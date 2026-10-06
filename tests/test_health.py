@@ -25,7 +25,7 @@ async def test_health_503_when_database_is_unreachable(client_for):
     assert response.json() == {"status": "error", "database": "unreachable"}
 
 
-async def test_pgvector_extension_is_available():
+async def test_pgvector_extension_is_available(test_database):
     # Guards against running against a plain Postgres image without pgvector.
     async with await psycopg.AsyncConnection.connect(TEST_DATABASE_URL) as conn:
         cur = await conn.execute(
