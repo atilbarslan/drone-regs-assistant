@@ -1,8 +1,12 @@
-# Packages the application imports directly. requirements.txt is compiled from this file with
-# `pip-compile --strip-extras requirements.in`. New packages are added in the change that first
-# imports them.
+# Packages the application and the ingest scripts import directly. requirements.txt is compiled
+# from this file with `pip-compile --strip-extras requirements.in`. New packages are added in the
+# change that first imports them.
 fastapi
+httpx
+pdfminer.six
 psycopg[binary]
 psycopg-pool
 pydantic-settings
+pypdf
+pyyaml
 uvicorn
