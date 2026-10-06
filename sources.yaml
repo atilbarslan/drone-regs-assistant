@@ -1,8 +1,16 @@
-# Official sources of the regulatory texts. The ingest scripts download these files into data/raw/
-# (git-ignored) and record their SHA-256 hashes; the files themselves are never committed.
+# Official sources of the regulatory texts. `python -m ingest.download` fetches these files into
+# data/raw/ (git-ignored) and checks them against the SHA-256 hashes below; the files themselves
+# are never committed. A hash mismatch means the publisher changed the file: review the new
+# version, then update the hash (and version fields) here.
 #
-# Fields: id, title, jurisdiction (EU | TR), language, version, published, url (direct file
-# download from the publisher), format (pdf | xml).
+# Fields
+#   id, title, jurisdiction (EU | TR), language, version, published
+#   url, format, sha256   the file the text is parsed from; format is pdf or xml-zip (a zip
+#                         archive holding one XML file)
+#   pdf_url, pdf_sha256   optional: the PDF edition, used for page numbers when the text comes
+#                         from XML
+#   parser                which parser in ingest/ reads the file (easa_xml | shgm_pdf)
+#   citation_url          the link shown to users next to a citation (always a PDF)
 
 sources:
   - id: easa-ear-uas
@@ -12,23 +20,31 @@ sources:
     jurisdiction: EU
     language: en
     version: Revision from June 2026
-    # Month as given on the EASA page; the downloaded file name carries the stamp 2026-06-29.
+    # Month as given on the EASA page; both files carry the publishing stamp 2026-06-29.
     published: "2026-06"
     # Landing page: https://www.easa.europa.eu/en/document-library/easy-access-rules/
     #   easy-access-rules-unmanned-aircraft-systems-regulations-eu
-    # The same revision is also published as XML (zip): https://www.easa.europa.eu/en/downloads/137111/en
-    # PDF or XML is decided in the parsing step, after checking how cleanly the XML separates
-    # articles, AMC and GM.
-    url: https://www.easa.europa.eu/en/downloads/110913/en
-    format: pdf
+    # The XML separates every article, rule, AMC and GM as its own topic with a type (IR, DR,
+    # AMC, GM), so text and structure come from it. It has no page numbers; those come from the
+    # bookmarks of the PDF edition of the same revision.
+    url: https://www.easa.europa.eu/en/downloads/137111/en
+    format: xml-zip
+    sha256: 0d35166d374084346d6f4b3ac962102ef75d13963ab8d1d0360cb988ab85dc54
+    pdf_url: https://www.easa.europa.eu/en/downloads/110913/en
+    pdf_sha256: 55aea77c99be7c479ceaa265794a27477e61a5a551bdaea81146803c2927caa1
+    parser: easa_xml
+    citation_url: https://www.easa.europa.eu/en/downloads/110913/en
 
   - id: shgm-sht-iha
     title: İnsansız Hava Aracı Sistemleri Talimatı (SHT-İHA)
     jurisdiction: TR
     language: tr
-    # Edition published on 30 July 2026; transition period until 31 July 2027. The revision
-    # number printed in the document is to be confirmed when it is parsed.
+    # The document carries no revision number; the edition is identified by its publication
+    # date. Transition period until 31 July 2027.
     version: "2026-07-30"
     published: "2026-07-30"
     url: https://web.shgm.gov.tr/documents/sivilhavacilik/files/mevzuat/sektorel/talimatlar/SHT-IHA(1).pdf
     format: pdf
+    sha256: 3e95358f3769b2845cf4e5a1cea066d4dac5add7b5680833a472f763dfdfbf65
+    parser: shgm_pdf
+    citation_url: https://web.shgm.gov.tr/documents/sivilhavacilik/files/mevzuat/sektorel/talimatlar/SHT-IHA(1).pdf

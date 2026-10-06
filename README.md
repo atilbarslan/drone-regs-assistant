@@ -6,5 +6,6 @@ SHT-İHA), citing the article or paragraph each statement comes from. The interf
 Turkish and English. It is a portfolio project, not a product, and its answers are not legal
 advice: the official texts always prevail.
 
-**Status: work in progress.** Only the project skeleton exists so far; ingestion, search,
-the answer endpoint and the web interface are still being built.
+**Status: work in progress.** Downloading, parsing and chunking the two sources works
+(`python -m ingest.download`, then `python -m ingest.build`); embedding, search, the answer
+endpoint and the web interface are still being built.
