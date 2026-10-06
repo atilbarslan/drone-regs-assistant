@@ -22,3 +22,8 @@ async def ping(pool: AsyncConnectionPool) -> None:
     """Run SELECT 1 on a pooled connection. Raises psycopg.Error if the database is unreachable."""
     async with pool.connection() as conn:
         await conn.execute("SELECT 1")
+
+
+def vector_literal(values: list[float]) -> str:
+    """pgvector's text form ("[0.1,0.2,...]"), passed as a parameter and cast with ::vector."""
+    return "[" + ",".join(repr(float(v)) for v in values) + "]"
