@@ -1,0 +1,9 @@
+# Packages the tests and tooling import directly. requirements-dev.txt is compiled from this file
+# with `pip-compile --strip-extras requirements-dev.in`; the constraint keeps shared packages at
+# the versions in requirements.txt.
+-c requirements.txt
+anyio
+httpx
+pip-tools
+pytest
+ruff
