@@ -1,0 +1,33 @@
+# Secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# Downloaded regulation files (PDF/XML) and anything derived from them. They are fetched from
+# the official sources by the ingest scripts and never committed (copyright and freshness).
+data/
+
+# Personal study notes, kept out of the repository on purpose
+notes/
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Editors and OS
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Test, lint and coverage output
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/

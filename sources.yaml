@@ -1,0 +1,34 @@
+# Official sources of the regulatory texts. The ingest scripts download these files into data/raw/
+# (git-ignored) and record their SHA-256 hashes; the files themselves are never committed.
+#
+# Fields: id, title, jurisdiction (EU | TR), language, version, published, url (direct file
+# download from the publisher), format (pdf | xml).
+
+sources:
+  - id: easa-ear-uas
+    title: >-
+      Easy Access Rules for Unmanned Aircraft Systems
+      (Regulation (EU) 2019/947 and Regulation (EU) 2019/945)
+    jurisdiction: EU
+    language: en
+    version: Revision from June 2026
+    # Month as given on the EASA page; the downloaded file name carries the stamp 2026-06-29.
+    published: "2026-06"
+    # Landing page: https://www.easa.europa.eu/en/document-library/easy-access-rules/
+    #   easy-access-rules-unmanned-aircraft-systems-regulations-eu
+    # The same revision is also published as XML (zip): https://www.easa.europa.eu/en/downloads/137111/en
+    # PDF or XML is decided in the parsing step, after checking how cleanly the XML separates
+    # articles, AMC and GM.
+    url: https://www.easa.europa.eu/en/downloads/110913/en
+    format: pdf
+
+  - id: shgm-sht-iha
+    title: İnsansız Hava Aracı Sistemleri Talimatı (SHT-İHA)
+    jurisdiction: TR
+    language: tr
+    # Edition published on 30 July 2026; transition period until 31 July 2027. The revision
+    # number printed in the document is to be confirmed when it is parsed.
+    version: "2026-07-30"
+    published: "2026-07-30"
+    url: https://web.shgm.gov.tr/documents/sivilhavacilik/files/mevzuat/sektorel/talimatlar/SHT-IHA(1).pdf
+    format: pdf

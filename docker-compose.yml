@@ -1,0 +1,24 @@
+# Local Postgres with the pgvector extension, for development and tests.
+# Start: docker compose up -d   Stop: docker compose down   (add -v to also delete the data)
+services:
+  db:
+    # pgvector 0.8.7 on Postgres 17. Neon supports Postgres 14-18; 17 is used in all environments.
+    image: pgvector/pgvector:0.8.7-pg17
+    environment:
+      # Local development credentials only; production uses the Neon connection string from .env.
+      POSTGRES_USER: drone
+      POSTGRES_PASSWORD: drone
+      POSTGRES_DB: drone_regs
+    ports:
+      # Bound to localhost only, so the database is not reachable from the network.
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U drone -d drone_regs"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:

@@ -1,0 +1,7 @@
+target-version = "py312"
+line-length = 100
+
+[lint]
+# pycodestyle errors (E), pyflakes (F), import sorting (I), pyupgrade (UP) and flake8-bugbear (B).
+# ASYNC flags blocking calls (file, network, subprocess, sleep) inside async functions.
+select = ["E", "F", "I", "UP", "B", "ASYNC"]
