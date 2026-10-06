@@ -2,6 +2,7 @@
 # from this file with `pip-compile --strip-extras requirements.in`. New packages are added in the
 # change that first imports them.
 fastapi
+google-genai
 httpx
 pdfminer.six
 psycopg[binary]
