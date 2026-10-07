@@ -147,7 +147,10 @@ async def ask(body: AskRequest, request: Request):
             citations=[CitationOut(**vars(c)) for c in result.citations],
             refused=result.refused,
             jurisdiction=result.jurisdiction,
-            matched_terms=[MatchedTermOut(**vars(t)) for t in result.matched_terms],
+            matched_terms=[
+                MatchedTermOut(text=t.text, jurisdiction=t.jurisdiction)
+                for t in result.matched_terms
+            ],
             jurisdiction_line=result.jurisdiction_line,
         )
     except RateLimited as exc:

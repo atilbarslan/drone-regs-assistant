@@ -98,6 +98,7 @@ class Rule:
     jurisdiction: Literal["EU", "TR"]
     pattern: re.Pattern
     context: re.Pattern | None = None  # the question must also match this
+    place: bool = False  # a city or province, not a country or an institution
 
 
 def _code(pattern: str) -> re.Pattern:
@@ -173,8 +174,8 @@ RULES: list[Rule] = [
         ),
     ),
     Rule("EU", _words(EU_COUNTRIES, _NAME_SUFFIX)),
-    Rule("EU", _places(_EU_CITY_NAMES)),
-    *[Rule("EU", pattern) for pattern in _ambiguous_places(_EU_CITY_NAMES)],
+    Rule("EU", _places(_EU_CITY_NAMES), place=True),
+    *[Rule("EU", pattern, place=True) for pattern in _ambiguous_places(_EU_CITY_NAMES)],
     Rule("EU", _adjectives_en(EU_ADJECTIVES_EN)),
     Rule("EU", _adjectives_tr(EU_ADJECTIVES_TR)),
     Rule("EU", re.compile(r"(?<![\w/])(2019/94[57])(?![\w/])")),
@@ -206,8 +207,8 @@ RULES: list[Rule] = [
         re.compile(rf"(?<![\w.])(Türk)(?!çe|ce){_APOSTROPHE_SUFFIX}(?![\w])", re.IGNORECASE),
     ),
     Rule("TR", _adjectives_en(["Turkish"])),
-    Rule("TR", _places(_TR_PLACE_NAMES)),
-    *[Rule("TR", pattern) for pattern in _ambiguous_places(_TR_PLACE_NAMES)],
+    Rule("TR", _places(_TR_PLACE_NAMES), place=True),
+    *[Rule("TR", pattern, place=True) for pattern in _ambiguous_places(_TR_PLACE_NAMES)],
     Rule("TR", _words(["SHGM"], _APOSTROPHE_SUFFIX)),
     Rule("TR", _words(["Sivil Havacılık Genel Müdürlüğü"], _ANY_SUFFIX)),
     Rule("TR", re.compile(rf"\b(SHT[-\s]?{_letters('İ')}HA){_APOSTROPHE_SUFFIX}", re.IGNORECASE)),
@@ -228,6 +229,7 @@ RULES: list[Rule] = [
 class MatchedTerm:
     text: str  # as written in the question, without a Turkish suffix
     jurisdiction: Literal["EU", "TR"]
+    place: bool = False  # a city or province
 
 
 @dataclass(frozen=True)
@@ -255,7 +257,7 @@ def detect(question: str) -> Detection:
             key = (rule.jurisdiction, text.casefold())
             if key not in seen:
                 seen.add(key)
-                found.append((match.start(1), MatchedTerm(text, rule.jurisdiction)))
+                found.append((match.start(1), MatchedTerm(text, rule.jurisdiction, rule.place)))
     terms = [term for _, term in sorted(found, key=lambda item: item[0])]
     sides = {t.jurisdiction for t in terms}
     if sides == {"EU", "TR"}:
