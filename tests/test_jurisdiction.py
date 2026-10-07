@@ -1,6 +1,7 @@
 import pytest
 
 from app.jurisdiction import EU_COUNTRIES, detect
+from app.places import AMBIGUOUS_PLACES, EU_CITIES, TR_PROVINCES
 
 
 @pytest.mark.parametrize(
@@ -38,7 +39,7 @@ from app.jurisdiction import EU_COUNTRIES, detect
         ("SHT-İHA ne zaman yürürlüğe girdi?", "TR", ["SHT-İHA"]),
         ("M2 sınıfı İHA için uçuşa elverişlilik belgesi", "TR", ["M2"]),
         ("Can I fly under SHGM rules at night?", "TR", ["SHGM"]),
-        ("What do Turkish rules say about BVLOS?", "TR", ["Turkish rules"]),
+        ("What do Turkish rules say about BVLOS?", "TR", ["Turkish"]),
         ("Is a licence needed in Turkey?", "TR", ["Turkey"]),
         ("Türk hava sahasında yabancı drone", "TR", ["Türk"]),
         # --- both ---
@@ -56,10 +57,13 @@ from app.jurisdiction import EU_COUNTRIES, detect
         ("A1 ihalesi ne zaman?", "none", []),  # "ihale" is not "İHA"
         ("C2 ehliyetim var", "none", []),  # driving licence class, no drone word
         ("Pilot lisansı nasıl alınır?", "none", []),  # "pilot" is not "Polonya"
-        ("İstanbul Avrupa yakasında drone uçurabilir miyim?", "none", []),
+        # Istanbul's European side: İstanbul makes it TR; "Avrupa yakası" adds nothing.
+        ("İstanbul Avrupa yakasında drone uçurabilir miyim?", "TR", ["İstanbul"]),
+        ("Avrupa yakasında drone uçurabilir miyim?", "none", []),
         ("Lütfen Türkçe cevap ver: gece uçuşu serbest mi?", "none", []),
         ("Please answer in Turkish: is night flying allowed?", "none", []),
         ("Kıbrıs'ta drone uçurulur mu?", "none", []),  # ambiguous: island, not only the EU state
+        ("Can I fly a drone in Cyprus?", "none", []),  # same decision in English
         ("Europa League maçında drone", "none", []),  # "Europa" is not "Europe"
     ],
 )
@@ -88,3 +92,95 @@ def test_all_27_member_states_are_listed_in_both_languages():
     assert len(EU_COUNTRIES) == 27 * 2 + 3
     for name in ["Almanya", "Germany", "Çekya", "Czechia", "Hırvatistan", "Croatia"]:
         assert detect(f"{name} drone").jurisdiction == "EU", name
+
+
+@pytest.mark.parametrize(
+    ("question", "expected", "terms"),
+    [
+        # --- Turkish provinces ---
+        ("İstanbul'da drone uçurabilir miyim?", "TR", ["İstanbul"]),
+        ("Ankara'daki parklarda uçuş serbest mi?", "TR", ["Ankara"]),
+        ("İzmir'de kayıt nasıl yapılır?", "TR", ["İzmir"]),
+        ("istanbulda drone uçurmak", "TR", ["istanbul"]),  # lower case, no apostrophe
+        ("ŞANLIURFA'DA UÇUŞ İZNİ", "TR", ["ŞANLIURFA"]),
+        ("Antep'te drone", "TR", ["Antep"]),  # short form
+        ("Can I fly my drone in Antalya?", "TR", ["Antalya"]),
+        # names that are also words, written like places
+        ("Van'da drone uçurmak serbest mi?", "TR", ["Van"]),
+        ("Can I fly a drone in Batman?", "TR", ["Batman"]),
+        ("Ordu ilinde izin gerekir mi?", "TR", ["Ordu"]),
+        ("Van Gölü üzerinde drone uçurulur mu?", "TR", ["Van"]),
+        ("Bursa'da kayıt", "TR", ["Bursa"]),
+        # --- EU cities ---
+        ("Can I fly a drone in Berlin?", "EU", ["Berlin"]),
+        ("Münih'te drone kuralları", "EU", ["Münih"]),
+        ("Varşova'da uçuş izni", "EU", ["Varşova"]),
+        ("Krakov'da drone uçurulur mu?", "EU", ["Krakov"]),
+        ("Flying near Kraków old town", "EU", ["Kraków"]),
+        ("Brüksel'de drone", "EU", ["Brüksel"]),
+        ("Is drone photography allowed in The Hague?", "EU", ["The Hague"]),
+        ("Limasol'da drone uçurabilir miyim?", "EU", ["Limasol"]),
+        ("Split'te drone uçurabilir miyim?", "EU", ["Split"]),
+        ("Drone rules in Cork", "EU", ["Cork"]),
+        ("Is it allowed in Sofia?", "EU", ["Sofia"]),
+        # --- nationality adjectives ---
+        ("What are the German drone rules?", "EU", ["German"]),
+        ("Fransız kurallarına göre 250 gram altı drone kaydı gerekir mi?", "EU", ["Fransız"]),
+        ("Under Polish law, do I need insurance?", "EU", ["Polish"]),
+        ("İtalyan hava sahasında uçuş", "EU", ["İtalyan"]),
+        ("Çek kurallarına göre kayıt", "EU", ["Çek"]),
+        ("What do Dutch authorities require?", "EU", ["Dutch"]),
+        ("Turkish drone rules for tourists", "TR", ["Turkish"]),
+        # --- both ---
+        ("İstanbul'dan Berlin'e drone götürebilir miyim?", "both", ["İstanbul", "Berlin"]),
+        # --- traps ---
+        ("Split the battery charge between two flights", "none", []),
+        ("My van is parked by the field, can I fly there?", "none", []),
+        ("Batman filmi için drone çekimi", "none", []),
+        ("Başımda ağrı var, drone uçurabilir miyim?", "none", []),  # "ağrı" = pain
+        ("Kara ordu tatbikatında drone", "none", []),  # "ordu" = army
+        ("Bursa başvurdum, drone alacağım", "none", []),  # "bursa" = to a scholarship
+        ("Kilisenin üstünden drone uçurabilir miyim?", "none", []),  # not "Kilis"
+        ("Konyak fabrikası üzerinde uçuş", "none", []),  # not "Konya"
+        ("Samsung telefonla drone kontrolü", "none", []),  # not "Samsun"
+        ("Drone ile fotoğraf çekmek için izin gerekir mi?", "none", []),  # not "Çek"
+        ("Please answer in German", "none", []),
+        ("Almanca cevap verir misin?", "none", []),
+        ("Is a French fries stand a crowd?", "none", []),
+        ("Polish the propellers before flying", "none", []),
+        ("Sofia wants to fly a drone", "none", []),  # a given name
+        ("Have a nice flight", "none", []),
+        ("Gölbaşı'nda drone uçurabilir miyim?", "none", []),  # district, not on the list
+    ],
+)
+def test_detect_places_and_adjectives(question, expected, terms):
+    detection = detect(question)
+
+    assert detection.jurisdiction == expected
+    assert [t.text for t in detection.matched_terms] == terms
+
+
+def test_all_81_provinces_are_recognised():
+    assert len(TR_PROVINCES) == 81
+    for name in TR_PROVINCES:
+        detection = detect(f"{name}'da drone uçurabilir miyim?")
+        assert (detection.jurisdiction, detection.terms("TR")) == ("TR", [name]), name
+
+
+def test_every_eu_city_name_is_recognised():
+    names = [name for cities in EU_CITIES.values() for city in cities for name in city]
+    for name in names:
+        for question in (f"{name}'de drone", f"Can I fly a drone in {name}?"):
+            detection = detect(question)
+            assert (detection.jurisdiction, detection.terms("EU")) == ("EU", [name]), question
+
+
+def test_every_member_state_has_cities_except_through_its_name():
+    # Luxembourg's capital has the country's name; every state has at least two cities.
+    assert len(EU_CITIES) == 27
+    assert all(len(cities) >= 2 for cities in EU_CITIES.values())
+
+
+def test_ambiguous_names_need_place_context():
+    for name in AMBIGUOUS_PLACES:
+        assert detect(f"{name.lower()} bir şey").jurisdiction == "none", name

@@ -10,12 +10,27 @@ Pitfalls handled here, each with a test:
 - Codes such as A1, C2, P1 or M0 count only when the question also has a drone word that fits
   the code ("A1 alt kategorisi", "C1 sınıfı", "P2 lisansı"), so "A1 vitamini" is ignored.
 - "Avrupa yakası" (Istanbul's European side) is not Europe, "Türkçe"/"in Turkish" is a
-  language, and "Kıbrıs" alone is ambiguous; none of these counts.
+  language, and "Kıbrıs"/"Cyprus" alone is ambiguous; none of these counts.
+- Place names (81 Turkish provinces, EU capitals and largest cities, see app/places.py) take
+  only real Turkish case endings when written without an apostrophe, so "Kilis" does not match
+  "kilise", "Konya" not "konyak", "Samsun" not "Samsung". Names that are also common words
+  ("Van", "Batman", "Ordu", "Split", "Cork", ...) count only when written like a place.
+- Nationality adjectives ("German", "Fransız") count only before a word about rules,
+  authorities, airspace or drones, so "in German", "Almanca" or "fotoğraf çek" do not.
 """
 
 import re
 from dataclasses import dataclass, field
 from typing import Literal
+
+from app.places import (
+    AMBIGUOUS_PLACES,
+    EU_ADJECTIVES_EN,
+    EU_ADJECTIVES_TR,
+    EU_CITIES,
+    TR_PROVINCE_VARIANTS,
+    TR_PROVINCES,
+)
 
 Jurisdiction = Literal["EU", "TR", "both", "none"]
 
@@ -24,6 +39,13 @@ _TURKISH_LETTERS = "a-zçğıöşü"
 _APOSTROPHE_SUFFIX = rf"(?:['’][{_TURKISH_LETTERS}]+)?"
 # Names may also take the suffix without an apostrophe: Almanyada, Avrupadaki.
 _ANY_SUFFIX = rf"(?:['’]?[{_TURKISH_LETTERS}]*)"
+# Place names: any suffix after an apostrophe, but without one only real case endings
+# (locative, ablative, dative after a vowel, genitive, "-lı"), optionally plural. A bare vowel
+# is not accepted, so "Kilis" + "e" (kilise, church) does not match.
+_CASE_ENDINGS = (
+    "da|de|ta|te|dan|den|tan|ten|daki|deki|taki|teki|ya|ye|yı|yi|yu|yü|nın|nin|nun|nün|lı|li|lu|lü"
+)
+_NAME_SUFFIX = rf"(?:['’][{_TURKISH_LETTERS}]+|(?:{_CASE_ENDINGS})(?:lar|ler)?)?"
 
 
 def _letters(word: str) -> str:
@@ -51,7 +73,9 @@ EU_COUNTRIES = [
     "Yunanistan", "Macaristan", "İrlanda", "İtalya", "Letonya", "Litvanya", "Lüksemburg", "Malta",
     "Hollanda", "Polonya", "Portekiz", "Romanya", "Slovakya", "Slovenya", "İspanya", "İsveç",
     # English names
-    "Austria", "Belgium", "Bulgaria", "Croatia", "Cyprus", "Czechia", "Czech Republic",
+    # "Cyprus" and "Kıbrıs" alone are ambiguous (the island is divided), so only the
+    # Republic counts.
+    "Austria", "Belgium", "Bulgaria", "Croatia", "Republic of Cyprus", "Czechia", "Czech Republic",
     "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hungary", "Ireland", "Italy",
     "Latvia", "Lithuania", "Luxembourg", "Netherlands", "Holland", "Poland", "Portugal",
     "Romania", "Slovakia", "Slovenia", "Spain", "Sweden",
@@ -83,6 +107,57 @@ def _code(pattern: str) -> re.Pattern:
 
 _QUOTE = "['‘’\"]"
 
+
+def _places(names: list[str]) -> re.Pattern:
+    return _words([n for n in names if n not in AMBIGUOUS_PLACES], _NAME_SUFFIX)
+
+
+def _ambiguous_places(names: list[str]) -> list[re.Pattern]:
+    """A name that is also a common word counts only when written like a place: with an
+    apostrophe suffix ("Van'da"), after a preposition with a capital letter ("in Batman"), or
+    before "ili"/"şehri"/"kenti" ("Ordu ili")."""
+    words = [n for n in names if n in AMBIGUOUS_PLACES]
+    if not words:
+        return []
+    alternatives = "|".join(_letters(w) for w in sorted(words, key=len, reverse=True))
+    return [
+        re.compile(rf"(?<![\w.])({alternatives})['’][{_TURKISH_LETTERS}]+(?![\w])"),
+        re.compile(rf"(?<![\w])(?i:in|at|near|around|to|from|over)\s+({alternatives})(?![\w'’])"),
+        re.compile(
+            rf"(?<![\w.])({alternatives})\s+(?i:{_letters('il')}|{_letters('ili')}\w*|"
+            rf"{_letters('ilçe')}\w*|şehr\w*|kent\w*|merkez\w*|göl\w*)(?![\w])"
+        ),
+    ]
+
+
+# Words about rules, authorities, airspace or drones that make a nationality adjective count.
+_EN_RULE_NOUNS = (
+    r"rules?|law|laws|legislation|regulations?|regulators?|airspace|authorit(?:y|ies)|aviation|"
+    r"civil|drones?|UAS|UAV|registration|operators?|pilots?|licen[cs]es?|requirements?|"
+    r"government|police|territory|cit(?:y|ies)|airports?|borders?|skies"
+)
+_TR_RULE_NOUNS = (
+    rf"kural\w*|mevzuat\w*|yasa\w*|kanun\w*|düzenleme\w*|yönetmelik\w*|hava\s+saha\w*|"
+    rf"sivil|havacılık\w*|otorite\w*|makam\w*|drone\w*|dron\w*|{_letters('İHA')}\w*|"
+    rf"pilot\w*|lisans\w*|kayıt\w*|kayd\w*|tescil\w*|polis\w*|hükümet\w*|devlet\w*|"
+    rf"şehir\w*|şehr\w*|kent\w*|havaliman\w*|sınır\w*|toprak\w*|vatandaş\w*"
+)
+
+
+def _adjectives_en(adjectives: list[str]) -> re.Pattern:
+    # Capitalised, as English writes nationalities: "polish the propellers" is not Polish.
+    alternatives = "|".join(sorted(adjectives, key=len, reverse=True))
+    return re.compile(rf"(?<![\w])({alternatives})\s+(?i:{_EN_RULE_NOUNS})(?![\w])")
+
+
+def _adjectives_tr(adjectives: list[str]) -> re.Pattern:
+    alternatives = "|".join(_letters(a) for a in sorted(adjectives, key=len, reverse=True))
+    return re.compile(rf"(?<![\w])({alternatives})\s+(?:{_TR_RULE_NOUNS})(?![\w])", re.IGNORECASE)
+
+
+_EU_CITY_NAMES = [name for cities in EU_CITIES.values() for city in cities for name in city]
+_TR_PLACE_NAMES = TR_PROVINCES + TR_PROVINCE_VARIANTS
+
 # Rules are tried in order, and a match that overlaps an earlier one is ignored, so the more
 # specific rules ("Avrupa Birliği") come before the general ones ("Avrupa").
 RULES: list[Rule] = [
@@ -97,7 +172,11 @@ RULES: list[Rule] = [
             rf"(?<![\w.])(Avrupa(?!\s+yakas)|European|Europe){_ANY_SUFFIX}(?![\w])", re.IGNORECASE
         ),
     ),
-    Rule("EU", _words(EU_COUNTRIES, _ANY_SUFFIX)),
+    Rule("EU", _words(EU_COUNTRIES, _NAME_SUFFIX)),
+    Rule("EU", _places(_EU_CITY_NAMES)),
+    *[Rule("EU", pattern) for pattern in _ambiguous_places(_EU_CITY_NAMES)],
+    Rule("EU", _adjectives_en(EU_ADJECTIVES_EN)),
+    Rule("EU", _adjectives_tr(EU_ADJECTIVES_TR)),
     Rule("EU", re.compile(r"(?<![\w/])(2019/94[57])(?![\w/])")),
     Rule(
         "EU",
@@ -126,14 +205,9 @@ RULES: list[Rule] = [
         "TR",
         re.compile(rf"(?<![\w.])(Türk)(?!çe|ce){_APOSTROPHE_SUFFIX}(?![\w])", re.IGNORECASE),
     ),
-    Rule(
-        "TR",
-        re.compile(
-            r"\b(Turkish\s+(?:rules?|law|laws|regulations?|airspace|authorit(?:y|ies)|"
-            r"civil aviation))",
-            re.IGNORECASE,
-        ),
-    ),
+    Rule("TR", _adjectives_en(["Turkish"])),
+    Rule("TR", _places(_TR_PLACE_NAMES)),
+    *[Rule("TR", pattern) for pattern in _ambiguous_places(_TR_PLACE_NAMES)],
     Rule("TR", _words(["SHGM"], _APOSTROPHE_SUFFIX)),
     Rule("TR", _words(["Sivil Havacılık Genel Müdürlüğü"], _ANY_SUFFIX)),
     Rule("TR", re.compile(rf"\b(SHT[-\s]?{_letters('İ')}HA){_APOSTROPHE_SUFFIX}", re.IGNORECASE)),
