@@ -2,8 +2,9 @@
 
 1. Mode: the one the user chose (EU / TR / compare), else the one detected from the question,
    else the interface's current mode, else EU.
-2. Retrieval: one source for EU or TR, both sources balanced for compare; more passages for
-   list questions ("hangi belgeler", "what do I need", "steps").
+2. Retrieval: one source for EU or TR, both sources balanced for compare (at least
+   search_compare_per_side from each); more passages for list questions ("hangi belgeler",
+   "what do I need", "steps").
 3. Generation: one request with structured output (app/schema.py).
 4. Cleaning: citations of passages that were not given are dropped, inline [n] markers are
    moved into the citation lists, and any part left without a citation is removed.
@@ -466,6 +467,7 @@ async def answer_question(
     llm: LLM,
     params: SearchParams,
     list_top_k: int,
+    compare_per_side: int,
     metrics: Metrics,
     debug_dir: Path | None = None,
 ) -> AnswerResult:
@@ -473,6 +475,9 @@ async def answer_question(
     detection = detect(question)
     used_mode, source = resolve_mode(mode, detection, default_mode)
     top_k = list_top_k if is_list_question(question) else params.top_k
+    if used_mode == "compare":
+        # Half of top_k comes from each source; keep enough of each for the table.
+        top_k = max(top_k, 2 * compare_per_side)
     metrics.jurisdiction = detection.jurisdiction
     metrics.mode, metrics.mode_source, metrics.top_k = used_mode, source, top_k
     metrics.facts_count = len(facts)

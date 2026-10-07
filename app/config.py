@@ -40,6 +40,8 @@ class Settings(BaseSettings):
     search_top_k: int = 8
     # More passages for list questions ("hangi belgeler", "what do I need", "steps").
     search_top_k_list: int = 14
+    # Compare mode searches each source separately; at least this many passages from each.
+    search_compare_per_side: int = 6
 
     # /api/ask limits. Each question makes one embedding and one generation request; the free
     # tier allows 500 generation requests a day for gemini-3.5-flash-lite (15 per minute), and

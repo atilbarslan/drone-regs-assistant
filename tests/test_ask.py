@@ -220,6 +220,17 @@ async def test_list_questions_get_more_passages(db, loaded, clean_log, question,
     assert (log["top_k"], log["retrieved_chunks"]) == (expected, expected)
 
 
+async def test_compare_mode_gets_at_least_per_side_passages_from_each_source(db, loaded, clean_log):
+    llm = FakeLLM()
+    settings = make_settings(search_top_k=2, search_compare_per_side=2)
+
+    async with ask_client(llm, settings=settings) as client:
+        await ask(client, "Gece uçuşu?", mode="compare")
+
+    assert passage_sides(llm.calls[0][1]) == ["Türkiye"] * 2 + ["European Union"] * 2
+    assert (await last_log(db))["top_k"] == 4
+
+
 # --- refusals ------------------------------------------------------------------------------
 
 

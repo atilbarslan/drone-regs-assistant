@@ -175,6 +175,7 @@ async def ask(body: AskRequest, request: Request):
             llm=state.llm,
             params=SearchParams.from_settings(settings),
             list_top_k=settings.search_top_k_list,
+            compare_per_side=settings.search_compare_per_side,
             metrics=metrics,
             debug_dir=settings.debug_raw_dir if settings.debug_raw else None,
         )
