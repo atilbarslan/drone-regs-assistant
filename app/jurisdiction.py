@@ -98,7 +98,9 @@ class Rule:
     jurisdiction: Literal["EU", "TR"]
     pattern: re.Pattern
     context: re.Pattern | None = None  # the question must also match this
-    place: bool = False  # a city or province, not a country or an institution
+    # A place inside a jurisdiction (an EU member state, a city, a province), as opposed to
+    # the jurisdiction itself (AB/EU, Türkiye) or an institution (EASA, SHGM).
+    place: bool = False
 
 
 def _code(pattern: str) -> re.Pattern:
@@ -173,11 +175,11 @@ RULES: list[Rule] = [
             rf"(?<![\w.])(Avrupa(?!\s+yakas)|European|Europe){_ANY_SUFFIX}(?![\w])", re.IGNORECASE
         ),
     ),
-    Rule("EU", _words(EU_COUNTRIES, _NAME_SUFFIX)),
+    Rule("EU", _words(EU_COUNTRIES, _NAME_SUFFIX), place=True),
     Rule("EU", _places(_EU_CITY_NAMES), place=True),
     *[Rule("EU", pattern, place=True) for pattern in _ambiguous_places(_EU_CITY_NAMES)],
-    Rule("EU", _adjectives_en(EU_ADJECTIVES_EN)),
-    Rule("EU", _adjectives_tr(EU_ADJECTIVES_TR)),
+    Rule("EU", _adjectives_en(EU_ADJECTIVES_EN), place=True),
+    Rule("EU", _adjectives_tr(EU_ADJECTIVES_TR), place=True),
     Rule("EU", re.compile(r"(?<![\w/])(2019/94[57])(?![\w/])")),
     Rule(
         "EU",
@@ -229,7 +231,7 @@ RULES: list[Rule] = [
 class MatchedTerm:
     text: str  # as written in the question, without a Turkish suffix
     jurisdiction: Literal["EU", "TR"]
-    place: bool = False  # a city or province
+    place: bool = False  # inside a jurisdiction: an EU member state, a city or a province
 
 
 @dataclass(frozen=True)

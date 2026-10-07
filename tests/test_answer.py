@@ -113,13 +113,13 @@ def test_provider_quota_messages():
     assert "busy" in provider_quota_message(False, reset, "en")
 
 
-def test_place_rule_only_when_a_city_or_province_is_named():
-    with_city, _ = build_prompt(
-        "İstanbul'da izin?", "tr", detect("İstanbul'da izin?"), [hit(1, "TR")]
-    )
-    with_country, _ = build_prompt("AB'de izin?", "tr", detect("AB'de izin?"), [hit(1, "EU")])
-    with_germany, _ = build_prompt("Germany?", "en", detect("Drones in Germany?"), [hit(1, "EU")])
+def test_place_rule_only_when_a_place_inside_a_jurisdiction_is_named():
+    def system(question, lang="tr"):
+        return build_prompt(question, lang, detect(question), [hit(1, "TR")])[0]
 
-    assert "names a city or province (İstanbul)" in with_city
-    assert "city or province" not in with_country
-    assert "city or province" not in with_germany
+    assert "names a place (İstanbul)" in system("İstanbul'da izin?")
+    assert "names a place (Germany)" in system("Drones in Germany?", "en")
+    assert "names a place (German)" in system("German drone rules?", "en")
+    # The jurisdiction itself or an institution is not a place inside it.
+    for question in ["AB'de izin?", "Türkiye'de izin?", "SHGM'ye göre lisans?", "EASA rules?"]:
+        assert "names a place" not in system(question), question
