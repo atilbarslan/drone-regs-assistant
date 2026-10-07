@@ -5,8 +5,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    # extra="ignore": .env also holds values for later steps (Gemini key and model names) that
-    # this class does not declare yet.
+    # extra="ignore": .env may hold values for later steps that this class does not declare.
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
     # SecretStr keeps the password in the connection string out of reprs and logs.
@@ -15,3 +14,28 @@ class Settings(BaseSettings):
     db_pool_max_size: int = 5
     # Seconds /health waits for the database (getting a connection plus SELECT 1).
     health_db_timeout: float = 2.0
+
+    # Gemini. Only needed by code that calls the API; tests use a fake embedder.
+    gemini_api_key: SecretStr | None = None
+    gemini_embedding_model: str = "gemini-embedding-2"
+    # Must match the vector(768) column in db/migrations/001_initial.sql.
+    gemini_embedding_dimensions: int = 768
+    gemini_timeout_seconds: float = 60.0
+
+    # Hybrid search: candidates taken from each of vector and full-text search, the RRF
+    # constant, and how many fused results are returned.
+    search_candidates: int = 30
+    search_rrf_k: int = 60
+    search_top_k: int = 8
+
+    # Embedding the sources (python -m ingest.embed). The free tier limits for
+    # gemini-embedding-2 were 100 requests and 30,000 tokens per minute and 1,000 requests per
+    # day (Google AI Studio, 2026-10-06), and each text in a batch counts as one request (measured).
+    # Token pacing is the bottleneck, so stay under the per-minute limits with some margin.
+    embed_tokens_per_minute: int = 25_000
+    embed_requests_per_minute: int = 90
+    embed_batch_max_items: int = 20
+    embed_batch_max_tokens: int = 8_000  # estimated tokens per batch
+    embed_max_retries: int = 6
+    embed_backoff_base_seconds: float = 2.0
+    embed_backoff_max_seconds: float = 120.0

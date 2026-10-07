@@ -29,7 +29,8 @@ jobs:
           --health-retries 10
 
     env:
-      TEST_DATABASE_URL: postgresql://drone:drone@localhost:5432/drone_regs
+      # The tests create this database on the service if it does not exist.
+      TEST_DATABASE_URL: postgresql://drone:drone@localhost:5432/drone_regs_test
 
     steps:
       - uses: actions/checkout@v7
