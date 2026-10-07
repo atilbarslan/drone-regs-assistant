@@ -60,4 +60,4 @@ jobs:
           node-version: "lts/*"
 
       - name: Test frontend
-        run: node --test frontend/tests/
+        run: node --test frontend/tests/*.test.mjs

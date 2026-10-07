@@ -1,4 +1,4 @@
-// Run with: node --test frontend/tests/
+// Run with: node --test frontend/tests/*.test.mjs
 import assert from "node:assert/strict";
 import { test } from "node:test";
 
