@@ -3,6 +3,8 @@
 from dataclasses import dataclass
 from typing import Protocol
 
+from pydantic import BaseModel
+
 
 @dataclass(frozen=True)
 class Document:
@@ -50,8 +52,7 @@ class TransientError(ProviderError):
 
 @dataclass(frozen=True)
 class Generation:
-    answerable: bool  # the model's judgement that the passages contain the answer
-    answer: str
+    data: dict  # the JSON object the model returned, matching the requested schema
     prompt_tokens: int | None
     output_tokens: int | None
     thinking_tokens: int | None
@@ -60,7 +61,9 @@ class Generation:
 class LLM(Protocol):
     model: str
 
-    async def generate(self, system: str, prompt: str) -> Generation: ...
+    async def generate(self, system: str, prompt: str, schema: type[BaseModel]) -> Generation:
+        """Answer with a JSON object that follows schema (structured output)."""
+        ...
 
 
 class EmptyResponse(ProviderError):

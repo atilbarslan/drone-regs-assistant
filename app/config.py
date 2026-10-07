@@ -31,6 +31,8 @@ class Settings(BaseSettings):
     search_candidates: int = 30
     search_rrf_k: int = 60
     search_top_k: int = 8
+    # More passages for list questions ("hangi belgeler", "what do I need", "steps").
+    search_top_k_list: int = 14
 
     # /api/ask limits. Each question makes one embedding and one generation request; the free
     # tier allows 500 generation requests a day for gemini-3.5-flash-lite (15 per minute), and

@@ -1,10 +1,11 @@
-"""User-facing texts in Turkish and English: limits, provider errors, and the line that says
-which jurisdiction an answer is based on."""
+"""User-facing texts in Turkish and English: limits, provider errors and refusals.
+
+Which jurisdiction an answer follows is no longer written into the answer: the API returns it
+as structured fields (mode, detected) and the page shows it."""
 
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from app.jurisdiction import Detection
 from app.limits import Refusal
 
 TURKEY = ZoneInfo("Europe/Istanbul")
@@ -84,23 +85,3 @@ def uncited_message(lang: str) -> str:
         "The generated answer could not be tied to any section of the sources, so it is not "
         "shown. You could try asking more specifically."
     )
-
-
-def jurisdiction_line(detection: Detection, lang: str) -> str | None:
-    """One line saying which rules the answer follows and which words decided it.
-
-    None for "none": the model itself says the question did not name a jurisdiction.
-    """
-    quoted = ", ".join(f"'{t.text}'" for t in detection.matched_terms[:4])
-    if lang == "tr":
-        source = "ifadesinden" if len(detection.matched_terms) == 1 else "ifadelerinden"
-        labels = {
-            "EU": "AB mevzuatına",
-            "TR": "Türkiye mevzuatına",
-            "both": "AB ve Türkiye mevzuatına",
-        }
-        label = labels.get(detection.jurisdiction)
-        return f"Bu cevap {label} göredir (sorudaki {quoted} {source})." if label else None
-    labels = {"EU": "EU rules", "TR": "Turkish rules", "both": "EU and Turkish rules"}
-    label = labels.get(detection.jurisdiction)
-    return f"This answer is based on {label} (from {quoted} in your question)." if label else None
