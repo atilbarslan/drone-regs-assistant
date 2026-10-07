@@ -5,7 +5,15 @@ The chunks are short, self-written stand-ins shaped like the real sources.
 
 import pytest
 
-from app.search import extract_references, reference_regex, search
+from app.search import (
+    SearchHit,
+    SearchParams,
+    balance,
+    extract_references,
+    reference_regex,
+    retrieve,
+    search,
+)
 from ingest.embed import Pacer, embed_pending, sync_source
 from tests.conftest import make_settings
 from tests.fakes import FakeEmbedder, sample_source
@@ -202,3 +210,55 @@ def test_reference_regex_does_not_match_longer_numbers():
     assert pattern.search("Madde 1")
     assert not pattern.search("Madde 12")
     assert re.search(reference_regex("Article 4"), "Article 4 (2019/945)")
+
+
+# --- jurisdiction ----------------------------------------------------------------------------
+
+
+async def ranked(db, embedder, query: str, jurisdiction: str, first: str = "TR", top_k: int = 4):
+    embedded = await embedder.embed_query(query)
+    return await retrieve(
+        db,
+        query=query,
+        embedding=embedded.vectors[0],
+        model=embedder.model,
+        jurisdiction=jurisdiction,
+        first=first,
+        params=SearchParams(top_k=top_k, candidates=20, rrf_k=60),
+    )
+
+
+async def test_one_jurisdiction_searches_only_its_sources(db, loaded):
+    # Turkish words, but the question is about the EU: only EU passages come back.
+    hits = await ranked(db, loaded, "kırmızı bölgede pilot", "EU")
+
+    assert hits and {h.jurisdiction for h in hits} == {"EU"}
+
+
+async def test_unknown_jurisdiction_is_balanced_between_sources(db, loaded):
+    hits = await ranked(db, loaded, "pilot uçuş izni", "none", first="TR", top_k=4)
+
+    assert [h.jurisdiction for h in hits] == ["TR", "TR", "EU", "EU"]
+
+
+async def test_balanced_search_lists_the_interface_language_side_first(db, loaded):
+    hits = await ranked(db, loaded, "pilot", "both", first="EU", top_k=3)
+
+    # The first side gets the odd place.
+    assert [h.jurisdiction for h in hits] == ["EU", "EU", "TR"]
+
+
+def hit(side: str, n: int):
+    return SearchHit(n, side, side, side, "", f"{side}-{n}", "", 1, "en", "", 1, None, None, 0.0)
+
+
+def test_balance_fills_a_short_side_from_the_other():
+    by_side = {"TR": [hit("TR", 1)], "EU": [hit("EU", n) for n in range(1, 8)]}
+
+    result = balance(by_side, ["TR", "EU"], top_k=6)
+
+    assert [h.section_ref for h in result] == ["TR-1", "EU-1", "EU-2", "EU-3", "EU-4", "EU-5"]
+
+
+def test_balance_with_both_sides_empty():
+    assert balance({"TR": [], "EU": []}, ["TR", "EU"], top_k=8) == []
