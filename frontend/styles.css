@@ -1,0 +1,406 @@
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --text: #1b1f24;
+  --muted: #59636e;
+  --border: #d5dae0;
+  --accent: #1f4e79;
+  --accent-text: #ffffff;
+  --focus: #b35c00;
+  --eu-bg: #e7eefb;
+  --eu-text: #1d3f7a;
+  --tr-bg: #fbe9e9;
+  --tr-text: #8a1c1c;
+  --both-bg: #efe8fb;
+  --both-text: #4b2a85;
+  --none-bg: #eef0f2;
+  --none-text: #3d4650;
+  --notice-bg: #fff6e0;
+  --notice-text: #5c4300;
+  --error-bg: #fdecea;
+  --error-text: #8a1c1c;
+  --highlight: #fff2bf;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14171b;
+    --surface: #1d2126;
+    --text: #e6e9ec;
+    --muted: #a7b0ba;
+    --border: #353b43;
+    --accent: #6ea8e0;
+    --accent-text: #0e1114;
+    --focus: #ffb054;
+    --eu-bg: #1e2c45;
+    --eu-text: #b9d0f5;
+    --tr-bg: #3d2020;
+    --tr-text: #f3c0c0;
+    --both-bg: #2e2645;
+    --both-text: #d6c6f5;
+    --none-bg: #2a2f35;
+    --none-text: #cfd5db;
+    --notice-bg: #3a3118;
+    --notice-text: #f1dfa8;
+    --error-bg: #3d2020;
+    --error-text: #f3c0c0;
+    --highlight: #4a4120;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.wrap {
+  max-width: 50rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+a {
+  color: var(--accent);
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.skip {
+  position: absolute;
+  left: -999px;
+}
+
+.skip:focus {
+  left: 1rem;
+  top: 0.5rem;
+  background: var(--surface);
+  padding: 0.4rem 0.8rem;
+  z-index: 10;
+}
+
+/* header */
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 0;
+}
+
+.header-row {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.subtitle {
+  margin: 0.25rem 0 0;
+  color: var(--muted);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.lang {
+  flex: none;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.8rem;
+}
+
+/* form */
+.ask {
+  margin-top: 1.25rem;
+}
+
+.ask label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem; /* 16px keeps iOS from zooming in */
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  background: var(--surface);
+  color: var(--text);
+  resize: vertical;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+  flex: 1 1 14rem;
+}
+
+.counter {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.primary {
+  background: var(--accent);
+  color: var(--accent-text);
+  border: none;
+  border-radius: 0.6rem;
+  padding: 0.6rem 1.4rem;
+  font-weight: 600;
+  min-height: 2.75rem;
+}
+
+.primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* fixed notices */
+.notices {
+  list-style: none;
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  background: var(--notice-bg);
+  color: var(--notice-text);
+  border-radius: 0.6rem;
+  font-size: 0.925rem;
+}
+
+.notices li + li {
+  margin-top: 0.25rem;
+}
+
+.notices li::before {
+  content: "⚠ ";
+}
+
+/* examples */
+.examples-section h2 {
+  font-size: 1rem;
+  margin: 1.25rem 0 0.5rem;
+}
+
+.examples {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.example {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  text-align: left;
+  min-height: 2.5rem;
+}
+
+.example:hover {
+  border-color: var(--accent);
+}
+
+/* result */
+.result {
+  margin: 1.5rem 0 2rem;
+}
+
+.result h2 {
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem;
+}
+
+.result h3 {
+  font-size: 1rem;
+  margin: 1.25rem 0 0.5rem;
+}
+
+.loading {
+  color: var(--muted);
+}
+
+.jurisdiction {
+  display: inline-block;
+  margin: 0 0 0.75rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.925rem;
+}
+
+.jurisdiction-EU {
+  background: var(--eu-bg);
+  color: var(--eu-text);
+}
+
+.jurisdiction-TR {
+  background: var(--tr-bg);
+  color: var(--tr-text);
+}
+
+.jurisdiction-both {
+  background: var(--both-bg);
+  color: var(--both-text);
+}
+
+.jurisdiction-none {
+  background: var(--none-bg);
+  color: var(--none-text);
+}
+
+.asked {
+  color: var(--muted);
+  margin: 0 0 0.75rem;
+  overflow-wrap: anywhere;
+}
+
+.asked span {
+  font-weight: 600;
+}
+
+.answer {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 0.25rem 1rem;
+  overflow-wrap: anywhere;
+}
+
+.answer.refused {
+  border-style: dashed;
+}
+
+.refused-title {
+  font-weight: 600;
+}
+
+.cite {
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cite:hover {
+  text-decoration: underline;
+}
+
+.citations {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.citations li {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  overflow-wrap: anywhere;
+}
+
+.citations li.highlight {
+  background: var(--highlight);
+}
+
+.citation-title,
+.citation-meta {
+  margin: 0;
+}
+
+.citation-number {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.citation-meta {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+blockquote {
+  margin: 0.5rem 0;
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--border);
+  color: var(--text);
+  font-size: 0.925rem;
+}
+
+.error {
+  background: var(--error-bg);
+  color: var(--error-text);
+  border-radius: 0.75rem;
+  padding: 0.25rem 1rem;
+}
+
+.error-title {
+  font-weight: 700;
+}
+
+/* footer */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 1rem 0 2rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.site-footer p {
+  margin: 0.25rem 0;
+}
+
+@media (max-width: 30rem) {
+  h1 {
+    font-size: 1.25rem;
+  }
+
+  .primary {
+    width: 100%;
+  }
+
+  .hint {
+    display: none; /* Enter/Shift+Enter matters little on touch keyboards */
+  }
+}
+
+/* Headings that receive focus from script (after an answer) need no focus ring. */
+[tabindex="-1"]:focus:not(:focus-visible),
+h2[tabindex="-1"]:focus {
+  outline: none;
+}

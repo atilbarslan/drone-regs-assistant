@@ -61,6 +61,9 @@ class AskResponse(BaseModel):
     refused: bool
     jurisdiction: Literal["EU", "TR", "both", "none"]
     matched_terms: list[MatchedTermOut]
+    # The first line of answer when it names the jurisdiction; clients that show their own
+    # label can strip it. None for "none".
+    jurisdiction_line: str | None
 
 
 class ErrorResponse(BaseModel):
@@ -144,7 +147,11 @@ async def ask(body: AskRequest, request: Request):
             citations=[CitationOut(**vars(c)) for c in result.citations],
             refused=result.refused,
             jurisdiction=result.jurisdiction,
-            matched_terms=[MatchedTermOut(**vars(t)) for t in result.matched_terms],
+            matched_terms=[
+                MatchedTermOut(text=t.text, jurisdiction=t.jurisdiction)
+                for t in result.matched_terms
+            ],
+            jurisdiction_line=result.jurisdiction_line,
         )
     except RateLimited as exc:
         metrics.error_type = f"provider_quota:{'daily' if exc.daily else 'minute'}"

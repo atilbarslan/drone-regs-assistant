@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Drone Mevzuat Asistanı</title>
+    <meta
+      name="description"
+      content="AB (EASA) ve Türkiye (SHGM) drone kurallarına kaynak göstererek cevap veren demo."
+    />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#question" data-i18n="questionLabel">Sorunuz</a>
+    <header class="site-header">
+      <div class="wrap header-row">
+        <div>
+          <h1 data-i18n="title">Drone Mevzuat Asistanı</h1>
+          <p class="subtitle" data-i18n="subtitle"></p>
+        </div>
+        <button id="lang-toggle" type="button" class="lang">English</button>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <form id="ask-form" class="ask" novalidate>
+        <label for="question" data-i18n="questionLabel">Sorunuz</label>
+        <textarea id="question" name="question" rows="3" required aria-describedby="hint counter"></textarea>
+        <div class="form-row">
+          <p id="hint" class="hint" data-i18n="hint"></p>
+          <p id="counter" class="counter" aria-live="polite"></p>
+          <button id="submit" type="submit" class="primary">Sor</button>
+        </div>
+      </form>
+
+      <ul class="notices">
+        <li data-i18n="noticeLegal">Hukuki danışmanlık değildir; resmi metin esastır.</li>
+        <li data-i18n="noticeData">
+          Sorular Google Gemini API'nin ücretsiz katmanına gönderilir; kişisel veri girmeyin.
+        </li>
+      </ul>
+
+      <section class="examples-section" aria-labelledby="examples-title">
+        <h2 id="examples-title" data-i18n="examplesTitle">Örnek sorular</h2>
+        <ul id="examples" class="examples"></ul>
+      </section>
+
+      <section id="result" class="result" aria-live="polite" aria-busy="false"></section>
+
+      <noscript>
+        <p class="error">Bu sayfa JavaScript gerektirir. / This page needs JavaScript.</p>
+      </noscript>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>
+          <span data-i18n="footerSources">Kaynak metinler</span>:
+          <a
+            href="https://www.easa.europa.eu/en/document-library/easy-access-rules/easy-access-rules-unmanned-aircraft-systems-regulations-eu"
+            rel="noopener noreferrer"
+            target="_blank"
+            >EASA Easy Access Rules for UAS (June 2026)</a
+          >
+          ·
+          <a
+            href="https://web.shgm.gov.tr/documents/sivilhavacilik/files/mevzuat/sektorel/talimatlar/SHT-IHA(1).pdf"
+            rel="noopener noreferrer"
+            target="_blank"
+            >SHGM SHT-İHA (30.07.2026)</a
+          >
+        </p>
+        <p data-i18n="footerNote">Portföy demosudur; cevaplar yanlış ya da eksik olabilir.</p>
+      </div>
+    </footer>
+  </body>
+</html>

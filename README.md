@@ -6,6 +6,6 @@ SHT-İHA), citing the article or paragraph each statement comes from. The interf
 Turkish and English. It is a portfolio project, not a product, and its answers are not legal
 advice: the official texts always prevail.
 
-**Status: work in progress.** Downloading, parsing, chunking, embedding, hybrid search and the
-answer endpoint (`POST /api/ask`) work; the web interface, the evaluation and the deployment
-are still being built.
+**Status: work in progress.** Downloading, parsing, chunking, embedding, hybrid search, the
+answer endpoint (`POST /api/ask`) and the web page (served at `/`) work; the evaluation and the
+deployment are still being built.

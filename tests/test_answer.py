@@ -111,3 +111,15 @@ def test_provider_quota_messages():
     assert "günlük kotası doldu" in provider_quota_message(True, reset, "tr")
     assert "10:00 (Türkiye saati)" in provider_quota_message(True, reset, "tr")
     assert "busy" in provider_quota_message(False, reset, "en")
+
+
+def test_place_rule_only_when_a_place_inside_a_jurisdiction_is_named():
+    def system(question, lang="tr"):
+        return build_prompt(question, lang, detect(question), [hit(1, "TR")])[0]
+
+    assert "names a place (İstanbul)" in system("İstanbul'da izin?")
+    assert "names a place (Germany)" in system("Drones in Germany?", "en")
+    assert "names a place (German)" in system("German drone rules?", "en")
+    # The jurisdiction itself or an institution is not a place inside it.
+    for question in ["AB'de izin?", "Türkiye'de izin?", "SHGM'ye göre lisans?", "EASA rules?"]:
+        assert "names a place" not in system(question), question

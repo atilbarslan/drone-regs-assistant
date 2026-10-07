@@ -58,10 +58,11 @@ async def test_answer_with_checked_citations(db, loaded, clean_log):
         {"text": "Türkiye", "jurisdiction": "TR"},
         {"text": "kırmızı bölge", "jurisdiction": "TR"},
     ]
-    assert body["answer"] == (
+    line = (
         "Bu cevap Türkiye mevzuatına göredir (sorudaki 'Türkiye', 'kırmızı bölge' ifadelerinden)."
-        "\n\nKırmızı bölgede uçuş izne tabidir [1]. Uydurma bir iddia."
     )
+    assert body["jurisdiction_line"] == line
+    assert body["answer"] == f"{line}\n\nKırmızı bölgede uçuş izne tabidir [1]. Uydurma bir iddia."
     [citation] = body["citations"]
     assert citation["n"] == 1
     assert citation["section_ref"] == "Madde 12"
@@ -102,6 +103,7 @@ async def test_question_without_jurisdiction_searches_both_sides(db, loaded, cle
     body = response.json()
     assert body["jurisdiction"] == "none"
     assert body["matched_terms"] == []
+    assert body["jurisdiction_line"] is None
     assert not body["answer"].startswith("Bu cevap")  # the model says it, not a fixed line
     system, prompt = llm.calls[0]
     assert "does not say whether it is about the EU or Türkiye" in system
