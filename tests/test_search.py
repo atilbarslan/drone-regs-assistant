@@ -5,98 +5,17 @@ The chunks are short, self-written stand-ins shaped like the real sources.
 
 import pytest
 
-from app.search import extract_references, reference_regex, search
-from ingest.embed import Pacer, embed_pending, sync_source
-from tests.conftest import make_settings
-from tests.fakes import FakeEmbedder, sample_source
+from app.search import (
+    SearchHit,
+    SearchParams,
+    balance,
+    extract_references,
+    reference_regex,
+    retrieve,
+    search,
+)
 
 pytestmark = pytest.mark.anyio
-
-
-def chunk(section_ref: str, heading: str, text: str, language: str, page: int = 1) -> dict:
-    return {
-        "section_ref": section_ref,
-        "heading": heading,
-        "page": page,
-        "chunk_index": 0,
-        "language": language,
-        "text": text,
-    }
-
-
-EU_CHUNKS = [
-    chunk(
-        "UAS.OPEN.020",
-        "Operations in subcategory A1",
-        "The remote pilot keeps the aircraft away from groups of people.",
-        "en",
-        page=10,
-    ),
-    # Mentions UAS.OPEN.020 several times, so a plain word count would favour it.
-    chunk(
-        "AMC1 UAS.OPEN.030",
-        "Operations in subcategory A2",
-        "Unlike UAS.OPEN.020, which covers A1, this applies to A2. Read UAS.OPEN.020 and "
-        "UAS.OPEN.020 together with the rules for the remote pilot.",
-        "en",
-        page=11,
-    ),
-    chunk(
-        "UAS.OPEN.030",
-        "Operations in subcategory A2",
-        "The remote pilot keeps a horizontal distance of 30 metres from uninvolved people.",
-        "en",
-        page=11,
-    ),
-    chunk(
-        "Article 4 (2019/947)",
-        "Open category",
-        "Operations are classified in the open category when the aircraft is light.",
-        "en",
-        page=3,
-    ),
-    chunk(
-        "Article 40 (2019/945)",
-        "Requirements for certified aircraft",
-        "Aircraft in the certified category need a type certificate.",
-        "en",
-        page=50,
-    ),
-]
-TR_CHUNKS = [
-    chunk(
-        "Madde 12",
-        "Kısıtlanmış bölgeler",
-        "Kırmızı bölgede uçuş izne tabidir. Yeşil bölgede izin gerekmez.",
-        "tr",
-        page=8,
-    ),
-    chunk(
-        "Madde 15",
-        "Pilot yetkinliği",
-        "Pilot lisansı P0, P1 ve P2 seviyelerinde verilir; bölgeler için 12 nci maddeye bakınız.",
-        "tr",
-        page=10,
-    ),
-]
-
-
-class NoWaitPacer(Pacer):
-    def __init__(self):
-        async def no_sleep(_: float) -> None:
-            return None
-
-        super().__init__(10**9, 10**9, sleep=no_sleep)
-
-
-@pytest.fixture
-async def loaded(db):
-    embedder = FakeEmbedder()
-    await sync_source(db, sample_source("eu-sample", "en", "EU"), EU_CHUNKS)
-    await sync_source(db, sample_source("tr-sample", "tr", "TR"), TR_CHUNKS)
-    stats = await embed_pending(db, embedder, make_settings(), NoWaitPacer())
-    assert stats.embedded == len(EU_CHUNKS) + len(TR_CHUNKS)
-    return embedder
 
 
 async def run(db, embedder, query: str, top_k: int = 5):
@@ -202,3 +121,55 @@ def test_reference_regex_does_not_match_longer_numbers():
     assert pattern.search("Madde 1")
     assert not pattern.search("Madde 12")
     assert re.search(reference_regex("Article 4"), "Article 4 (2019/945)")
+
+
+# --- jurisdiction ----------------------------------------------------------------------------
+
+
+async def ranked(db, embedder, query: str, jurisdiction: str, first: str = "TR", top_k: int = 4):
+    embedded = await embedder.embed_query(query)
+    return await retrieve(
+        db,
+        query=query,
+        embedding=embedded.vectors[0],
+        model=embedder.model,
+        jurisdiction=jurisdiction,
+        first=first,
+        params=SearchParams(top_k=top_k, candidates=20, rrf_k=60),
+    )
+
+
+async def test_one_jurisdiction_searches_only_its_sources(db, loaded):
+    # Turkish words, but the question is about the EU: only EU passages come back.
+    hits = await ranked(db, loaded, "kırmızı bölgede pilot", "EU")
+
+    assert hits and {h.jurisdiction for h in hits} == {"EU"}
+
+
+async def test_unknown_jurisdiction_is_balanced_between_sources(db, loaded):
+    hits = await ranked(db, loaded, "pilot uçuş izni", "none", first="TR", top_k=4)
+
+    assert [h.jurisdiction for h in hits] == ["TR", "TR", "EU", "EU"]
+
+
+async def test_balanced_search_lists_the_interface_language_side_first(db, loaded):
+    hits = await ranked(db, loaded, "pilot", "both", first="EU", top_k=3)
+
+    # The first side gets the odd place.
+    assert [h.jurisdiction for h in hits] == ["EU", "EU", "TR"]
+
+
+def hit(side: str, n: int):
+    return SearchHit(n, side, side, side, "", f"{side}-{n}", "", 1, "en", "", 1, None, None, 0.0)
+
+
+def test_balance_fills_a_short_side_from_the_other():
+    by_side = {"TR": [hit("TR", 1)], "EU": [hit("EU", n) for n in range(1, 8)]}
+
+    result = balance(by_side, ["TR", "EU"], top_k=6)
+
+    assert [h.section_ref for h in result] == ["TR-1", "EU-1", "EU-2", "EU-3", "EU-4", "EU-5"]
+
+
+def test_balance_with_both_sides_empty():
+    assert balance({"TR": [], "EU": []}, ["TR", "EU"], top_k=8) == []

@@ -25,14 +25,14 @@ import time
 from collections import deque
 from collections.abc import Awaitable, Callable
 from dataclasses import dataclass, field
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime
 from pathlib import Path
-from zoneinfo import ZoneInfo
 
 import psycopg
 
 from app.config import Settings
 from app.db import vector_literal
+from app.limits import next_daily_reset
 from app.providers import Document, Embedder, RateLimited, TransientError
 from ingest.chunk import CHARS_PER_TOKEN
 from ingest.sources import Source, load_sources
@@ -278,13 +278,6 @@ async def embed_pending(
         stats.batches += 1
         print(f"  {done}/{len(rows)} chunks embedded", flush=True)
     return stats
-
-
-def next_daily_reset(now: datetime) -> datetime:
-    """Gemini daily quotas reset at midnight Pacific time."""
-    pacific = now.astimezone(ZoneInfo("America/Los_Angeles"))
-    midnight = (pacific + timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
-    return midnight.astimezone(UTC)
 
 
 async def main() -> int:

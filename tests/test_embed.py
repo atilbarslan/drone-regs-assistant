@@ -1,9 +1,7 @@
-from datetime import UTC, datetime
-
 import pytest
 
 from app.providers import Document, RateLimited, TransientError
-from ingest.embed import Pacer, embed_pending, make_batches, next_daily_reset, sync_source
+from ingest.embed import Pacer, embed_pending, make_batches, sync_source
 from tests.conftest import make_settings
 from tests.fakes import FakeEmbedder, sample_source
 
@@ -210,16 +208,3 @@ def test_batches_respect_item_and_token_limits():
 
     assert [len(b) for b in batches] == [2, 2, 2, 1]
     assert [r[0] for b in batches for r in b] == list(range(7))
-
-
-@pytest.mark.parametrize(
-    ("now", "reset"),
-    [
-        # 11:22 in California (PDT, UTC-7): next midnight is 07:00 UTC the next day.
-        (datetime(2026, 10, 6, 18, 22, tzinfo=UTC), datetime(2026, 10, 7, 7, 0, tzinfo=UTC)),
-        # In winter (PST, UTC-8) midnight is 08:00 UTC.
-        (datetime(2026, 12, 1, 9, 0, tzinfo=UTC), datetime(2026, 12, 2, 8, 0, tzinfo=UTC)),
-    ],
-)
-def test_next_daily_reset_is_midnight_pacific(now, reset):
-    assert next_daily_reset(now) == reset
