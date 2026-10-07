@@ -11,6 +11,8 @@ from psycopg.conninfo import conninfo_to_dict, make_conninfo
 from app.config import Settings
 from app.main import create_app
 from app.migrate import migrate, read_migrations
+from ingest.embed import embed_pending, sync_source
+from tests.fakes import EU_CHUNKS, TR_CHUNKS, FakeEmbedder, NoWaitPacer, sample_source
 
 # Tests never read .env, so they cannot reach the production database by accident. They use a
 # separate database (created if missing) on the docker-compose server; CI sets
@@ -75,3 +77,13 @@ def client_for() -> Callable[[Settings], AbstractAsyncContextManager[AsyncClient
 async def client(test_database: str) -> AsyncIterator[AsyncClient]:
     async with _client(make_settings()) as c:
         yield c
+
+
+@pytest.fixture
+async def loaded(db):
+    embedder = FakeEmbedder()
+    await sync_source(db, sample_source("eu-sample", "en", "EU"), EU_CHUNKS)
+    await sync_source(db, sample_source("tr-sample", "tr", "TR"), TR_CHUNKS)
+    stats = await embed_pending(db, embedder, make_settings(), NoWaitPacer())
+    assert stats.embedded == len(EU_CHUNKS) + len(TR_CHUNKS)
+    return embedder

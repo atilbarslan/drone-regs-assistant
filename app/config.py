@@ -17,6 +17,10 @@ class Settings(BaseSettings):
 
     # Gemini. Only needed by code that calls the API; tests use a fake embedder.
     gemini_api_key: SecretStr | None = None
+    gemini_generation_model: str = "gemini-3.5-flash-lite"
+    # minimal | low | medium | high; unset keeps the model's default (minimal for
+    # gemini-3.5-flash-lite, per ai.google.dev/gemini-api/docs/thinking).
+    gemini_thinking_level: str | None = None
     gemini_embedding_model: str = "gemini-embedding-2"
     # Must match the vector(768) column in db/migrations/001_initial.sql.
     gemini_embedding_dimensions: int = 768
@@ -28,9 +32,18 @@ class Settings(BaseSettings):
     search_rrf_k: int = 60
     search_top_k: int = 8
 
+    # /api/ask limits. Each question makes one embedding and one generation request; the free
+    # tier allows 500 generation requests a day for gemini-3.5-flash-lite (15 per minute), and
+    # part of that is kept for evaluation and development.
+    ask_global_per_minute: int = 12
+    ask_global_per_day: int = 300
+    ask_ip_per_minute: int = 3
+    ask_ip_per_day: int = 20
+
     # Embedding the sources (python -m ingest.embed). The free tier limits for
     # gemini-embedding-2 were 100 requests and 30,000 tokens per minute and 1,000 requests per
-    # day (Google AI Studio, 2026-10-06), and each text in a batch counts as one request (measured).
+    # day (Google AI Studio, 2026-10-06). Each text in a batch counts as one request, per minute
+    # (measured with a 429) and per day (AI Studio showed 816 for the 816 texts sent that day).
     # Token pacing is the bottleneck, so stay under the per-minute limits with some margin.
     embed_tokens_per_minute: int = 25_000
     embed_requests_per_minute: int = 90

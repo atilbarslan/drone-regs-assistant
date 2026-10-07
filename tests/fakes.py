@@ -4,7 +4,8 @@ import hashlib
 import math
 import re
 
-from app.providers import Document, Embeddings
+from app.providers import Document, Embeddings, Generation
+from ingest.embed import Pacer
 from ingest.sources import Source
 
 
@@ -60,3 +61,105 @@ def sample_source(source_id: str, language: str, jurisdiction: str) -> Source:
         parser="shgm_pdf",
         citation_url=f"https://example.test/{source_id}.pdf",
     )
+
+
+class FakeLLM:
+    """Returns a fixed answer (or one computed from the prompt) and records each call.
+    failures are raised, in order, by the next calls."""
+
+    def __init__(self, answer="Örnek cevap [1].", answerable: bool = True, failures=None):
+        self.model = "fake-llm"
+        self.answer = answer
+        self.answerable = answerable
+        self.failures = list(failures or [])
+        self.calls: list[tuple[str, str]] = []
+
+    async def generate(self, system: str, prompt: str) -> Generation:
+        self.calls.append((system, prompt))
+        if self.failures:
+            raise self.failures.pop(0)
+        text = self.answer(prompt) if callable(self.answer) else self.answer
+        return Generation(
+            answerable=self.answerable,
+            answer=text,
+            prompt_tokens=len(prompt.split()),
+            output_tokens=len(text.split()),
+            thinking_tokens=None,
+        )
+
+
+class NoWaitPacer(Pacer):
+    def __init__(self):
+        async def no_sleep(_: float) -> None:
+            return None
+
+        super().__init__(10**9, 10**9, sleep=no_sleep)
+
+
+# Short, self-written stand-ins shaped like the real sources.
+def chunk(section_ref: str, heading: str, text: str, language: str, page: int = 1) -> dict:
+    return {
+        "section_ref": section_ref,
+        "heading": heading,
+        "page": page,
+        "chunk_index": 0,
+        "language": language,
+        "text": text,
+    }
+
+
+EU_CHUNKS = [
+    chunk(
+        "UAS.OPEN.020",
+        "Operations in subcategory A1",
+        "The remote pilot keeps the aircraft away from groups of people.",
+        "en",
+        page=10,
+    ),
+    # Mentions UAS.OPEN.020 several times, so a plain word count would favour it.
+    chunk(
+        "AMC1 UAS.OPEN.030",
+        "Operations in subcategory A2",
+        "Unlike UAS.OPEN.020, which covers A1, this applies to A2. Read UAS.OPEN.020 and "
+        "UAS.OPEN.020 together with the rules for the remote pilot.",
+        "en",
+        page=11,
+    ),
+    chunk(
+        "UAS.OPEN.030",
+        "Operations in subcategory A2",
+        "The remote pilot keeps a horizontal distance of 30 metres from uninvolved people.",
+        "en",
+        page=11,
+    ),
+    chunk(
+        "Article 4 (2019/947)",
+        "Open category",
+        "Operations are classified in the open category when the aircraft is light.",
+        "en",
+        page=3,
+    ),
+    chunk(
+        "Article 40 (2019/945)",
+        "Requirements for certified aircraft",
+        "Aircraft in the certified category need a type certificate.",
+        "en",
+        page=50,
+    ),
+]
+TR_CHUNKS = [
+    chunk(
+        "Madde 12",
+        "Kısıtlanmış bölgeler",
+        "Kırmızı bölgede uçuş izne tabidir. Yeşil bölgede izin gerekmez.",
+        "tr",
+        page=8,
+    ),
+    chunk(
+        "Madde 15",
+        "Pilot yetkinliği",
+        "Pilot lisansı P0, P1 ve P2 seviyelerinde verilir; bölgeler için 12 nci maddeye bakınız.",
+        "tr",
+        page=10,
+    ),
+]
