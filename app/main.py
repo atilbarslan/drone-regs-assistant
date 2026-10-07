@@ -9,14 +9,32 @@ The app assumes a single worker: the request limits are counted in memory (app/l
 
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
+from pathlib import Path
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.staticfiles import StaticFiles
 
 from app import ask, health
 from app.config import Settings
 from app.db import create_pool
 from app.limits import Limits, RateLimiter
 from app.providers import LLM, Embedder
+
+FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
+
+# The page loads only its own files: no inline scripts or styles, no third-party origins. Even
+# if model output ever reached the page as HTML, an injected script would not run.
+CONTENT_SECURITY_POLICY = (
+    "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; "
+    "connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"
+)
+SECURITY_HEADERS = {
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "no-referrer",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+}
+# FastAPI's interactive docs load scripts from a CDN, so they get no CSP.
+DOCS_PATHS = ("/docs", "/redoc", "/openapi.json")
 
 
 def create_app(
@@ -72,4 +90,15 @@ def create_app(
     )
     app.include_router(health.router)
     app.include_router(ask.router)
+
+    @app.middleware("http")
+    async def security_headers(request: Request, call_next):
+        response = await call_next(request)
+        response.headers.update(SECURITY_HEADERS)
+        if not request.url.path.startswith(DOCS_PATHS):
+            response.headers["Content-Security-Policy"] = CONTENT_SECURITY_POLICY
+        return response
+
+    # Mounted last, so /health and /api/* are matched first.
+    app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
     return app
