@@ -3,6 +3,7 @@
 from datetime import UTC, datetime
 
 import pytest
+from pydantic import ValidationError
 
 from app.answer import (
     best_excerpt,
@@ -67,6 +68,25 @@ def test_resolve_mode(requested, question, default, expected):
 )
 def test_is_list_question(question, expected):
     assert is_list_question(question) is expected
+
+
+# --- schema --------------------------------------------------------------------------------
+
+
+def test_every_citation_list_is_required_and_non_empty_in_the_schema():
+    # A section's citations once had a default, so the schema sent to the model did not
+    # require them, and a whole reply came back with none (refused as uncited_answer).
+    defs = StructuredAnswer.model_json_schema()["$defs"]
+    for name in ("Section", "Case", "Side"):
+        assert "citations" in defs[name]["required"], name
+        assert defs[name]["properties"]["citations"]["minItems"] == 1, name
+
+
+def test_section_without_citations_does_not_fit_the_schema():
+    with pytest.raises(ValidationError):
+        StructuredAnswer.model_validate(
+            {"answerable": True, "sections": [{"topic": "Kayıt", "text": "Kayıt gerekir."}]}
+        )
 
 
 # --- prompt --------------------------------------------------------------------------------

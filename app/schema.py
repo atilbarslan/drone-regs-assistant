@@ -9,6 +9,10 @@ Pydantic constraints, so a reply that exceeds one is trimmed by the server, not 
 
 from pydantic import BaseModel, Field
 
+# Every part of an answer must cite at least one passage. A hint for the model, like the
+# limits below; a part left without a valid citation is dropped by the server.
+CITED = {"minItems": 1}
+
 
 class Option(BaseModel):
     label: str = Field(description="Short choice shown to the user, e.g. 'Has a camera'.")
@@ -27,7 +31,9 @@ class Case(BaseModel):
     condition: str = Field(description="The situation, e.g. 'With a camera'.")
     verdict: str = Field(description="One to three words, e.g. 'REGISTER' or 'NOT REQUIRED'.")
     text: str
-    citations: list[int] = Field(description="Numbers of the passages this case is based on.")
+    citations: list[int] = Field(
+        description="Numbers of the passages this case is based on.", json_schema_extra=CITED
+    )
 
 
 class Section(BaseModel):
@@ -39,14 +45,19 @@ class Section(BaseModel):
         default_factory=list,
         description="Use when the rule differs by a condition the question does not settle.",
     )
+    # Required, also for a section given as cases: with a default, the field was optional in the
+    # schema sent to Gemini, and a reply came back with no section citations at all.
     citations: list[int] = Field(
-        default_factory=list, description="Numbers of the passages the text is based on."
+        description="Numbers of the passages the text (or, with cases, the cases) is based on.",
+        json_schema_extra=CITED,
     )
 
 
 class Side(BaseModel):
     text: str
-    citations: list[int] = Field(description="Passage numbers from this side only.")
+    citations: list[int] = Field(
+        description="Passage numbers from this side only.", json_schema_extra=CITED
+    )
 
 
 class CompareRow(BaseModel):
