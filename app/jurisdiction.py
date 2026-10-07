@@ -86,7 +86,14 @@ EU_COUNTRIES = [
 _DRONE = r"drone\w*|dron\w*|[iİ]ha(?:['’]\w*|lar\w*|ları\w*)?\b|uas\b|uav\w*|unmanned|insansız"
 _CATEGORY_CONTEXT = re.compile(
     rf"\b(?:kategor\w*|category|categories|subcategory|{_DRONE}|uçuş\w*|uçur\w*|uçmak|"
-    rf"flight\w*|fly\w*|operasyon\w*|operation\w*)",
+    rf"flight\w*|fly\w*|operasyon\w*|operation\w*|certificate\w*|sertifika\w*|"
+    rf"remote\s+pilot\w*|uzaktan\s+pilot\w*|exam\w*|sınav\w*|training|eğitim\w*)",
+    re.IGNORECASE,
+)
+# Words before "talimat" that make it a manufacturer's or user's instruction, not SHT-İHA.
+_NOT_THE_INSTRUCTION = re.compile(
+    rf"(?:üretici\w*|imalatçı\w*|kullanım|kullanma|{_letters('kılavuz')}\w*|manufacturer\w*)"
+    rf"\s+(?:\w+\s+)?$",
     re.IGNORECASE,
 )
 _CLASS_CONTEXT = re.compile(rf"\b(?:sınıf\w*|class\w*|etiket\w*|label\w*|{_DRONE})", re.IGNORECASE)
@@ -98,6 +105,11 @@ class Rule:
     jurisdiction: Literal["EU", "TR"]
     pattern: re.Pattern
     context: re.Pattern | None = None  # the question must also match this
+    # Weak rules are tried only when no other rule matched: "yeni mevzuat" alone points to
+    # Türkiye, but not in "AB'nin yeni mevzuatı".
+    weak: bool = False
+    # A match is ignored when the text just before it matches this ("üreticinin talimatları").
+    not_after: re.Pattern | None = None
     # A place inside a jurisdiction (an EU member state, a city, a province), as opposed to
     # the jurisdiction itself (AB/EU, Türkiye) or an institution (EASA, SHGM).
     place: bool = False
@@ -198,6 +210,8 @@ RULES: list[Rule] = [
     ),
     Rule("EU", re.compile(r"\b(UAS\.(?:OPEN|SPEC|LUC|STS)\b|STS-0[12])", re.IGNORECASE)),
     Rule("EU", _words(["SORA", "LUC"], _APOSTROPHE_SUFFIX, flags=0)),
+    # "A1/A3" (the open-category certificate) needs no other context.
+    Rule("EU", re.compile(r"(?<![\w.])(A[123]\s*/\s*A[123])(?![\w.])", re.IGNORECASE)),
     Rule("EU", _code("A[123]"), _CATEGORY_CONTEXT),
     Rule("EU", _code("C[0-6]"), _CLASS_CONTEXT),
     # --- TR ---
@@ -224,6 +238,23 @@ RULES: list[Rule] = [
     ),
     Rule("TR", _code("P[0-2]"), _LICENCE_CONTEXT),
     Rule("TR", _code("M[0-3]"), _CLASS_CONTEXT),
+    # Licence names of the previous Turkish instruction: İHA0 ... İHA3, also "İHA-1".
+    Rule("TR", re.compile(rf"(?<![\w])({_letters('İHA')}-?[0-3])(?![\w])", re.IGNORECASE)),
+    # Weak: "talimat" or "yeni/eski mevzuat" alone, in a Turkish question, means SHT-İHA.
+    Rule(
+        "TR",
+        re.compile(
+            rf"(?<![\w])((?:yeni|eski|güncel|mevcut|son)\s+(?:{_letters('talimat')}|mevzuat))\w*",
+            re.IGNORECASE,
+        ),
+        weak=True,
+    ),
+    Rule(
+        "TR",
+        re.compile(rf"(?<![\w])({_letters('talimat')})\w*", re.IGNORECASE),
+        weak=True,
+        not_after=_NOT_THE_INSTRUCTION,
+    ),
 ]
 
 
@@ -243,23 +274,35 @@ class Detection:
         return [t.text for t in self.matched_terms if t.jurisdiction == jurisdiction]
 
 
+def _apply(rule: Rule, question: str, found: list, taken: list, seen: set) -> None:
+    if rule.context is not None and not rule.context.search(question):
+        return
+    for match in rule.pattern.finditer(question):
+        start, end = match.span()
+        if any(start < t_end and t_start < end for t_start, t_end in taken):
+            continue
+        if rule.not_after is not None and rule.not_after.search(
+            question[max(0, start - 40) : start]
+        ):
+            continue
+        taken.append((start, end))
+        text = re.sub(r"\s+", " ", match.group(1)).strip()
+        key = (rule.jurisdiction, text.casefold())
+        if key not in seen:
+            seen.add(key)
+            found.append((match.start(1), MatchedTerm(text, rule.jurisdiction, rule.place)))
+
+
 def detect(question: str) -> Detection:
     found: list[tuple[int, MatchedTerm]] = []
     taken: list[tuple[int, int]] = []  # spans already matched by an earlier rule
     seen: set[tuple[str, str]] = set()
-    for rule in RULES:
-        if rule.context is not None and not rule.context.search(question):
-            continue
-        for match in rule.pattern.finditer(question):
-            start, end = match.span()
-            if any(start < t_end and t_start < end for t_start, t_end in taken):
-                continue
-            taken.append((start, end))
-            text = re.sub(r"\s+", " ", match.group(1)).strip()
-            key = (rule.jurisdiction, text.casefold())
-            if key not in seen:
-                seen.add(key)
-                found.append((match.start(1), MatchedTerm(text, rule.jurisdiction, rule.place)))
+    for weak in (False, True):
+        if weak and found:
+            break
+        for rule in RULES:
+            if rule.weak is weak:
+                _apply(rule, question, found, taken, seen)
     terms = [term for _, term in sorted(found, key=lambda item: item[0])]
     sides = {t.jurisdiction for t in terms}
     if sides == {"EU", "TR"}:
