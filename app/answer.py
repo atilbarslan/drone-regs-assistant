@@ -15,14 +15,16 @@ import dataclasses
 import re
 import time
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Literal
 
 from psycopg_pool import AsyncConnectionPool
 from pydantic import ValidationError
 
+from app.debug import write_raw
 from app.jurisdiction import Detection, detect
 from app.messages import no_passages_message, uncited_message
-from app.providers import LLM, Embedder, EmptyResponse
+from app.providers import LLM, Embedder, EmptyResponse, Generation
 from app.schema import Compare, CompareRow, Side, StructuredAnswer
 from app.search import SearchHit, SearchParams, retrieve
 
@@ -415,6 +417,33 @@ def citation_for(n: int, hit: SearchHit, answer: StructuredAnswer, version: str)
     )
 
 
+def debug_record(
+    question: str, lang: str, mode: Mode, facts: list[str], hits: list[SearchHit], gen: Generation
+) -> dict:
+    """What DEBUG_RAW writes: the passages in the order the model saw them and its raw reply."""
+    passages = [
+        {
+            "n": n,
+            "section_ref": hit.section_ref,
+            "document_id": hit.document_id,
+            "jurisdiction": hit.jurisdiction,
+            "page": hit.page,
+            "vector_rank": hit.vector_rank,
+            "text_rank": hit.text_rank,
+            "reference_rank": hit.reference_rank,
+        }
+        for n, hit in enumerate(hits, 1)
+    ]
+    return {
+        "question": question,
+        "lang": lang,
+        "mode": mode,
+        "facts": facts,
+        "passages": passages,
+        "raw": gen.data,
+    }
+
+
 def _ms(since: float) -> int:
     return round((time.perf_counter() - since) * 1000)
 
@@ -438,6 +467,7 @@ async def answer_question(
     params: SearchParams,
     list_top_k: int,
     metrics: Metrics,
+    debug_dir: Path | None = None,
 ) -> AnswerResult:
     facts = facts[:MAX_FACTS]
     detection = detect(question)
@@ -485,6 +515,8 @@ async def answer_question(
     metrics.prompt_tokens = generation.prompt_tokens
     metrics.output_tokens = generation.output_tokens
     metrics.thinking_tokens = generation.thinking_tokens
+    if debug_dir is not None:
+        await write_raw(debug_dir, debug_record(question, lang, used_mode, facts, hits, generation))
 
     try:
         raw = StructuredAnswer.model_validate(generation.data)

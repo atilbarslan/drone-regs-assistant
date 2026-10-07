@@ -176,6 +176,7 @@ async def ask(body: AskRequest, request: Request):
             params=SearchParams.from_settings(settings),
             list_top_k=settings.search_top_k_list,
             metrics=metrics,
+            debug_dir=settings.debug_raw_dir if settings.debug_raw else None,
         )
         answer = result.answer
         detected_mode = {"EU": "EU", "TR": "TR", "both": "compare"}.get(

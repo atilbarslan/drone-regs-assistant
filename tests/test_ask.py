@@ -289,6 +289,35 @@ async def test_request_log_has_figures_but_no_question_facts_or_address(db, load
         assert secret not in serialized
 
 
+async def test_debug_raw_writes_passages_and_raw_reply(db, loaded, clean_log, tmp_path):
+    reply = structured(sections=[section("İzin", "Kırmızı bölgede izin gerekir.", [7])])
+    settings = make_settings(debug_raw=True, debug_raw_dir=tmp_path / "debug")
+
+    async with ask_client(FakeLLM(reply), settings=settings) as client:
+        r = await ask(client, "Türkiye'de kırmızı bölgede izin gerekir mi?")
+
+    assert r.status_code == 200
+    (path,) = (tmp_path / "debug").iterdir()
+    record = json.loads(path.read_text(encoding="utf-8"))
+    assert record["question"] == "Türkiye'de kırmızı bölgede izin gerekir mi?"
+    assert record["mode"] == "TR"
+    assert [(p["n"], p["section_ref"], p["document_id"]) for p in record["passages"]] == [
+        (1, "Madde 12", "tr-sample"),
+        (2, "Madde 15", "tr-sample"),
+    ]
+    # The reply as the model sent it, before the server dropped the invalid citation.
+    assert record["raw"]["sections"][0]["citations"] == [7]
+
+
+async def test_debug_raw_is_off_by_default(db, loaded, clean_log, tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+
+    async with ask_client(FakeLLM()) as client:
+        await ask(client, "Türkiye'de kırmızı bölgede izin gerekir mi?")
+
+    assert not (tmp_path / "data").exists()
+
+
 # --- limits and errors ---------------------------------------------------------------------
 
 

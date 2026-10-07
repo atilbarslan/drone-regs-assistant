@@ -1,5 +1,7 @@
 """Application settings, read from environment variables and an optional .env file."""
 
+from pathlib import Path
+
 from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -25,6 +27,11 @@ class Settings(BaseSettings):
     # Must match the vector(768) column in db/migrations/001_initial.sql.
     gemini_embedding_dimensions: int = 768
     gemini_timeout_seconds: float = 60.0
+
+    # Local debugging only (DEBUG_RAW=1): write each answer's passages and the model's raw reply,
+    # with the question, to this directory (outside git). See app/debug.py.
+    debug_raw: bool = False
+    debug_raw_dir: Path = Path("data/debug")
 
     # Hybrid search: candidates taken from each of vector and full-text search, the RRF
     # constant, and how many fused results are returned.
