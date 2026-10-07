@@ -105,6 +105,9 @@ class AnswerResult:
     refused: bool
     jurisdiction: str
     matched_terms: list[MatchedTerm] = field(default_factory=list)
+    # The line at the top of answer that names the jurisdiction (None for "none"), so a client
+    # that shows its own label can leave it out.
+    jurisdiction_line: str | None = None
 
 
 def first_side(lang: str) -> str:
@@ -229,7 +232,7 @@ async def answer_question(
         metrics.refused, metrics.cited_chunks = True, 0
         return AnswerResult(
             with_line(no_passages_message(lang)), [], True, detection.jurisdiction,
-            detection.matched_terms,
+            detection.matched_terms, line,
         )  # fmt: skip
 
     system, prompt = build_prompt(question, lang, detection, hits)
@@ -256,5 +259,5 @@ async def answer_question(
     metrics.refused = refused
     metrics.cited_chunks = len(citations)
     return AnswerResult(
-        with_line(text), citations, refused, detection.jurisdiction, detection.matched_terms
+        with_line(text), citations, refused, detection.jurisdiction, detection.matched_terms, line
     )
