@@ -104,7 +104,7 @@ async def test_question_without_jurisdiction_searches_both_sides(db, loaded, cle
     assert body["matched_terms"] == []
     assert not body["answer"].startswith("Bu cevap")  # the model says it, not a fixed line
     system, prompt = llm.calls[0]
-    assert "does not name a jurisdiction" in system
+    assert "does not say whether it is about the EU or Türkiye" in system
     # Balanced: both Turkish passages first, then EU passages fill the remaining places.
     lines = [line for line in prompt.splitlines() if line.startswith("[")]
     sides = [line.split(" | ")[0].split("] ")[1] for line in lines]

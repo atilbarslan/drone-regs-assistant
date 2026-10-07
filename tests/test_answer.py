@@ -58,7 +58,8 @@ def test_prompt_for_an_unknown_jurisdiction_asks_for_two_labelled_parts():
     system_tr, _ = build_prompt("Gece uçuşu?", "tr", detect("Gece uçuşu?"), [hit(1, "TR")])
     system_en, _ = build_prompt("Night flight?", "en", detect("Night flight?"), [hit(1, "EU")])
 
-    assert "does not name a jurisdiction" in system_tr
+    assert "does not say whether it is about the EU or Türkiye" in system_tr
+    assert "Sorunuz AB'yi mi Türkiye'yi mi" in system_tr
     assert "'Türkiye'de' and 'AB'de'" in system_tr
     assert "'In the EU' and 'In Türkiye'" in system_en
 

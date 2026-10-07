@@ -32,7 +32,9 @@ such as [2] or [1][3]. Use only the passage numbers you were given.
 "answer" that the sources provided do not answer the question. If they answer only part of it, \
 answer that part with citations and say what is missing.
 4. Write the answer in {language}, even when the passages are in another language. Keep \
-section references (such as UAS.OPEN.020, Article 4 or Madde 12) as written.
+section references (such as UAS.OPEN.020, Article 4 or Madde 12) as written. When translating, \
+keep the exact meaning of numbers, limits and conditions: "lower by up to 4 years" is an \
+amount of reduction, not a resulting age.
 5. Be brief: a few sentences or a short list.
 6. End with one short sentence saying that this is not legal advice and the official text \
 prevails.
@@ -49,10 +51,14 @@ JURISDICTION_RULES = {
     ),
     "none": (
         "8. The question does not say whether it is about the EU or Türkiye. Start with one "
-        "sentence saying that the question does not name a jurisdiction, then answer in two "
-        "labelled parts, '{first_label}' and '{second_label}', each using only the passages of "
-        "that jurisdiction. If one side has no relevant passage, say so for that side."
+        "plain sentence saying so ({none_sentence}), then answer in two labelled parts, "
+        "'{first_label}' and '{second_label}', each using only the passages of that side. If "
+        "one side has no relevant passage, say so for that side."
     ),
+}
+NONE_SENTENCES = {
+    "tr": "for example: 'Sorunuz AB'yi mi Türkiye'yi mi kastettiğini belirtmiyor.'",
+    "en": "for example: 'Your question does not say whether it is about the EU or Türkiye.'",
 }
 SIDE_LABELS = {
     "tr": {"TR": "Türkiye'de", "EU": "AB'de"},
@@ -113,7 +119,9 @@ def build_prompt(
     first = first_side(lang)
     second = "EU" if first == "TR" else "TR"
     rule = JURISDICTION_RULES[detection.jurisdiction].format(
-        first_label=SIDE_LABELS[lang][first], second_label=SIDE_LABELS[lang][second]
+        first_label=SIDE_LABELS[lang][first],
+        second_label=SIDE_LABELS[lang][second],
+        none_sentence=NONE_SENTENCES[lang],
     )
     system = SYSTEM_PROMPT.format(language=LANGUAGE_NAMES[lang], jurisdiction_rule=rule)
     passages = []
