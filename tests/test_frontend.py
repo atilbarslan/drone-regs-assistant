@@ -64,11 +64,13 @@ def test_frontend_never_writes_html():
 def test_page_basics():
     html = (FRONTEND_DIR / "index.html").read_text(encoding="utf-8")
 
-    assert '<html lang="tr">' in html
+    # English first (the audience is European); the script switches to Turkish if the visitor
+    # chose it or the browser asks for it.
+    assert '<html lang="en">' in html
     assert 'name="viewport"' in html
     # The two fixed notices are part of the page, not of the model's answer.
-    assert "Hukuki danışmanlık değildir; resmi metin esastır." in html
-    assert "ücretsiz katmanına gönderilir; kişisel veri girmeyin." in html
+    assert "Not legal advice — the official text prevails." in html
+    assert "do not enter personal data." in html
     assert "<script>" not in html and "style=" not in html  # nothing inline (CSP)
 
 
