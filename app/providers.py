@@ -46,3 +46,22 @@ class RateLimited(ProviderError):
 
 class TransientError(ProviderError):
     """A temporary failure (server error, timeout) that is worth retrying."""
+
+
+@dataclass(frozen=True)
+class Generation:
+    answerable: bool  # the model's judgement that the passages contain the answer
+    answer: str
+    prompt_tokens: int | None
+    output_tokens: int | None
+    thinking_tokens: int | None
+
+
+class LLM(Protocol):
+    model: str
+
+    async def generate(self, system: str, prompt: str) -> Generation: ...
+
+
+class EmptyResponse(ProviderError):
+    """The model returned no usable answer (blocked, cut off, or not the expected JSON)."""

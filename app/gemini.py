@@ -7,8 +7,16 @@ import re
 import httpx
 from google import genai
 from google.genai import errors, types
+from pydantic import BaseModel, Field
 
-from app.providers import Document, Embeddings, RateLimited, TransientError
+from app.providers import (
+    Document,
+    Embeddings,
+    EmptyResponse,
+    Generation,
+    RateLimited,
+    TransientError,
+)
 
 # google-genai does not expose the token count of an embedding call, but the raw response
 # carries it (usageMetadata.promptTokenCount). A response hook on the SDK's httpx client reads
@@ -95,3 +103,63 @@ class GeminiEmbedder:
 
     async def embed_query(self, query: str) -> Embeddings:
         return await self._embed([query_prompt(query)])
+
+
+class _Answer(BaseModel):
+    """The JSON shape the model must return (structured output)."""
+
+    answerable: bool = Field(description="False if the passages do not contain the answer.")
+    answer: str = Field(description="The answer, with [n] citations.")
+
+
+class GeminiLLM:
+    """Answers with generateContent: one stateless request per question, nothing stored by the
+    API between calls (the Interactions API stores requests unless store=false is set)."""
+
+    def __init__(
+        self, api_key: str, model: str, timeout_seconds: float, thinking_level: str | None = None
+    ):
+        self.model = model
+        self.thinking_level = thinking_level
+        options = types.HttpOptions(timeout=int(timeout_seconds * 1000))
+        self._client = genai.Client(api_key=api_key, http_options=options).aio
+
+    async def aclose(self) -> None:
+        await self._client.aclose()
+
+    async def generate(self, system: str, prompt: str) -> Generation:
+        config = types.GenerateContentConfig(
+            system_instruction=system,
+            response_mime_type="application/json",
+            response_schema=_Answer,
+            # No tools are passed; disabling automatic function calling also silences the
+            # SDK's warning about it.
+            automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True),
+            # Temperature stays at the default: Google advises against lowering it for
+            # Gemini 3 models. Thinking stays at the model default unless configured.
+            thinking_config=(
+                types.ThinkingConfig(thinking_level=self.thinking_level.upper())
+                if self.thinking_level
+                else None
+            ),
+        )
+        try:
+            response = await self._client.models.generate_content(
+                model=self.model, contents=prompt, config=config
+            )
+        except errors.APIError as exc:
+            raise classify_error(exc) from exc
+        except httpx.TransportError as exc:
+            raise TransientError(type(exc).__name__) from exc
+        parsed = response.parsed
+        if not isinstance(parsed, _Answer):
+            reason = response.candidates[0].finish_reason if response.candidates else None
+            raise EmptyResponse(f"no structured answer (finish_reason={reason})")
+        usage = response.usage_metadata
+        return Generation(
+            answerable=parsed.answerable,
+            answer=parsed.answer,
+            prompt_tokens=usage.prompt_token_count if usage else None,
+            output_tokens=usage.candidates_token_count if usage else None,
+            thinking_tokens=usage.thoughts_token_count if usage else None,
+        )
