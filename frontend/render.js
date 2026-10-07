@@ -33,6 +33,16 @@ export const STRINGS = {
     unexpected: "Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.",
     footerSources: "Kaynak metinler",
     footerNote: "Portföy demosudur; cevaplar yanlış ya da eksik olabilir.",
+    dependsTitle: "Cevap şunlara bağlı",
+    dependsHint: "Size uyanı seçin; soru bu bilgiyle yeniden sorulur.",
+    factsGiven: "Verdiğiniz bilgiler",
+    notInSources: "Kaynaklarda olmayanlar",
+    keyDifferences: "Temel farklar",
+    topic: "Konu",
+    sideTR: "Türkiye",
+    sideEU: "AB",
+    followUps: "Devam soruları",
+    emptyCell: "Kaynaklarda yok",
   },
   en: {
     title: "Drone Rules Assistant",
@@ -66,6 +76,16 @@ export const STRINGS = {
     unexpected: "Something went wrong. Please try again.",
     footerSources: "Source texts",
     footerNote: "A portfolio demo; answers may be wrong or incomplete.",
+    dependsTitle: "The answer depends on",
+    dependsHint: "Pick what applies; the question is asked again with it.",
+    factsGiven: "What you told us",
+    notInSources: "Not in the sources",
+    keyDifferences: "Key differences",
+    topic: "Topic",
+    sideTR: "Türkiye",
+    sideEU: "EU",
+    followUps: "Follow-up questions",
+    emptyCell: "Not in the sources",
   },
 };
 
@@ -100,66 +120,37 @@ function quoted(terms) {
   return terms.map((t) => `'${t.text}'`).join(", ");
 }
 
-/** The label shown above an answer, built from jurisdiction and matched_terms. */
-export function jurisdictionLabel(jurisdiction, matchedTerms, lang) {
-  const terms = (matchedTerms || []).slice(0, 4);
-  if (lang === "tr") {
-    const from = terms.length
-      ? ` — sorudaki ${quoted(terms)} ${terms.length === 1 ? "ifadesinden" : "ifadelerinden"}`
-      : "";
-    switch (jurisdiction) {
-      case "EU":
-        return `AB mevzuatına göre${from}`;
-      case "TR":
-        return `Türkiye mevzuatına göre${from}`;
-      case "both":
-        return `Türkiye ve AB${from}`;
-      default:
-        return "Soru ülke belirtmiyor — iki taraf";
+const MODE_NAMES = {
+  tr: { EU: "AB mevzuatına göre", TR: "Türkiye mevzuatına göre", compare: "Türkiye ve AB karşılaştırması" },
+  en: { EU: "Based on EU rules", TR: "Based on Turkish rules", compare: "Türkiye and the EU compared" },
+};
+
+/** The label above an answer, from the response's mode, mode_source and detected fields. */
+export function modeLabel(mode, modeSource, detected, lang) {
+  const name = MODE_NAMES[lang][mode];
+  const terms = ((detected && detected.matched_terms) || []).slice(0, 4);
+  if (modeSource === "detected" && terms.length) {
+    if (lang === "tr") {
+      const word = terms.length === 1 ? "ifadesinden" : "ifadelerinden";
+      return `${name} — sorudaki ${quoted(terms)} ${word}`;
     }
+    return `${name} — from ${quoted(terms)} in your question`;
   }
-  const from = terms.length ? ` — from ${quoted(terms)} in your question` : "";
-  switch (jurisdiction) {
-    case "EU":
-      return `Based on EU rules${from}`;
-    case "TR":
-      return `Based on Turkish rules${from}`;
-    case "both":
-      return `Türkiye and the EU${from}`;
-    default:
-      return "No country named in the question — both sides";
-  }
+  if (modeSource === "explicit") return lang === "tr" ? `${name} — seçiminize göre` : `${name} — your choice`;
+  return lang === "tr"
+    ? `${name} — soru ülke belirtmiyor (varsayılan)`
+    : `${name} — the question names no country (default)`;
 }
 
-/** The answer without the server's jurisdiction line, which the label replaces. */
-export function stripJurisdictionLine(answer, line) {
-  if (line && answer.startsWith(line)) return answer.slice(line.length).trimStart();
-  return answer;
+/** The mode sent as default_mode: the last one answered, else the interface language's. */
+export function defaultMode(lastMode, lang) {
+  if (lastMode === "EU" || lastMode === "TR" || lastMode === "compare") return lastMode;
+  return lang === "tr" ? "TR" : "EU";
 }
 
-/**
- * Split an answer into paragraphs of tokens: {type: "text", value} or {type: "cite", n}.
- * Only numbers that are in `citationNumbers` become citations; anything else stays text.
- */
-export function splitAnswer(answer, citationNumbers) {
-  const known = new Set(citationNumbers);
-  return answer
-    .split(/\n\s*\n/)
-    .map((paragraph) => paragraph.trim())
-    .filter(Boolean)
-    .map((paragraph) => {
-      const tokens = [];
-      let last = 0;
-      for (const match of paragraph.matchAll(/\[(\d+)\]/g)) {
-        const n = Number(match[1]);
-        if (!known.has(n)) continue;
-        if (match.index > last) tokens.push({ type: "text", value: paragraph.slice(last, match.index) });
-        tokens.push({ type: "cite", n });
-        last = match.index + match[0].length;
-      }
-      if (last < paragraph.length) tokens.push({ type: "text", value: paragraph.slice(last) });
-      return tokens;
-    });
+/** Facts for the next request: the ones already given plus the chosen one, once each. */
+export function withFact(facts, fact) {
+  return facts.includes(fact) ? [...facts] : [...facts, fact];
 }
 
 /** Local-time rendering of an ISO timestamp, or null if it is missing or invalid. */

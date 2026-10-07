@@ -63,27 +63,36 @@ def sample_source(source_id: str, language: str, jurisdiction: str) -> Source:
     )
 
 
-class FakeLLM:
-    """Returns a fixed answer (or one computed from the prompt) and records each call.
-    failures are raised, in order, by the next calls."""
+def section(topic="Kural", text="Örnek kural.", citations=(1,), cases=()) -> dict:
+    return {"topic": topic, "text": text, "citations": list(citations), "cases": list(cases)}
 
-    def __init__(self, answer="Örnek cevap [1].", answerable: bool = True, failures=None):
+
+def structured(**fields) -> dict:
+    """A model reply in the StructuredAnswer shape; one cited section unless overridden."""
+    reply = {"answerable": True, "sections": [section()]}
+    reply.update(fields)
+    return reply
+
+
+class FakeLLM:
+    """Returns a fixed structured reply (or one computed from the prompt) and records each
+    call. failures are raised, in order, by the next calls."""
+
+    def __init__(self, reply=None, failures=None):
         self.model = "fake-llm"
-        self.answer = answer
-        self.answerable = answerable
+        self.reply = reply if reply is not None else structured()
         self.failures = list(failures or [])
         self.calls: list[tuple[str, str]] = []
 
-    async def generate(self, system: str, prompt: str) -> Generation:
+    async def generate(self, system: str, prompt: str, schema) -> Generation:
         self.calls.append((system, prompt))
         if self.failures:
             raise self.failures.pop(0)
-        text = self.answer(prompt) if callable(self.answer) else self.answer
+        data = self.reply(prompt) if callable(self.reply) else self.reply
         return Generation(
-            answerable=self.answerable,
-            answer=text,
+            data=data,
             prompt_tokens=len(prompt.split()),
-            output_tokens=len(text.split()),
+            output_tokens=len(str(data).split()),
             thinking_tokens=None,
         )
 

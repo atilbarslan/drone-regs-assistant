@@ -5,11 +5,11 @@ import { test } from "node:test";
 import {
   EXAMPLES,
   STRINGS,
+  defaultMode,
   formatLocalTime,
-  jurisdictionLabel,
+  modeLabel,
   pickLanguage,
-  splitAnswer,
-  stripJurisdictionLine,
+  withFact,
 } from "../render.js";
 
 test("both languages define the same texts", () => {
@@ -30,56 +30,41 @@ test("language: stored choice first, then the browser language", () => {
   assert.equal(pickLanguage("xx", []), "en");
 });
 
-test("jurisdiction labels come from matched_terms", () => {
-  const germany = [{ text: "Almanya", jurisdiction: "EU" }];
+test("mode labels say where the mode came from", () => {
+  const germany = { mode: "EU", matched_terms: [{ text: "Almanya", jurisdiction: "EU" }] };
+  assert.equal(modeLabel("EU", "detected", germany, "tr"), "AB mevzuatına göre — sorudaki 'Almanya' ifadesinden");
   assert.equal(
-    jurisdictionLabel("EU", germany, "tr"),
-    "AB mevzuatına göre — sorudaki 'Almanya' ifadesinden",
-  );
-  assert.equal(
-    jurisdictionLabel("EU", [{ text: "Germany", jurisdiction: "EU" }], "en"),
+    modeLabel("EU", "detected", { mode: "EU", matched_terms: [{ text: "Germany", jurisdiction: "EU" }] }, "en"),
     "Based on EU rules — from 'Germany' in your question",
   );
-  const both = [
-    { text: "AB", jurisdiction: "EU" },
-    { text: "Türkiye", jurisdiction: "TR" },
-  ];
-  assert.equal(jurisdictionLabel("both", both, "tr"), "Türkiye ve AB — sorudaki 'AB', 'Türkiye' ifadelerinden");
+  const both = {
+    mode: "compare",
+    matched_terms: [
+      { text: "AB", jurisdiction: "EU" },
+      { text: "Türkiye", jurisdiction: "TR" },
+    ],
+  };
   assert.equal(
-    jurisdictionLabel("TR", [{ text: "SHGM", jurisdiction: "TR" }], "en"),
-    "Based on Turkish rules — from 'SHGM' in your question",
+    modeLabel("compare", "detected", both, "tr"),
+    "Türkiye ve AB karşılaştırması — sorudaki 'AB', 'Türkiye' ifadelerinden",
   );
-  assert.equal(jurisdictionLabel("none", [], "tr"), "Soru ülke belirtmiyor — iki taraf");
-  assert.equal(jurisdictionLabel("none", [], "en"), "No country named in the question — both sides");
+  assert.equal(modeLabel("TR", "explicit", both, "tr"), "Türkiye mevzuatına göre — seçiminize göre");
+  const none = { mode: null, matched_terms: [] };
+  assert.equal(modeLabel("TR", "default", none, "tr"), "Türkiye mevzuatına göre — soru ülke belirtmiyor (varsayılan)");
+  assert.equal(modeLabel("EU", "default", none, "en"), "Based on EU rules — the question names no country (default)");
 });
 
-test("the server's jurisdiction line is stripped only when it matches", () => {
-  const line = "Bu cevap AB mevzuatına göredir (sorudaki 'AB' ifadesinden).";
-  assert.equal(stripJurisdictionLine(`${line}\n\nCevap [1].`, line), "Cevap [1].");
-  assert.equal(stripJurisdictionLine("Cevap [1].", line), "Cevap [1].");
-  assert.equal(stripJurisdictionLine("Cevap.", null), "Cevap.");
+test("default mode: the last answered mode, else the interface language's", () => {
+  assert.equal(defaultMode(null, "tr"), "TR");
+  assert.equal(defaultMode(null, "en"), "EU");
+  assert.equal(defaultMode("compare", "tr"), "compare");
+  assert.equal(defaultMode("bogus", "en"), "EU");
 });
 
-test("answers split into paragraphs of text and known citations", () => {
-  const parts = splitAnswer("Birinci [1] ve [2].\n\nİkinci [9] paragraf [1]", [1, 2]);
-  assert.deepEqual(parts, [
-    [
-      { type: "text", value: "Birinci " },
-      { type: "cite", n: 1 },
-      { type: "text", value: " ve " },
-      { type: "cite", n: 2 },
-      { type: "text", value: "." },
-    ],
-    [
-      { type: "text", value: "İkinci [9] paragraf " },
-      { type: "cite", n: 1 },
-    ],
-  ]);
-});
-
-test("markup in an answer stays text", () => {
-  const parts = splitAnswer('<img src=x onerror="alert(1)"> [1]', [1]);
-  assert.deepEqual(parts[0][0], { type: "text", value: '<img src=x onerror="alert(1)"> ' });
+test("a chosen fact is added once", () => {
+  assert.deepEqual(withFact([], "Has a camera"), ["Has a camera"]);
+  assert.deepEqual(withFact(["Has a camera"], "Has a camera"), ["Has a camera"]);
+  assert.deepEqual(withFact(["a"], "b"), ["a", "b"]);
 });
 
 test("reset times are shown in local time, invalid ones ignored", () => {

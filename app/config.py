@@ -1,5 +1,7 @@
 """Application settings, read from environment variables and an optional .env file."""
 
+from pathlib import Path
+
 from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -26,11 +28,20 @@ class Settings(BaseSettings):
     gemini_embedding_dimensions: int = 768
     gemini_timeout_seconds: float = 60.0
 
+    # Local debugging only (DEBUG_RAW=1): write each answer's passages and the model's raw reply,
+    # with the question, to this directory (outside git). See app/debug.py.
+    debug_raw: bool = False
+    debug_raw_dir: Path = Path("data/debug")
+
     # Hybrid search: candidates taken from each of vector and full-text search, the RRF
     # constant, and how many fused results are returned.
     search_candidates: int = 30
     search_rrf_k: int = 60
     search_top_k: int = 8
+    # More passages for list questions ("hangi belgeler", "what do I need", "steps").
+    search_top_k_list: int = 14
+    # Compare mode searches each source separately; at least this many passages from each.
+    search_compare_per_side: int = 6
 
     # /api/ask limits. Each question makes one embedding and one generation request; the free
     # tier allows 500 generation requests a day for gemini-3.5-flash-lite (15 per minute), and

@@ -184,3 +184,42 @@ def test_every_member_state_has_cities_except_through_its_name():
 def test_ambiguous_names_need_place_context():
     for name in AMBIGUOUS_PLACES:
         assert detect(f"{name.lower()} bir şey").jurisdiction == "none", name
+
+
+@pytest.mark.parametrize(
+    ("question", "expected", "terms"),
+    [
+        # "talimat" and "yeni/eski mevzuat" point to SHT-İHA ...
+        ("Yeni talimata göre kayıt nasıl yapılır?", "TR", ["Yeni talimat"]),
+        ("Talimata göre P0 kimdir?", "TR", ["Talimat"]),
+        (
+            "Yeni mevzuat ile eski mevzuat arasındaki farklar",
+            "TR",
+            ["Yeni mevzuat", "eski mevzuat"],
+        ),
+        ("İkinci el drone alacağım, yeni mevzuata göre adımlar neler?", "TR", ["yeni mevzuat"]),
+        # ... but not a manufacturer's or user's instructions ...
+        ("Üreticinin talimatlarına uymak zorunlu mu?", "none", []),
+        ("Kullanım talimatı nerede yazıyor?", "none", []),
+        ("Üretici kullanım talimatına göre uçuş", "none", []),
+        # ... and they are weak: another signal decides.
+        ("AB'nin yeni mevzuatı neler getiriyor?", "EU", ["AB"]),
+        ("Almanya'daki yeni talimata göre kayıt", "EU", ["Almanya"]),
+        # licence names of the previous Turkish instruction
+        ("İHA1 belgem var, ne yapmalıyım?", "TR", ["İHA1"]),
+        ("IHA-2 sertifikası geçerli mi?", "TR", ["IHA-2"]),
+        ("iha0 ile uçabilir miyim?", "TR", ["iha0"]),
+        ("İHA 2 tane aldım", "none", []),  # a count, not a licence
+        # A1/A3 written with a slash; certificate and remote-pilot context
+        ("A1/A3 sertifikam var", "EU", ["A1/A3"]),
+        ("Do I need an A2 certificate?", "EU", ["A2"]),
+        ("Remote pilot with A1 training", "EU", ["A1"]),
+        ("A2 sınavı nasıl yapılır?", "EU", ["A2"]),
+        ("A1 vitamini", "none", []),  # still not a drone code
+    ],
+)
+def test_detect_instruction_words_old_licences_and_certificates(question, expected, terms):
+    detection = detect(question)
+
+    assert detection.jurisdiction == expected
+    assert [t.text for t in detection.matched_terms] == terms

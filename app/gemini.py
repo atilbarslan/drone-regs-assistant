@@ -7,7 +7,7 @@ import re
 import httpx
 from google import genai
 from google.genai import errors, types
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 from app.providers import (
     Document,
@@ -105,13 +105,6 @@ class GeminiEmbedder:
         return await self._embed([query_prompt(query)])
 
 
-class _Answer(BaseModel):
-    """The JSON shape the model must return (structured output)."""
-
-    answerable: bool = Field(description="False if the passages do not contain the answer.")
-    answer: str = Field(description="The answer, with [n] citations.")
-
-
 class GeminiLLM:
     """Answers with generateContent: one stateless request per question, nothing stored by the
     API between calls (the Interactions API stores requests unless store=false is set)."""
@@ -127,11 +120,11 @@ class GeminiLLM:
     async def aclose(self) -> None:
         await self._client.aclose()
 
-    async def generate(self, system: str, prompt: str) -> Generation:
+    async def generate(self, system: str, prompt: str, schema: type[BaseModel]) -> Generation:
         config = types.GenerateContentConfig(
             system_instruction=system,
             response_mime_type="application/json",
-            response_schema=_Answer,
+            response_schema=schema,
             # No tools are passed; disabling automatic function calling also silences the
             # SDK's warning about it.
             automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True),
@@ -152,13 +145,12 @@ class GeminiLLM:
         except httpx.TransportError as exc:
             raise TransientError(type(exc).__name__) from exc
         parsed = response.parsed
-        if not isinstance(parsed, _Answer):
+        if not isinstance(parsed, schema):
             reason = response.candidates[0].finish_reason if response.candidates else None
             raise EmptyResponse(f"no structured answer (finish_reason={reason})")
         usage = response.usage_metadata
         return Generation(
-            answerable=parsed.answerable,
-            answer=parsed.answer,
+            data=parsed.model_dump(),
             prompt_tokens=usage.prompt_token_count if usage else None,
             output_tokens=usage.candidates_token_count if usage else None,
             thinking_tokens=usage.thoughts_token_count if usage else None,
