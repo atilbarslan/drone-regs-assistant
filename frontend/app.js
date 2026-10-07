@@ -5,11 +5,11 @@ import {
   EXAMPLES,
   MAX_QUESTION_CHARS,
   STRINGS,
+  defaultMode,
   formatLocalTime,
-  jurisdictionLabel,
+  modeLabel,
   pickLanguage,
-  splitAnswer,
-  stripJurisdictionLine,
+  withFact,
 } from "./render.js";
 
 const $ = (id) => document.getElementById(id);
@@ -24,6 +24,7 @@ const langButton = $("lang-toggle");
 let lang = pickLanguage(readStoredLanguage(), navigator.languages || [navigator.language]);
 let busy = false;
 let waitTimer = null;
+let lastMode = null; // the mode of the last answer, sent as default_mode
 
 function readStoredLanguage() {
   try {
@@ -130,7 +131,7 @@ function waitBeforeRetry(seconds) {
   }, 1000);
 }
 
-async function ask(rawQuestion) {
+async function ask(rawQuestion, facts = []) {
   const question = rawQuestion.trim();
   const t = STRINGS[lang];
   if (busy || waitTimer) return;
@@ -144,11 +145,18 @@ async function ask(rawQuestion) {
     const response = await fetch("/api/ask", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ question, lang }),
+      body: JSON.stringify({
+        question,
+        lang,
+        mode: null,
+        default_mode: defaultMode(lastMode, lang),
+        facts,
+      }),
     });
     const body = await response.json().catch(() => null);
     if (response.ok && body) {
-      showAnswer(question, body);
+      lastMode = body.mode;
+      showAnswer(question, body, facts);
     } else if ((response.status === 429 || response.status === 503) && body && body.message) {
       showError(body.message, body.resets_at);
       if (response.status === 429 && !body.resets_at && body.retry_after_seconds) {
@@ -167,45 +175,118 @@ async function ask(rawQuestion) {
 }
 
 // --- answer --------------------------------------------------------------------------------
+// The visual design comes later; this shows the structured answer in its simplest form.
 
-function showAnswer(question, data) {
+function citeLinks(numbers, citations) {
+  const t = STRINGS[lang];
+  const nodes = [];
+  for (const n of numbers) {
+    const citation = citations.get(n);
+    if (!citation) continue;
+    const link = el("a", {
+      href: `#cite-${n}`,
+      class: "cite",
+      "aria-label": t.citeLabel(n, citation.section_ref),
+      text: `[${n}]`,
+    });
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      focusCitation(n);
+    });
+    nodes.push(link);
+  }
+  return nodes.length ? [" ", ...nodes] : [];
+}
+
+function dependsOnBlock(question, data, facts) {
+  const t = STRINGS[lang];
+  const box = el("div", { class: "depends" }, el("h3", { text: t.dependsTitle }));
+  box.append(el("p", { class: "hint", text: t.dependsHint }));
+  for (const item of data.depends_on) {
+    const buttons = item.options.map((option) => {
+      const button = el("button", { type: "button", class: "example", text: option.label });
+      button.addEventListener("click", () => ask(question, withFact(facts, option.fact)));
+      return el("li", {}, button);
+    });
+    box.append(el("p", { class: "depends-question", text: item.question }));
+    box.append(el("ul", { class: "examples" }, ...buttons));
+  }
+  return box;
+}
+
+function compareBlock(compare, citations) {
+  const t = STRINGS[lang];
+  const parts = [];
+  if (compare.key_differences.length) {
+    parts.push(el("h3", { text: t.keyDifferences }));
+    parts.push(el("ol", {}, ...compare.key_differences.map((text) => el("li", { text }))));
+  }
+  const head = el("tr", {}, ...[t.topic, t.sideTR, t.sideEU].map((text) => el("th", { scope: "col", text })));
+  const rows = compare.rows.map((row) => {
+    const cell = (side) =>
+      side ? el("td", {}, side.text, ...citeLinks(side.citations, citations)) : el("td", { class: "empty", text: t.emptyCell });
+    return el("tr", {}, el("th", { scope: "row", text: row.topic }), cell(row.TR), cell(row.EU));
+  });
+  parts.push(el("div", { class: "table-wrap" }, el("table", { class: "compare" }, el("thead", {}, head), el("tbody", {}, ...rows))));
+  return parts;
+}
+
+function sectionBlock(section, citations) {
+  const block = el("section", { class: "answer-section" }, el("h3", { text: section.topic }));
+  if (section.text) block.append(el("p", {}, section.text, ...citeLinks(section.citations, citations)));
+  if (section.cases.length) {
+    const items = section.cases.map((c) =>
+      el(
+        "li",
+        {},
+        el("span", { class: "case-condition", text: `${c.condition} — ` }),
+        el("strong", { class: "verdict", text: c.verdict }),
+        `: ${c.text}`,
+        ...citeLinks(c.citations, citations),
+      ),
+    );
+    block.append(el("ul", { class: "cases" }, ...items));
+  }
+  return block;
+}
+
+function showAnswer(question, data, facts) {
   const t = STRINGS[lang];
   const citations = new Map(data.citations.map((c) => [c.n, c]));
   const heading = el("h2", { id: "answer-heading", tabindex: "-1", text: t.answerTitle });
-
   const label = el("p", {
-    class: `jurisdiction jurisdiction-${data.jurisdiction}`,
-    text: jurisdictionLabel(data.jurisdiction, data.matched_terms, lang),
+    class: `jurisdiction jurisdiction-${data.mode === "compare" ? "both" : data.mode}`,
+    text: modeLabel(data.mode, data.mode_source, data.detected, lang),
   });
   const asked = el("p", { class: "asked" }, el("span", { text: `${t.yourQuestion}: ` }), question);
+  const parts = [heading, label, asked];
+  if (facts.length) {
+    parts.push(el("p", { class: "asked" }, el("span", { text: `${t.factsGiven}: ` }), facts.join(" · ")));
+  }
 
   const body = el("div", { class: data.refused ? "answer refused" : "answer" });
   if (data.refused) body.append(el("p", { class: "refused-title", text: t.refusedTitle }));
-  const text = stripJurisdictionLine(data.answer, data.jurisdiction_line);
-  for (const tokens of splitAnswer(text, [...citations.keys()])) {
-    const paragraph = el("p");
-    for (const token of tokens) {
-      if (token.type === "text") {
-        paragraph.append(document.createTextNode(token.value));
-      } else {
-        const citation = citations.get(token.n);
-        const link = el("a", {
-          href: `#cite-${token.n}`,
-          class: "cite",
-          "aria-label": t.citeLabel(token.n, citation.section_ref),
-          text: `[${token.n}]`,
-        });
-        link.addEventListener("click", (event) => {
-          event.preventDefault();
-          focusCitation(token.n);
-        });
-        paragraph.append(link);
-      }
-    }
-    body.append(paragraph);
+  if (data.depends_on.length) body.append(dependsOnBlock(question, data, facts));
+  if (data.compare) body.append(...compareBlock(data.compare, citations));
+  for (const section of data.sections) body.append(sectionBlock(section, citations));
+  if (data.not_in_sources.length) {
+    body.append(el("h3", { text: t.notInSources }));
+    body.append(el("ul", {}, ...data.not_in_sources.map((text) => el("li", { text }))));
   }
+  parts.push(body);
 
-  const parts = [heading, label, asked, body];
+  if (data.follow_ups.length) {
+    const buttons = data.follow_ups.map((followUp) => {
+      const button = el("button", { type: "button", class: "example", text: followUp });
+      button.addEventListener("click", () => {
+        input.value = followUp;
+        updateCounter();
+        ask(followUp);
+      });
+      return el("li", {}, button);
+    });
+    parts.push(el("h3", { text: t.followUps }), el("ul", { class: "examples" }, ...buttons));
+  }
   if (data.citations.length) {
     parts.push(el("h3", { text: t.sourcesTitle }), citationList(data.citations));
   }
@@ -226,7 +307,7 @@ function citationList(citations) {
     );
     const meta = el("p", {
       class: "citation-meta",
-      text: c.page ? `${c.source_title} · ${t.page(c.page)}` : c.source_title,
+      text: [c.source_title, c.source_version, c.page ? t.page(c.page) : ""].filter(Boolean).join(" · "),
     });
     const excerpt = el("blockquote", { text: c.excerpt });
     const link = el("a", {

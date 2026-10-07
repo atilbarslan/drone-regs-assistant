@@ -404,3 +404,53 @@ blockquote {
 h2[tabindex="-1"]:focus {
   outline: none;
 }
+
+/* structured answer (simple form; the visual design comes later) */
+.answer-section h3,
+.depends h3 {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin: 1rem 0 0.25rem;
+}
+
+.cases {
+  padding-left: 1.1rem;
+}
+
+.verdict {
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+}
+
+.depends {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.75rem;
+}
+
+.depends-question {
+  font-weight: 600;
+  margin: 0.5rem 0 0.25rem;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table.compare {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.925rem;
+}
+
+table.compare th,
+table.compare td {
+  border: 1px solid var(--border);
+  padding: 0.5rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+table.compare td.empty {
+  color: var(--muted);
+}
