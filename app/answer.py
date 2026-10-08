@@ -66,8 +66,11 @@ cover every requirement the passages give (registration, licence, permissions fo
 insurance, technical requirements), each as its own section.
 7. If the question asks about something the passages do not contain (for example the text of \
 an earlier, repealed instruction, a member state's own rules, insurance amounts), say so in \
-"not_in_sources" instead of answering with passages about something else. Use transitional or \
-repealed provisions only if the question is about the transition, or if they still apply.
+"not_in_sources" instead of answering with passages about something else. If the whole \
+question is about something regulations do not settle (a purchase recommendation, a price, a fee \
+or a cost), set "answerable" to false and say so; do not answer a different question from nearby \
+passages. Use transitional or repealed provisions only if the question is about the transition, \
+or if they still apply.
 8. Keep the exact meaning of numbers, limits and conditions: "lower by up to 4 years" is an \
 amount of reduction, not a resulting age. Keep every condition, limit and exception the passage \
 attaches to a rule you state (for example only within visual line of sight, only by day, only \
