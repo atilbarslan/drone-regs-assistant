@@ -164,6 +164,8 @@ class AnswerResult:
     answer: StructuredAnswer
     citations: list[Citation]
     text: str  # plain-text rendering of answer
+    # The passages given to the model, in order (passage n is hits[n - 1]); for the evaluation.
+    hits: list[SearchHit] = dataclasses.field(default_factory=list)
 
 
 def resolve_mode(
@@ -505,7 +507,7 @@ async def answer_question(
         metrics.sections_count, metrics.depends_on_count = 0, 0
         metrics.error_type = error_type
         return AnswerResult(
-            used_mode, source, detection, True, answer, [], render_text(answer, lang)
+            used_mode, source, detection, True, answer, [], render_text(answer, lang), hits
         )
 
     if not hits:
@@ -553,5 +555,5 @@ async def answer_question(
     )
     metrics.depends_on_count = len(answer.depends_on)
     return AnswerResult(
-        used_mode, source, detection, False, answer, citations, render_text(answer, lang)
+        used_mode, source, detection, False, answer, citations, render_text(answer, lang), hits
     )
