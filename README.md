@@ -9,3 +9,10 @@ advice: the official texts always prevail.
 **Status: work in progress.** Downloading, parsing, chunking, embedding, hybrid search, the
 answer endpoint (`POST /api/ask`) and the web page (served at `/`) work; the evaluation and the
 deployment are still being built.
+
+Fonts (Barlow Condensed, IBM Plex Sans, IBM Plex Mono; SIL Open Font License 1.1) are served
+from this site, not from Google Fonts, so visitors' IP addresses are not sent to a third party
+and the Content Security Policy allows fonts from this origin only. Licences: `frontend/fonts/`.
+
+To try the interface without a Gemini API key, run `python -m scripts.dev_fake_server` (fake
+answers, real search on the local database; see the file's docstring).

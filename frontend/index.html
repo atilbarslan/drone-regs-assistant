@@ -1,79 +1,154 @@
 <!doctype html>
-<html lang="tr">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
-    <title>Drone Mevzuat Asistanı</title>
+    <meta name="color-scheme" content="dark" />
+    <title>Drone Rules Assistant</title>
     <meta
       name="description"
-      content="AB (EASA) ve Türkiye (SHGM) drone kurallarına kaynak göstererek cevap veren demo."
+      content="Answers questions about EU (EASA) and Turkish (SHGM) drone rules, citing the article and page of the official text."
     />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="fonts/barlow-condensed-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="fonts.css" />
     <link rel="stylesheet" href="styles.css" />
     <script type="module" src="app.js"></script>
   </head>
-  <body>
-    <a class="skip" href="#question" data-i18n="questionLabel">Sorunuz</a>
+  <body class="view-home">
+    <a class="skip" href="#question" data-i18n="skip">Skip to the question</a>
+
     <header class="site-header">
-      <div class="wrap header-row">
-        <div>
-          <h1 data-i18n="title">Drone Mevzuat Asistanı</h1>
-          <p class="subtitle" data-i18n="subtitle"></p>
+      <div class="bar">
+        <a id="brand" class="brand" href="./" data-i18n-aria="home" aria-label="Drone Rules Assistant, start page">
+          <svg class="logo" width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="#F2A93B" stroke-width="1.6" aria-hidden="true" focusable="false">
+            <circle cx="7" cy="7" r="4.5" />
+            <circle cx="27" cy="7" r="4.5" />
+            <circle cx="7" cy="27" r="4.5" />
+            <circle cx="27" cy="27" r="4.5" />
+            <path d="M10 10l4.5 4.5M24 10l-4.5 4.5M10 24l4.5-4.5M24 24l-4.5-4.5" />
+            <rect x="13.5" y="13.5" width="7" height="7" rx="1.5" />
+          </svg>
+          <span class="brand-name">DRONE RULES <span class="brand-second" data-i18n="brandSecond">ASSISTANT</span></span>
+        </a>
+        <div id="switch-header" class="switch-slot header-switch"></div>
+        <div class="bar-end">
+          <nav class="site-nav" data-i18n-aria="navLabel" aria-label="Main">
+            <a href="#sources" data-i18n="navSources">Sources</a>
+            <a href="#how" data-i18n="navHow">How it works</a>
+            <a id="github-link" href="https://github.com/atilbarslan/drone-regs-assistant" rel="noopener noreferrer" target="_blank" data-i18n="navGitHub">GitHub</a>
+          </nav>
+          <div class="lang" role="group" data-i18n-aria="languageLabel" aria-label="Language">
+            <button type="button" data-lang="en" lang="en" aria-pressed="true">EN</button>
+            <button type="button" data-lang="tr" lang="tr" aria-pressed="false">TR</button>
+          </div>
         </div>
-        <button id="lang-toggle" type="button" class="lang">English</button>
       </div>
     </header>
 
-    <main class="wrap">
-      <form id="ask-form" class="ask" novalidate>
-        <label for="question" data-i18n="questionLabel">Sorunuz</label>
-        <textarea id="question" name="question" rows="3" required aria-describedby="hint counter"></textarea>
-        <div class="form-row">
-          <p id="hint" class="hint" data-i18n="hint"></p>
-          <p id="counter" class="counter" aria-live="polite"></p>
-          <button id="submit" type="submit" class="primary">Sor</button>
+    <main id="main">
+      <div id="home-view" class="home">
+        <div class="intro">
+          <p class="kicker" data-i18n="kicker">REGULATION (EU) 2019/947 · 2019/945 — SHT-İHA 30.07.2026</p>
+          <h1 class="headline" data-i18n="headline">Drone rules, answered with the article that says so.</h1>
+          <p class="lede" data-i18n="lede"></p>
         </div>
-      </form>
 
-      <ul class="notices">
-        <li data-i18n="noticeLegal">Hukuki danışmanlık değildir; resmi metin esastır.</li>
-        <li data-i18n="noticeData">
-          Sorular Google Gemini API'nin ücretsiz katmanına gönderilir; kişisel veri girmeyin.
-        </li>
-      </ul>
+        <section class="ask-panel" data-i18n-aria="askLabel" aria-label="Ask a question">
+          <div class="panel-top">
+            <div class="switch-block">
+              <span id="jurisdiction-label" class="mono-label" data-i18n="jurisdiction">JURISDICTION</span>
+              <div id="switch-home" class="switch-slot"></div>
+            </div>
+            <p class="switch-hint" data-i18n="switchHint"></p>
+          </div>
 
-      <section class="examples-section" aria-labelledby="examples-title">
-        <h2 id="examples-title" data-i18n="examplesTitle">Örnek sorular</h2>
-        <ul id="examples" class="examples"></ul>
-      </section>
+          <form id="ask-form" class="ask-form" novalidate>
+            <label for="question" class="mono-label" data-i18n="questionLabel">YOUR QUESTION</label>
+            <div class="ask-row">
+              <textarea id="question" name="question" rows="2" required></textarea>
+              <button id="submit" type="submit" class="primary" data-i18n="submit">Ask</button>
+            </div>
+          </form>
+          <div id="home-message" class="message-slot"></div>
 
-      <section id="result" class="result" aria-live="polite" aria-busy="false"></section>
+          <div class="examples">
+            <span class="examples-title" id="examples-title" data-i18n="tryOne">Try one</span>
+            <ul id="examples" class="chips" aria-labelledby="examples-title"></ul>
+          </div>
+        </section>
+
+        <div class="notices" role="note">
+          <span class="notice">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#F2A93B" stroke-width="1.5" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="6.5" /><path d="M8 7v4.5M8 4.6v.2" /></svg>
+            <span data-i18n="noticeLegal">Not legal advice — the official text prevails.</span>
+          </span>
+          <span class="notice">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#F2A93B" stroke-width="1.5" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="6.5" /><path d="M8 7v4.5M8 4.6v.2" /></svg>
+            <span data-i18n="noticeData">Questions are sent to the Google Gemini API free tier — do not enter personal data.</span>
+          </span>
+        </div>
+
+        <section class="facts" data-i18n-aria="factsLabel" aria-label="What is behind the answers">
+          <div class="fact">
+            <span class="fact-value">327</span>
+            <span class="fact-text" data-i18n="factSections"></span>
+          </div>
+          <div class="fact">
+            <span class="fact-value" data-i18n="factCiteValue">ART. + PAGE</span>
+            <span class="fact-text" data-i18n="factCite"></span>
+          </div>
+          <div class="fact">
+            <span class="fact-value">36</span>
+            <span class="fact-text" data-i18n="factTests"></span>
+          </div>
+        </section>
+
+        <section id="how" class="how" aria-labelledby="how-title" tabindex="-1">
+          <h2 id="how-title" class="mono-label" data-i18n="howTitle">HOW IT WORKS</h2>
+          <ol id="how-steps" class="how-steps"></ol>
+        </section>
+      </div>
+
+      <div id="answer-view" class="answer-view" hidden>
+        <div id="switch-answer" class="switch-slot answer-switch"></div>
+        <div class="answer-head">
+          <div class="badge-row">
+            <span id="mode-badge" class="badge"></span>
+            <span id="source-line" class="source-line"></span>
+          </div>
+          <h1 id="answer-title" class="answer-title" tabindex="-1"></h1>
+          <div id="fact-chips" class="fact-chips"></div>
+          <div id="ask-again" class="ask-again"></div>
+        </div>
+        <div id="answer-body" class="answer-body" aria-live="polite" aria-busy="false"></div>
+        <form id="followup-form" class="followup" novalidate>
+          <label for="followup" class="visually-hidden" data-i18n="followUpLabel">Ask a follow-up</label>
+          <input id="followup" name="followup" type="text" autocomplete="off" />
+          <button id="followup-submit" type="submit" class="primary" data-i18n="submit">Ask</button>
+        </form>
+        <p class="note-line" role="note">
+          <span data-i18n="noticeLegal">Not legal advice — the official text prevails.</span>
+          ·
+          <span data-i18n="noticeData">Questions are sent to the Google Gemini API free tier — do not enter personal data.</span>
+        </p>
+      </div>
 
       <noscript>
-        <p class="error">Bu sayfa JavaScript gerektirir. / This page needs JavaScript.</p>
+        <p class="noscript">This page needs JavaScript. / Bu sayfa JavaScript gerektirir.</p>
       </noscript>
     </main>
 
-    <footer class="site-footer">
-      <div class="wrap">
-        <p>
-          <span data-i18n="footerSources">Kaynak metinler</span>:
-          <a
-            href="https://www.easa.europa.eu/en/document-library/easy-access-rules/easy-access-rules-unmanned-aircraft-systems-regulations-eu"
-            rel="noopener noreferrer"
-            target="_blank"
-            >EASA Easy Access Rules for UAS (June 2026)</a
-          >
+    <footer id="sources" class="site-footer" tabindex="-1">
+      <div class="bar footer-bar">
+        <span>
+          <span data-i18n="footerSources">Sources</span>:
+          <a href="https://www.easa.europa.eu/en/document-library/easy-access-rules/easy-access-rules-unmanned-aircraft-systems-regulations-eu" rel="noopener noreferrer" target="_blank">EASA Easy Access Rules for UAS (June 2026)</a>
           ·
-          <a
-            href="https://web.shgm.gov.tr/documents/sivilhavacilik/files/mevzuat/sektorel/talimatlar/SHT-IHA(1).pdf"
-            rel="noopener noreferrer"
-            target="_blank"
-            >SHGM SHT-İHA (30.07.2026)</a
-          >
-        </p>
-        <p data-i18n="footerNote">Portföy demosudur; cevaplar yanlış ya da eksik olabilir.</p>
+          <a href="https://web.shgm.gov.tr/documents/sivilhavacilik/files/mevzuat/sektorel/talimatlar/SHT-IHA(1).pdf" rel="noopener noreferrer" target="_blank">SHGM SHT-İHA (30.07.2026)</a>
+        </span>
+        <span data-i18n="footerNote">Portfolio demo · answers may be wrong or incomplete</span>
       </div>
     </footer>
   </body>

@@ -7,6 +7,7 @@ import time, and lets tests pass fake providers.
 The app assumes a single worker: the request limits are counted in memory (app/limits.py).
 """
 
+import mimetypes
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -22,12 +23,16 @@ from app.providers import LLM, Embedder
 
 FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
 
-# The page loads only its own files: no inline scripts or styles, no third-party origins. Even
-# if model output ever reached the page as HTML, an injected script would not run.
+# The page loads only its own files: no inline scripts or styles, no third-party origins (the
+# fonts are self-hosted too). Even if model output ever reached the page as HTML, an injected
+# script would not run.
 CONTENT_SECURITY_POLICY = (
-    "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; "
-    "connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"
+    "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; "
+    "img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'self'; "
+    "frame-ancestors 'none'"
 )
+# Not every system's mimetypes table knows .woff2; StaticFiles uses it for Content-Type.
+mimetypes.add_type("font/woff2", ".woff2")
 SECURITY_HEADERS = {
     "X-Content-Type-Options": "nosniff",
     "Referrer-Policy": "no-referrer",

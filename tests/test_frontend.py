@@ -17,6 +17,7 @@ async def test_index_is_served_with_security_headers(client):
     assert '<script type="module" src="app.js">' in response.text
     csp = response.headers["content-security-policy"]
     assert "script-src 'self'" in csp and "unsafe-inline" not in csp
+    assert "font-src 'self'" in csp
     assert "frame-ancestors 'none'" in csp
     assert response.headers["x-content-type-options"] == "nosniff"
     assert response.headers["referrer-policy"] == "no-referrer"
@@ -24,7 +25,13 @@ async def test_index_is_served_with_security_headers(client):
 
 @pytest.mark.parametrize(
     ("path", "content_type"),
-    [("/app.js", "javascript"), ("/render.js", "javascript"), ("/styles.css", "text/css")],
+    [
+        ("/app.js", "javascript"),
+        ("/render.js", "javascript"),
+        ("/styles.css", "text/css"),
+        ("/fonts.css", "text/css"),
+        ("/fonts/ibm-plex-sans-latin-400-normal.woff2", "font/woff2"),
+    ],
 )
 async def test_assets_are_served(client, path, content_type):
     response = await client.get(path)
@@ -57,9 +64,32 @@ def test_frontend_never_writes_html():
 def test_page_basics():
     html = (FRONTEND_DIR / "index.html").read_text(encoding="utf-8")
 
-    assert '<html lang="tr">' in html
+    # English first (the audience is European); the script switches to Turkish if the visitor
+    # chose it or the browser asks for it.
+    assert '<html lang="en">' in html
     assert 'name="viewport"' in html
     # The two fixed notices are part of the page, not of the model's answer.
-    assert "Hukuki danışmanlık değildir; resmi metin esastır." in html
-    assert "ücretsiz katmanına gönderilir; kişisel veri girmeyin." in html
+    assert "Not legal advice — the official text prevails." in html
+    assert "do not enter personal data." in html
     assert "<script>" not in html and "style=" not in html  # nothing inline (CSP)
+
+
+def test_fonts_are_self_hosted_with_their_licences():
+    # Loading from Google Fonts would send every visitor's IP address to Google.
+    fonts_css = (FRONTEND_DIR / "fonts.css").read_text(encoding="utf-8")
+    for path in [
+        FRONTEND_DIR / "index.html",
+        FRONTEND_DIR / "styles.css",
+        FRONTEND_DIR / "fonts.css",
+    ]:
+        text = path.read_text(encoding="utf-8")
+        assert "fonts.googleapis" not in text and "fonts.gstatic" not in text, path.name
+    css_text = (FRONTEND_DIR / "styles.css").read_text(encoding="utf-8") + fonts_css
+    assert not re.search(r"url\(\s*[\"']?(https?:)?//", css_text)  # no third-party url()
+    files = re.findall(r'url\("(fonts/[^"]+\.woff2)"\)', fonts_css)
+    assert len(files) == 14  # 7 weights × latin and latin-ext (Turkish İ, ş, ğ)
+    for file in files:
+        assert (FRONTEND_DIR / file).is_file(), file
+    for family in ("barlow-condensed", "ibm-plex-sans", "ibm-plex-mono"):
+        licence = (FRONTEND_DIR / "fonts" / f"LICENSE-{family}.txt").read_text(encoding="utf-8")
+        assert "SIL Open Font License" in licence, family
