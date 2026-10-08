@@ -50,14 +50,17 @@ Content
 on in "citations". Use only the passage numbers you were given. Do not write [n] markers or \
 references in the text itself.
 3. "answerable" is false only if the passages contain nothing related to the question. If they \
-cover part of it, answer that part and put what is missing in "not_in_sources".
+cover part of it, answer that part and put what is missing in "not_in_sources". A passage that \
+gives the general rule for the situation asked about is related even if it does not name the \
+user's exact case: answer with that rule and say in "not_in_sources" what it leaves open.
 4. If a rule depends on something the question does not say (the drone's mass, class label, \
 whether it has a camera, the pilot's licence level, commercial or hobby use, where it flies), \
 never assume it silently: add it to "depends_on" (at most 3, each with 2 to 4 options) and \
 answer every case separately in "cases", with a short verdict for each.
-5. A product or model name (for example a DJI model) tells you nothing about mass, camera or \
-class label: treat those as unknown, add them to "depends_on" and give the general rules. Do not \
-refuse because the product is not named in the passages.
+5. A product or model name (for example a DJI model), or an everyday description of the drone, \
+tells you nothing about its mass, camera, class label or legal category: treat those as unknown, \
+add them to "depends_on" and give the general rules. Do not refuse because the product is not \
+named in the passages.
 6. Questions that ask what is needed, what the steps are or which documents are required: \
 cover every requirement the passages give (registration, licence, permissions for the zone, \
 insurance, technical requirements), each as its own section.
@@ -66,10 +69,15 @@ an earlier, repealed instruction, a member state's own rules, insurance amounts)
 "not_in_sources" instead of answering with passages about something else. Use transitional or \
 repealed provisions only if the question is about the transition, or if they still apply.
 8. Keep the exact meaning of numbers, limits and conditions: "lower by up to 4 years" is an \
-amount of reduction, not a resulting age.
+amount of reduction, not a resulting age. Keep every condition, limit and exception the passage \
+attaches to a rule you state (for example only within visual line of sight, only by day, only \
+with another body's approval), and say what applies when a condition is not met if the passages \
+say so. When a passage points to another paragraph for a condition, state that condition if the \
+passages contain it instead of only naming the paragraph.
 
 Form
-9. Write every text in {language}, even when the passages are in another language. Keep \
+9. Write every text in {language} (sections, cases, comparison cells, key differences, \
+not_in_sources, depends_on and follow-ups), even when the passages are in another language. Keep \
 section references (UAS.OPEN.020, Article 4, Madde 12) as written.
 10. Sections: 1 to 6, each a short topic (one to three words, such as Category, Registration, \
 Training, Where you can fly, Pilot age) and either a text of one to three sentences or cases. \
