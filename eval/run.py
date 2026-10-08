@@ -169,12 +169,15 @@ class CachedEmbedder:
 class PacedLLM:
     """Spaces calls, retries a per-minute 429 and one transient error, stops on a daily 429."""
 
-    def __init__(self, inner: LLM, spacing: Spacing, calls: Calls, field: str):
+    def __init__(
+        self, inner: LLM, spacing: Spacing, calls: Calls, field: str, transient_retries: int = 1
+    ):
         self.inner, self.spacing, self.calls, self.field = inner, spacing, calls, field
+        self.transient_retries = transient_retries
         self.model = inner.model
 
     async def generate(self, system, prompt, schema):
-        transient_left = 1
+        transient_left = self.transient_retries
         for _ in range(4):
             await self.spacing.wait()
             setattr(self.calls, self.field, getattr(self.calls, self.field) + 1)
@@ -308,6 +311,13 @@ def parse_args(argv):
     p.add_argument("--resume", action="store_true", help="continue the latest run of this config")
     p.add_argument("--dry-run", action="store_true", help="count the calls, make none")
     p.add_argument("--note", help="free text stored with the configuration")
+    p.add_argument(
+        "--retries",
+        type=int,
+        default=1,
+        help="retries of a timeout or 5xx for the generation model (0 for a model with a tiny "
+        "daily quota: failed calls count against it too)",
+    )
     return p.parse_args(argv)
 
 
@@ -370,12 +380,12 @@ def main(argv) -> int:
     if previous:
         record["calls_before"] = previous.get("calls_total", previous.get("calls", {}))
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
-    asyncio.run(execute(settings, todo, cache, record, path, order))
+    asyncio.run(execute(settings, todo, cache, record, path, order, args.retries))
     print(f"{path.relative_to(ROOT)}  calls: {record['calls']}")
     return 0
 
 
-async def execute(settings, todo, cache, record, path, order) -> None:
+async def execute(settings, todo, cache, record, path, order, retries: int) -> None:
     from app.gemini import GeminiEmbedder, GeminiLLM
 
     key = settings.gemini_api_key.get_secret_value()
@@ -396,7 +406,7 @@ async def execute(settings, todo, cache, record, path, order) -> None:
     )
     raw_judge = GeminiLLM(key, JUDGE_MODEL, settings.gemini_timeout_seconds, None)
     embedder = CachedEmbedder(raw_embedder, cache, settings.gemini_embedding_dimensions, calls)
-    llm = PacedLLM(raw_llm, gen_spacing, calls, "generation")
+    llm = PacedLLM(raw_llm, gen_spacing, calls, "generation", transient_retries=retries)
     judge_llm = PacedLLM(raw_judge, flash_lite, calls, "judge")
     debug_dir = settings.debug_raw_dir if settings.debug_raw else None
 

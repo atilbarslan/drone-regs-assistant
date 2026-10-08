@@ -1,0 +1,99 @@
+{
+ "config": {
+  "name": "C",
+  "generation_model": "gemini-3.8-flash",
+  "thinking_level": "default (minimal)",
+  "judge_model": "gemini-3.5-flash-lite",
+  "top_k": 8,
+  "list_top_k": 14,
+  "compare_per_side": 6,
+  "core_sections": "off",
+  "candidates": 30,
+  "rrf_k": 60,
+  "timeout_s": 60.0,
+  "prompt_sha": "0b579e927c61",
+  "judge_prompt_sha": "4f05e274f182",
+  "questions": "eval/questions.yaml",
+  "questions_sha": "ff5f0ba634b1",
+  "git": "aabf77a",
+  "note": "A prompt, stronger model, questions wrong in A or B"
+ },
+ "started": "2026-10-08T09:52:18+00:00",
+ "status": "stopped: daily quota (gemini-3.8-flash)",
+ "calls": {
+  "embedding": 0,
+  "embedding_cached": 11,
+  "generation": 22,
+  "judge": 0,
+  "retries": 11
+ },
+ "results": [
+  {
+   "id": "tr-01",
+   "lang": "tr",
+   "question": "P1 lisansıyla ticari çekim yapacağım. En fazla ne kadar yükseğe ve ne kadar uzağa uçabilirim?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  },
+  {
+   "id": "tr-03",
+   "lang": "tr",
+   "question": "Oyuncak drone için lisans ya da kayıt gerekiyor mu?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  },
+  {
+   "id": "tr-07",
+   "lang": "tr",
+   "question": "P1 lisansım var. Kırmızı bölgede uçabilir miyim?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  },
+  {
+   "id": "tr-10",
+   "lang": "tr",
+   "question": "Yurt dışından yanımda getirdiğim bir dronu Türkiye'de uçurabilir miyim?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  },
+  {
+   "id": "en-09",
+   "lang": "en",
+   "question": "When do I need an operational authorisation instead of flying in the open category?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  },
+  {
+   "id": "x-01",
+   "lang": "tr",
+   "question": "Avrupa'da A1 alt kategorisinde insanların üzerinden uçabilir miyim?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  },
+  {
+   "id": "x-03",
+   "lang": "tr",
+   "question": "Türkiye'de ve AB'de drone pilotu için asgari yaş kaç?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  },
+  {
+   "id": "r-03",
+   "lang": "tr",
+   "question": "Düğün çekimi için hangi drone'u almalıyım?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  },
+  {
+   "id": "j-01",
+   "lang": "tr",
+   "question": "120 metreden yükseğe uçabilir miyim?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  },
+  {
+   "id": "j-02",
+   "lang": "tr",
+   "question": "Almanya'da 250 gramdan hafif drone için eğitim gerekiyor mu?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  }
+ ],
+ "calls_total": {
+  "embedding": 0,
+  "embedding_cached": 11,
+  "generation": 22,
+  "judge": 0,
+  "retries": 11
+ }
+}
