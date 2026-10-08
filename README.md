@@ -16,3 +16,31 @@ and the Content Security Policy allows fonts from this origin only. Licences: `f
 
 To try the interface without a Gemini API key, run `python -m scripts.dev_fake_server` (fake
 answers, real search on the local database; see the file's docstring).
+
+## Evaluation
+
+36 questions in `eval/questions.yaml` (Turkish and English; EU, Türkiye, both, unclear and
+out-of-scope questions). The answer keys were written from the official texts and checked against
+the official PDFs. `python -m eval.run --config NAME` asks each question the way the page does
+(real Gemini API, run by hand, never in CI); a second model call per question (the judge)
+checks the key's facts and must quote the answer word for word. `python -m eval.report` writes
+`eval/REPORT.md`, with every change and its measured effect.
+
+| | Baseline | Current |
+|---|---|---|
+| Jurisdiction detected correctly | 36/36 | 36/36 |
+| Expected articles retrieved | 45/57 | 45/57 |
+| Required facts in the answer | 45/61 | 48–50/61 |
+| Facts contradicted | 0 | 0–1 |
+| Out-of-scope questions refused | 4/4 | 4/4 |
+| Answerable questions refused | 2/32 | 0/32 |
+
+The model is not deterministic: two runs of the same configuration differed by 4 required facts,
+so small differences are noise. Held-out questions and a comparison with a stronger model are
+still to come.
+
+Retrieval has an option to add a few core articles of each jurisdiction to the passages
+(registration, class, licence, zones and technical requirements in SHT-İHA; Articles 4, 9, 14 and
+UAS.OPEN.020 in 2019/947), chosen from the structure of the regulations rather than from the
+questions. It is off: on the evaluation set it raised retrieval (45 → 50 of 57) but not the
+facts in the answers, and made prompts a third longer.
