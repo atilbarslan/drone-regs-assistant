@@ -27,7 +27,7 @@ from app.jurisdiction import Detection, detect
 from app.messages import no_passages_message, uncited_message
 from app.providers import LLM, Embedder, EmptyResponse, Generation
 from app.schema import Compare, CompareRow, Side, StructuredAnswer
-from app.search import SearchHit, SearchParams, retrieve
+from app.search import SearchHit, SearchParams, retrieve, with_core_sections
 
 Mode = Literal["EU", "TR", "compare"]
 ModeSource = Literal["explicit", "detected", "default"]
@@ -472,11 +472,13 @@ async def answer_question(
     compare_per_side: int,
     metrics: Metrics,
     debug_dir: Path | None = None,
+    core_sections: str = "off",
 ) -> AnswerResult:
     facts = facts[:MAX_FACTS]
     detection = detect(question)
     used_mode, source = resolve_mode(mode, detection, default_mode)
-    top_k = list_top_k if is_list_question(question) else params.top_k
+    list_question = is_list_question(question)
+    top_k = list_top_k if list_question else params.top_k
     if used_mode == "compare":
         # Half of top_k comes from each source; keep enough of each for the table.
         top_k = max(top_k, 2 * compare_per_side)
@@ -499,6 +501,12 @@ async def answer_question(
             first=first_side(lang),
             params=dataclasses.replace(params, top_k=top_k),
         )
+        if core_sections == "all" or (core_sections == "list" and list_question):
+            first = first_side(lang)
+            both = [first, "EU" if first == "TR" else "TR"]
+            hits = await with_core_sections(
+                conn, hits, both if used_mode == "compare" else [used_mode]
+            )
     metrics.retrieval_ms = _ms(started)
     metrics.retrieved_chunks = len(hits)
 

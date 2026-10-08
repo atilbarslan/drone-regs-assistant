@@ -232,6 +232,55 @@ async def retrieve(
     return balance(by_side, order, params.top_k)
 
 
+# Core sections: the articles most questions about "what applies" turn on, per jurisdiction,
+# chosen from the structure of the texts (registration, class, licence, zones, technical
+# requirements; operating categories, pilot age, registration, the A1 subcategory). Added to
+# the passages of list questions when they were not retrieved. No API call.
+CORE_SECTIONS = {
+    "TR": ["Madde 11", "Madde 8", "Madde 15", "Madde 12", "Madde 23"],
+    "EU": [
+        "Article 4 (2019/947)",
+        "Article 9 (2019/947)",
+        "Article 14 (2019/947)",
+        "UAS.OPEN.020",
+    ],
+}
+
+CORE_SQL = """
+SELECT DISTINCT ON (c.section_ref)
+    c.id, c.document_id, d.title AS document_title, d.jurisdiction, d.citation_url,
+    c.section_ref, c.heading, c.page, c.language, c.text,
+    NULL::bigint AS vector_rank, NULL::bigint AS text_rank, NULL::bigint AS reference_rank,
+    0.0 AS score
+FROM chunks c
+JOIN documents d ON d.id = c.document_id
+WHERE d.jurisdiction = %(jurisdiction)s AND c.section_ref = ANY(%(refs)s)
+ORDER BY c.section_ref, c.ordinal
+"""
+
+
+async def with_core_sections(
+    conn: psycopg.AsyncConnection, hits: list[SearchHit], sides: list[str]
+) -> list[SearchHit]:
+    """Append the first passage of each core section of these sides that is not among the
+    hits yet, right after that side's passages (so a comparison stays grouped by side)."""
+    have = {(h.jurisdiction, h.section_ref) for h in hits}
+    out: list[SearchHit] = []
+    for side in sides:
+        out += [h for h in hits if h.jurisdiction == side]
+        refs = [r for r in CORE_SECTIONS[side] if (side, r) not in have]
+        if not refs:
+            continue
+        async with conn.cursor(row_factory=dict_row) as cur:
+            await cur.execute(CORE_SQL, {"jurisdiction": side, "refs": refs})
+            found = {row["section_ref"]: row for row in await cur.fetchall()}
+        out += [
+            SearchHit(**{**found[r], "score": float(found[r]["score"])}) for r in refs if r in found
+        ]
+    out += [h for h in hits if h.jurisdiction not in sides]
+    return out
+
+
 @dataclass(frozen=True)
 class SearchResult:
     hits: list[SearchHit]

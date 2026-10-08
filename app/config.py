@@ -1,6 +1,7 @@
 """Application settings, read from environment variables and an optional .env file."""
 
 from pathlib import Path
+from typing import Literal
 
 from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -42,6 +43,9 @@ class Settings(BaseSettings):
     search_top_k_list: int = 14
     # Compare mode searches each source separately; at least this many passages from each.
     search_compare_per_side: int = 6
+    # Core sections of each jurisdiction (app/search.py) added to: no question ("off"), list
+    # questions ("list") or every question ("all").
+    search_core_sections: Literal["off", "list", "all"] = "off"
 
     # /api/ask limits. Each question makes one embedding and one generation request; the free
     # tier allows 500 generation requests a day for gemini-3.5-flash-lite (15 per minute), and

@@ -92,6 +92,7 @@ async def ask_like_the_page(
         params=SearchParams.from_settings(settings),
         list_top_k=settings.search_top_k_list,
         compare_per_side=settings.search_compare_per_side,
+        core_sections=settings.search_core_sections,
         metrics=metrics,
         debug_dir=debug_dir,
     )
@@ -282,6 +283,7 @@ def run_config(args, settings: Settings, questions_path: Path) -> dict:
         "top_k": settings.search_top_k,
         "list_top_k": settings.search_top_k_list,
         "compare_per_side": settings.search_compare_per_side,
+        "core_sections": settings.search_core_sections,
         "candidates": settings.search_candidates,
         "rrf_k": settings.search_rrf_k,
         "timeout_s": settings.gemini_timeout_seconds,

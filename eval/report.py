@@ -149,7 +149,7 @@ def summary_table(runs: list[dict]) -> list[str]:
 
 def config_table(runs: list[dict]) -> list[str]:
     keys = ["generation_model", "thinking_level", "judge_model", "top_k", "list_top_k",
-            "compare_per_side", "prompt_sha", "git", "note", "questions"]  # fmt: skip
+            "compare_per_side", "core_sections", "prompt_sha", "git", "note", "questions"]  # fmt: skip
     out = [
         "| | " + " | ".join(r["config"]["name"] for r in runs) + " |",
         "|---|" + "---|" * len(runs),
