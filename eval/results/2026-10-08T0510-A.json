@@ -4195,8 +4195,7 @@
     ],
     "count": 8,
     "ranks": {
-     "Madde 15": 2,
-     "Article 4 (2019/947)": null
+     "Madde 15": 2
     },
     "list_question": false,
     "top_k": 8
@@ -4206,8 +4205,7 @@
      "Madde 15": [
       "case 'Uçuş Yüksekliği / P0 veya P1 Lisansı ile'",
       "case 'Uçuş Yüksekliği / P2 Lisansı ile'"
-     ],
-     "Article 4 (2019/947)": []
+     ]
     },
     "any_expected_cited": true
    },
@@ -4221,29 +4219,21 @@
     {
      "id": "m1",
      "kind": "must",
-     "text": "cevap iki yetki alanına ayrılır",
-     "status": "absent",
-     "quote": "",
-     "note": ""
-    },
-    {
-     "id": "m2",
-     "kind": "must",
      "text": "Türkiye: P0/P1 azami 120 m; P2'de 120 m üzeri yalnız ilgili kurumlarla koordinasyonla",
      "status": "present",
      "quote": "P0 veya P1 Lisansı ile — HAYIR: P0 ve P1 lisans sahipleri için uçuş zarfı azami 120 metre yükseklik ile sınırlıdır; bu yüksekliğin ötesine uçulamaz. [2]\n- P2 Lisansı ile — EVET: P2 lisansı sahipleri, 120 metrenin üzerindeki operasyonları ilgili kurum ve kuruluşlarla koordinasyonla ve tanımlanan koridor veya tahsisli hacim içinde yürütebilir.",
      "note": ""
     },
     {
-     "id": "m3",
-     "kind": "must",
-     "text": "AB açık kategori: 120 m",
+     "id": "s1",
+     "kind": "should",
+     "text": "AB açık kategori: 120 m (AB tarafı sorulursa)",
      "status": "absent",
      "quote": "",
      "note": ""
     },
     {
-     "id": "s1",
+     "id": "s2",
      "kind": "should",
      "text": "AB'de engel istisnası (50 m içinde, 105 m üstü engel, +15 m)",
      "status": "absent",
@@ -4355,21 +4345,16 @@
     "facts": [
      {
       "id": "m1",
-      "status": "absent",
-      "quote": ""
-     },
-     {
-      "id": "m2",
       "status": "present",
       "quote": "P0 veya P1 Lisansı ile — HAYIR: P0 ve P1 lisans sahipleri için uçuş zarfı azami 120 metre yükseklik ile sınırlıdır; bu yüksekliğin ötesine uçulamaz. [2]\n- P2 Lisansı ile — EVET: P2 lisansı sahipleri, 120 metrenin üzerindeki operasyonları ilgili kurum ve kuruluşlarla koordinasyonla ve tanımlanan koridor veya tahsisli hacim içinde yürütebilir."
      },
      {
-      "id": "m3",
+      "id": "s1",
       "status": "absent",
       "quote": ""
      },
      {
-      "id": "s1",
+      "id": "s2",
       "status": "absent",
       "quote": ""
      }
@@ -4381,8 +4366,106 @@
       "question_quote": ""
      }
     ],
-    "refusal_explained": null
-   }
+    "refusal_explained": false
+   },
+   "before_key_change": {
+    "retrieval": {
+     "passages": [
+      "Madde 11",
+      "Madde 15",
+      "Madde 23",
+      "Madde 8",
+      "Madde 4",
+      "Madde 12",
+      "Madde 12",
+      "Madde 13"
+     ],
+     "count": 8,
+     "ranks": {
+      "Madde 15": 2,
+      "Article 4 (2019/947)": null
+     },
+     "list_question": false,
+     "top_k": 8
+    },
+    "citations": {
+     "places": {
+      "Madde 15": [
+       "case 'Uçuş Yüksekliği / P0 veya P1 Lisansı ile'",
+       "case 'Uçuş Yüksekliği / P2 Lisansı ile'"
+      ],
+      "Article 4 (2019/947)": []
+     },
+     "any_expected_cited": true
+    },
+    "facts": [
+     {
+      "id": "m1",
+      "kind": "must",
+      "text": "cevap iki yetki alanına ayrılır",
+      "status": "absent",
+      "quote": "",
+      "note": ""
+     },
+     {
+      "id": "m2",
+      "kind": "must",
+      "text": "Türkiye: P0/P1 azami 120 m; P2'de 120 m üzeri yalnız ilgili kurumlarla koordinasyonla",
+      "status": "present",
+      "quote": "P0 veya P1 Lisansı ile — HAYIR: P0 ve P1 lisans sahipleri için uçuş zarfı azami 120 metre yükseklik ile sınırlıdır; bu yüksekliğin ötesine uçulamaz. [2]\n- P2 Lisansı ile — EVET: P2 lisansı sahipleri, 120 metrenin üzerindeki operasyonları ilgili kurum ve kuruluşlarla koordinasyonla ve tanımlanan koridor veya tahsisli hacim içinde yürütebilir.",
+      "note": ""
+     },
+     {
+      "id": "m3",
+      "kind": "must",
+      "text": "AB açık kategori: 120 m",
+      "status": "absent",
+      "quote": "",
+      "note": ""
+     },
+     {
+      "id": "s1",
+      "kind": "should",
+      "text": "AB'de engel istisnası (50 m içinde, 105 m üstü engel, +15 m)",
+      "status": "absent",
+      "quote": "",
+      "note": ""
+     }
+    ],
+    "judge": {
+     "facts": [
+      {
+       "id": "m1",
+       "status": "absent",
+       "quote": ""
+      },
+      {
+       "id": "m2",
+       "status": "present",
+       "quote": "P0 veya P1 Lisansı ile — HAYIR: P0 ve P1 lisans sahipleri için uçuş zarfı azami 120 metre yükseklik ile sınırlıdır; bu yüksekliğin ötesine uçulamaz. [2]\n- P2 Lisansı ile — EVET: P2 lisansı sahipleri, 120 metrenin üzerindeki operasyonları ilgili kurum ve kuruluşlarla koordinasyonla ve tanımlanan koridor veya tahsisli hacim içinde yürütebilir."
+      },
+      {
+       "id": "m3",
+       "status": "absent",
+       "quote": ""
+      },
+      {
+       "id": "s1",
+       "status": "absent",
+       "quote": ""
+      }
+     ],
+     "depends_on": [
+      {
+       "number": 1,
+       "already_given": false,
+       "question_quote": ""
+      }
+     ],
+     "refusal_explained": null
+    }
+   },
+   "key_changed": "j-01 key changed (approved by Atıl, 8 Oct)"
   },
   {
    "id": "j-02",
@@ -5541,5 +5624,11 @@
   "generation": 36,
   "judge": 36,
   "retries": 0
- }
+ },
+ "rescore_calls": [
+  {
+   "reason": "j-01 key changed (approved by Atıl, 8 Oct)",
+   "judge": 1
+  }
+ ]
 }

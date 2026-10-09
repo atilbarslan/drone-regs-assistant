@@ -29,15 +29,26 @@ checks the key's facts and must quote the answer word for word. `python -m eval.
 | | Baseline | Current |
 |---|---|---|
 | Jurisdiction detected correctly | 36/36 | 36/36 |
-| Expected articles retrieved | 45/57 | 45/57 |
-| Required facts in the answer | 45/61 | 48–50/61 |
-| Facts contradicted | 0 | 0–1 |
+| Expected articles retrieved | 45/56 | 45/56 |
+| Required facts in the answer | 45/59 | 48/59 |
+| Facts contradicted | 0 | 0 |
 | Out-of-scope questions refused | 4/4 | 4/4 |
-| Answerable questions refused | 2/32 | 0/32 |
+| Answerable questions refused | 2/32 | 1/32 |
 
-The model is not deterministic: two runs of the same configuration differed by 4 required facts,
-so small differences are noise. Held-out questions and a comparison with a stronger model are
-still to come.
+"Current" is measured after prompt changes that were tuned on this same set of questions, so it
+flatters the system; the held-out row below uses questions that were not seen while tuning. The
+model is not deterministic: two runs of the same configuration differed by 4 required facts, so
+small differences are noise.
+
+| Held-out (5 questions, not seen while tuning) | — |
+|---|---|
+| Required facts in the answer | to come |
+
+A limit of the free tier: the stronger model on the same account (gemini-3.8-flash, 20 requests
+a day) could not be compared. On two days, 35 of its 36 requests to answer the questions the
+smaller model got wrong returned "503 UNAVAILABLE". The one answer it gave (a licence-recognition
+question) did not refuse where the smaller model usually did, but missed the same facts, because
+the article it needed was not retrieved; it took 45 s. One answer is no evidence either way.
 
 Retrieval has an option to add a few core articles of each jurisdiction to the passages
 (registration, class, licence, zones and technical requirements in SHT-İHA; Articles 4, 9, 14 and

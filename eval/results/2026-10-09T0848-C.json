@@ -1,0 +1,334 @@
+{
+ "config": {
+  "name": "C",
+  "generation_model": "gemini-3.8-flash",
+  "thinking_level": "default (minimal)",
+  "judge_model": "gemini-3.5-flash-lite",
+  "top_k": 8,
+  "list_top_k": 14,
+  "compare_per_side": 6,
+  "core_sections": "off",
+  "candidates": 30,
+  "rrf_k": 60,
+  "timeout_s": 60.0,
+  "prompt_sha": "0b579e927c61",
+  "judge_prompt_sha": "4f05e274f182",
+  "questions": "/Users/atil/Desktop/drone-regs-assistant/eval/questions.yaml",
+  "questions_sha": "ab1dbd6e6417",
+  "git": "c8262f0+dirty(app)",
+  "note": "A prompt, stronger model, questions wrong in A or B; no retries"
+ },
+ "started": "2026-10-09T08:48:18+00:00",
+ "status": "complete",
+ "calls": {
+  "embedding": 0,
+  "embedding_cached": 14,
+  "generation": 14,
+  "judge": 1,
+  "retries": 0
+ },
+ "results": [
+  {
+   "id": "tr-01",
+   "lang": "tr",
+   "question": "P1 lisansıyla ticari çekim yapacağım. En fazla ne kadar yükseğe ve ne kadar uzağa uçabilirim?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  },
+  {
+   "id": "tr-03",
+   "lang": "tr",
+   "question": "Oyuncak drone için lisans ya da kayıt gerekiyor mu?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  },
+  {
+   "id": "tr-07",
+   "lang": "tr",
+   "question": "P1 lisansım var. Kırmızı bölgede uçabilir miyim?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  },
+  {
+   "id": "tr-10",
+   "lang": "tr",
+   "question": "Yurt dışından yanımda getirdiğim bir dronu Türkiye'de uçurabilir miyim?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  },
+  {
+   "id": "en-09",
+   "lang": "en",
+   "question": "When do I need an operational authorisation instead of flying in the open category?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  },
+  {
+   "id": "x-01",
+   "lang": "tr",
+   "question": "Avrupa'da A1 alt kategorisinde insanların üzerinden uçabilir miyim?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  },
+  {
+   "id": "x-03",
+   "lang": "tr",
+   "question": "Türkiye'de ve AB'de drone pilotu için asgari yaş kaç?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  },
+  {
+   "id": "r-03",
+   "lang": "tr",
+   "question": "Düğün çekimi için hangi drone'u almalıyım?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  },
+  {
+   "id": "j-01",
+   "lang": "tr",
+   "question": "120 metreden yükseğe uçabilir miyim?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  },
+  {
+   "id": "j-02",
+   "lang": "tr",
+   "question": "Almanya'da 250 gramdan hafif drone için eğitim gerekiyor mu?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  },
+  {
+   "id": "k-01",
+   "lang": "tr",
+   "question": "Türkiye'de P1 lisansım var. Bu lisansla Almanya'da uçabilir miyim?",
+   "detection": {
+    "detected_mode": "compare",
+    "mode": "compare",
+    "mode_source": "detected",
+    "accepted": [
+     "both"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "Türkiye",
+     "P1",
+     "Almanya"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 15",
+     "Madde 15",
+     "Madde 10",
+     "Madde 29",
+     "Madde 6",
+     "Madde 4",
+     "AMC1 Article 11 Annex D",
+     "UAS.OPEN.020",
+     "AMC1bis Article 11",
+     "UAS.OPEN.060",
+     "AMC1bis Article 11 Annex D",
+     "AMC2 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)"
+    ],
+    "count": 12,
+    "ranks": {
+     "Article 41 (2019/945)": null
+    },
+    "list_question": false,
+    "top_k": 12
+   },
+   "citations": {
+    "places": {
+     "Article 41 (2019/945)": []
+    },
+    "any_expected_cited": false
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "otomatik geçerli değil: üçüncü ülkede yerleşik işletici AB'de 2019/947'ye uymak zorunda; yetkili otorite uçmak istediği ilk üye devletin otoritesi",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "üçüncü ülke belgesi ancak üç koşulla tanınabilir: ülke tanıma istemiş olmalı, belge geçerli olmalı, Komisyon EASA'ya danışarak eşdeğer emniyet seviyesini sağlamış olmalı",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "m3",
+     "kind": "must",
+     "text": "Türkiye için böyle bir tanıma kaynaklarda geçmiyor (uydurulmamalı)",
+     "status": "present",
+     "quote": "Türkiye'de verilen P1 lisansının Almanya'da veya AB genelinde doğrudan geçerli olduğuna ya da AB denkliğine ilişkin hükümler metinlerde yer almamaktadır.",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "2019/947'ye uymak, ilgili kategori için AB yetkinlik şartlarını sağlamak demektir",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "compare",
+    "retrieval_ms": 23,
+    "generation_ms": 45445,
+    "prompt_tokens": 7558,
+    "output_tokens": 719
+   },
+   "answer": {
+    "refused": false,
+    "text": "Temel farklar:\n- Türkiye'de ticari operasyonlar için P1 lisansı zorunluyken, AB Açık kategorisinde ticari-amatör ayrımı bulunmayıp gereklilikler İHA sınıfı ve operasyon alt kategorisine (A1 gibi) göre belirlenir.\n- AB kurallarında Türk P1 lisansının geçerliliğine dair bir düzenleme bulunmamakta; yetkinlik belgesi gereken İHA sınıflarında (C1 gibi) AB üye ülke otoritesince düzenlenen sınav ve belge aranmaktadır.\n- Türkiye yabancı lisansların intibak ve tanınmasını Şikago Sözleşmesi çerçevesinde düzenlemişken, sunulan AB metinlerinde üçüncü ülke lisanslarının tanınma usulü yer almamaktadır.\n\nPilot Lisansı ve Yetkinlik\n- Türkiye: P1 lisansı görerek (VLOS) yapılan ticari uçuşlar için azami 120 metre yükseklik sınırıyla düzenlenir; uçuş yapabilmek için KDM-ORG diploma lisansına ek olarak KDM-ERP üzerinden operasyonel lisans alınması şarttır. [1][2][5]\n- AB: A1 alt kategorisinde 250 gram altı veya C0 sınıfı İHA'lar için pilotun üretici talimatlarına aşina olması yeterliyken, C1 sınıfı İHA'lar için AB üye devleti yetkili otoritesinin çevrim içi eğitimini ve teorik sınavını tamamlama ve yetkinlik kanıtı taşıma şartı aranır. [8][10][12]\n\nYabancı Lisansların Tanınması\n- Türkiye: Yabancı pilot lisanslarının geçerliliği Şikago Sözleşmesi ve mevzuat kapsamında Genel Müdürlükçe değerlendirilir; intibak eğitimini tamamlayanlara P1 veya P2 lisansı ile operasyonel lisans verilir. [3]\n\nKaynaklarda olmayanlar:\n- Türkiye'de verilen P1 lisansının Almanya'da veya AB genelinde doğrudan geçerli olduğuna ya da AB denkliğine ilişkin hükümler metinlerde yer almamaktadır.\n- Almanya'ya özgü yerel uçuş bölgeleri (coğrafi bölgeler) ve ulusal sigorta gereklilikleri metinlerde bulunmamaktadır.",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [],
+     "not_in_sources": [
+      "Türkiye'de verilen P1 lisansının Almanya'da veya AB genelinde doğrudan geçerli olduğuna ya da AB denkliğine ilişkin hükümler metinlerde yer almamaktadır.",
+      "Almanya'ya özgü yerel uçuş bölgeleri (coğrafi bölgeler) ve ulusal sigorta gereklilikleri metinlerde bulunmamaktadır."
+     ],
+     "compare": {
+      "key_differences": [
+       "Türkiye'de ticari operasyonlar için P1 lisansı zorunluyken, AB Açık kategorisinde ticari-amatör ayrımı bulunmayıp gereklilikler İHA sınıfı ve operasyon alt kategorisine (A1 gibi) göre belirlenir.",
+       "AB kurallarında Türk P1 lisansının geçerliliğine dair bir düzenleme bulunmamakta; yetkinlik belgesi gereken İHA sınıflarında (C1 gibi) AB üye ülke otoritesince düzenlenen sınav ve belge aranmaktadır.",
+       "Türkiye yabancı lisansların intibak ve tanınmasını Şikago Sözleşmesi çerçevesinde düzenlemişken, sunulan AB metinlerinde üçüncü ülke lisanslarının tanınma usulü yer almamaktadır."
+      ],
+      "rows": [
+       {
+        "topic": "Pilot Lisansı ve Yetkinlik",
+        "TR": {
+         "text": "P1 lisansı görerek (VLOS) yapılan ticari uçuşlar için azami 120 metre yükseklik sınırıyla düzenlenir; uçuş yapabilmek için KDM-ORG diploma lisansına ek olarak KDM-ERP üzerinden operasyonel lisans alınması şarttır.",
+         "citations": [
+          1,
+          2,
+          5
+         ]
+        },
+        "EU": {
+         "text": "A1 alt kategorisinde 250 gram altı veya C0 sınıfı İHA'lar için pilotun üretici talimatlarına aşina olması yeterliyken, C1 sınıfı İHA'lar için AB üye devleti yetkili otoritesinin çevrim içi eğitimini ve teorik sınavını tamamlama ve yetkinlik kanıtı taşıma şartı aranır.",
+         "citations": [
+          8,
+          10,
+          12
+         ]
+        }
+       },
+       {
+        "topic": "Yabancı Lisansların Tanınması",
+        "TR": {
+         "text": "Yabancı pilot lisanslarının geçerliliği Şikago Sözleşmesi ve mevzuat kapsamında Genel Müdürlükçe değerlendirilir; intibak eğitimini tamamlayanlara P1 veya P2 lisansı ile operasyonel lisans verilir.",
+         "citations": [
+          3
+         ]
+        },
+        "EU": null
+       }
+      ]
+     },
+     "follow_ups": [
+      "Almanya'da A1 alt kategorisinde uçmak için hangi sınav ve gereklilikler gerekir?",
+      "Türkiye'de P1 lisansı ile hangi sınırlar dahilinde uçuş yapılabilir?",
+      "Yabancı pilot lisansları Türkiye'de P1 lisansına nasıl dönüştürülür?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "Madde 15",
+      "page": 10
+     },
+     {
+      "n": 2,
+      "section_ref": "Madde 15",
+      "page": 11
+     },
+     {
+      "n": 3,
+      "section_ref": "Madde 10",
+      "page": 7
+     },
+     {
+      "n": 5,
+      "section_ref": "Madde 6",
+      "page": 5
+     },
+     {
+      "n": 8,
+      "section_ref": "UAS.OPEN.020",
+      "page": 422
+     },
+     {
+      "n": 10,
+      "section_ref": "UAS.OPEN.060",
+      "page": 441
+     },
+     {
+      "n": 12,
+      "section_ref": "AMC2 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)",
+      "page": 428
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "m2",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "m3",
+      "status": "present",
+      "quote": "Türkiye'de verilen P1 lisansının Almanya'da veya AB genelinde doğrudan geçerli olduğuna ya da AB denkliğine ilişkin hükümler metinlerde yer almamaktadır."
+     },
+     {
+      "id": "s1",
+      "status": "absent",
+      "quote": ""
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "k-02",
+   "lang": "tr",
+   "question": "AB'den aldığım A2 sertifikasıyla Türkiye'de uçabilir miyim?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  },
+  {
+   "id": "k-04",
+   "lang": "tr",
+   "question": "Türkiye'deki P1 lisansı ile AB'deki A2 sertifikası arasındaki fark ne?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  },
+  {
+   "id": "k-05",
+   "lang": "tr",
+   "question": "Türkiye'deki M0 sınıfı ile AB'deki C0 sınıfı aynı şey mi?",
+   "error": "generation: TransientError: 503 UNAVAILABLE"
+  }
+ ],
+ "calls_total": {
+  "embedding": 0,
+  "embedding_cached": 14,
+  "generation": 14,
+  "judge": 1,
+  "retries": 0
+ }
+}

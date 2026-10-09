@@ -292,7 +292,11 @@ def run_config(args, settings: Settings, questions_path: Path) -> dict:
         "timeout_s": settings.gemini_timeout_seconds,
         "prompt_sha": prompt_fingerprint(),
         "judge_prompt_sha": sha(JUDGE_SYSTEM),
-        "questions": str(questions_path.relative_to(ROOT)),
+        "questions": str(
+            questions_path.relative_to(ROOT)
+            if questions_path.is_relative_to(ROOT)
+            else questions_path
+        ),
         "questions_sha": sha(questions_path.read_text(encoding="utf-8")),
         "git": git_commit(),
         "note": args.note or "",
