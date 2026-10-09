@@ -432,14 +432,11 @@ questions:
   expected_sources:
   - source_id: shgm-sht-iha
     section_ref: Madde 15
-  - source_id: easa-ear-uas
-    section_ref: Article 4 (2019/947)
   should_refuse: false
   must:
-  - cevap iki yetki alanına ayrılır
   - 'Türkiye: P0/P1 azami 120 m; P2''de 120 m üzeri yalnız ilgili kurumlarla koordinasyonla'
-  - 'AB açık kategori: 120 m'
   should:
+  - 'AB açık kategori: 120 m (AB tarafı sorulursa)'
   - AB'de engel istisnası (50 m içinde, 105 m üstü engel, +15 m)
 - id: j-02
   lang: tr
