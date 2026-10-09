@@ -1,0 +1,551 @@
+# Validated evaluation set for drone-regs-assistant (7 October 2026).
+# Answer keys written from the source texts by the team lead. All 36 answer keys checked
+# against the official PDFs by Atıl Arslan (UAS pilot), 7 October 2026.
+# Do not edit the keys without a source check.
+# must:   facts the answer has to contain (missing one = incomplete)
+# should: facts that improve the answer (missing one is not an error)
+# jurisdiction: acceptable results of app.jurisdiction.detect (any of the listed values passes).
+#   Two values = the question is genuinely ambiguous; a two-sided answer is also acceptable.
+questions:
+- id: tr-01
+  lang: tr
+  jurisdiction:
+  - TR
+  question: P1 lisansıyla ticari çekim yapacağım. En fazla ne kadar yükseğe ve ne kadar uzağa uçabilirim?
+  expected_sources:
+  - source_id: shgm-sht-iha
+    section_ref: Madde 15
+  - source_id: shgm-sht-iha
+    section_ref: Madde 11
+  should_refuse: false
+  must:
+  - azami 120 m yükseklik
+  - azami 3.000 m yatay uzaklık
+  - her durumda görsel görüş hattında (VLOS) kalmak
+  should:
+  - bunun ötesi P2 lisansı ve tescil gerektirir
+- id: tr-02
+  lang: tr
+  jurisdiction:
+  - TR
+  question: 4,5 kg'lık bir drone yeni talimata göre hangi sınıfa girer?
+  expected_sources:
+  - source_id: shgm-sht-iha
+    section_ref: Madde 8
+  should_refuse: false
+  must:
+  - M1 sınıfı (4 kg dâhil – 25 kg)
+  should: []
+- id: tr-03
+  lang: tr
+  jurisdiction:
+  - TR
+  - none
+  question: Oyuncak drone için lisans ya da kayıt gerekiyor mu?
+  expected_sources:
+  - source_id: shgm-sht-iha
+    section_ref: Madde 8
+  - source_id: shgm-sht-iha
+    section_ref: Madde 4
+  - source_id: shgm-sht-iha
+    section_ref: Madde 11
+  - source_id: shgm-sht-iha
+    section_ref: Madde 15
+  - source_id: shgm-sht-iha
+    section_ref: Madde 12
+  should_refuse: false
+  must:
+  - cevap tanıma bağlıdır; 'oyuncak' kelimesi yetmez
+  - Basit İHA ise (tasarımı gereği 10 m yarıçap ve 20 m yükseklik dışına çıkamıyor, M0 özelliklerini aşmıyor)
+    lisans, kayıt, tescil ve ithal uygunluk gerekmez
+  - bu zarfın dışına çıkabiliyorsa 500 g altında olsa bile M0 hükümleri uygulanır; lisans ve kayıt gerekir
+    (Madde 8(3))
+  should:
+  - Basit İHA kırmızı bölgeye giremez
+- id: tr-04
+  lang: tr
+  jurisdiction:
+  - TR
+  question: Eski talimata göre aldığım İHA1 sertifikası ne olacak?
+  expected_sources:
+  - source_id: shgm-sht-iha
+    section_ref: Madde 29
+  should_refuse: false
+  must:
+  - P1 lisansına dönüştürülür
+  - intibak eğitimi 31/07/2027'ye kadar tamamlanırsa geçerliliğini korur
+  should:
+  - kazanılmış haklar ve uçuş tecrübesi korunur
+- id: tr-05
+  lang: tr
+  jurisdiction:
+  - TR
+  question: Yeni talimat yayımlandı ama eski kurallar hâlâ uygulanabiliyor mu? Geçiş ne zamana kadar?
+  expected_sources:
+  - source_id: shgm-sht-iha
+    section_ref: Geçici Madde 1
+  should_refuse: false
+  must:
+  - tam uyum için 31/07/2027'ye kadar geçiş süresi
+  - bu sürede emniyeti tehlikeye atmayan hâllerde eski hükümlerin uygulanmasına SHGM izin verebilir
+  should:
+  - İHATTYS devreye alınana kadar kayıt/izin işlemlerinde eski mevzuat hükümleri de uygulanır
+- id: tr-06
+  lang: tr
+  jurisdiction:
+  - TR
+  - none
+  question: Elimdeki dronu yeni kurallara uygun hâle getirmek için ne yapmam gerekiyor, son tarih ne?
+  expected_sources:
+  - source_id: shgm-sht-iha
+    section_ref: Madde 27
+  - source_id: shgm-sht-iha
+    section_ref: Geçici Madde 2
+  - source_id: shgm-sht-iha
+    section_ref: Madde 25
+  should_refuse: false
+  must:
+  - kayıt, uzaktan tanımlama, geofence, uyum yazılım modülü, yazılım sertifikasyonu ve İHATTYS entegrasyonu
+  - son tarih 31/07/2027
+  - süre sonunda dönüştürülmemiş araç uçurulamaz
+  should:
+  - üretici/ithalatçı/dağıtıcı ile iletişime geçilir
+- id: tr-07
+  lang: tr
+  jurisdiction:
+  - TR
+  question: P1 lisansım var. Kırmızı bölgede uçabilir miyim?
+  expected_sources:
+  - source_id: shgm-sht-iha
+    section_ref: Madde 12
+  should_refuse: false
+  must:
+  - bölgeyi kapatan kurumun uygunluğu (gerekirse Cumhurbaşkanlığı) ile
+  - SHGM izni ve NOTAM ile
+  - kurum uygunluk vermezse izin verilmez
+  should: []
+- id: tr-08
+  lang: tr
+  jurisdiction:
+  - TR
+  question: P0 lisansıyla gece uçuşu yapabilir miyim?
+  expected_sources:
+  - source_id: shgm-sht-iha
+    section_ref: Madde 15
+  should_refuse: false
+  must:
+  - 'hayır: P0 yalnız görsel görüş hattında ve gündüz'
+  should:
+  - gece uçuşu P1'de uygun donanımla mümkün
+- id: tr-09
+  lang: tr
+  jurisdiction:
+  - TR
+  question: P2 lisansı için sağlık raporu gerekiyor mu?
+  expected_sources:
+  - source_id: shgm-sht-iha
+    section_ref: Madde 15
+  should_refuse: false
+  must:
+  - 'evet: SHGM veya EASA üyesi bir ülkenin düzenlediği geçerli, asgari 3. sınıf sağlık sertifikası'
+  should:
+  - P0/P1'de sağlık raporu yok, göreve elverişlilik öz-beyanı var
+- id: tr-10
+  lang: tr
+  jurisdiction:
+  - TR
+  question: Yurt dışından yanımda getirdiğim bir dronu Türkiye'de uçurabilir miyim?
+  expected_sources:
+  - source_id: shgm-sht-iha
+    section_ref: Madde 24
+  - source_id: shgm-sht-iha
+    section_ref: Madde 11
+  - source_id: shgm-sht-iha
+    section_ref: Madde 15
+  - source_id: shgm-sht-iha
+    section_ref: Madde 12
+  should_refuse: false
+  must:
+  - uyum yazılım modülü mevcut ve entegre olmalı; değilse kayıt yapılamaz ve uçurulamaz
+  - bu sağlansa bile kullanıcı kaydı, uygun pilot lisansı ve bölge kuralları (yeşil/turuncu/kırmızı) geçerlidir
+  should:
+  - Basit İHA bu yükümlülüklerden muaftır
+- id: en-01
+  lang: en
+  jurisdiction:
+  - EU
+  question: What is the maximum height I can fly in the open category?
+  expected_sources:
+  - source_id: easa-ear-uas
+    section_ref: Article 4 (2019/947)
+  - source_id: easa-ear-uas
+    section_ref: UAS.OPEN.010
+  should_refuse: false
+  must:
+  - 120 m from the closest point of the earth's surface
+  - 'exception only within 50 m horizontally of an artificial obstacle taller than 105 m: up to 15 m above
+    the obstacle, at the request of the entity responsible for it'
+  should:
+  - over natural elevations the distance is measured from the closest point of the surface
+  - unmanned sailplanes under 10 kg exception
+- id: en-02
+  lang: en
+  jurisdiction:
+  - EU
+  - none
+  question: My drone weighs 200 g and has a camera. Do I need to register as an operator?
+  expected_sources:
+  - source_id: easa-ear-uas
+    section_ref: Article 14 (2019/947)
+  - source_id: shgm-sht-iha
+    section_ref: Madde 11
+  should_refuse: false
+  must:
+  - 'yes: registration is required if the drone has a sensor able to capture personal data, unless it
+    is a toy (Directive 2009/48/EC)'
+  should:
+  - registration is also required at 250 g or more or above 80 J
+  - 'if answered for both: in Turkey every user must register except for a ''Basit İHA'' (Madde 11(1))'
+- id: en-03
+  lang: en
+  jurisdiction:
+  - EU
+  question: How far from uninvolved people must I stay with a C2 drone in subcategory A2?
+  expected_sources:
+  - source_id: easa-ear-uas
+    section_ref: UAS.OPEN.030
+  - source_id: easa-ear-uas
+    section_ref: AMC1 UAS.OPEN.030(1)
+  - source_id: easa-ear-uas
+    section_ref: Part 3 (2019/945 Annex)
+  should_refuse: false
+  must:
+  - at least 30 m horizontally
+  - down to 5 m with an active low-speed mode after assessing weather, UA performance and segregation
+    of the area
+  should:
+  - AMC recommends the 1:1 rule (guidance, not binding)
+  - C2 low-speed mode limits ground speed to max 3 m/s
+- id: en-04
+  lang: en
+  jurisdiction:
+  - EU
+  question: In subcategory A3, how far from residential areas do I need to fly?
+  expected_sources:
+  - source_id: easa-ear-uas
+    section_ref: UAS.OPEN.040
+  should_refuse: false
+  must:
+  - at least 150 m horizontally from residential, commercial, industrial or recreational areas
+  should: []
+- id: en-05
+  lang: en
+  jurisdiction:
+  - EU
+  question: How many questions does the online theory exam for A1/A3 have, and what is the pass mark?
+  expected_sources:
+  - source_id: easa-ear-uas
+    section_ref: UAS.OPEN.020
+  should_refuse: false
+  must:
+  - 40 multiple-choice questions
+  - at least 75%
+  should: []
+- id: en-06
+  lang: en
+  jurisdiction:
+  - EU
+  question: How long is the A2 certificate of remote pilot competency valid?
+  expected_sources:
+  - source_id: easa-ear-uas
+    section_ref: UAS.OPEN.070
+  should_refuse: false
+  must:
+  - 5 years
+  should: []
+- id: en-07
+  lang: en
+  jurisdiction:
+  - EU
+  question: What are the main requirements for a class C0 drone?
+  expected_sources:
+  - source_id: easa-ear-uas
+    section_ref: Part 1 (2019/945 Annex)
+  should_refuse: false
+  must:
+  - MTOM less than 250 g including payload
+  - maximum level-flight speed 19 m/s
+  - maximum height above take-off point limited to 120 m
+  should:
+  - exclusively electric
+  - follow-me mode within 50 m
+- id: en-08
+  lang: en
+  jurisdiction:
+  - EU
+  question: Can I fly at night in the open category, and is there any extra requirement?
+  expected_sources:
+  - source_id: easa-ear-uas
+    section_ref: UAS.OPEN.060
+  should_refuse: false
+  must:
+  - yes; a green flashing light on the drone must be activated
+  should: []
+- id: en-09
+  lang: en
+  jurisdiction:
+  - EU
+  question: When do I need an operational authorisation instead of flying in the open category?
+  expected_sources:
+  - source_id: easa-ear-uas
+    section_ref: Article 5 (2019/947)
+  - source_id: easa-ear-uas
+    section_ref: Article 12 (2019/947)
+  - source_id: easa-ear-uas
+    section_ref: UAS.SPEC.020
+  should_refuse: false
+  must:
+  - when any Article 4 / Part A requirement is not met (specific category)
+  - authorisation from the competent authority of the state of registration, with a risk assessment
+  should:
+  - 'alternative: declaration for a standard scenario'
+  - not needed with an LUC or a model club authorisation
+- id: en-10
+  lang: en
+  jurisdiction:
+  - EU
+  - none
+  question: What risk assessment do I have to submit with an application for an operational authorisation?
+  expected_sources:
+  - source_id: easa-ear-uas
+    section_ref: Article 5 (2019/947)
+  - source_id: easa-ear-uas
+    section_ref: Article 11 (2019/947)
+  - source_id: shgm-sht-iha
+    section_ref: Madde 9
+  should_refuse: false
+  must:
+  - a risk assessment according to Article 11, with adequate mitigating measures
+  should:
+  - the AMC method is SORA
+  - 'if answered for both: Turkey has no separate per-flight risk assessment method; risk is embedded
+    in the pilot licence level (Madde 9(1))'
+- id: x-01
+  lang: tr
+  jurisdiction:
+  - EU
+  question: Avrupa'da A1 alt kategorisinde insanların üzerinden uçabilir miyim?
+  expected_sources:
+  - source_id: easa-ear-uas
+    section_ref: UAS.OPEN.020
+  should_refuse: false
+  must:
+  - '250 g altı / C0: ilgisiz kişilerin üzerinden uçulabilir ama kalabalıkların üzerinden asla'
+  - 'C1: ilgisiz kişilerin üzerinden uçulmaması beklenir; beklenmedik durumda süre en aza indirilir'
+  should: []
+- id: x-02
+  lang: en
+  jurisdiction:
+  - TR
+  question: Under the Turkish rules, what licence do I need for BVLOS flights?
+  expected_sources:
+  - source_id: shgm-sht-iha
+    section_ref: Madde 6
+  - source_id: shgm-sht-iha
+    section_ref: Madde 15
+  should_refuse: false
+  must:
+  - P2
+  should: []
+- id: x-03
+  lang: tr
+  jurisdiction:
+  - both
+  question: Türkiye'de ve AB'de drone pilotu için asgari yaş kaç?
+  expected_sources:
+  - source_id: shgm-sht-iha
+    section_ref: Madde 17
+  - source_id: easa-ear-uas
+    section_ref: Article 9 (2019/947)
+  should_refuse: false
+  must:
+  - 'Türkiye: P0 için 10, P1 ve P2 için 18'
+  - 'AB: 16'
+  - AB'de üye devlet açık kategoride en fazla 4 yıl, specific kategoride en fazla 2 yıl düşürebilir (yani
+    yaşın kendisi değil indirim miktarı)
+  should:
+  - 'AB istisnaları: C0 oyuncak ile A1, 250 g altı kendi yapımı, gözetim altında uçuş'
+- id: x-04
+  lang: en
+  jurisdiction:
+  - TR
+  question: Is remote identification mandatory for drones in Turkey?
+  expected_sources:
+  - source_id: shgm-sht-iha
+    section_ref: Madde 23
+  should_refuse: false
+  must:
+  - yes, for all drones subject to registration (i.e. except 'Basit İHA')
+  should: []
+- id: r-01
+  lang: tr
+  jurisdiction:
+  - TR
+  - none
+  question: İHA pilot lisansı sınavının ücreti ne kadar?
+  expected_sources: []
+  should_refuse: true
+  must: []
+  should: []
+- id: r-02
+  lang: en
+  jurisdiction:
+  - none
+  question: What are the drone rules in the United States?
+  expected_sources: []
+  should_refuse: true
+  must: []
+  should: []
+- id: r-03
+  lang: tr
+  jurisdiction:
+  - none
+  question: Düğün çekimi için hangi drone'u almalıyım?
+  expected_sources: []
+  should_refuse: true
+  must: []
+  should: []
+- id: r-04
+  lang: en
+  jurisdiction:
+  - EU
+  question: How much does drone insurance cost in Germany?
+  expected_sources: []
+  should_refuse: true
+  must: []
+  should: []
+- id: j-01
+  lang: tr
+  jurisdiction:
+  - none
+  question: 120 metreden yükseğe uçabilir miyim?
+  expected_sources:
+  - source_id: shgm-sht-iha
+    section_ref: Madde 15
+  should_refuse: false
+  must:
+  - 'Türkiye: P0/P1 azami 120 m; P2''de 120 m üzeri yalnız ilgili kurumlarla koordinasyonla'
+  should:
+  - 'AB açık kategori: 120 m (AB tarafı sorulursa)'
+  - AB'de engel istisnası (50 m içinde, 105 m üstü engel, +15 m)
+- id: j-02
+  lang: tr
+  jurisdiction:
+  - EU
+  question: Almanya'da 250 gramdan hafif drone için eğitim gerekiyor mu?
+  expected_sources:
+  - source_id: easa-ear-uas
+    section_ref: UAS.OPEN.020
+  - source_id: easa-ear-uas
+    section_ref: Part 1 (2019/945 Annex)
+  should_refuse: false
+  must:
+  - 250 g altı / C0 ile A1'de çevrim içi eğitim ve sınav şartı yok; zorunlu eğitim C1 için
+  - üreticinin talimatlarını bilmek gerekir
+  should: []
+- id: j-03
+  lang: en
+  jurisdiction:
+  - TR
+  question: Under SHGM rules, how old must a commercial drone pilot be?
+  expected_sources:
+  - source_id: shgm-sht-iha
+    section_ref: Madde 17
+  should_refuse: false
+  must:
+  - 18 (P1, commercial)
+  should: []
+- id: k-01
+  lang: tr
+  jurisdiction:
+  - both
+  question: Türkiye'de P1 lisansım var. Bu lisansla Almanya'da uçabilir miyim?
+  expected_sources:
+  - source_id: easa-ear-uas
+    section_ref: Article 41 (2019/945)
+  should_refuse: false
+  must:
+  - 'otomatik geçerli değil: üçüncü ülkede yerleşik işletici AB''de 2019/947''ye uymak zorunda; yetkili
+    otorite uçmak istediği ilk üye devletin otoritesi'
+  - 'üçüncü ülke belgesi ancak üç koşulla tanınabilir: ülke tanıma istemiş olmalı, belge geçerli olmalı,
+    Komisyon EASA''ya danışarak eşdeğer emniyet seviyesini sağlamış olmalı'
+  - Türkiye için böyle bir tanıma kaynaklarda geçmiyor (uydurulmamalı)
+  should:
+  - 2019/947'ye uymak, ilgili kategori için AB yetkinlik şartlarını sağlamak demektir
+- id: k-02
+  lang: tr
+  jurisdiction:
+  - both
+  - TR
+  question: AB'den aldığım A2 sertifikasıyla Türkiye'de uçabilir miyim?
+  expected_sources:
+  - source_id: shgm-sht-iha
+    section_ref: Madde 10
+  - source_id: shgm-sht-iha
+    section_ref: Madde 15
+  should_refuse: false
+  must:
+  - yabancı lisansın tanınmasını SHGM uluslararası antlaşmalar çerçevesinde değerlendirir
+  - tanınırsa KDM-ORG üzerinden fark (intibak) eğitimi ile karşılık gelen P1 veya P2 verilir; uçmak için
+    ayrıca operasyonel lisans gerekir
+  should:
+  - yabancı tescilli dron İHATTYS ile uyumlu olmalı (Madde 10(1))
+- id: k-03
+  lang: en
+  jurisdiction:
+  - TR
+  - both
+  question: Does Turkey accept a medical certificate issued in an EU country for a P2 licence?
+  expected_sources:
+  - source_id: shgm-sht-iha
+    section_ref: Madde 15
+  should_refuse: false
+  must:
+  - 'yes: a valid, at least class 3 medical certificate issued by SHGM or by an EASA member country'
+  should: []
+- id: k-04
+  lang: tr
+  jurisdiction:
+  - both
+  question: Türkiye'deki P1 lisansı ile AB'deki A2 sertifikası arasındaki fark ne?
+  expected_sources:
+  - source_id: shgm-sht-iha
+    section_ref: Madde 15
+  - source_id: easa-ear-uas
+    section_ref: UAS.OPEN.030
+  should_refuse: false
+  must:
+  - 'P1: Türkiye''de ticari uçuş lisansı; VLOS, 120 m / 3.000 m, uygun donanımla gece; aracın sınıfından
+    bağımsız'
+  - 'A2: AB''de C2 sınıfı dron ile ilgisiz kişilerden en az 30 m (düşük hız modunda 5 m); çevrim içi eğitim
+    + sınav, kendi kendine pratik eğitim ve en az 30 soruluk ek sınav (%75)'
+  should:
+  - Türkiye'de yetki lisans seviyesi ve bölgeye, AB'de alt kategori ve dron sınıfına göre belirlenir
+- id: k-05
+  lang: tr
+  jurisdiction:
+  - both
+  question: Türkiye'deki M0 sınıfı ile AB'deki C0 sınıfı aynı şey mi?
+  expected_sources:
+  - source_id: shgm-sht-iha
+    section_ref: Madde 8
+  - source_id: easa-ear-uas
+    section_ref: Part 1 (2019/945 Annex)
+  should_refuse: false
+  must:
+  - hayır
+  - 'M0: azami kalkış kütlesi 500 g (dâhil) – 4 kg; 500 g altı olup Basit İHA olmayanlar da M0 hükümlerine
+    tabi'
+  - 'C0: 250 g altı ve teknik şartlar (19 m/s, 120 m sınırı, yalnız elektrik)'
+  should:
+  - M0 kütle sınıfı, C0 ürün sınıfı (CE işaretli ürün gereklilikleri)

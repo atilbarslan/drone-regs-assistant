@@ -1,0 +1,85 @@
+# Held-out questions (5), written after tuning ended; not seen while tuning.
+# Questions h-01..h-04 by Atıl Arslan; h-05 by the team lead (replaced a question too close to k-04).
+# Answer keys written from the official texts by the team lead; checked and corrected against the PDFs by Atıl Arslan (9 Oct 2026).
+# Comments inside the file are notes, not instructions.
+questions:
+- id: h-01
+  lang: tr
+  jurisdiction: [TR, none]
+  question: Dji mavic pro 3 dronum var. hangi ehliyeti almam lazım ?
+  expected_sources:
+  - {source_id: shgm-sht-iha, section_ref: Madde 15}   # s. 10-11
+  - {source_id: shgm-sht-iha, section_ref: Madde 8}    # s. 6
+  should_refuse: false
+  must:
+  - lisans dronun modeline, sınıfına ya da ağırlığına göre değil operasyonun türüne göre belirlenir (M.15(2); M.8(4))
+  - ticari olmayan uçuş için P0, ticari uçuş için P1 (M.15(2)(a)-(b))
+  should:
+  - görüş hattı dışı ve yüksek riskli operasyonlar için P2 (M.15(2)(c))
+  - eğitim ve sınavdan sonra diploma lisansı KDM-ORG'dan; uçmak için ayrıca KDM-ERP'den operasyonel lisans gerekir (M.15(4))
+
+- id: h-02
+  lang: tr
+  jurisdiction: [TR, none]
+  question: Yeşil alanlarda uçmak için de izine ihtiyacım var mı ?
+  expected_sources:
+  - {source_id: shgm-sht-iha, section_ref: Madde 12}   # s. 8-9
+  should_refuse: false
+  must:
+  - yeşil bölgede belirlenen irtifa ve şartlar altında operasyonel izin gerekmez (M.12(2)(a))
+  - P0 ve P1 yeşil bölgede sistem üzerinden ayrıca izin almadan uçar (M.12(7)(b))
+  should:
+  - P2'de yükseklik ya da uzun mesafe gerektirirse koordinasyon, Genel Müdürlük izni ve NOTAM aranır (M.12(7)(c))
+  - lisansın uçuş zarfı bölgenin tavan irtifasını aşamaz (M.12(6))
+  - yeşil bölgeler İHATTYS haritasında yayımlanır (M.12(1))
+
+- id: h-03
+  lang: en
+  jurisdiction: [TR]
+  question: What are the top 3 issue for p1 lecience holder ?
+  expected_sources:
+  - {source_id: shgm-sht-iha, section_ref: Madde 15}   # s. 10-11
+  - {source_id: shgm-sht-iha, section_ref: Madde 12}   # s. 8-9
+  should_refuse: false
+  must:
+  - treats P1 as the Turkish commercial UAS pilot licence and answers under SHT-İHA (M.15(2)(b))
+  - VLOS only, maximum 120 m height and 3,000 m visual or horizontal distance (M.15(2)(b))
+  should:
+  - night operations allowed with suitable equipment; an observer may be required (M.15(2)(b))
+  - flying needs the operational licence (KDM-ERP) after the diploma licence (M.15(4))
+  - green zone without a permit; outside it with a permit (M.12(7)(b))
+
+- id: h-04
+  lang: en
+  jurisdiction: [EU, none]
+  question: If ı modify my drone and the weight is changed, should i reapply for register ?
+  expected_sources:
+  - {source_id: easa-ear-uas, section_ref: Article 14 (2019/947)}   # p. 399-400
+  - {source_id: easa-ear-uas, section_ref: "AMC1 UAS.OPEN.020(5)(c) and (d), UAS.OPEN.030(3) and UAS.OPEN.040(4)(c),(d) and (e)"}   # p. 429
+  should_refuse: false
+  must:
+  - in the open category the operator registers, not each drone (only UA whose design is subject to certification are registered individually) (Art. 14(5), 14(7))
+  - an operator not yet registered must register if the modified UA now has an MTOM of 250 g or more, or a sensor able to capture personal data (Art. 14(5)(a))
+  - a modification that changes the weight outside the manufacturer's specifications invalidates the class (C0-C4) conformity; the class label must be removed and the UA may then only be flown in the specific category (AMC1/GM1 UAS.OPEN.020(5)…, p. 429)
+  should:
+  - registration information must be kept accurate (Art. 14(6))
+  - payload or original replacement parts allowed by the manufacturer are not a modification (AMC1, p. 429)
+
+- id: h-05
+  lang: tr
+  jurisdiction: [both]
+  question: Türkiye'de ve Avrupa'da drone için sigorta yaptırmak zorunlu mu?
+  expected_sources:
+  - {source_id: easa-ear-uas, section_ref: Article 14 (2019/947)}   # p. 399-400
+  - {source_id: easa-ear-uas, section_ref: UAS.SPEC.020}            # p. 447-448
+  - {source_id: easa-ear-uas, section_ref: UAS.SPEC.030}            # p. 448
+  # Retrieval değerlendirmesinde negatif kaynak kontrol ediliyorsa eklenebilir:
+  # - {source_id: shgm-sht-iha, section_ref: Genel}
+  should_refuse: false
+  must:
+  - "Türkiye: SHT-İHA'da sigorta zorunluluğuna ilişkin hüküm yok; cevap bunu kaynakta yok olarak söyler, uydurmaz"
+  - "AB: 2019/947 genel bir sigorta zorunluluğu koymaz; sigorta Birlik ya da ulusal hukuk gerektiriyorsa aranır (kayıtta poliçe numarası yalnız bu durumda: Art. 14(2)(d))"
+  should:
+  - "specific kategoride beyan ve izinde uygun sigortanın olacağı teyit edilir, yine 'gerekiyorsa' (UAS.SPEC.020(2)(d), UAS.SPEC.030(3)(f))"
+  - "üye devletlerin ulusal sigorta kuralları farklı olabilir (AMC1 UAS.OPEN.020(4)(b), p. 427)"
+  - "üye devlet kayıtta poliçenin bitiş tarihini isteyebilir (GM1 Article 14(1), p. 401)"

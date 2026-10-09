@@ -5,3 +5,7 @@ line-length = 100
 # pycodestyle errors (E), pyflakes (F), import sorting (I), pyupgrade (UP) and flake8-bugbear (B).
 # ASYNC flags blocking calls (file, network, subprocess, sleep) inside async functions.
 select = ["E", "F", "I", "UP", "B", "ASYNC"]
+
+[lint.per-file-ignores]
+# The report builds Markdown table rows; splitting each row expression would not make it clearer.
+"eval/report.py" = ["E501"]

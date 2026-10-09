@@ -12,6 +12,7 @@ from app.answer import (
     is_list_question,
     render_text,
     resolve_mode,
+    scrub_internal_terms,
 )
 from app.jurisdiction import detect
 from app.limits import Refusal
@@ -243,6 +244,28 @@ def test_unanswerable_reply_keeps_no_sections():
     cleaned, used = clean_answer(raw, [hit(1, "TR")], "TR", [])
 
     assert (cleaned.answerable, cleaned.sections, used) == (False, [], [])
+
+
+def test_the_prompts_word_for_the_sources_never_reaches_the_reader():
+    raw = StructuredAnswer.model_validate(
+        structured(
+            sections=[section("Kayıt", "Pasajlarda kayıt şartı var; ilgili pasajı okuyun.", [1])],
+            not_in_sources=["Bu bilgi passages metinlerinde yok.", "Yedek parça kuralı yok."],
+            follow_ups=["Passenger drones?"],
+        )
+    )
+
+    tr = scrub_internal_terms(raw, "tr")
+    assert tr.sections[0].text == "Kaynaklarda kayıt şartı var; ilgili kaynağı okuyun."
+    assert tr.not_in_sources == ["Bu bilgi kaynak metinlerinde yok.", "Yedek parça kuralı yok."]
+    assert tr.follow_ups == ["Passenger drones?"]
+
+    en = StructuredAnswer.model_validate(
+        structured(not_in_sources=["The passages do not say; this passage is about A1."])
+    )
+    assert scrub_internal_terms(en, "en").not_in_sources == [
+        "The sources do not say; this source is about A1."
+    ]
 
 
 # --- rendering and excerpts ------------------------------------------------------------------

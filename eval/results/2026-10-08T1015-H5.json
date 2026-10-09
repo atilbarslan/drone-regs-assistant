@@ -1,0 +1,5673 @@
+{
+ "config": {
+  "name": "H5",
+  "generation_model": "gemini-3.5-flash-lite",
+  "thinking_level": "default (minimal)",
+  "judge_model": "gemini-3.5-flash-lite",
+  "top_k": 8,
+  "list_top_k": 14,
+  "compare_per_side": 6,
+  "core_sections": "off",
+  "candidates": 30,
+  "rrf_k": 60,
+  "timeout_s": 60.0,
+  "prompt_sha": "80baeb68cee0",
+  "judge_prompt_sha": "4f05e274f182",
+  "questions": "eval/questions.yaml",
+  "questions_sha": "ff5f0ba634b1",
+  "git": "8778a87+dirty(app)",
+  "note": "F2 without the transitional-provisions sentence (ablation)"
+ },
+ "started": "2026-10-08T10:15:33+00:00",
+ "status": "complete",
+ "calls": {
+  "embedding": 0,
+  "embedding_cached": 36,
+  "generation": 36,
+  "judge": 36,
+  "retries": 0
+ },
+ "results": [
+  {
+   "id": "tr-01",
+   "lang": "tr",
+   "question": "P1 lisansıyla ticari çekim yapacağım. En fazla ne kadar yükseğe ve ne kadar uzağa uçabilirim?",
+   "detection": {
+    "detected_mode": "TR",
+    "mode": "TR",
+    "mode_source": "detected",
+    "accepted": [
+     "TR"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "P1"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 15",
+     "Madde 6",
+     "Madde 4",
+     "Madde 15",
+     "Madde 17",
+     "Madde 29",
+     "Madde 19",
+     "Madde 4"
+    ],
+    "count": 8,
+    "ranks": {
+     "Madde 15": 1,
+     "Madde 11": null
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "Madde 15": [
+      "section 'Uçuş Yüksekliği ve Mesafesi'",
+      "section 'Görüş Hattı Şartı'"
+     ],
+     "Madde 11": []
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "azami 120 m yükseklik",
+     "status": "present",
+     "quote": "azami 120 metre yükseklik",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "azami 3.000 m yatay uzaklık",
+     "status": "present",
+     "quote": "3.000 metre görüş mesafesi veya yatay uzaklık",
+     "note": ""
+    },
+    {
+     "id": "m3",
+     "kind": "must",
+     "text": "her durumda görsel görüş hattında (VLOS) kalmak",
+     "status": "present",
+     "quote": "P1 lisansı kapsamındaki operasyonların görsel görüş hattında (VLOS) yapılması gerekir",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "bunun ötesi P2 lisansı ve tescil gerektirir",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "TR",
+    "retrieval_ms": 8,
+    "generation_ms": 2238,
+    "prompt_tokens": 5350,
+    "output_tokens": 295
+   },
+   "answer": {
+    "refused": false,
+    "text": "Uçuş Yüksekliği ve Mesafesi\nP1 lisansı ile gerçekleştirilen ticari operasyonlarda azami 120 metre yükseklik ile 3.000 metre görüş mesafesi veya yatay uzaklık sınırları dâhilindeki uçuş zarfında operasyon yapılır. [1]\n\nGörüş Hattı Şartı\nP1 lisansı kapsamındaki operasyonların görsel görüş hattında (VLOS) yapılması gerekir, ancak uygun donanımla gece operasyonu da yapılabilir. [1]\n\nKaynaklarda olmayanlar:\n- Ticari çekim için alınması gereken özel izinler veya coğrafi bölge kısıtlamalarının detayları verilmemiştir.",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [
+      {
+       "topic": "Uçuş Yüksekliği ve Mesafesi",
+       "text": "P1 lisansı ile gerçekleştirilen ticari operasyonlarda azami 120 metre yükseklik ile 3.000 metre görüş mesafesi veya yatay uzaklık sınırları dâhilindeki uçuş zarfında operasyon yapılır.",
+       "cases": [],
+       "citations": [
+        1
+       ]
+      },
+      {
+       "topic": "Görüş Hattı Şartı",
+       "text": "P1 lisansı kapsamındaki operasyonların görsel görüş hattında (VLOS) yapılması gerekir, ancak uygun donanımla gece operasyonu da yapılabilir.",
+       "cases": [],
+       "citations": [
+        1
+       ]
+      }
+     ],
+     "not_in_sources": [
+      "Ticari çekim için alınması gereken özel izinler veya coğrafi bölge kısıtlamalarının detayları verilmemiştir."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "P1 lisansı ile gece uçuşu yapmak için hangi koşullar aranır?",
+      "P1 lisansı almak için hangi eğitimleri tamamlamak gerekir?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "Madde 15",
+      "page": 10
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "azami 120 metre yükseklik"
+     },
+     {
+      "id": "m2",
+      "status": "present",
+      "quote": "3.000 metre görüş mesafesi veya yatay uzaklık"
+     },
+     {
+      "id": "m3",
+      "status": "present",
+      "quote": "P1 lisansı kapsamındaki operasyonların görsel görüş hattında (VLOS) yapılması gerekir"
+     },
+     {
+      "id": "s1",
+      "status": "absent",
+      "quote": ""
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "tr-02",
+   "lang": "tr",
+   "question": "4,5 kg'lık bir drone yeni talimata göre hangi sınıfa girer?",
+   "detection": {
+    "detected_mode": "TR",
+    "mode": "TR",
+    "mode_source": "detected",
+    "accepted": [
+     "TR"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "yeni talimat"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 4",
+     "Madde 8",
+     "Madde 4",
+     "Madde 5",
+     "Madde 19",
+     "Madde 4",
+     "Madde 29",
+     "Madde 24",
+     "Madde 27",
+     "Madde 25",
+     "Madde 4",
+     "Madde 2",
+     "Geçici Madde 3",
+     "Madde 28"
+    ],
+    "count": 14,
+    "ranks": {
+     "Madde 8": 2
+    },
+    "list_question": true,
+    "top_k": 14
+   },
+   "citations": {
+    "places": {
+     "Madde 8": [
+      "section 'İHA Sınıfı'"
+     ]
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "M1 sınıfı (4 kg dâhil – 25 kg)",
+     "status": "present",
+     "quote": "Azami kalkış kütlesi 4 kg (dâhil) ile 25 kg aralığında olan insansız hava araçları M1 sınıfına girer",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "TR",
+    "retrieval_ms": 9,
+    "generation_ms": 5661,
+    "prompt_tokens": 8223,
+    "output_tokens": 178
+   },
+   "answer": {
+    "refused": false,
+    "text": "İHA Sınıfı\nAzami kalkış kütlesi 4 kg (dâhil) ile 25 kg aralığında olan insansız hava araçları M1 sınıfına girer; buna göre 4,5 kg ağırlığındaki bir drone M1 sınıfında yer alır. [2]",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [
+      {
+       "topic": "İHA Sınıfı",
+       "text": "Azami kalkış kütlesi 4 kg (dâhil) ile 25 kg aralığında olan insansız hava araçları M1 sınıfına girer; buna göre 4,5 kg ağırlığındaki bir drone M1 sınıfında yer alır.",
+       "cases": [],
+       "citations": [
+        2
+       ]
+      }
+     ],
+     "not_in_sources": [],
+     "compare": null,
+     "follow_ups": [
+      "4,5 kg'lık bir drone için pilot lisansı gereksinimi nedir?",
+      "M1 sınıfı drone'lar için kayıt ve tescil kuralları nelerdir?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 2,
+      "section_ref": "Madde 8",
+      "page": 6
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "Azami kalkış kütlesi 4 kg (dâhil) ile 25 kg aralığında olan insansız hava araçları M1 sınıfına girer"
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": null
+   }
+  },
+  {
+   "id": "tr-03",
+   "lang": "tr",
+   "question": "Oyuncak drone için lisans ya da kayıt gerekiyor mu?",
+   "detection": {
+    "detected_mode": null,
+    "mode": "TR",
+    "mode_source": "default",
+    "accepted": [
+     "TR",
+     "none"
+    ],
+    "ok": true,
+    "matched_terms": []
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 11",
+     "Madde 25",
+     "Madde 4",
+     "Madde 15",
+     "Madde 8",
+     "Madde 6",
+     "Madde 15",
+     "Madde 2"
+    ],
+    "count": 8,
+    "ranks": {
+     "Madde 8": 5,
+     "Madde 4": 3,
+     "Madde 11": 1,
+     "Madde 15": 4,
+     "Madde 12": null
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "Madde 8": [
+      "section 'Lisans ve Kayıt Zorunluluğu'"
+     ],
+     "Madde 4": [
+      "section 'Lisans ve Kayıt Zorunluluğu'"
+     ],
+     "Madde 11": [],
+     "Madde 15": [],
+     "Madde 12": []
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "cevap tanıma bağlıdır; 'oyuncak' kelimesi yetmez",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "Basit İHA ise (tasarımı gereği 10 m yarıçap ve 20 m yükseklik dışına çıkamıyor, M0 özelliklerini aşmıyor) lisans, kayıt, tescil ve ithal uygunluk gerekmez",
+     "status": "present",
+     "quote": "Basit İHA (oyuncak) niteliğini taşıyan insansız hava araçları, pilot lisansı, kayıt, tescil ve ithal uygunluk izni yükümlülüklerinden muaftır.",
+     "note": ""
+    },
+    {
+     "id": "m3",
+     "kind": "must",
+     "text": "bu zarfın dışına çıkabiliyorsa 500 g altında olsa bile M0 hükümleri uygulanır; lisans ve kayıt gerekir (Madde 8(3))",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "Basit İHA kırmızı bölgeye giremez",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "TR",
+    "retrieval_ms": 9,
+    "generation_ms": 5923,
+    "prompt_tokens": 5244,
+    "output_tokens": 173
+   },
+   "answer": {
+    "refused": false,
+    "text": "Lisans ve Kayıt Zorunluluğu\nBasit İHA (oyuncak) niteliğini taşıyan insansız hava araçları, pilot lisansı, kayıt, tescil ve ithal uygunluk izni yükümlülüklerinden muaftır. [3][5]",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [
+      {
+       "topic": "Lisans ve Kayıt Zorunluluğu",
+       "text": "Basit İHA (oyuncak) niteliğini taşıyan insansız hava araçları, pilot lisansı, kayıt, tescil ve ithal uygunluk izni yükümlülüklerinden muaftır.",
+       "cases": [],
+       "citations": [
+        3,
+        5
+       ]
+      }
+     ],
+     "not_in_sources": [],
+     "compare": null,
+     "follow_ups": [
+      "Basit İHA (oyuncak) tanımı hangi teknik özellikleri kapsar?",
+      "Basit İHA dışındaki M0 sınıfı drone'lar için kayıt zorunlu mu?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 3,
+      "section_ref": "Madde 4",
+      "page": 2
+     },
+     {
+      "n": 5,
+      "section_ref": "Madde 8",
+      "page": 6
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "m2",
+      "status": "present",
+      "quote": "Basit İHA (oyuncak) niteliğini taşıyan insansız hava araçları, pilot lisansı, kayıt, tescil ve ithal uygunluk izni yükümlülüklerinden muaftır."
+     },
+     {
+      "id": "m3",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "s1",
+      "status": "absent",
+      "quote": ""
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "tr-04",
+   "lang": "tr",
+   "question": "Eski talimata göre aldığım İHA1 sertifikası ne olacak?",
+   "detection": {
+    "detected_mode": "TR",
+    "mode": "TR",
+    "mode_source": "detected",
+    "accepted": [
+     "TR"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "İHA1"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 29",
+     "Geçici Madde 3",
+     "Madde 25",
+     "Madde 15",
+     "Madde 27",
+     "Madde 8",
+     "Madde 19",
+     "Madde 24"
+    ],
+    "count": 8,
+    "ranks": {
+     "Madde 29": 1
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "Madde 29": [
+      "section 'İHA1 Sertifikasının Dönüşümü'",
+      "section 'İntibak ve Geçerlilik'"
+     ]
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "P1 lisansına dönüştürülür",
+     "status": "present",
+     "quote": "P1 lisansına dönüştürülür",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "intibak eğitimi 31/07/2027'ye kadar tamamlanırsa geçerliliğini korur",
+     "status": "present",
+     "quote": "geçiş planında öngörülen intibak eğitimlerinin 31/07/2027 tarihine kadar tamamlanması kaydıyla geçerliliğini korur",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "kazanılmış haklar ve uçuş tecrübesi korunur",
+     "status": "present",
+     "quote": "kazanılmış hakları korunur",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "TR",
+    "retrieval_ms": 9,
+    "generation_ms": 5931,
+    "prompt_tokens": 5199,
+    "output_tokens": 339
+   },
+   "answer": {
+    "refused": false,
+    "text": "İHA1 Sertifikasının Dönüşümü\nBu Talimatın yürürlüğe girdiği tarihten önce düzenlenmiş İHA1 sertifikaları P1 lisansına dönüştürülür ve mevcut lisans sahiplerinin kazanılmış hakları korunur. [1]\n\nİntibak ve Geçerlilik\nMevcut tüm İHA pilotu sertifika ve lisansları, geçiş planında öngörülen intibak eğitimlerinin 31/07/2027 tarihine kadar tamamlanması kaydıyla geçerliliğini korur ve Genel Müdürlükçe belirlenen tazeleme esaslı geçerlilik rejimine tabi olur. [1]\n\nKaynaklarda olmayanlar:\n- Geçiş planının ayrıntılı takvimi ve intibak eğitiminin detaylı içeriği passages içinde yer almamaktadır.",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [
+      {
+       "topic": "İHA1 Sertifikasının Dönüşümü",
+       "text": "Bu Talimatın yürürlüğe girdiği tarihten önce düzenlenmiş İHA1 sertifikaları P1 lisansına dönüştürülür ve mevcut lisans sahiplerinin kazanılmış hakları korunur.",
+       "cases": [],
+       "citations": [
+        1
+       ]
+      },
+      {
+       "topic": "İntibak ve Geçerlilik",
+       "text": "Mevcut tüm İHA pilotu sertifika ve lisansları, geçiş planında öngörülen intibak eğitimlerinin 31/07/2027 tarihine kadar tamamlanması kaydıyla geçerliliğini korur ve Genel Müdürlükçe belirlenen tazeleme esaslı geçerlilik rejimine tabi olur.",
+       "cases": [],
+       "citations": [
+        1
+       ]
+      }
+     ],
+     "not_in_sources": [
+      "Geçiş planının ayrıntılı takvimi ve intibak eğitiminin detaylı içeriği passages içinde yer almamaktadır."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "P1 lisansı almak için hangi eğitimlerin tamamlanması gerekir?",
+      "İntibak eğitimi nereden tamamlanacaktır?",
+      "Lisansların geçerlilik süresi ve yenilenme şartları nelerdir?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "Madde 29",
+      "page": 18
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "P1 lisansına dönüştürülür"
+     },
+     {
+      "id": "m2",
+      "status": "present",
+      "quote": "geçiş planında öngörülen intibak eğitimlerinin 31/07/2027 tarihine kadar tamamlanması kaydıyla geçerliliğini korur"
+     },
+     {
+      "id": "s1",
+      "status": "present",
+      "quote": "kazanılmış hakları korunur"
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": null
+   }
+  },
+  {
+   "id": "tr-05",
+   "lang": "tr",
+   "question": "Yeni talimat yayımlandı ama eski kurallar hâlâ uygulanabiliyor mu? Geçiş ne zamana kadar?",
+   "detection": {
+    "detected_mode": "TR",
+    "mode": "TR",
+    "mode_source": "detected",
+    "accepted": [
+     "TR"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "Yeni talimat"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Geçici Madde 1",
+     "Madde 29",
+     "Geçici Madde 2",
+     "Madde 28",
+     "Geçici Madde 3",
+     "Madde 25",
+     "Madde 27",
+     "Madde 7"
+    ],
+    "count": 8,
+    "ranks": {
+     "Geçici Madde 1": 1
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "Geçici Madde 1": [
+      "section 'Geçiş Süresi'",
+      "section 'Eski Mevzuat'",
+      "section 'Kayıt ve İzinler'"
+     ]
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "tam uyum için 31/07/2027'ye kadar geçiş süresi",
+     "status": "present",
+     "quote": "İnsansız Hava Aracı Sistemleri Talimatının (SHT-İHA) operasyonel kurallarına tam uyum için kullanıcılara ve pilotlara 31/07/2027 tarihine kadar geçiş süresi tanınır.",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "bu sürede emniyeti tehlikeye atmayan hâllerde eski hükümlerin uygulanmasına SHGM izin verebilir",
+     "status": "present",
+     "quote": "Geçiş süresi zarfında, emniyeti tehlikeye düşürmeyecek hâllerde yürürlükten kaldırılan mevzuat hükümlerinin uygulanmasına Genel Müdürlükçe izin verilebilir.",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "İHATTYS devreye alınana kadar kayıt/izin işlemlerinde eski mevzuat hükümleri de uygulanır",
+     "status": "present",
+     "quote": "İHATTYS devreye alınıp Genel Müdürlükçe duyurulana kadar, kayıt, bildirim, izin, yetkilendirme ve tahsis işlemleri bakımından yürürlükten kaldırılan mevzuatın bu işlemlere ilişkin hükümleri de uygulanır.",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "TR",
+    "retrieval_ms": 11,
+    "generation_ms": 5977,
+    "prompt_tokens": 4221,
+    "output_tokens": 369
+   },
+   "answer": {
+    "refused": false,
+    "text": "Geçiş Süresi\nİnsansız Hava Aracı Sistemleri Talimatının (SHT-İHA) operasyonel kurallarına tam uyum için kullanıcılara ve pilotlara 31/07/2027 tarihine kadar geçiş süresi tanınır. [1]\n\nEski Mevzuat\nGeçiş süresi zarfında, emniyeti tehlikeye düşürmeyecek hâllerde yürürlükten kaldırılan mevzuat hükümlerinin uygulanmasına Genel Müdürlükçe izin verilebilir. [1]\n\nKayıt ve İzinler\nİHATTYS devreye alınıp Genel Müdürlükçe duyurulana kadar, kayıt, bildirim, izin, yetkilendirme ve tahsis işlemleri bakımından yürürlükten kaldırılan mevzuatın bu işlemlere ilişkin hükümleri de uygulanır. [1]",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [
+      {
+       "topic": "Geçiş Süresi",
+       "text": "İnsansız Hava Aracı Sistemleri Talimatının (SHT-İHA) operasyonel kurallarına tam uyum için kullanıcılara ve pilotlara 31/07/2027 tarihine kadar geçiş süresi tanınır.",
+       "cases": [],
+       "citations": [
+        1
+       ]
+      },
+      {
+       "topic": "Eski Mevzuat",
+       "text": "Geçiş süresi zarfında, emniyeti tehlikeye düşürmeyecek hâllerde yürürlükten kaldırılan mevzuat hükümlerinin uygulanmasına Genel Müdürlükçe izin verilebilir.",
+       "cases": [],
+       "citations": [
+        1
+       ]
+      },
+      {
+       "topic": "Kayıt ve İzinler",
+       "text": "İHATTYS devreye alınıp Genel Müdürlükçe duyurulana kadar, kayıt, bildirim, izin, yetkilendirme ve tahsis işlemleri bakımından yürürlükten kaldırılan mevzuatın bu işlemlere ilişkin hükümleri de uygulanır.",
+       "cases": [],
+       "citations": [
+        1
+       ]
+      }
+     ],
+     "not_in_sources": [],
+     "compare": null,
+     "follow_ups": [
+      "Eski belgelerim ne zamana kadar geçerli?",
+      "Pilot sertifikalarının intibakı nasıl yapılacak?",
+      "Mevcut İHA'ların uyarlanması için son tarih nedir?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "Geçici Madde 1",
+      "page": 18
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "İnsansız Hava Aracı Sistemleri Talimatının (SHT-İHA) operasyonel kurallarına tam uyum için kullanıcılara ve pilotlara 31/07/2027 tarihine kadar geçiş süresi tanınır."
+     },
+     {
+      "id": "m2",
+      "status": "present",
+      "quote": "Geçiş süresi zarfında, emniyeti tehlikeye düşürmeyecek hâllerde yürürlükten kaldırılan mevzuat hükümlerinin uygulanmasına Genel Müdürlükçe izin verilebilir."
+     },
+     {
+      "id": "s1",
+      "status": "present",
+      "quote": "İHATTYS devreye alınıp Genel Müdürlükçe duyurulana kadar, kayıt, bildirim, izin, yetkilendirme ve tahsis işlemleri bakımından yürürlükten kaldırılan mevzuatın bu işlemlere ilişkin hükümleri de uygulanır."
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": null
+   }
+  },
+  {
+   "id": "tr-06",
+   "lang": "tr",
+   "question": "Elimdeki dronu yeni kurallara uygun hâle getirmek için ne yapmam gerekiyor, son tarih ne?",
+   "detection": {
+    "detected_mode": null,
+    "mode": "TR",
+    "mode_source": "default",
+    "accepted": [
+     "TR",
+     "none"
+    ],
+    "ok": true,
+    "matched_terms": []
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 27",
+     "Geçici Madde 1",
+     "Madde 28",
+     "Madde 25",
+     "Geçici Madde 3",
+     "Geçici Madde 2",
+     "Madde 29",
+     "Madde 7",
+     "Madde 23",
+     "Madde 22",
+     "Madde 19",
+     "Madde 23",
+     "Madde 15",
+     "Madde 30"
+    ],
+    "count": 14,
+    "ranks": {
+     "Madde 27": 1,
+     "Geçici Madde 2": 6,
+     "Madde 25": 4
+    },
+    "list_question": true,
+    "top_k": 14
+   },
+   "citations": {
+    "places": {
+     "Madde 27": [
+      "section 'Uyum ve Dönüştürme'",
+      "section 'Son Tarih'"
+     ],
+     "Geçici Madde 2": [
+      "section 'Yazılım Sertifikasyonu'",
+      "section 'Son Tarih'"
+     ],
+     "Madde 25": []
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "kayıt, uzaktan tanımlama, geofence, uyum yazılım modülü, yazılım sertifikasyonu ve İHATTYS entegrasyonu",
+     "status": "present",
+     "quote": "kayıt, uzaktan tanımlama, coğrafi sınırlama, uyum yazılım modülü, yazılım sertifikasyonu ve İHATTYS entegrasyonu",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "son tarih 31/07/2027",
+     "status": "present",
+     "quote": "son tarih 31/07/2027 olarak belirlenmiştir.",
+     "note": ""
+    },
+    {
+     "id": "m3",
+     "kind": "must",
+     "text": "süre sonunda dönüştürülmemiş araç uçurulamaz",
+     "status": "present",
+     "quote": "Bu sürenin sonunda dönüştürülmemiş ve sertifikalandırılmamış araçlar Türk hava sahasında işletilemez.",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "üretici/ithalatçı/dağıtıcı ile iletişime geçilir",
+     "status": "present",
+     "quote": "Bu dönüşüm, ürünün üreticisiyle temasa geçilerek gerçekleştirilebilir ve gerekli donanım veya yazılım güncellemesi imalatçı, ithalatçı veya dağıtıcıdan temin edilir.",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [
+     "Dronun sınıfı veya türü nedir?"
+    ],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "TR",
+    "retrieval_ms": 16,
+    "generation_ms": 6518,
+    "prompt_tokens": 7019,
+    "output_tokens": 650
+   },
+   "answer": {
+    "refused": false,
+    "text": "Cevap şunlara bağlı:\n- Dronun sınıfı veya türü nedir? (M0-M3 sınıfı mevcut İHA / Basit İHA)\n\nUyum ve Dönüştürme\nMevcut insansız hava araçları; ait oldukları kütle sınıfına (M0-M3) göre kayıt, uzaktan tanımlama, coğrafi sınırlama, uyum yazılım modülü, yazılım sertifikasyonu ve İHATTYS entegrasyonu gerekliliklerine uygun hâle getirilmelidir. Bu dönüşüm, ürünün üreticisiyle temasa geçilerek gerçekleştirilebilir ve gerekli donanım veya yazılım güncellemesi imalatçı, ithalatçı veya dağıtıcıdan temin edilir. [1]\n\nYazılım Sertifikasyonu\nBasit İHA hariç tüm insansız hava araçlarının uçuş kontrol yazılımları, kontrol ünitesi yazılımları ve komuta yazılımlarının Genel Müdürlükçe düzenlenen yazılım sertifikasyonuna sahip olması zorunludur. Yazılım sertifikasyonu olmayan araçlar için başvuru yapılması ve dönüşümün tamamlanması gerekir. [6][12]\n\nSon Tarih\nMevcut insansız hava araçlarının dönüştürülmesi, yazılım sertifikasyonu başvurularının yapılması ve operasyonel kurallara tam uyum için son tarih 31/07/2027 olarak belirlenmiştir. Bu sürenin sonunda dönüştürülmemiş ve sertifikalandırılmamış araçlar Türk hava sahasında işletilemez. [1][2][6]\n\nKaynaklarda olmayanlar:\n- Dronunuzun hangi M sınıfına ait olduğu veya basit İHA kapsamında olup olmadığı.\n- Dönüşüm işlemleri için üreticilerin talep edeceği olası ücretler veya maliyetler.",
+    "structured": {
+     "answerable": true,
+     "depends_on": [
+      {
+       "question": "Dronun sınıfı veya türü nedir?",
+       "options": [
+        {
+         "label": "M0-M3 sınıfı mevcut İHA",
+         "fact": "Dron M0-M3 sınıfına ait mevcut bir insansız hava aracıdır."
+        },
+        {
+         "label": "Basit İHA",
+         "fact": "Dron basit İHA statüsündedir."
+        }
+       ]
+      }
+     ],
+     "sections": [
+      {
+       "topic": "Uyum ve Dönüştürme",
+       "text": "Mevcut insansız hava araçları; ait oldukları kütle sınıfına (M0-M3) göre kayıt, uzaktan tanımlama, coğrafi sınırlama, uyum yazılım modülü, yazılım sertifikasyonu ve İHATTYS entegrasyonu gerekliliklerine uygun hâle getirilmelidir. Bu dönüşüm, ürünün üreticisiyle temasa geçilerek gerçekleştirilebilir ve gerekli donanım veya yazılım güncellemesi imalatçı, ithalatçı veya dağıtıcıdan temin edilir.",
+       "cases": [],
+       "citations": [
+        1
+       ]
+      },
+      {
+       "topic": "Yazılım Sertifikasyonu",
+       "text": "Basit İHA hariç tüm insansız hava araçlarının uçuş kontrol yazılımları, kontrol ünitesi yazılımları ve komuta yazılımlarının Genel Müdürlükçe düzenlenen yazılım sertifikasyonuna sahip olması zorunludur. Yazılım sertifikasyonu olmayan araçlar için başvuru yapılması ve dönüşümün tamamlanması gerekir.",
+       "cases": [],
+       "citations": [
+        6,
+        12
+       ]
+      },
+      {
+       "topic": "Son Tarih",
+       "text": "Mevcut insansız hava araçlarının dönüştürülmesi, yazılım sertifikasyonu başvurularının yapılması ve operasyonel kurallara tam uyum için son tarih 31/07/2027 olarak belirlenmiştir. Bu sürenin sonunda dönüştürülmemiş ve sertifikalandırılmamış araçlar Türk hava sahasında işletilemez.",
+       "cases": [],
+       "citations": [
+        1,
+        2,
+        6
+       ]
+      }
+     ],
+     "not_in_sources": [
+      "Dronunuzun hangi M sınıfına ait olduğu veya basit İHA kapsamında olup olmadığı.",
+      "Dönüşüm işlemleri için üreticilerin talep edeceği olası ücretler veya maliyetler."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "Mevcut pilot lisansımı yeni sisteme nasıl intibak ettirebilirim?",
+      "İHATTYS kaydı ve işlemleri nasıl yapılır?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "Madde 27",
+      "page": 17
+     },
+     {
+      "n": 2,
+      "section_ref": "Geçici Madde 1",
+      "page": 18
+     },
+     {
+      "n": 6,
+      "section_ref": "Geçici Madde 2",
+      "page": 19
+     },
+     {
+      "n": 12,
+      "section_ref": "Madde 23",
+      "page": 15
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "kayıt, uzaktan tanımlama, coğrafi sınırlama, uyum yazılım modülü, yazılım sertifikasyonu ve İHATTYS entegrasyonu"
+     },
+     {
+      "id": "m2",
+      "status": "present",
+      "quote": "son tarih 31/07/2027 olarak belirlenmiştir."
+     },
+     {
+      "id": "m3",
+      "status": "present",
+      "quote": "Bu sürenin sonunda dönüştürülmemiş ve sertifikalandırılmamış araçlar Türk hava sahasında işletilemez."
+     },
+     {
+      "id": "s1",
+      "status": "present",
+      "quote": "Bu dönüşüm, ürünün üreticisiyle temasa geçilerek gerçekleştirilebilir ve gerekli donanım veya yazılım güncellemesi imalatçı, ithalatçı veya dağıtıcıdan temin edilir."
+     }
+    ],
+    "depends_on": [
+     {
+      "number": 1,
+      "already_given": false,
+      "question_quote": ""
+     }
+    ],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "tr-07",
+   "lang": "tr",
+   "question": "P1 lisansım var. Kırmızı bölgede uçabilir miyim?",
+   "detection": {
+    "detected_mode": "TR",
+    "mode": "TR",
+    "mode_source": "detected",
+    "accepted": [
+     "TR"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "P1",
+     "Kırmızı bölge"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 12",
+     "Madde 6",
+     "Madde 12",
+     "Madde 13",
+     "Madde 4",
+     "Madde 15",
+     "Madde 15",
+     "Madde 22"
+    ],
+    "count": 8,
+    "ranks": {
+     "Madde 12": 1
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "Madde 12": [
+      "section 'Kırmızı Bölge Uçuşu'"
+     ]
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "bölgeyi kapatan kurumun uygunluğu (gerekirse Cumhurbaşkanlığı) ile",
+     "status": "present",
+     "quote": "sahayı kapatan kurumun ve gerekli hâllerde Cumhurbaşkanlığının uygunluğu",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "SHGM izni ve NOTAM ile",
+     "status": "present",
+     "quote": "Genel Müdürlük izni ve NOTAM alınması",
+     "note": ""
+    },
+    {
+     "id": "m3",
+     "kind": "must",
+     "text": "kurum uygunluk vermezse izin verilmez",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "TR",
+    "retrieval_ms": 10,
+    "generation_ms": 5968,
+    "prompt_tokens": 5510,
+    "output_tokens": 255
+   },
+   "answer": {
+    "refused": false,
+    "text": "Kırmızı Bölge Uçuşu\nP1 lisans sahipleri, kırmızı bölgede uçuş izni alabilir; ancak bu izin, sahayı kapatan kurumun ve gerekli hâllerde Cumhurbaşkanlığının uygunluğu, diğer ilgili kurumlarla koordinasyon sağlanması, Genel Müdürlük izni ve NOTAM alınması şartına tabidir. [1][3]\n\nKaynaklarda olmayanlar:\n- Kırmızı bölge izni için başvuru sürecinin ne kadar süreceği veya ücretlendirme detayları.",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [
+      {
+       "topic": "Kırmızı Bölge Uçuşu",
+       "text": "P1 lisans sahipleri, kırmızı bölgede uçuş izni alabilir; ancak bu izin, sahayı kapatan kurumun ve gerekli hâllerde Cumhurbaşkanlığının uygunluğu, diğer ilgili kurumlarla koordinasyon sağlanması, Genel Müdürlük izni ve NOTAM alınması şartına tabidir.",
+       "cases": [],
+       "citations": [
+        1,
+        3
+       ]
+      }
+     ],
+     "not_in_sources": [
+      "Kırmızı bölge izni için başvuru sürecinin ne kadar süreceği veya ücretlendirme detayları."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "P1 lisansı ile yeşil bölgelerde uçmak için izin gerekiyor mu?",
+      "Kırmızı bölgede uçuş izni almak için İHATTYS üzerinden nasıl başvurulur?",
+      "P1 lisansının azami uçuş zarfı sınırları nelerdir?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "Madde 12",
+      "page": 8
+     },
+     {
+      "n": 3,
+      "section_ref": "Madde 12",
+      "page": 8
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "sahayı kapatan kurumun ve gerekli hâllerde Cumhurbaşkanlığının uygunluğu"
+     },
+     {
+      "id": "m2",
+      "status": "present",
+      "quote": "Genel Müdürlük izni ve NOTAM alınması"
+     },
+     {
+      "id": "m3",
+      "status": "absent",
+      "quote": ""
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": null
+   }
+  },
+  {
+   "id": "tr-08",
+   "lang": "tr",
+   "question": "P0 lisansıyla gece uçuşu yapabilir miyim?",
+   "detection": {
+    "detected_mode": "TR",
+    "mode": "TR",
+    "mode_source": "detected",
+    "accepted": [
+     "TR"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "P0"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 15",
+     "Madde 12",
+     "Madde 6",
+     "Madde 15",
+     "Madde 17",
+     "Madde 4",
+     "Madde 29",
+     "Madde 8"
+    ],
+    "count": 8,
+    "ranks": {
+     "Madde 15": 1
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "Madde 15": [
+      "section 'Gece Uçuşu'"
+     ]
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "hayır: P0 yalnız görsel görüş hattında ve gündüz",
+     "status": "present",
+     "quote": "P0 İHA Pilot Lisansı (Amatör) yalnızca gündüz operasyonları için düzenlenir ve P0 lisansıyla gece uçuşu yapılamaz.",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "gece uçuşu P1'de uygun donanımla mümkün",
+     "status": "present",
+     "quote": "Gece operasyonları uygun donanımla yalnızca P1 lisansı sahipleri tarafından yapılabilir.",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "TR",
+    "retrieval_ms": 10,
+    "generation_ms": 6547,
+    "prompt_tokens": 5331,
+    "output_tokens": 192
+   },
+   "answer": {
+    "refused": false,
+    "text": "Gece Uçuşu\nP0 İHA Pilot Lisansı (Amatör) yalnızca gündüz operasyonları için düzenlenir ve P0 lisansıyla gece uçuşu yapılamaz. Gece operasyonları uygun donanımla yalnızca P1 lisansı sahipleri tarafından yapılabilir. [1]",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [
+      {
+       "topic": "Gece Uçuşu",
+       "text": "P0 İHA Pilot Lisansı (Amatör) yalnızca gündüz operasyonları için düzenlenir ve P0 lisansıyla gece uçuşu yapılamaz. Gece operasyonları uygun donanımla yalnızca P1 lisansı sahipleri tarafından yapılabilir.",
+       "cases": [],
+       "citations": [
+        1
+       ]
+      }
+     ],
+     "not_in_sources": [],
+     "compare": null,
+     "follow_ups": [
+      "P1 lisansı ile gece uçuşu hangi şartlarda yapılabilir?",
+      "P0 lisansı ile hangi bölgelerde uçuş yapabilirim?",
+      "P0 lisansı için asgari yaş sınırı nedir?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "Madde 15",
+      "page": 10
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "P0 İHA Pilot Lisansı (Amatör) yalnızca gündüz operasyonları için düzenlenir ve P0 lisansıyla gece uçuşu yapılamaz."
+     },
+     {
+      "id": "s1",
+      "status": "present",
+      "quote": "Gece operasyonları uygun donanımla yalnızca P1 lisansı sahipleri tarafından yapılabilir."
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "tr-09",
+   "lang": "tr",
+   "question": "P2 lisansı için sağlık raporu gerekiyor mu?",
+   "detection": {
+    "detected_mode": "TR",
+    "mode": "TR",
+    "mode_source": "detected",
+    "accepted": [
+     "TR"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "P2"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 15",
+     "Madde 15",
+     "Madde 17",
+     "Madde 6",
+     "Madde 12",
+     "Madde 19",
+     "Madde 11",
+     "Madde 7"
+    ],
+    "count": 8,
+    "ranks": {
+     "Madde 15": 1
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "Madde 15": [
+      "section 'Sağlık Raporu'"
+     ]
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "evet: SHGM veya EASA üyesi bir ülkenin düzenlediği geçerli, asgari 3. sınıf sağlık sertifikası",
+     "status": "present",
+     "quote": "P2 lisansı düzenlenecek kişilerin, Genel Müdürlük veya EASA üyesi bir ülke tarafından düzenlenen ve geçerli olan asgari 3 üncü sınıf sağlık sertifikası sahibi olması zorunludur.",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "P0/P1'de sağlık raporu yok, göreve elverişlilik öz-beyanı var",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "TR",
+    "retrieval_ms": 13,
+    "generation_ms": 6805,
+    "prompt_tokens": 4784,
+    "output_tokens": 179
+   },
+   "answer": {
+    "refused": false,
+    "text": "Sağlık Raporu\nP2 lisansı düzenlenecek kişilerin, Genel Müdürlük veya EASA üyesi bir ülke tarafından düzenlenen ve geçerli olan asgari 3 üncü sınıf sağlık sertifikası sahibi olması zorunludur. [1]",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [
+      {
+       "topic": "Sağlık Raporu",
+       "text": "P2 lisansı düzenlenecek kişilerin, Genel Müdürlük veya EASA üyesi bir ülke tarafından düzenlenen ve geçerli olan asgari 3 üncü sınıf sağlık sertifikası sahibi olması zorunludur.",
+       "cases": [],
+       "citations": [
+        1
+       ]
+      }
+     ],
+     "not_in_sources": [],
+     "compare": null,
+     "follow_ups": [
+      "P2 lisansı için asgari yaş sınırı nedir?",
+      "P0 ve P1 lisansları için sağlık raporu gerekiyor mu?",
+      "P2 lisansı hangi operasyonları kapsar?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "Madde 15",
+      "page": 11
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "P2 lisansı düzenlenecek kişilerin, Genel Müdürlük veya EASA üyesi bir ülke tarafından düzenlenen ve geçerli olan asgari 3 üncü sınıf sağlık sertifikası sahibi olması zorunludur."
+     },
+     {
+      "id": "s1",
+      "status": "absent",
+      "quote": ""
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": null
+   }
+  },
+  {
+   "id": "tr-10",
+   "lang": "tr",
+   "question": "Yurt dışından yanımda getirdiğim bir dronu Türkiye'de uçurabilir miyim?",
+   "detection": {
+    "detected_mode": "TR",
+    "mode": "TR",
+    "mode_source": "detected",
+    "accepted": [
+     "TR"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "Türkiye"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 24",
+     "Madde 2",
+     "Madde 12",
+     "Madde 12",
+     "Madde 23",
+     "Madde 7",
+     "Madde 1",
+     "Madde 4"
+    ],
+    "count": 8,
+    "ranks": {
+     "Madde 24": 1,
+     "Madde 11": null,
+     "Madde 15": null,
+     "Madde 12": 3
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "Madde 24": [
+      "section 'İthal Koşulları'"
+     ],
+     "Madde 11": [],
+     "Madde 15": [],
+     "Madde 12": []
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "uyum yazılım modülü mevcut ve entegre olmalı; değilse kayıt yapılamaz ve uçurulamaz",
+     "status": "present",
+     "quote": "Yolcu beraberinde veya bireysel yollarla yurt dışından getirilen insansız hava araçlarında uyum yazılım modülünün mevcudiyeti ve entegrasyonu aranır; bu şart sağlanmadıkça söz konusu araçlar kayıt işlemlerine konu edilemez ve Türk hava sahasında uçurulamaz.",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "bu sağlansa bile kullanıcı kaydı, uygun pilot lisansı ve bölge kuralları (yeşil/turuncu/kırmızı) geçerlidir",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "Basit İHA bu yükümlülüklerden muaftır",
+     "status": "present",
+     "quote": "Basit İHA (oyuncak) niteliğindeki araçlar, pilot lisansı, kayıt, tescil ve ithal uygunluk izni yükümlülüklerinden muaftır.",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [
+     "Dronun türü veya özellikleri nedir?",
+     "Uyum yazılım modülü mevcut mu?"
+    ],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "TR",
+    "retrieval_ms": 15,
+    "generation_ms": 6582,
+    "prompt_tokens": 5231,
+    "output_tokens": 521
+   },
+   "answer": {
+    "refused": false,
+    "text": "Cevap şunlara bağlı:\n- Dronun türü veya özellikleri nedir? (Basit İHA (oyuncak) / Normal İHA)\n- Uyum yazılım modülü mevcut mu? (Yazılım modülü var / Yazılım modülü yok)\n\nİthal Koşulları\nYolcu beraberinde veya bireysel yollarla yurt dışından getirilen insansız hava araçlarında uyum yazılım modülünün mevcudiyeti ve entegrasyonu aranır; bu şart sağlanmadıkça söz konusu araçlar kayıt işlemlerine konu edilemez ve Türk hava sahasında uçurulamaz. [1]\n\nBasit İHA Durumu\nBasit İHA (oyuncak) niteliğindeki araçlar, pilot lisansı, kayıt, tescil ve ithal uygunluk izni yükümlülüklerinden muaftır. [8]\n\nKaynaklarda olmayanlar:\n- Dronun gümrük vergileri veya kişisel muafiyet limitleri hakkında bilgi verilmemektedir.",
+    "structured": {
+     "answerable": true,
+     "depends_on": [
+      {
+       "question": "Dronun türü veya özellikleri nedir?",
+       "options": [
+        {
+         "label": "Basit İHA (oyuncak)",
+         "fact": "Dron basit İHA (oyuncak) niteliğindedir"
+        },
+        {
+         "label": "Normal İHA",
+         "fact": "Dron basit İHA değildir"
+        }
+       ]
+      },
+      {
+       "question": "Uyum yazılım modülü mevcut mu?",
+       "options": [
+        {
+         "label": "Yazılım modülü var",
+         "fact": "Uyum yazılım modülü dronda mevcuttur ve entegre edilmiştir"
+        },
+        {
+         "label": "Yazılım modülü yok",
+         "fact": "Uyum yazılım modülü mevcut değildir"
+        }
+       ]
+      }
+     ],
+     "sections": [
+      {
+       "topic": "İthal Koşulları",
+       "text": "Yolcu beraberinde veya bireysel yollarla yurt dışından getirilen insansız hava araçlarında uyum yazılım modülünün mevcudiyeti ve entegrasyonu aranır; bu şart sağlanmadıkça söz konusu araçlar kayıt işlemlerine konu edilemez ve Türk hava sahasında uçurulamaz.",
+       "cases": [],
+       "citations": [
+        1
+       ]
+      },
+      {
+       "topic": "Basit İHA Durumu",
+       "text": "Basit İHA (oyuncak) niteliğindeki araçlar, pilot lisansı, kayıt, tescil ve ithal uygunluk izni yükümlülüklerinden muaftır.",
+       "cases": [],
+       "citations": [
+        8
+       ]
+      }
+     ],
+     "not_in_sources": [
+      "Dronun gümrük vergileri veya kişisel muafiyet limitleri hakkında bilgi verilmemektedir."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "Uyum yazılım modülü nedir ve nasıl entegre edilir?",
+      "Basit İHA tam olarak hangi özelliklere sahiptir?",
+      "Kayıt işlemleri hangi kurum üzerinden yapılır?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "Madde 24",
+      "page": 15
+     },
+     {
+      "n": 8,
+      "section_ref": "Madde 4",
+      "page": 2
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "Yolcu beraberinde veya bireysel yollarla yurt dışından getirilen insansız hava araçlarında uyum yazılım modülünün mevcudiyeti ve entegrasyonu aranır; bu şart sağlanmadıkça söz konusu araçlar kayıt işlemlerine konu edilemez ve Türk hava sahasında uçurulamaz."
+     },
+     {
+      "id": "m2",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "s1",
+      "status": "present",
+      "quote": "Basit İHA (oyuncak) niteliğindeki araçlar, pilot lisansı, kayıt, tescil ve ithal uygunluk izni yükümlülüklerinden muaftır."
+     }
+    ],
+    "depends_on": [
+     {
+      "number": 1,
+      "already_given": false,
+      "question_quote": ""
+     },
+     {
+      "number": 2,
+      "already_given": false,
+      "question_quote": ""
+     }
+    ],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "en-01",
+   "lang": "en",
+   "question": "What is the maximum height I can fly in the open category?",
+   "detection": {
+    "detected_mode": "EU",
+    "mode": "EU",
+    "mode_source": "detected",
+    "accepted": [
+     "EU"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "open category"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Article 4 (2019/947)",
+     "UAS.OPEN.010",
+     "GM2 Article 15(2)",
+     "GM1 Article 3",
+     "Article 20 (2019/947)",
+     "UAS.STS-01.010",
+     "UAS.STS-02.010",
+     "AMC4 Article 11"
+    ],
+    "count": 8,
+    "ranks": {
+     "Article 4 (2019/947)": 1,
+     "UAS.OPEN.010": 2
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "Article 4 (2019/947)": [
+      "section 'Maximum Height'"
+     ],
+     "UAS.OPEN.010": [
+      "section 'Maximum Height'",
+      "section 'Obstacle Exception'"
+     ]
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "120 m from the closest point of the earth's surface",
+     "status": "present",
+     "quote": "the unmanned aircraft must be maintained within 120 metres from the closest point of the surface of the earth",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "exception only within 50 m horizontally of an artificial obstacle taller than 105 m: up to 15 m above the obstacle, at the request of the entity responsible for it",
+     "status": "present",
+     "quote": "When flying an unmanned aircraft within a horizontal distance of 50 metres from an artificial obstacle taller than 105 metres, the maximum height of the operation may be increased up to 15 metres above the height of the obstacle at the request of the entity responsible for the obstacle.",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "over natural elevations the distance is measured from the closest point of the surface",
+     "status": "present",
+     "quote": "The measurement of distances must be adapted accordingly to the geographical characteristics of the terrain, such as plains, hills, and mountains.",
+     "note": ""
+    },
+    {
+     "id": "s2",
+     "kind": "should",
+     "text": "unmanned sailplanes under 10 kg exception",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "EU",
+    "retrieval_ms": 23,
+    "generation_ms": 5722,
+    "prompt_tokens": 3546,
+    "output_tokens": 313
+   },
+   "answer": {
+    "refused": false,
+    "text": "Maximum Height\nDuring flight, the unmanned aircraft must be maintained within 120 metres from the closest point of the surface of the earth, except when overflying an obstacle. The measurement of distances must be adapted accordingly to the geographical characteristics of the terrain, such as plains, hills, and mountains. [1][2]\n\nObstacle Exception\nWhen flying an unmanned aircraft within a horizontal distance of 50 metres from an artificial obstacle taller than 105 metres, the maximum height of the operation may be increased up to 15 metres above the height of the obstacle at the request of the entity responsible for the obstacle. [2]\n\nNot in the sources:\n- Member States may define different height thresholds in UAS geographical zones.",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [
+      {
+       "topic": "Maximum Height",
+       "text": "During flight, the unmanned aircraft must be maintained within 120 metres from the closest point of the surface of the earth, except when overflying an obstacle. The measurement of distances must be adapted accordingly to the geographical characteristics of the terrain, such as plains, hills, and mountains.",
+       "cases": [],
+       "citations": [
+        1,
+        2
+       ]
+      },
+      {
+       "topic": "Obstacle Exception",
+       "text": "When flying an unmanned aircraft within a horizontal distance of 50 metres from an artificial obstacle taller than 105 metres, the maximum height of the operation may be increased up to 15 metres above the height of the obstacle at the request of the entity responsible for the obstacle.",
+       "cases": [],
+       "citations": [
+        2
+       ]
+      }
+     ],
+     "not_in_sources": [
+      "Member States may define different height thresholds in UAS geographical zones."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "What are the rules for flying near obstacles taller than 105 metres?",
+      "How is the 120-metre distance measured over mountainous terrain?",
+      "Can Member States authorize flights exceeding 120 metres?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "Article 4 (2019/947)",
+      "page": 32
+     },
+     {
+      "n": 2,
+      "section_ref": "UAS.OPEN.010",
+      "page": 421
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "the unmanned aircraft must be maintained within 120 metres from the closest point of the surface of the earth"
+     },
+     {
+      "id": "m2",
+      "status": "present",
+      "quote": "When flying an unmanned aircraft within a horizontal distance of 50 metres from an artificial obstacle taller than 105 metres, the maximum height of the operation may be increased up to 15 metres above the height of the obstacle at the request of the entity responsible for the obstacle."
+     },
+     {
+      "id": "s1",
+      "status": "present",
+      "quote": "The measurement of distances must be adapted accordingly to the geographical characteristics of the terrain, such as plains, hills, and mountains."
+     },
+     {
+      "id": "s2",
+      "status": "absent",
+      "quote": ""
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "en-02",
+   "lang": "en",
+   "question": "My drone weighs 200 g and has a camera. Do I need to register as an operator?",
+   "detection": {
+    "detected_mode": null,
+    "mode": "EU",
+    "mode_source": "default",
+    "accepted": [
+     "EU",
+     "none"
+    ],
+    "ok": true,
+    "matched_terms": []
+   },
+   "retrieval": {
+    "passages": [
+     "Article 14 (2019/947)",
+     "GM1 UAS.SPEC.050(1)(a)(iv)",
+     "Recitals (2019/947)",
+     "AMC1 UAS.SPEC.050(1)(g)",
+     "AMC1 UAS.LUC.030(2)(g)(vi)",
+     "Article 14 (2019/947)",
+     "AMC1 UAS.LUC.030(2)(g)(v)",
+     "Article 4 (2019/947)"
+    ],
+    "count": 8,
+    "ranks": {
+     "Article 14 (2019/947)": 1,
+     "Madde 11": null
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "Article 14 (2019/947)": [
+      "case 'Registration / Equipped with a sensor capturing personal data and not a toy'",
+      "case 'Registration / Complies with toy safety directive or does not capture personal data'"
+     ],
+     "Madde 11": []
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "yes: registration is required if the drone has a sensor able to capture personal data, unless it is a toy (Directive 2009/48/EC)",
+     "status": "present",
+     "quote": "UAS operators must register themselves when operating within the 'open' category an unmanned aircraft that is equipped with a sensor able to capture personal data, unless it complies with Directive 2009/48/EC.",
+     "note": "case içinde"
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "registration is also required at 250 g or more or above 80 J",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "s2",
+     "kind": "should",
+     "text": "if answered for both: in Turkey every user must register except for a 'Basit İHA' (Madde 11(1))",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [
+     "Is the camera able to capture personal data and does the drone comply with Directive 2009/48/EC (toy safety)?"
+    ],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "EU",
+    "retrieval_ms": 39,
+    "generation_ms": 6786,
+    "prompt_tokens": 4643,
+    "output_tokens": 637
+   },
+   "answer": {
+    "refused": false,
+    "text": "The answer depends on:\n- Is the camera able to capture personal data and does the drone comply with Directive 2009/48/EC (toy safety)? (Captures personal data / Not a toy / Complies with toy safety directive / Does not capture personal data)\n\nRegistration\n- Equipped with a sensor capturing personal data and not a toy — REGISTER: UAS operators must register themselves when operating within the 'open' category an unmanned aircraft that is equipped with a sensor able to capture personal data, unless it complies with Directive 2009/48/EC. [1][3][6]\n- Complies with toy safety directive or does not capture personal data — NOT REQUIRED: Because the drone weighs less than 250 g and can transfer less than 80 Joules of kinetic energy, operator registration is not required based on mass. If it does not capture personal data or complies with Directive 2009/48/EC, registration is not required. [1][3][6]\n\nNot in the sources:\n- The passages do not state the exact technical specifications of your camera or whether it qualifies as capturing personal data under EU rules.\n- The passages do not explicitly state whether your specific 200 g model complies with Directive 2009/48/EC (toy safety).",
+    "structured": {
+     "answerable": true,
+     "depends_on": [
+      {
+       "question": "Is the camera able to capture personal data and does the drone comply with Directive 2009/48/EC (toy safety)?",
+       "options": [
+        {
+         "label": "Captures personal data / Not a toy",
+         "fact": "The drone is equipped with a sensor able to capture personal data and does not comply with Directive 2009/48/EC."
+        },
+        {
+         "label": "Complies with toy safety directive",
+         "fact": "The drone is equipped with a sensor able to capture personal data, but it complies with Directive 2009/48/EC."
+        },
+        {
+         "label": "Does not capture personal data",
+         "fact": "The drone's camera or sensor is not able to capture personal data."
+        }
+       ]
+      }
+     ],
+     "sections": [
+      {
+       "topic": "Registration",
+       "text": null,
+       "cases": [
+        {
+         "condition": "Equipped with a sensor capturing personal data and not a toy",
+         "verdict": "REGISTER",
+         "text": "UAS operators must register themselves when operating within the 'open' category an unmanned aircraft that is equipped with a sensor able to capture personal data, unless it complies with Directive 2009/48/EC.",
+         "citations": [
+          1,
+          3,
+          6
+         ]
+        },
+        {
+         "condition": "Complies with toy safety directive or does not capture personal data",
+         "verdict": "NOT REQUIRED",
+         "text": "Because the drone weighs less than 250 g and can transfer less than 80 Joules of kinetic energy, operator registration is not required based on mass. If it does not capture personal data or complies with Directive 2009/48/EC, registration is not required.",
+         "citations": [
+          1,
+          3,
+          6
+         ]
+        }
+       ],
+       "citations": [
+        1,
+        3,
+        6
+       ]
+      }
+     ],
+     "not_in_sources": [
+      "The passages do not state the exact technical specifications of your camera or whether it qualifies as capturing personal data under EU rules.",
+      "The passages do not explicitly state whether your specific 200 g model complies with Directive 2009/48/EC (toy safety)."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "Where should I register as a UAS operator?",
+      "Do I need to display my registration number on the drone?",
+      "What are the other operational rules for the 'open' category?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "Article 14 (2019/947)",
+      "page": 399
+     },
+     {
+      "n": 3,
+      "section_ref": "Recitals (2019/947)",
+      "page": 20
+     },
+     {
+      "n": 6,
+      "section_ref": "Article 14 (2019/947)",
+      "page": 399
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "UAS operators must register themselves when operating within the 'open' category an unmanned aircraft that is equipped with a sensor able to capture personal data, unless it complies with Directive 2009/48/EC."
+     },
+     {
+      "id": "s1",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "s2",
+      "status": "absent",
+      "quote": ""
+     }
+    ],
+    "depends_on": [
+     {
+      "number": 1,
+      "already_given": false,
+      "question_quote": ""
+     }
+    ],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "en-03",
+   "lang": "en",
+   "question": "How far from uninvolved people must I stay with a C2 drone in subcategory A2?",
+   "detection": {
+    "detected_mode": "EU",
+    "mode": "EU",
+    "mode_source": "detected",
+    "accepted": [
+     "EU"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "C2",
+     "A2"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "AMC1 UAS.OPEN.030(1)",
+     "UAS.OPEN.030",
+     "GM1 UAS.OPEN.030(1)",
+     "AMC1 UAS.OPEN.030(2)(c)",
+     "GM1 UAS.OPEN.030(1) and UAS.OPEN.040(1)",
+     "AMC2 UAS.OPEN.030(2)(b)",
+     "AMC1 UAS.OPEN.020(1) and (2)",
+     "AMC1 UAS.OPEN.040(1)"
+    ],
+    "count": 8,
+    "ranks": {
+     "UAS.OPEN.030": 2,
+     "AMC1 UAS.OPEN.030(1)": 1,
+     "Part 3 (2019/945 Annex)": null
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "UAS.OPEN.030": [
+      "section 'Safe Distance'",
+      "section 'Low-Speed Mode'"
+     ],
+     "AMC1 UAS.OPEN.030(1)": [
+      "section 'Low-Speed Mode'"
+     ],
+     "Part 3 (2019/945 Annex)": []
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "at least 30 m horizontally",
+     "status": "present",
+     "quote": "maintain a safe horizontal distance of at least 30 metres from them.",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "down to 5 m with an active low-speed mode after assessing weather, UA performance and segregation of the area",
+     "status": "present",
+     "quote": "You may reduce the horizontal safety distance down to a minimum of 5 metres from an uninvolved person only when operating with an active low-speed mode function and after evaluating the weather conditions, the performance of the unmanned aircraft, and the segregation of the overflown area.",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "AMC recommends the 1:1 rule (guidance, not binding)",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "s2",
+     "kind": "should",
+     "text": "C2 low-speed mode limits ground speed to max 3 m/s",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "EU",
+    "retrieval_ms": 25,
+    "generation_ms": 6570,
+    "prompt_tokens": 3923,
+    "output_tokens": 259
+   },
+   "answer": {
+    "refused": false,
+    "text": "Safe Distance\nWhen operating in subcategory A2 with a C2 drone, you must not overfly uninvolved persons and must maintain a safe horizontal distance of at least 30 metres from them. [2]\n\nLow-Speed Mode\nYou may reduce the horizontal safety distance down to a minimum of 5 metres from an uninvolved person only when operating with an active low-speed mode function and after evaluating the weather conditions, the performance of the unmanned aircraft, and the segregation of the overflown area. [1][2]",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [
+      {
+       "topic": "Safe Distance",
+       "text": "When operating in subcategory A2 with a C2 drone, you must not overfly uninvolved persons and must maintain a safe horizontal distance of at least 30 metres from them.",
+       "cases": [],
+       "citations": [
+        2
+       ]
+      },
+      {
+       "topic": "Low-Speed Mode",
+       "text": "You may reduce the horizontal safety distance down to a minimum of 5 metres from an uninvolved person only when operating with an active low-speed mode function and after evaluating the weather conditions, the performance of the unmanned aircraft, and the segregation of the overflown area.",
+       "cases": [],
+       "citations": [
+        1,
+        2
+       ]
+      }
+     ],
+     "not_in_sources": [],
+     "compare": null,
+     "follow_ups": [
+      "What training do I need to fly in subcategory A2?",
+      "What is the 1:1 rule for safe distance?",
+      "What are the requirements for the low-speed mode function?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "AMC1 UAS.OPEN.030(1)",
+      "page": 430
+     },
+     {
+      "n": 2,
+      "section_ref": "UAS.OPEN.030",
+      "page": 430
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "maintain a safe horizontal distance of at least 30 metres from them."
+     },
+     {
+      "id": "m2",
+      "status": "present",
+      "quote": "You may reduce the horizontal safety distance down to a minimum of 5 metres from an uninvolved person only when operating with an active low-speed mode function and after evaluating the weather conditions, the performance of the unmanned aircraft, and the segregation of the overflown area."
+     },
+     {
+      "id": "s1",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "s2",
+      "status": "absent",
+      "quote": ""
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "en-04",
+   "lang": "en",
+   "question": "In subcategory A3, how far from residential areas do I need to fly?",
+   "detection": {
+    "detected_mode": "EU",
+    "mode": "EU",
+    "mode_source": "detected",
+    "accepted": [
+     "EU"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "A3"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "GM1 UAS.OPEN.030(1) and UAS.OPEN.040(1)",
+     "UAS.OPEN.040",
+     "GM1 UAS.OPEN.040(4)",
+     "AMC1 UAS.OPEN.040(1)",
+     "UAS.OPEN.030",
+     "AMC1 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)",
+     "AMC1 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)",
+     "AMC1 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)"
+    ],
+    "count": 8,
+    "ranks": {
+     "UAS.OPEN.040": 2
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "UAS.OPEN.040": [
+      "section 'Horizontal Distance'"
+     ]
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "at least 150 m horizontally from residential, commercial, industrial or recreational areas",
+     "status": "unverified",
+     "quote": "at least 150 m of residential, commercial, industrial or recreational areas",
+     "note": "judge said present; quote not found"
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "EU",
+    "retrieval_ms": 25,
+    "generation_ms": 5585,
+    "prompt_tokens": 4530,
+    "output_tokens": 152
+   },
+   "answer": {
+    "refused": false,
+    "text": "Horizontal Distance\nUAS operations in subcategory A3 must be conducted at a safe horizontal distance of at least 150 m from residential, commercial, industrial or recreational areas. [1][2]",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [
+      {
+       "topic": "Horizontal Distance",
+       "text": "UAS operations in subcategory A3 must be conducted at a safe horizontal distance of at least 150 m from residential, commercial, industrial or recreational areas.",
+       "cases": [],
+       "citations": [
+        1,
+        2
+       ]
+      }
+     ],
+     "not_in_sources": [],
+     "compare": null,
+     "follow_ups": [
+      "What are the requirements for uninvolved people in subcategory A3?",
+      "Which classes of drones can be used in subcategory A3?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "GM1 UAS.OPEN.030(1) and UAS.OPEN.040(1)",
+      "page": 439
+     },
+     {
+      "n": 2,
+      "section_ref": "UAS.OPEN.040",
+      "page": 438
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "at least 150 m of residential, commercial, industrial or recreational areas"
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "en-05",
+   "lang": "en",
+   "question": "How many questions does the online theory exam for A1/A3 have, and what is the pass mark?",
+   "detection": {
+    "detected_mode": "EU",
+    "mode": "EU",
+    "mode_source": "detected",
+    "accepted": [
+     "EU"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "A1/A3"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "UAS.OPEN.020",
+     "STS-01 Attachment A",
+     "UAS.OPEN.030",
+     "UAS.OPEN.070",
+     "UAS.OPEN.040",
+     "AMC2 UAS.OPEN.030(2)(c)",
+     "AMC2 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)",
+     "UAS.STS-01.020"
+    ],
+    "count": 8,
+    "ranks": {
+     "UAS.OPEN.020": 1
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "UAS.OPEN.020": [
+      "section 'Exam Questions'",
+      "section 'Pass Mark'"
+     ]
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "40 multiple-choice questions",
+     "status": "present",
+     "quote": "comprises 40 multiple-choice questions",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "at least 75%",
+     "status": "present",
+     "quote": "at least 75% of the overall marks",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "EU",
+    "retrieval_ms": 17,
+    "generation_ms": 5764,
+    "prompt_tokens": 4425,
+    "output_tokens": 236
+   },
+   "answer": {
+    "refused": false,
+    "text": "Exam Questions\nThe online theoretical knowledge examination comprises 40 multiple-choice questions distributed appropriately across subjects such as air safety, airspace restrictions, aviation regulation, human performance limitations, operational procedures, UAS general knowledge, privacy and data protection, insurance, and security. [1]\n\nPass Mark\nTo successfully pass the online theoretical knowledge examination, the remote pilot must achieve at least 75% of the overall marks. [1]",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [
+      {
+       "topic": "Exam Questions",
+       "text": "The online theoretical knowledge examination comprises 40 multiple-choice questions distributed appropriately across subjects such as air safety, airspace restrictions, aviation regulation, human performance limitations, operational procedures, UAS general knowledge, privacy and data protection, insurance, and security.",
+       "cases": [],
+       "citations": [
+        1
+       ]
+      },
+      {
+       "topic": "Pass Mark",
+       "text": "To successfully pass the online theoretical knowledge examination, the remote pilot must achieve at least 75% of the overall marks.",
+       "cases": [],
+       "citations": [
+        1
+       ]
+      }
+     ],
+     "not_in_sources": [],
+     "compare": null,
+     "follow_ups": [
+      "What subjects are covered in the A1/A3 online theory exam?",
+      "How long is the online theoretical competency valid for?",
+      "What are the requirements to revalidate the remote pilot online theoretical competency?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "UAS.OPEN.020",
+      "page": 422
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "comprises 40 multiple-choice questions"
+     },
+     {
+      "id": "m2",
+      "status": "present",
+      "quote": "at least 75% of the overall marks"
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": null
+   }
+  },
+  {
+   "id": "en-06",
+   "lang": "en",
+   "question": "How long is the A2 certificate of remote pilot competency valid?",
+   "detection": {
+    "detected_mode": "EU",
+    "mode": "EU",
+    "mode_source": "detected",
+    "accepted": [
+     "EU"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "A2"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "UAS.OPEN.070",
+     "AMC2 UAS.OPEN.030(2)(c)",
+     "AMC1 UAS.OPEN.030(2)",
+     "UAS.OPEN.030",
+     "GM1 UAS.OPEN.030(2)(c)",
+     "Article 21 (2019/947)",
+     "UAS.OPEN.060",
+     "AMC1 Article 18(e)"
+    ],
+    "count": 8,
+    "ranks": {
+     "UAS.OPEN.070": 1
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "UAS.OPEN.070": [
+      "section 'Certificate Validity'",
+      "section 'Revalidation'"
+     ]
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "5 years",
+     "status": "present",
+     "quote": "valid for five years.",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "EU",
+    "retrieval_ms": 29,
+    "generation_ms": 5806,
+    "prompt_tokens": 4326,
+    "output_tokens": 187
+   },
+   "answer": {
+    "refused": false,
+    "text": "Certificate Validity\nThe certificate of remote pilot competency in subcategory A2 is valid for five years. [1]\n\nRevalidation\nWithin its validity period, the certificate can be revalidated by demonstrating competencies or by completing a refresher training provided by the competent authority or a designated entity. Upon expiration, it must be revalidated by demonstrating competencies. [1]",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [
+      {
+       "topic": "Certificate Validity",
+       "text": "The certificate of remote pilot competency in subcategory A2 is valid for five years.",
+       "cases": [],
+       "citations": [
+        1
+       ]
+      },
+      {
+       "topic": "Revalidation",
+       "text": "Within its validity period, the certificate can be revalidated by demonstrating competencies or by completing a refresher training provided by the competent authority or a designated entity. Upon expiration, it must be revalidated by demonstrating competencies.",
+       "cases": [],
+       "citations": [
+        1
+       ]
+      }
+     ],
+     "not_in_sources": [],
+     "compare": null,
+     "follow_ups": [
+      "How can I revalidate my A2 certificate?",
+      "What are the requirements to obtain an A2 certificate of remote pilot competency?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "UAS.OPEN.070",
+      "page": 445
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "valid for five years."
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": null
+   }
+  },
+  {
+   "id": "en-07",
+   "lang": "en",
+   "question": "What are the main requirements for a class C0 drone?",
+   "detection": {
+    "detected_mode": "EU",
+    "mode": "EU",
+    "mode_source": "detected",
+    "accepted": [
+     "EU"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "C0"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Part 1 (2019/945 Annex)",
+     "Part 2 (2019/945 Annex)",
+     "Part 3 (2019/945 Annex)",
+     "Part 17 (2019/945 Annex)",
+     "Part 5 (2019/945 Annex)",
+     "Part 4 (2019/945 Annex)",
+     "Part 16 (2019/945 Annex)",
+     "Part 2 (2019/945 Annex)",
+     "Part 3 (2019/945 Annex)",
+     "Part 2 (2019/945 Annex)",
+     "Part 3 (2019/945 Annex)",
+     "Part 4 (2019/945 Annex)",
+     "Part 4 (2019/945 Annex)",
+     "Part 2 (2019/945 Annex)"
+    ],
+    "count": 14,
+    "ranks": {
+     "Part 1 (2019/945 Annex)": 1
+    },
+    "list_question": true,
+    "top_k": 14
+   },
+   "citations": {
+    "places": {
+     "Part 1 (2019/945 Annex)": [
+      "section 'Mass and Speed'",
+      "section 'Flight Limitations'",
+      "section 'Control and Safety'",
+      "section 'Follow-me Mode'",
+      "section 'Manufacturer Instructions'",
+      "section 'Information Notice'"
+     ]
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "MTOM less than 250 g including payload",
+     "status": "present",
+     "quote": "A class C0 UAS must have a maximum take-off mass (MTOM) of less than 250 g, including payload",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "maximum level-flight speed 19 m/s",
+     "status": "present",
+     "quote": "maximum speed in level flight of 19 m/s.",
+     "note": ""
+    },
+    {
+     "id": "m3",
+     "kind": "must",
+     "text": "maximum height above take-off point limited to 120 m",
+     "status": "present",
+     "quote": "maximum attainable height above the take-off point limited to 120 m.",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "exclusively electric",
+     "status": "present",
+     "quote": "exclusively powered by electricity.",
+     "note": ""
+    },
+    {
+     "id": "s2",
+     "kind": "should",
+     "text": "follow-me mode within 50 m",
+     "status": "present",
+     "quote": "the UA must remain within a range not exceeding 50 m from the remote pilot when the function is on",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "EU",
+    "retrieval_ms": 26,
+    "generation_ms": 6747,
+    "prompt_tokens": 9207,
+    "output_tokens": 540
+   },
+   "answer": {
+    "refused": false,
+    "text": "Mass and Speed\nA class C0 UAS must have a maximum take-off mass (MTOM) of less than 250 g, including payload, and a maximum speed in level flight of 19 m/s. [1]\n\nFlight Limitations\nA class C0 UAS must have a maximum attainable height above the take-off point limited to 120 m. [1]\n\nControl and Safety\nThe aircraft must be safely controllable under all anticipated operating conditions and be exclusively powered by electricity. It must be designed to minimise injury to people, avoiding sharp edges and limiting propeller blade injuries, though these design and power points do not apply to UAS that are toys under Directive 2009/48/EC. [1]\n\nFollow-me Mode\nIf equipped with a follow-me mode, the UA must remain within a range not exceeding 50 m from the remote pilot when the function is on, and allow the remote pilot to regain control. [1]\n\nManufacturer Instructions\nThe UAS must be placed on the market with manufacturer's instructions covering characteristics, operational instructions, limitations, and a risk description adapted for the user's age. [1]\n\nInformation Notice\nThe UAS must include an information notice published by EASA providing applicable limitations and obligations. [1]\n\nNot in the sources:\n- Pilot competency or training requirements under Implementing Regulation (EU) 2019/947 are not detailed in the passages.\n- Registration requirements for the operator are not specified in the passages.",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [
+      {
+       "topic": "Mass and Speed",
+       "text": "A class C0 UAS must have a maximum take-off mass (MTOM) of less than 250 g, including payload, and a maximum speed in level flight of 19 m/s.",
+       "cases": [],
+       "citations": [
+        1
+       ]
+      },
+      {
+       "topic": "Flight Limitations",
+       "text": "A class C0 UAS must have a maximum attainable height above the take-off point limited to 120 m.",
+       "cases": [],
+       "citations": [
+        1
+       ]
+      },
+      {
+       "topic": "Control and Safety",
+       "text": "The aircraft must be safely controllable under all anticipated operating conditions and be exclusively powered by electricity. It must be designed to minimise injury to people, avoiding sharp edges and limiting propeller blade injuries, though these design and power points do not apply to UAS that are toys under Directive 2009/48/EC.",
+       "cases": [],
+       "citations": [
+        1
+       ]
+      },
+      {
+       "topic": "Follow-me Mode",
+       "text": "If equipped with a follow-me mode, the UA must remain within a range not exceeding 50 m from the remote pilot when the function is on, and allow the remote pilot to regain control.",
+       "cases": [],
+       "citations": [
+        1
+       ]
+      },
+      {
+       "topic": "Manufacturer Instructions",
+       "text": "The UAS must be placed on the market with manufacturer's instructions covering characteristics, operational instructions, limitations, and a risk description adapted for the user's age.",
+       "cases": [],
+       "citations": [
+        1
+       ]
+      },
+      {
+       "topic": "Information Notice",
+       "text": "The UAS must include an information notice published by EASA providing applicable limitations and obligations.",
+       "cases": [],
+       "citations": [
+        1
+       ]
+      }
+     ],
+     "not_in_sources": [
+      "Pilot competency or training requirements under Implementing Regulation (EU) 2019/947 are not detailed in the passages.",
+      "Registration requirements for the operator are not specified in the passages."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "What are the requirements for a class C1 drone?",
+      "What are the rules for a class C2 drone?",
+      "What are the requirements for a class C3 drone?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "Part 1 (2019/945 Annex)",
+      "page": 590
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "A class C0 UAS must have a maximum take-off mass (MTOM) of less than 250 g, including payload"
+     },
+     {
+      "id": "m2",
+      "status": "present",
+      "quote": "maximum speed in level flight of 19 m/s."
+     },
+     {
+      "id": "m3",
+      "status": "present",
+      "quote": "maximum attainable height above the take-off point limited to 120 m."
+     },
+     {
+      "id": "s1",
+      "status": "present",
+      "quote": "exclusively powered by electricity."
+     },
+     {
+      "id": "s2",
+      "status": "present",
+      "quote": "the UA must remain within a range not exceeding 50 m from the remote pilot when the function is on"
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": null
+   }
+  },
+  {
+   "id": "en-08",
+   "lang": "en",
+   "question": "Can I fly at night in the open category, and is there any extra requirement?",
+   "detection": {
+    "detected_mode": "EU",
+    "mode": "EU",
+    "mode_source": "detected",
+    "accepted": [
+     "EU"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "open category"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Article 4 (2019/947)",
+     "Article 20 (2019/947)",
+     "Article 3 (2019/947)",
+     "GM1 Article 3",
+     "UAS.LUC.010",
+     "UAS.OPEN.060",
+     "Article 40 (2019/945)",
+     "UAS.OPEN.010"
+    ],
+    "count": 8,
+    "ranks": {
+     "UAS.OPEN.060": 6
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "UAS.OPEN.060": [
+      "section 'Night Flight'"
+     ]
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "yes; a green flashing light on the drone must be activated",
+     "status": "present",
+     "quote": "You are allowed to fly at night in the open category, provided that you ensure a green flashing light on the unmanned aircraft is activated during the flight.",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "EU",
+    "retrieval_ms": 31,
+    "generation_ms": 5636,
+    "prompt_tokens": 4048,
+    "output_tokens": 171
+   },
+   "answer": {
+    "refused": false,
+    "text": "Night Flight\nYou are allowed to fly at night in the open category, provided that you ensure a green flashing light on the unmanned aircraft is activated during the flight. [6]\n\nNot in the sources:\n- Specific local geographical night-flying restrictions or permissions required by member states.",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [
+      {
+       "topic": "Night Flight",
+       "text": "You are allowed to fly at night in the open category, provided that you ensure a green flashing light on the unmanned aircraft is activated during the flight.",
+       "cases": [],
+       "citations": [
+        6
+       ]
+      }
+     ],
+     "not_in_sources": [
+      "Specific local geographical night-flying restrictions or permissions required by member states."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "What are the general operational distance limits in the open category?",
+      "What are the responsibilities of the remote pilot before starting a flight?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 6,
+      "section_ref": "UAS.OPEN.060",
+      "page": 441
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "You are allowed to fly at night in the open category, provided that you ensure a green flashing light on the unmanned aircraft is activated during the flight."
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "en-09",
+   "lang": "en",
+   "question": "When do I need an operational authorisation instead of flying in the open category?",
+   "detection": {
+    "detected_mode": "EU",
+    "mode": "EU",
+    "mode_source": "detected",
+    "accepted": [
+     "EU"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "open category"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Article 12 (2019/947)",
+     "Article 3 (2019/947)",
+     "Article 4 (2019/947)",
+     "GM2 UAS.SPEC.030(2)",
+     "GM1 Article 3",
+     "Article 5 (2019/947)",
+     "UAS.SPEC.030",
+     "AMC1 Article 12(2)(a)"
+    ],
+    "count": 8,
+    "ranks": {
+     "Article 5 (2019/947)": 6,
+     "Article 12 (2019/947)": 1,
+     "UAS.SPEC.020": null
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "Article 5 (2019/947)": [
+      "section 'Categories'",
+      "section 'Specific Category Triggers'"
+     ],
+     "Article 12 (2019/947)": [],
+     "UAS.SPEC.020": []
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "when any Article 4 / Part A requirement is not met (specific category)",
+     "status": "present",
+     "quote": "Operations require an operational authorisation in the 'specific' category when one of the requirements for the 'open' category is not met.",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "authorisation from the competent authority of the state of registration, with a risk assessment",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "alternative: declaration for a standard scenario",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "s2",
+     "kind": "should",
+     "text": "not needed with an LUC or a model club authorisation",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "EU",
+    "retrieval_ms": 35,
+    "generation_ms": 6528,
+    "prompt_tokens": 4138,
+    "output_tokens": 461
+   },
+   "answer": {
+    "refused": false,
+    "text": "Categories\nUAS operations are classified into three categories: 'open', 'specific', or 'certified'. Operations belong to the 'open' category only when specific criteria are met, and they do not require any prior operational authorisation or operational declaration. Operations require an operational authorisation in the 'specific' category when one of the requirements for the 'open' category is not met. [2][3][6]\n\nOpen Category Requirements\nTo stay in the 'open' category, the UAS must belong to a recognised class, be privately built, or meet Article 20 conditions; have a maximum take-off mass of less than 25 kg; be kept at a safe distance from people without flying over assemblies; remain in VLOS at all times (except for follow-up mode or with an observer); stay within 120 metres from the earth's surface (except over obstacles); and not carry dangerous goods or drop any material. [3]\n\nSpecific Category Triggers\nYou need an operational authorisation when at least one of the general criteria for the 'open' category is not met (such as operating beyond visual line of sight or exceeding mass limits for a subcategory close to people). [5][6]\n\nNot in the sources:\n- Specific details on all Member State geographical zones or national insurance mandates.",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [
+      {
+       "topic": "Categories",
+       "text": "UAS operations are classified into three categories: 'open', 'specific', or 'certified'. Operations belong to the 'open' category only when specific criteria are met, and they do not require any prior operational authorisation or operational declaration. Operations require an operational authorisation in the 'specific' category when one of the requirements for the 'open' category is not met.",
+       "cases": [],
+       "citations": [
+        2,
+        3,
+        6
+       ]
+      },
+      {
+       "topic": "Open Category Requirements",
+       "text": "To stay in the 'open' category, the UAS must belong to a recognised class, be privately built, or meet Article 20 conditions; have a maximum take-off mass of less than 25 kg; be kept at a safe distance from people without flying over assemblies; remain in VLOS at all times (except for follow-up mode or with an observer); stay within 120 metres from the earth's surface (except over obstacles); and not carry dangerous goods or drop any material.",
+       "cases": [],
+       "citations": [
+        3
+       ]
+      },
+      {
+       "topic": "Specific Category Triggers",
+       "text": "You need an operational authorisation when at least one of the general criteria for the 'open' category is not met (such as operating beyond visual line of sight or exceeding mass limits for a subcategory close to people).",
+       "cases": [],
+       "citations": [
+        5,
+        6
+       ]
+      }
+     ],
+     "not_in_sources": [
+      "Specific details on all Member State geographical zones or national insurance mandates."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "What are the steps to apply for an operational authorisation in the specific category?",
+      "When can I operate in the specific category using a declaration instead of an authorisation?",
+      "What conditions place a drone operation into the certified category?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 2,
+      "section_ref": "Article 3 (2019/947)",
+      "page": 31
+     },
+     {
+      "n": 3,
+      "section_ref": "Article 4 (2019/947)",
+      "page": 32
+     },
+     {
+      "n": 5,
+      "section_ref": "GM1 Article 3",
+      "page": 31
+     },
+     {
+      "n": 6,
+      "section_ref": "Article 5 (2019/947)",
+      "page": 32
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "Operations require an operational authorisation in the 'specific' category when one of the requirements for the 'open' category is not met."
+     },
+     {
+      "id": "m2",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "s1",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "s2",
+      "status": "absent",
+      "quote": ""
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "en-10",
+   "lang": "en",
+   "question": "What risk assessment do I have to submit with an application for an operational authorisation?",
+   "detection": {
+    "detected_mode": null,
+    "mode": "EU",
+    "mode_source": "default",
+    "accepted": [
+     "EU",
+     "none"
+    ],
+    "ok": true,
+    "matched_terms": []
+   },
+   "retrieval": {
+    "passages": [
+     "UAS.SPEC.030",
+     "GM1 AMC1 Article 11",
+     "Article 11 (2019/947)",
+     "GM1 AMC1 Article 11",
+     "AMC1 Article 11 Annex A",
+     "AMC1bis Article 11",
+     "UAS.SPEC.010",
+     "AMC2 Article 11"
+    ],
+    "count": 8,
+    "ranks": {
+     "Article 5 (2019/947)": null,
+     "Article 11 (2019/947)": 3,
+     "Madde 9": null
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "Article 5 (2019/947)": [],
+     "Article 11 (2019/947)": [
+      "section 'Operational Risk Assessment'"
+     ],
+     "Madde 9": []
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "a risk assessment according to Article 11, with adequate mitigating measures",
+     "status": "present",
+     "quote": "The application for an operational authorisation must be based on the operational risk assessment referred to in Article 11, which describes the characteristics of the operation, proposes safety objectives, identifies ground and air risks, and determines mitigating measures and their required level of robustness.",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "the AMC method is SORA",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "s2",
+     "kind": "should",
+     "text": "if answered for both: Turkey has no separate per-flight risk assessment method; risk is embedded in the pilot licence level (Madde 9(1))",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [
+     "What type of operation or risk assessment methodology applies to your flight?"
+    ],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "EU",
+    "retrieval_ms": 36,
+    "generation_ms": 6454,
+    "prompt_tokens": 4934,
+    "output_tokens": 535
+   },
+   "answer": {
+    "refused": false,
+    "text": "The answer depends on:\n- What type of operation or risk assessment methodology applies to your flight? (Standard scenario (STS) / Standard SORA / Risk assessment)\n\nOperational Risk Assessment\nThe application for an operational authorisation must be based on the operational risk assessment referred to in Article 11, which describes the characteristics of the operation, proposes safety objectives, identifies ground and air risks, and determines mitigating measures and their required level of robustness. [1][3]\n\nAlternatives to Full Assessment\n- Operations with lower intrinsic risks complying with Standard Scenarios (STSs) — DECLARATION: A declaration may be submitted instead of a full risk assessment when operations comply with the standard scenarios listed in Appendix 1 to the UAS Regulation. [2]\n- Other operations meeting Predefined Risk Assessments (PDRAs) — PDRA REQUEST: A request for authorisation may be submitted based on the mitigations and provisions described in a predefined risk assessment (PDRA) when the operation meets the operational characterisation described in AMC2 et seq. Article 11. [2]\n\nNot in the sources:\n- Specific fees or costs associated with submitting the risk assessment or operational authorisation application are not specified in the sources.",
+    "structured": {
+     "answerable": true,
+     "depends_on": [
+      {
+       "question": "What type of operation or risk assessment methodology applies to your flight?",
+       "options": [
+        {
+         "label": "Standard scenario (STS)",
+         "fact": "The operation complies with a standard scenario listed in Appendix 1"
+        },
+        {
+         "label": "Standard SORA / Risk assessment",
+         "fact": "The operation requires a full operational risk assessment based on SORA or Article 11"
+        }
+       ]
+      }
+     ],
+     "sections": [
+      {
+       "topic": "Operational Risk Assessment",
+       "text": "The application for an operational authorisation must be based on the operational risk assessment referred to in Article 11, which describes the characteristics of the operation, proposes safety objectives, identifies ground and air risks, and determines mitigating measures and their required level of robustness.",
+       "cases": [],
+       "citations": [
+        1,
+        3
+       ]
+      },
+      {
+       "topic": "Alternatives to Full Assessment",
+       "text": null,
+       "cases": [
+        {
+         "condition": "Operations with lower intrinsic risks complying with Standard Scenarios (STSs)",
+         "verdict": "DECLARATION",
+         "text": "A declaration may be submitted instead of a full risk assessment when operations comply with the standard scenarios listed in Appendix 1 to the UAS Regulation.",
+         "citations": [
+          2
+         ]
+        },
+        {
+         "condition": "Other operations meeting Predefined Risk Assessments (PDRAs)",
+         "verdict": "PDRA REQUEST",
+         "text": "A request for authorisation may be submitted based on the mitigations and provisions described in a predefined risk assessment (PDRA) when the operation meets the operational characterisation described in AMC2 et seq. Article 11.",
+         "citations": [
+          2
+         ]
+        }
+       ],
+       "citations": [
+        2
+       ]
+      }
+     ],
+     "not_in_sources": [
+      "Specific fees or costs associated with submitting the risk assessment or operational authorisation application are not specified in the sources."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "What information must be included in the application for an operational authorisation?",
+      "What is the difference between a generic PDRA and an STS-derived PDRA?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "UAS.SPEC.030",
+      "page": 448
+     },
+     {
+      "n": 2,
+      "section_ref": "GM1 AMC1 Article 11",
+      "page": 40
+     },
+     {
+      "n": 3,
+      "section_ref": "Article 11 (2019/947)",
+      "page": 37
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "The application for an operational authorisation must be based on the operational risk assessment referred to in Article 11, which describes the characteristics of the operation, proposes safety objectives, identifies ground and air risks, and determines mitigating measures and their required level of robustness."
+     },
+     {
+      "id": "s1",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "s2",
+      "status": "absent",
+      "quote": ""
+     }
+    ],
+    "depends_on": [
+     {
+      "number": 1,
+      "already_given": false,
+      "question_quote": ""
+     }
+    ],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "x-01",
+   "lang": "tr",
+   "question": "Avrupa'da A1 alt kategorisinde insanların üzerinden uçabilir miyim?",
+   "detection": {
+    "detected_mode": "EU",
+    "mode": "EU",
+    "mode_source": "detected",
+    "accepted": [
+     "EU"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "Avrupa",
+     "A1"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "UAS.OPEN.020",
+     "AMC1 UAS.OPEN.020(1) and (2)",
+     "GM1 UAS.OPEN.030(1) and UAS.OPEN.040(1)",
+     "AMC1 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)",
+     "GM1 UAS.OPEN.040(4)",
+     "AMC1 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)",
+     "Article 20 (2019/947)",
+     "UAS.OPEN.010"
+    ],
+    "count": 8,
+    "ranks": {
+     "UAS.OPEN.020": 1
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "UAS.OPEN.020": [
+      "case 'İnsanların Üzerinden Uçuş / C0 sınıfı veya 250 g altı özel yapım İHA'",
+      "case 'İnsanların Üzerinden Uçuş / C1 sınıfı İHA'",
+      "section 'Topluluklar'"
+     ]
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "250 g altı / C0: ilgisiz kişilerin üzerinden uçulabilir ama kalabalıkların üzerinden asla",
+     "status": "present",
+     "quote": "C0 sınıfı veya azami kalkış kütlesi 250 gramdan küçük olan özel yapım İHA'lar ile uninvolved (olaya dahil olmayan) kişilerin üzerinden uçulabilir; ancak bu durumdan mümkün olduğunca kaçınılmalı ve kaçınılmaz olduğu durumlarda aşırı dikkatli olunmalıdır. [1][2]",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "C1: ilgisiz kişilerin üzerinden uçulmaması beklenir; beklenmedik durumda süre en aza indirilir",
+     "status": "present",
+     "quote": "Uçuş öncesinde alan değerlendirmesi yapılmalı ve olaya dahil olmayan kimselerin üzerinden uçulmayacağı makul bir şekilde öngörülmelidir; beklenmedik bir geçiş durumunda ise bu sürenin mümkün olduğunca azaltılması gerekmektedir.",
+     "note": "case içinde"
+    }
+   ],
+   "depends_on": {
+    "questions": [
+     "İHA'nın sınıfı veya yapısı nedir?"
+    ],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "EU",
+    "retrieval_ms": 13,
+    "generation_ms": 7278,
+    "prompt_tokens": 4156,
+    "output_tokens": 706
+   },
+   "answer": {
+    "refused": false,
+    "text": "Cevap şunlara bağlı:\n- İHA'nın sınıfı veya yapısı nedir? (C0 sınıfı veya 250 g altı özel yapım / C1 sınıfı)\n\nİnsanların Üzerinden Uçuş\n- C0 sınıfı veya 250 g altı özel yapım İHA — MÜMKÜN: C0 sınıfı veya azami kalkış kütlesi 250 gramdan küçük olan özel yapım İHA'lar ile uninvolved (olaya dahil olmayan) kişilerin üzerinden uçulabilir; ancak bu durumdan mümkün olduğunca kaçınılmalı ve kaçınılmaz olduğu durumlarda aşırı dikkatli olunmalıdır. [1][2]\n- C1 sınıfı İHA — SINIRLI: C1 sınıfı bir İHA ile olaya dahil olmayan kişilerin üzerinden geçilebilir, ancak kalabalık insan topluluklarının üzerinden kesinlikle uçulamaz. Uçuş öncesinde alan değerlendirmesi yapılmalı ve olaya dahil olmayan kimselerin üzerinden uçulmayacağı makul bir şekilde öngörülmelidir; beklenmedik bir geçiş durumunda ise bu sürenin mümkün olduğunca azaltılması gerekmektedir. [1][2]\n\nTopluluklar\nA1 alt kategorisinde gerçekleştirilen tüm operasyonlarda, İHA türü ne olursa olsun kalabalık insan topluluklarının üzerinden kesinlikle uçulamaz. [1][2]\n\nKaynaklarda olmayanlar:\n- İHA'ların ticari veya hobi amaçlı kullanımına dair detaylar metinlerde yer almamaktadır.\n- Kayıt ve sigorta ücretleri ile ilgili herhangi bir mali bilgi bulunmamaktadır.",
+    "structured": {
+     "answerable": true,
+     "depends_on": [
+      {
+       "question": "İHA'nın sınıfı veya yapısı nedir?",
+       "options": [
+        {
+         "label": "C0 sınıfı veya 250 g altı özel yapım",
+         "fact": "İHA C0 sınıfıdır veya 250 gramdan küçük azami kalkış kütlesine sahip özel yapım bir İHA'dır."
+        },
+        {
+         "label": "C1 sınıfı",
+         "fact": "İHA C1 sınıfı olarak etiketlenmiştir."
+        }
+       ]
+      }
+     ],
+     "sections": [
+      {
+       "topic": "İnsanların Üzerinden Uçuş",
+       "text": null,
+       "cases": [
+        {
+         "condition": "C0 sınıfı veya 250 g altı özel yapım İHA",
+         "verdict": "MÜMKÜN",
+         "text": "C0 sınıfı veya azami kalkış kütlesi 250 gramdan küçük olan özel yapım İHA'lar ile uninvolved (olaya dahil olmayan) kişilerin üzerinden uçulabilir; ancak bu durumdan mümkün olduğunca kaçınılmalı ve kaçınılmaz olduğu durumlarda aşırı dikkatli olunmalıdır.",
+         "citations": [
+          1,
+          2
+         ]
+        },
+        {
+         "condition": "C1 sınıfı İHA",
+         "verdict": "SINIRLI",
+         "text": "C1 sınıfı bir İHA ile olaya dahil olmayan kişilerin üzerinden geçilebilir, ancak kalabalık insan topluluklarının üzerinden kesinlikle uçulamaz. Uçuş öncesinde alan değerlendirmesi yapılmalı ve olaya dahil olmayan kimselerin üzerinden uçulmayacağı makul bir şekilde öngörülmelidir; beklenmedik bir geçiş durumunda ise bu sürenin mümkün olduğunca azaltılması gerekmektedir.",
+         "citations": [
+          1,
+          2
+         ]
+        }
+       ],
+       "citations": [
+        1,
+        2
+       ]
+      },
+      {
+       "topic": "Topluluklar",
+       "text": "A1 alt kategorisinde gerçekleştirilen tüm operasyonlarda, İHA türü ne olursa olsun kalabalık insan topluluklarının üzerinden kesinlikle uçulamaz.",
+       "cases": [],
+       "citations": [
+        1,
+        2
+       ]
+      }
+     ],
+     "not_in_sources": [
+      "İHA'ların ticari veya hobi amaçlı kullanımına dair detaylar metinlerde yer almamaktadır.",
+      "Kayıt ve sigorta ücretleri ile ilgili herhangi bir mali bilgi bulunmamaktadır."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "A1 alt kategorisinde uçuş yapmak için uzaktan pilotun hangi eğitimleri tamamlaması gerekir?",
+      "A1 alt kategorisinde azami uçuş yüksekliği sınırı nedir?",
+      "C1 sınıfı İHA'lar için doğrudan uzaktan kimlik belirleme sistemi zorunlu mu?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "UAS.OPEN.020",
+      "page": 422
+     },
+     {
+      "n": 2,
+      "section_ref": "AMC1 UAS.OPEN.020(1) and (2)",
+      "page": 423
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "C0 sınıfı veya azami kalkış kütlesi 250 gramdan küçük olan özel yapım İHA'lar ile uninvolved (olaya dahil olmayan) kişilerin üzerinden uçulabilir; ancak bu durumdan mümkün olduğunca kaçınılmalı ve kaçınılmaz olduğu durumlarda aşırı dikkatli olunmalıdır. [1][2]"
+     },
+     {
+      "id": "m2",
+      "status": "present",
+      "quote": "Uçuş öncesinde alan değerlendirmesi yapılmalı ve olaya dahil olmayan kimselerin üzerinden uçulmayacağı makul bir şekilde öngörülmelidir; beklenmedik bir geçiş durumunda ise bu sürenin mümkün olduğunca azaltılması gerekmektedir."
+     }
+    ],
+    "depends_on": [
+     {
+      "number": 1,
+      "already_given": false,
+      "question_quote": ""
+     }
+    ],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "x-02",
+   "lang": "en",
+   "question": "Under the Turkish rules, what licence do I need for BVLOS flights?",
+   "detection": {
+    "detected_mode": "TR",
+    "mode": "TR",
+    "mode_source": "detected",
+    "accepted": [
+     "TR"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "Turkish"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 4",
+     "Madde 6",
+     "Madde 15",
+     "Madde 4",
+     "Madde 12",
+     "Madde 14",
+     "Madde 4",
+     "Madde 21"
+    ],
+    "count": 8,
+    "ranks": {
+     "Madde 6": 2,
+     "Madde 15": 3
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "Madde 6": [
+      "section 'Pilot Licence'"
+     ],
+     "Madde 15": [
+      "section 'Pilot Licence'"
+     ]
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "P2",
+     "status": "present",
+     "quote": "a P2 license",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "TR",
+    "retrieval_ms": 19,
+    "generation_ms": 5647,
+    "prompt_tokens": 5624,
+    "output_tokens": 182
+   },
+   "answer": {
+    "refused": false,
+    "text": "Pilot Licence\nBVLOS (Görüş hattı dışı) operations are carried out within the scope of a P2 license, which is the most comprehensive license level covering high-risk operations. [2][3]\n\nNot in the sources:\n- The exact theoretical and practical training hours required to obtain a P2 license are not specified in the passages.",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [
+      {
+       "topic": "Pilot Licence",
+       "text": "BVLOS (Görüş hattı dışı) operations are carried out within the scope of a P2 license, which is the most comprehensive license level covering high-risk operations.",
+       "cases": [],
+       "citations": [
+        2,
+        3
+       ]
+      }
+     ],
+     "not_in_sources": [
+      "The exact theoretical and practical training hours required to obtain a P2 license are not specified in the passages."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "What are the operational requirements for P2 license holders?",
+      "Where can BVLOS flights be conducted under Turkish rules?",
+      "Are simple drones exempt from license requirements?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 2,
+      "section_ref": "Madde 6",
+      "page": 5
+     },
+     {
+      "n": 3,
+      "section_ref": "Madde 15",
+      "page": 10
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "a P2 license"
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "x-03",
+   "lang": "tr",
+   "question": "Türkiye'de ve AB'de drone pilotu için asgari yaş kaç?",
+   "detection": {
+    "detected_mode": "compare",
+    "mode": "compare",
+    "mode_source": "detected",
+    "accepted": [
+     "both"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "Türkiye",
+     "AB"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 17",
+     "Madde 15",
+     "Madde 15",
+     "Madde 6",
+     "Madde 29",
+     "Madde 23",
+     "Article 9 (2019/947)",
+     "GM1 UAS.SPEC.050(1)(a)(iv)",
+     "GM1 Article 2(11)",
+     "GM1 Article 9",
+     "Article 8 (2019/947)",
+     "AMC1 Article 11 Annex D"
+    ],
+    "count": 12,
+    "ranks": {
+     "Madde 17": 1,
+     "Article 9 (2019/947)": 7
+    },
+    "list_question": false,
+    "top_k": 12
+   },
+   "citations": {
+    "places": {
+     "Madde 17": [
+      "case 'Türkiye Yaş Sınırları / P0 lisansı gerektiren operasyonlar'",
+      "case 'Türkiye Yaş Sınırları / P1 lisansı gerektiren operasyonlar'",
+      "case 'Türkiye Yaş Sınırları / P2 lisansı gerektiren operasyonlar'",
+      "compare 'Asgari Yaş' TR"
+     ],
+     "Article 9 (2019/947)": [
+      "section 'AB Yaş Sınırları'",
+      "compare 'Asgari Yaş' EU"
+     ]
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "Türkiye: P0 için 10, P1 ve P2 için 18",
+     "status": "present",
+     "quote": "Türkiye: P0 operasyonları için en az 10 yaş, P1 ve P2 operasyonları için ise en az 18 yaş doldurulmuş olmalıdır.",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "AB: 16",
+     "status": "present",
+     "quote": "AB: Genel olarak en az 16 yaştır",
+     "note": ""
+    },
+    {
+     "id": "m3",
+     "kind": "must",
+     "text": "AB'de üye devlet açık kategoride en fazla 4 yıl, specific kategoride en fazla 2 yıl düşürebilir (yani yaşın kendisi değil indirim miktarı)",
+     "status": "present",
+     "quote": "AB üyesi ülkelerin risk temelli yaklaşım çerçevesinde açık kategoride yaşı 4 yıla kadar, özel kategoride ise 2 yıla kadar düşürebileceği belirtilmiş",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "AB istisnaları: C0 oyuncak ile A1, 250 g altı kendi yapımı, gözetim altında uçuş",
+     "status": "present",
+     "quote": "ancak C0 sınıfı oyuncak İHA'larda, 250 gramdan hafif özel yapım İHA'larda ve gözetim altında uçuşlarda asgari yaş aranmaz.",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "compare",
+    "retrieval_ms": 29,
+    "generation_ms": 7656,
+    "prompt_tokens": 6448,
+    "output_tokens": 836
+   },
+   "answer": {
+    "refused": false,
+    "text": "Temel farklar:\n- Türkiye'de yaş sınırı pilotun sahip olduğu lisans seviyesine (P0, P1, P2) göre 10 ile 18 yaş arasında değişmektedir.\n- AB düzenlemelerinde genel asgari yaş 16'dır ve bazı hafif veya oyuncak sınıfı cihazlarda yaş sınırı aranmazken, üye devletler yaşı belirli koşullarla düşürebilmektedir.\n\nAsgari Yaş\n- Türkiye: P0 operasyonları için en az 10 yaş, P1 ve P2 operasyonları için ise en az 18 yaş doldurulmuş olmalıdır. [1]\n- AB: Genel olarak en az 16 yaştır; ancak C0 sınıfı oyuncak İHA'larda, 250 gramdan hafif özel yapım İHA'larda ve gözetim altında uçuşlarda asgari yaş aranmaz. [7]\n\nTürkiye Yaş Sınırları\n- P0 lisansı gerektiren operasyonlar — 10 yaş: P0 lisansı gerektiren operasyonlar için İHA pilotu asgari on yaşını doldurmuş olmalıdır. [1]\n- P1 lisansı gerektiren operasyonlar — 18 yaş: P1 lisansı gerektiren operasyonlar için İHA pilotu asgari on sekiz yaşını doldurmuş olmalıdır. [1]\n- P2 lisansı gerektiren operasyonlar — 18 yaş: P2 lisansı gerektiren operasyonları yürütecek İHA pilotu asgari on sekiz yaşını doldurmuş olmalıdır. [1]\n\nAB Yaş Sınırları\nAçık ve özel kategorilerde İHA kullanan uzaktan pilotlar için asgari yaş 16'dır. Oyuncak niteliğindeki C0 sınıfı İHA'larda, kalkış kütlesi 250 gramdan az olan özel yapım İHA'larda veya 16 yaş şartını karşılayan bir pilotun doğrudan gözetimi altında uçuş yapılırken asgari yaş aranmaz. [7]\n\nKaynaklarda olmayanlar:\n- AB üyesi ülkelerin risk temelli yaklaşım çerçevesinde açık kategoride yaşı 4 yıla kadar, özel kategoride ise 2 yıla kadar düşürebileceği belirtilmiş ancak Türkiye için böyle bir yaş indirimi yetkisi kaynaklarda geçmemektedir.",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [
+      {
+       "topic": "Türkiye Yaş Sınırları",
+       "text": null,
+       "cases": [
+        {
+         "condition": "P0 lisansı gerektiren operasyonlar",
+         "verdict": "10 yaş",
+         "text": "P0 lisansı gerektiren operasyonlar için İHA pilotu asgari on yaşını doldurmuş olmalıdır.",
+         "citations": [
+          1
+         ]
+        },
+        {
+         "condition": "P1 lisansı gerektiren operasyonlar",
+         "verdict": "18 yaş",
+         "text": "P1 lisansı gerektiren operasyonlar için İHA pilotu asgari on sekiz yaşını doldurmuş olmalıdır.",
+         "citations": [
+          1
+         ]
+        },
+        {
+         "condition": "P2 lisansı gerektiren operasyonlar",
+         "verdict": "18 yaş",
+         "text": "P2 lisansı gerektiren operasyonları yürütecek İHA pilotu asgari on sekiz yaşını doldurmuş olmalıdır.",
+         "citations": [
+          1
+         ]
+        }
+       ],
+       "citations": [
+        1
+       ]
+      },
+      {
+       "topic": "AB Yaş Sınırları",
+       "text": "Açık ve özel kategorilerde İHA kullanan uzaktan pilotlar için asgari yaş 16'dır. Oyuncak niteliğindeki C0 sınıfı İHA'larda, kalkış kütlesi 250 gramdan az olan özel yapım İHA'larda veya 16 yaş şartını karşılayan bir pilotun doğrudan gözetimi altında uçuş yapılırken asgari yaş aranmaz.",
+       "cases": [],
+       "citations": [
+        7
+       ]
+      }
+     ],
+     "not_in_sources": [
+      "AB üyesi ülkelerin risk temelli yaklaşım çerçevesinde açık kategoride yaşı 4 yıla kadar, özel kategoride ise 2 yıla kadar düşürebileceği belirtilmiş ancak Türkiye için böyle bir yaş indirimi yetkisi kaynaklarda geçmemektedir."
+     ],
+     "compare": {
+      "key_differences": [
+       "Türkiye'de yaş sınırı pilotun sahip olduğu lisans seviyesine (P0, P1, P2) göre 10 ile 18 yaş arasında değişmektedir.",
+       "AB düzenlemelerinde genel asgari yaş 16'dır ve bazı hafif veya oyuncak sınıfı cihazlarda yaş sınırı aranmazken, üye devletler yaşı belirli koşullarla düşürebilmektedir."
+      ],
+      "rows": [
+       {
+        "topic": "Asgari Yaş",
+        "TR": {
+         "text": "P0 operasyonları için en az 10 yaş, P1 ve P2 operasyonları için ise en az 18 yaş doldurulmuş olmalıdır.",
+         "citations": [
+          1
+         ]
+        },
+        "EU": {
+         "text": "Genel olarak en az 16 yaştır; ancak C0 sınıfı oyuncak İHA'larda, 250 gramdan hafif özel yapım İHA'larda ve gözetim altında uçuşlarda asgari yaş aranmaz.",
+         "citations": [
+          7
+         ]
+        }
+       }
+      ]
+     },
+     "follow_ups": [
+      "Türkiye'de hangi İHA operasyonları için pilot lisansı aranmaz?",
+      "AB'de uzaktan pilot yaş sınırı hangi durumlarda aranmaz?",
+      "Türkiye'deki P0, P1 ve P2 lisanslarının kapsamı nedir?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "Madde 17",
+      "page": 12
+     },
+     {
+      "n": 7,
+      "section_ref": "Article 9 (2019/947)",
+      "page": 36
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "Türkiye: P0 operasyonları için en az 10 yaş, P1 ve P2 operasyonları için ise en az 18 yaş doldurulmuş olmalıdır."
+     },
+     {
+      "id": "m2",
+      "status": "present",
+      "quote": "AB: Genel olarak en az 16 yaştır"
+     },
+     {
+      "id": "m3",
+      "status": "present",
+      "quote": "AB üyesi ülkelerin risk temelli yaklaşım çerçevesinde açık kategoride yaşı 4 yıla kadar, özel kategoride ise 2 yıla kadar düşürebileceği belirtilmiş"
+     },
+     {
+      "id": "s1",
+      "status": "present",
+      "quote": "ancak C0 sınıfı oyuncak İHA'larda, 250 gramdan hafif özel yapım İHA'larda ve gözetim altında uçuşlarda asgari yaş aranmaz."
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "x-04",
+   "lang": "en",
+   "question": "Is remote identification mandatory for drones in Turkey?",
+   "detection": {
+    "detected_mode": "TR",
+    "mode": "TR",
+    "mode_source": "detected",
+    "accepted": [
+     "TR"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "Turkey"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 21",
+     "Madde 4",
+     "Madde 7",
+     "Madde 22",
+     "Madde 4",
+     "Madde 15",
+     "Madde 23",
+     "Madde 23"
+    ],
+    "count": 8,
+    "ranks": {
+     "Madde 23": 7
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "Madde 23": [
+      "case 'Remote Identification / For drones other than imported or domestically produced simple UAS (Basit İHA) that are subject to registration'",
+      "case 'Remote Identification / For simple UAS (Basit İHA)'"
+     ]
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "yes, for all drones subject to registration (i.e. except 'Basit İHA')",
+     "status": "present",
+     "quote": "Except for simple UAS, all unmanned aircraft subject to the registration obligation under this Instruction are required to have a remote identification system.",
+     "note": "case içinde"
+    }
+   ],
+   "depends_on": {
+    "questions": [
+     "Is the drone classified as a 'Basit İHA' (simple UAS)?",
+     "Is the drone subject to registration obligations?"
+    ],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "TR",
+    "retrieval_ms": 16,
+    "generation_ms": 6131,
+    "prompt_tokens": 5585,
+    "output_tokens": 521
+   },
+   "answer": {
+    "refused": false,
+    "text": "The answer depends on:\n- Is the drone classified as a 'Basit İHA' (simple UAS)? (Yes, it is a simple UAS / No, it is not a simple UAS)\n- Is the drone subject to registration obligations? (Subject to registration / Not subject to registration)\n\nRemote Identification\n- For drones other than imported or domestically produced simple UAS (Basit İHA) that are subject to registration — MANDATORY: Except for simple UAS, all unmanned aircraft subject to the registration obligation under this Instruction are required to have a remote identification system. [7]\n- For simple UAS (Basit İHA) — NOT MANDATORY: Imported or domestically produced simple UAS are exempt from the remote identification system requirement. [7]\n\nNot in the sources:\n- The exact technical specifications and standards for the remote identification module are determined separately by the Directorate General.",
+    "structured": {
+     "answerable": true,
+     "depends_on": [
+      {
+       "question": "Is the drone classified as a 'Basit İHA' (simple UAS)?",
+       "options": [
+        {
+         "label": "Yes, it is a simple UAS",
+         "fact": "The drone is a Basit İHA"
+        },
+        {
+         "label": "No, it is not a simple UAS",
+         "fact": "The drone is not a Basit İHA"
+        }
+       ]
+      },
+      {
+       "question": "Is the drone subject to registration obligations?",
+       "options": [
+        {
+         "label": "Subject to registration",
+         "fact": "The drone is subject to registration obligations"
+        },
+        {
+         "label": "Not subject to registration",
+         "fact": "The drone is not subject to registration obligations"
+        }
+       ]
+      }
+     ],
+     "sections": [
+      {
+       "topic": "Remote Identification",
+       "text": null,
+       "cases": [
+        {
+         "condition": "For drones other than imported or domestically produced simple UAS (Basit İHA) that are subject to registration",
+         "verdict": "MANDATORY",
+         "text": "Except for simple UAS, all unmanned aircraft subject to the registration obligation under this Instruction are required to have a remote identification system.",
+         "citations": [
+          7
+         ]
+        },
+        {
+         "condition": "For simple UAS (Basit İHA)",
+         "verdict": "NOT MANDATORY",
+         "text": "Imported or domestically produced simple UAS are exempt from the remote identification system requirement.",
+         "citations": [
+          7
+         ]
+        }
+       ],
+       "citations": [
+        7
+       ]
+      }
+     ],
+     "not_in_sources": [
+      "The exact technical specifications and standards for the remote identification module are determined separately by the Directorate General."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "What is the definition of a remote identification system under Turkish regulations?",
+      "Which drones are classified as simple UAS (Basit İHA)?",
+      "What are the registration requirements for drones in Turkey?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 7,
+      "section_ref": "Madde 23",
+      "page": 15
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "Except for simple UAS, all unmanned aircraft subject to the registration obligation under this Instruction are required to have a remote identification system."
+     }
+    ],
+    "depends_on": [
+     {
+      "number": 1,
+      "already_given": false,
+      "question_quote": ""
+     },
+     {
+      "number": 2,
+      "already_given": false,
+      "question_quote": ""
+     }
+    ],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "r-01",
+   "lang": "tr",
+   "question": "İHA pilot lisansı sınavının ücreti ne kadar?",
+   "detection": {
+    "detected_mode": null,
+    "mode": "TR",
+    "mode_source": "default",
+    "accepted": [
+     "TR",
+     "none"
+    ],
+    "ok": true,
+    "matched_terms": []
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 15",
+     "Madde 15",
+     "Madde 17",
+     "Madde 16",
+     "Madde 29",
+     "Madde 25",
+     "Madde 22",
+     "Madde 8"
+    ],
+    "count": 8,
+    "ranks": {},
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {},
+    "any_expected_cited": null
+   },
+   "refusal": {
+    "should_refuse": true,
+    "refused_flag": true,
+    "empty_and_explained": true,
+    "false_refusal": false
+   },
+   "facts": [],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "TR",
+    "retrieval_ms": 15,
+    "generation_ms": 5776,
+    "prompt_tokens": 4713,
+    "output_tokens": 86
+   },
+   "answer": {
+    "refused": true,
+    "text": "Kaynaklarda olmayanlar:\n- İHA pilot lisansı sınavının ücretine dair herhangi bir bilgi verilmemektedir.",
+    "structured": {
+     "answerable": false,
+     "depends_on": [],
+     "sections": [],
+     "not_in_sources": [
+      "İHA pilot lisansı sınavının ücretine dair herhangi bir bilgi verilmemektedir."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "İHA pilot lisansı hangi düzeylerde düzenlenir?",
+      "P0 lisansı için asgari yaş sınırı nedir?"
+     ]
+    },
+    "citations": []
+   },
+   "judge": {
+    "facts": [],
+    "depends_on": [],
+    "refusal_explained": true
+   }
+  },
+  {
+   "id": "r-02",
+   "lang": "en",
+   "question": "What are the drone rules in the United States?",
+   "detection": {
+    "detected_mode": null,
+    "mode": "EU",
+    "mode_source": "default",
+    "accepted": [
+     "none"
+    ],
+    "ok": true,
+    "matched_terms": []
+   },
+   "retrieval": {
+    "passages": [
+     "AMC1bis Article 11",
+     "Article 15 (2019/947)",
+     "AMC2 Article 11",
+     "UAS.OPEN.060",
+     "AMC1 Article 11",
+     "GM1 UAS.OPEN.060(1)(b)",
+     "AMC1bis Article 11",
+     "GM1 UAS.OPEN.010"
+    ],
+    "count": 8,
+    "ranks": {},
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {},
+    "any_expected_cited": null
+   },
+   "refusal": {
+    "should_refuse": true,
+    "refused_flag": true,
+    "empty_and_explained": true,
+    "false_refusal": false
+   },
+   "facts": [],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "EU",
+    "retrieval_ms": 21,
+    "generation_ms": 5858,
+    "prompt_tokens": 4630,
+    "output_tokens": 55
+   },
+   "answer": {
+    "refused": true,
+    "text": "Not in the sources:\n- The provided passages contain no rules for the United States, as all regulations are for the European Union.",
+    "structured": {
+     "answerable": false,
+     "depends_on": [],
+     "sections": [],
+     "not_in_sources": [
+      "The provided passages contain no rules for the United States, as all regulations are for the European Union."
+     ],
+     "compare": null,
+     "follow_ups": []
+    },
+    "citations": []
+   },
+   "judge": {
+    "facts": [],
+    "depends_on": [],
+    "refusal_explained": true
+   }
+  },
+  {
+   "id": "r-03",
+   "lang": "tr",
+   "question": "Düğün çekimi için hangi drone'u almalıyım?",
+   "detection": {
+    "detected_mode": null,
+    "mode": "TR",
+    "mode_source": "default",
+    "accepted": [
+     "none"
+    ],
+    "ok": true,
+    "matched_terms": []
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 27",
+     "Madde 24",
+     "Madde 23",
+     "Madde 4",
+     "Madde 6",
+     "Madde 2",
+     "Madde 15",
+     "Madde 4",
+     "Madde 8",
+     "Madde 11",
+     "Geçici Madde 1",
+     "Madde 1",
+     "Madde 17",
+     "Madde 16"
+    ],
+    "count": 14,
+    "ranks": {},
+    "list_question": true,
+    "top_k": 14
+   },
+   "citations": {
+    "places": {},
+    "any_expected_cited": null
+   },
+   "refusal": {
+    "should_refuse": true,
+    "refused_flag": true,
+    "empty_and_explained": true,
+    "false_refusal": false
+   },
+   "facts": [],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "TR",
+    "retrieval_ms": 10,
+    "generation_ms": 5543,
+    "prompt_tokens": 6431,
+    "output_tokens": 51
+   },
+   "answer": {
+    "refused": true,
+    "text": "Kaynaklarda olmayanlar:\n- The provided passages do not contain purchase recommendations or product selection advice for wedding photography.",
+    "structured": {
+     "answerable": false,
+     "depends_on": [],
+     "sections": [],
+     "not_in_sources": [
+      "The provided passages do not contain purchase recommendations or product selection advice for wedding photography."
+     ],
+     "compare": null,
+     "follow_ups": []
+    },
+    "citations": []
+   },
+   "judge": {
+    "facts": [],
+    "depends_on": [],
+    "refusal_explained": true
+   }
+  },
+  {
+   "id": "r-04",
+   "lang": "en",
+   "question": "How much does drone insurance cost in Germany?",
+   "detection": {
+    "detected_mode": "EU",
+    "mode": "EU",
+    "mode_source": "detected",
+    "accepted": [
+     "EU"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "Germany"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "GM1 UAS.SPEC.050(1)(a)(iv)",
+     "Recitals (2019/947)",
+     "Article 14 (2019/947)",
+     "GM1 Article 14(1)",
+     "AMC1 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)",
+     "GM3 Article 15(1)",
+     "UAS.OPEN.020",
+     "Article 14 (2019/947)"
+    ],
+    "count": 8,
+    "ranks": {},
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {},
+    "any_expected_cited": null
+   },
+   "refusal": {
+    "should_refuse": true,
+    "refused_flag": true,
+    "empty_and_explained": true,
+    "false_refusal": false
+   },
+   "facts": [],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "EU",
+    "retrieval_ms": 13,
+    "generation_ms": 5475,
+    "prompt_tokens": 4772,
+    "output_tokens": 48
+   },
+   "answer": {
+    "refused": true,
+    "text": "Not in the sources:\n- The passages do not state the cost or price of drone insurance.",
+    "structured": {
+     "answerable": false,
+     "depends_on": [],
+     "sections": [],
+     "not_in_sources": [
+      "The passages do not state the cost or price of drone insurance."
+     ],
+     "compare": null,
+     "follow_ups": []
+    },
+    "citations": []
+   },
+   "judge": {
+    "facts": [],
+    "depends_on": [],
+    "refusal_explained": true
+   }
+  },
+  {
+   "id": "j-01",
+   "lang": "tr",
+   "question": "120 metreden yükseğe uçabilir miyim?",
+   "detection": {
+    "detected_mode": null,
+    "mode": "TR",
+    "mode_source": "default",
+    "accepted": [
+     "none"
+    ],
+    "ok": true,
+    "matched_terms": []
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 11",
+     "Madde 15",
+     "Madde 23",
+     "Madde 8",
+     "Madde 4",
+     "Madde 12",
+     "Madde 12",
+     "Madde 13"
+    ],
+    "count": 8,
+    "ranks": {
+     "Madde 15": 2,
+     "Article 4 (2019/947)": null
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "Madde 15": [
+      "section 'Yükseklik Sınırı'",
+      "case '120 Metre Üzeri Uçuş / P2 Lisansı ile'",
+      "case '120 Metre Üzeri Uçuş / P0/P1 Lisansı veya Basit İHA ile'"
+     ],
+     "Article 4 (2019/947)": []
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "cevap iki yetki alanına ayrılır",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "Türkiye: P0/P1 azami 120 m; P2'de 120 m üzeri yalnız ilgili kurumlarla koordinasyonla",
+     "status": "present",
+     "quote": "P0 ve P1 lisansına sahip pilotlar için uçuş zarfı azami 120 metre yükseklik ile sınırlıdır. [2][4][6]\n\n120 Metre Üzeri Uçuş\n- P2 Lisansı ile — MÜMKÜN: P2 lisansı sahipleri için 120 metrenin üzerindeki operasyonlar yalnızca ilgili kurum ve kuruluşlarla koordinasyonla, helikopter uçuşlarına uygulanan uçuş bölgesi esaslarına uygun olarak yürütülür.",
+     "note": ""
+    },
+    {
+     "id": "m3",
+     "kind": "must",
+     "text": "AB açık kategori: 120 m",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "AB'de engel istisnası (50 m içinde, 105 m üstü engel, +15 m)",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [
+     "Hangi pilot lisansına sahipsiniz?"
+    ],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "TR",
+    "retrieval_ms": 9,
+    "generation_ms": 10907,
+    "prompt_tokens": 5488,
+    "output_tokens": 647
+   },
+   "answer": {
+    "refused": false,
+    "text": "Cevap şunlara bağlı:\n- Hangi pilot lisansına sahipsiniz? (P0 veya P1 Lisansı / P2 Lisansı / Lisansım yok / Basit İHA)\n\nYükseklik Sınırı\nBasit İHA'lar tasarımı gereği dikeyde 20 metrelik silindirik uçuş zarfını aşamaz. P0 ve P1 lisansına sahip pilotlar için uçuş zarfı azami 120 metre yükseklik ile sınırlıdır. [2][4][6]\n\n120 Metre Üzeri Uçuş\n- P2 Lisansı ile — MÜMKÜN: P2 lisansı sahipleri için 120 metrenin üzerindeki operasyonlar yalnızca ilgili kurum ve kuruluşlarla koordinasyonla, helikopter uçuşlarına uygulanan uçuş bölgesi esaslarına uygun olarak yürütülür. [1][2][6]\n- P0/P1 Lisansı veya Basit İHA ile — YASAK: P0 ve P1 lisansı sahipleri azami 120 metre yükseklik sınırına tabidir; Basit İHA'lar ise dikeyde 20 metreyi aşamaz. [2][4][6]\n\nKaynaklarda olmayanlar:\n- P2 lisansı dışındaki pilotların koordinasyon sağlayarak 120 metre üzerine çıkıp çıkamayacağı kaynaklarda belirtilmemiştir.",
+    "structured": {
+     "answerable": true,
+     "depends_on": [
+      {
+       "question": "Hangi pilot lisansına sahipsiniz?",
+       "options": [
+        {
+         "label": "P0 veya P1 Lisansı",
+         "fact": "P0 veya P1 İHA pilot lisansına sahibim"
+        },
+        {
+         "label": "P2 Lisansı",
+         "fact": "P2 İHA pilot lisansına sahibim"
+        },
+        {
+         "label": "Lisansım yok / Basit İHA",
+         "fact": "Pilot lisansım yok veya Basit İHA kullanıyorum"
+        }
+       ]
+      }
+     ],
+     "sections": [
+      {
+       "topic": "Yükseklik Sınırı",
+       "text": "Basit İHA'lar tasarımı gereği dikeyde 20 metrelik silindirik uçuş zarfını aşamaz. P0 ve P1 lisansına sahip pilotlar için uçuş zarfı azami 120 metre yükseklik ile sınırlıdır.",
+       "cases": [],
+       "citations": [
+        2,
+        4,
+        6
+       ]
+      },
+      {
+       "topic": "120 Metre Üzeri Uçuş",
+       "text": null,
+       "cases": [
+        {
+         "condition": "P2 Lisansı ile",
+         "verdict": "MÜMKÜN",
+         "text": "P2 lisansı sahipleri için 120 metrenin üzerindeki operasyonlar yalnızca ilgili kurum ve kuruluşlarla koordinasyonla, helikopter uçuşlarına uygulanan uçuş bölgesi esaslarına uygun olarak yürütülür.",
+         "citations": [
+          1,
+          2,
+          6
+         ]
+        },
+        {
+         "condition": "P0/P1 Lisansı veya Basit İHA ile",
+         "verdict": "YASAK",
+         "text": "P0 ve P1 lisansı sahipleri azami 120 metre yükseklik sınırına tabidir; Basit İHA'lar ise dikeyde 20 metreyi aşamaz.",
+         "citations": [
+          2,
+          4,
+          6
+         ]
+        }
+       ],
+       "citations": [
+        1,
+        2,
+        4,
+        6
+       ]
+      }
+     ],
+     "not_in_sources": [
+      "P2 lisansı dışındaki pilotların koordinasyon sağlayarak 120 metre üzerine çıkıp çıkamayacağı kaynaklarda belirtilmemiştir."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "P2 lisansı almak için hangi şartlar gereklidir?",
+      "120 metre üzeri uçuşlar için hangi kurumlarla koordinasyon sağlanmalıdır?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "Madde 11",
+      "page": 7
+     },
+     {
+      "n": 2,
+      "section_ref": "Madde 15",
+      "page": 10
+     },
+     {
+      "n": 4,
+      "section_ref": "Madde 8",
+      "page": 6
+     },
+     {
+      "n": 6,
+      "section_ref": "Madde 12",
+      "page": 8
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "m2",
+      "status": "present",
+      "quote": "P0 ve P1 lisansına sahip pilotlar için uçuş zarfı azami 120 metre yükseklik ile sınırlıdır. [2][4][6]\n\n120 Metre Üzeri Uçuş\n- P2 Lisansı ile — MÜMKÜN: P2 lisansı sahipleri için 120 metrenin üzerindeki operasyonlar yalnızca ilgili kurum ve kuruluşlarla koordinasyonla, helikopter uçuşlarına uygulanan uçuş bölgesi esaslarına uygun olarak yürütülür."
+     },
+     {
+      "id": "m3",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "s1",
+      "status": "absent",
+      "quote": ""
+     }
+    ],
+    "depends_on": [
+     {
+      "number": 1,
+      "already_given": false,
+      "question_quote": ""
+     }
+    ],
+    "refusal_explained": null
+   }
+  },
+  {
+   "id": "j-02",
+   "lang": "tr",
+   "question": "Almanya'da 250 gramdan hafif drone için eğitim gerekiyor mu?",
+   "detection": {
+    "detected_mode": "EU",
+    "mode": "EU",
+    "mode_source": "detected",
+    "accepted": [
+     "EU"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "Almanya"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "AMC1 UAS.OPEN.020(1) and (2)",
+     "UAS.OPEN.020",
+     "Recitals (2019/947)",
+     "Part 1 (2019/945 Annex)",
+     "Article 20 (2019/947)",
+     "Article 14 (2019/947)",
+     "AMC1 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)",
+     "GM1 UAS.SPEC.050(1)(a)(iv)"
+    ],
+    "count": 8,
+    "ranks": {
+     "UAS.OPEN.020": 2,
+     "Part 1 (2019/945 Annex)": 4
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "UAS.OPEN.020": [
+      "case 'Eğitim Gereksinimi / C0 sınıfı veya 250 g'dan hafif özel yapım drone'",
+      "case 'Eğitim Gereksinimi / C1 sınıfı drone'"
+     ],
+     "Part 1 (2019/945 Annex)": []
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "250 g altı / C0 ile A1'de çevrim içi eğitim ve sınav şartı yok; zorunlu eğitim C1 için",
+     "status": "present",
+     "quote": "C0 sınıfı veya 250 g'dan hafif özel yapım drone — GEREKLİ DEĞİL: 250 gramdan hafif C0 sınıfı veya özel yapım insansız hava araçları için çevrim içi eğitim zorunluluğu öngörülmemiştir",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "üreticinin talimatlarını bilmek gerekir",
+     "status": "present",
+     "quote": "ancak uzaktan pilotun üretici talimatlarına aşina olması gerekir.",
+     "note": "case içinde"
+    }
+   ],
+   "depends_on": {
+    "questions": [
+     "Dronun sınıfı veya yapısı nedir?"
+    ],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "EU",
+    "retrieval_ms": 12,
+    "generation_ms": 6886,
+    "prompt_tokens": 4896,
+    "output_tokens": 514
+   },
+   "answer": {
+    "refused": false,
+    "text": "Cevap şunlara bağlı:\n- Dronun sınıfı veya yapısı nedir? (C0 sınıfı / Özel yapım (<250g) / C1 sınıfı)\n\nEğitim Gereksinimi\n- C0 sınıfı veya 250 g'dan hafif özel yapım drone — GEREKLİ DEĞİL: 250 gramdan hafif C0 sınıfı veya özel yapım insansız hava araçları için çevrim içi eğitim zorunluluğu öngörülmemiştir, ancak uzaktan pilotun üretici talimatlarına aşina olması gerekir. [1][2]\n- C1 sınıfı drone — GEREKLİ: C1 sınıfı bir insansız hava aracı işletmek için uzaktan pilotun çevrim içi bir eğitim kursunu tamamlaması ve yetkili makam veya belirlenmiş bir kuruluş tarafından sağlanan çevrim içi teorik bilgi sınavını en az %75 başarıyla geçmesi gereklidir. [2]\n\nKaynaklarda olmayanlar:\n- Almanya'ya özgü ek ulusal eğitim kural veya istisnaları kaynaklarda yer almamaktadır.",
+    "structured": {
+     "answerable": true,
+     "depends_on": [
+      {
+       "question": "Dronun sınıfı veya yapısı nedir?",
+       "options": [
+        {
+         "label": "C0 sınıfı / Özel yapım (<250g)",
+         "fact": "Drone C0 sınıfıdır veya 250 gramdan küçük özel yapım bir dromedir"
+        },
+        {
+         "label": "C1 sınıfı",
+         "fact": "Drone C1 sınıfı olarak işaretlenmiştir"
+        }
+       ]
+      }
+     ],
+     "sections": [
+      {
+       "topic": "Eğitim Gereksinimi",
+       "text": null,
+       "cases": [
+        {
+         "condition": "C0 sınıfı veya 250 g'dan hafif özel yapım drone",
+         "verdict": "GEREKLİ DEĞİL",
+         "text": "250 gramdan hafif C0 sınıfı veya özel yapım insansız hava araçları için çevrim içi eğitim zorunluluğu öngörülmemiştir, ancak uzaktan pilotun üretici talimatlarına aşina olması gerekir.",
+         "citations": [
+          1,
+          2
+         ]
+        },
+        {
+         "condition": "C1 sınıfı drone",
+         "verdict": "GEREKLİ",
+         "text": "C1 sınıfı bir insansız hava aracı işletmek için uzaktan pilotun çevrim içi bir eğitim kursunu tamamlaması ve yetkili makam veya belirlenmiş bir kuruluş tarafından sağlanan çevrim içi teorik bilgi sınavını en az %75 başarıyla geçmesi gereklidir.",
+         "citations": [
+          2
+         ]
+        }
+       ],
+       "citations": [
+        1,
+        2
+       ]
+      }
+     ],
+     "not_in_sources": [
+      "Almanya'ya özgü ek ulusal eğitim kural veya istisnaları kaynaklarda yer almamaktadır."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "250 gramdan hafif dronlar için kayıt olmak gerekiyor mu?",
+      "C1 sınıfı bir drone ile kalabalıkların üzerinden uçulabilir mi?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "AMC1 UAS.OPEN.020(1) and (2)",
+      "page": 423
+     },
+     {
+      "n": 2,
+      "section_ref": "UAS.OPEN.020",
+      "page": 422
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "C0 sınıfı veya 250 g'dan hafif özel yapım drone — GEREKLİ DEĞİL: 250 gramdan hafif C0 sınıfı veya özel yapım insansız hava araçları için çevrim içi eğitim zorunluluğu öngörülmemiştir"
+     },
+     {
+      "id": "m2",
+      "status": "present",
+      "quote": "ancak uzaktan pilotun üretici talimatlarına aşina olması gerekir."
+     }
+    ],
+    "depends_on": [
+     {
+      "number": 1,
+      "already_given": false,
+      "question_quote": ""
+     }
+    ],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "j-03",
+   "lang": "en",
+   "question": "Under SHGM rules, how old must a commercial drone pilot be?",
+   "detection": {
+    "detected_mode": "TR",
+    "mode": "TR",
+    "mode_source": "detected",
+    "accepted": [
+     "TR"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "SHGM"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 15",
+     "Madde 17",
+     "Madde 15",
+     "Madde 6",
+     "Madde 8",
+     "Madde 23",
+     "Madde 25",
+     "Madde 10"
+    ],
+    "count": 8,
+    "ranks": {
+     "Madde 17": 2
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "Madde 17": [
+      "section 'Pilot age'"
+     ]
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "18 (P1, commercial)",
+     "status": "present",
+     "quote": "eighteen years of age",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "TR",
+    "retrieval_ms": 16,
+    "generation_ms": 5776,
+    "prompt_tokens": 5060,
+    "output_tokens": 163
+   },
+   "answer": {
+    "refused": false,
+    "text": "Pilot age\nFor operations requiring a P1 commercial drone pilot licence, the pilot must have completed at least eighteen years of age. [2]\n\nNot in the sources:\n- Maximum age limits for commercial drone pilots are not specified in the sources.",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [
+      {
+       "topic": "Pilot age",
+       "text": "For operations requiring a P1 commercial drone pilot licence, the pilot must have completed at least eighteen years of age.",
+       "cases": [],
+       "citations": [
+        2
+       ]
+      }
+     ],
+     "not_in_sources": [
+      "Maximum age limits for commercial drone pilots are not specified in the sources."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "What training is required to get a P1 commercial pilot licence?",
+      "What are the operating limits for a P1 commercial drone pilot?",
+      "Do P1 commercial drone pilots need a medical report?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 2,
+      "section_ref": "Madde 17",
+      "page": 12
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "eighteen years of age"
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": null
+   }
+  },
+  {
+   "id": "k-01",
+   "lang": "tr",
+   "question": "Türkiye'de P1 lisansım var. Bu lisansla Almanya'da uçabilir miyim?",
+   "detection": {
+    "detected_mode": "compare",
+    "mode": "compare",
+    "mode_source": "detected",
+    "accepted": [
+     "both"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "Türkiye",
+     "P1",
+     "Almanya"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 15",
+     "Madde 15",
+     "Madde 10",
+     "Madde 29",
+     "Madde 6",
+     "Madde 4",
+     "AMC1 Article 11 Annex D",
+     "UAS.OPEN.020",
+     "AMC1bis Article 11",
+     "UAS.OPEN.060",
+     "AMC1bis Article 11 Annex D",
+     "AMC2 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)"
+    ],
+    "count": 12,
+    "ranks": {
+     "Article 41 (2019/945)": null
+    },
+    "list_question": false,
+    "top_k": 12
+   },
+   "citations": {
+    "places": {
+     "Article 41 (2019/945)": []
+    },
+    "any_expected_cited": false
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": true,
+    "empty_and_explained": null,
+    "false_refusal": true
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "otomatik geçerli değil: üçüncü ülkede yerleşik işletici AB'de 2019/947'ye uymak zorunda; yetkili otorite uçmak istediği ilk üye devletin otoritesi",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "üçüncü ülke belgesi ancak üç koşulla tanınabilir: ülke tanıma istemiş olmalı, belge geçerli olmalı, Komisyon EASA'ya danışarak eşdeğer emniyet seviyesini sağlamış olmalı",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "m3",
+     "kind": "must",
+     "text": "Türkiye için böyle bir tanıma kaynaklarda geçmiyor (uydurulmamalı)",
+     "status": "present",
+     "quote": "Pasajlarda Türkiye'de alınan P1 lisansının Almanya'da veya diğer AB üye ülkelerinde geçerli olup olmadığına dair bir bilgi bulunmamaktadır.",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "2019/947'ye uymak, ilgili kategori için AB yetkinlik şartlarını sağlamak demektir",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "compare",
+    "retrieval_ms": 18,
+    "generation_ms": 5867,
+    "prompt_tokens": 7745,
+    "output_tokens": 150
+   },
+   "answer": {
+    "refused": true,
+    "text": "Kaynaklarda olmayanlar:\n- Pasajlarda Türkiye'de alınan P1 lisansının Almanya'da veya diğer AB üye ülkelerinde geçerli olup olmadığına dair bir bilgi bulunmamaktadır.\n- Yabancı pilot lisanslarının tanınması yalnızca Türk hava sahasında yabancı tescilli araçlar için düzenlenmiştir.",
+    "structured": {
+     "answerable": false,
+     "depends_on": [],
+     "sections": [],
+     "not_in_sources": [
+      "Pasajlarda Türkiye'de alınan P1 lisansının Almanya'da veya diğer AB üye ülkelerinde geçerli olup olmadığına dair bir bilgi bulunmamaktadır.",
+      "Yabancı pilot lisanslarının tanınması yalnızca Türk hava sahasında yabancı tescilli araçlar için düzenlenmiştir."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "Türkiye'de alınan P1 lisansı hangi şartlarda geçerlidir?",
+      "Almanya'da (AB kurallarına göre) İHA uçurmak için hangi yetkinlikler gereklidir?"
+     ]
+    },
+    "citations": []
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "m2",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "m3",
+      "status": "present",
+      "quote": "Pasajlarda Türkiye'de alınan P1 lisansının Almanya'da veya diğer AB üye ülkelerinde geçerli olup olmadığına dair bir bilgi bulunmamaktadır."
+     },
+     {
+      "id": "s1",
+      "status": "absent",
+      "quote": ""
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": true
+   }
+  },
+  {
+   "id": "k-02",
+   "lang": "tr",
+   "question": "AB'den aldığım A2 sertifikasıyla Türkiye'de uçabilir miyim?",
+   "detection": {
+    "detected_mode": "compare",
+    "mode": "compare",
+    "mode_source": "detected",
+    "accepted": [
+     "both",
+     "TR"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "AB",
+     "A2",
+     "Türkiye"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 29",
+     "Madde 24",
+     "Madde 4",
+     "Madde 10",
+     "Madde 3",
+     "Geçici Madde 2",
+     "UAS.OPEN.030",
+     "AMC1 UAS.OPEN.030(2)",
+     "AMC2 UAS.OPEN.030(2)(c)",
+     "AMC1 UAS.OPEN.030(2)(c)",
+     "AMC2 UAS.OPEN.030(2)(b)",
+     "AMC1 UAS.OPEN.030(2)(b)"
+    ],
+    "count": 12,
+    "ranks": {
+     "Madde 10": 4,
+     "Madde 15": null
+    },
+    "list_question": false,
+    "top_k": 12
+   },
+   "citations": {
+    "places": {
+     "Madde 10": [
+      "section 'Yabancı Lisansların Tanınması'",
+      "section 'İntibak Eğitimi ve Yetkilendirme'",
+      "section 'Operasyonel Lisans'"
+     ],
+     "Madde 15": []
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "yabancı lisansın tanınmasını SHGM uluslararası antlaşmalar çerçevesinde değerlendirir",
+     "status": "present",
+     "quote": "Yabancı pilotların lisanslarının tanınması, uluslararası antlaşmalar çerçevesinde Genel Müdürlükçe Şikago Sözleşmesinin 33 üncü maddesi ile ilgili ulusal mevzuat hükümleri kıyasen uygulanarak değerlendirilir.",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "tanınırsa KDM-ORG üzerinden fark (intibak) eğitimi ile karşılık gelen P1 veya P2 verilir; uçmak için ayrıca operasyonel lisans gerekir",
+     "status": "present",
+     "quote": "fark eğitimini KDM-ORG üzerinden tamamlamaları hâlinde, lisansları karşılık geldiği seviyedeki P1 veya P2 lisansı ile yetkilendirilir. [4]\n\nOperasyonel Lisans\nTürkiye'de uçuş icrası yapılabilmesi için 15 inci maddenin dördüncü fıkrası uyarınca operasyonel lisans alınması zorunludur.",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "yabancı tescilli dron İHATTYS ile uyumlu olmalı (Madde 10(1))",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [
+     "Yabancı pilot lisansınızın durumu nedir?"
+    ],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "compare",
+    "retrieval_ms": 18,
+    "generation_ms": 6861,
+    "prompt_tokens": 6485,
+    "output_tokens": 566
+   },
+   "answer": {
+    "refused": false,
+    "text": "Cevap şunlara bağlı:\n- Yabancı pilot lisansınızın durumu nedir? (Tanınmış değil / Tanınmış)\n\nYabancı Lisansların Tanınması\nYabancı pilotların lisanslarının tanınması, uluslararası antlaşmalar çerçevesinde Genel Müdürlükçe Şikago Sözleşmesinin 33 üncü maddesi ile ilgili ulusal mevzuat hükümleri kıyasen uygulanarak değerlendirilir. [4]\n\nİntibak Eğitimi ve Yetkilendirme\nLisansı tanınan yabancı İHA pilotlarının, hava aracı tip intibakına ilişkin esaslara kıyasen Talimat hükümleri, ulusal hava sahası yapısı ve İHATTYS kullanımına ilişkin fark eğitimini KDM-ORG üzerinden tamamlamaları hâlinde, lisansları karşılık geldiği seviyedeki P1 veya P2 lisansı ile yetkilendirilir. [4]\n\nOperasyonel Lisans\nTürkiye'de uçuş icrası yapılabilmesi için 15 inci maddenin dördüncü fıkrası uyarınca operasyonel lisans alınması zorunludur. [4]\n\nKaynaklarda olmayanlar:\n- Avrupa Birliği'nden alınan A2 sertifikasının doğrudan Türkiye'de geçerli olup olmadığına veya otomatik olarak tanınıp tanınmayacağına dair özel bir hüküm pasajlarda yer almamaktadır.",
+    "structured": {
+     "answerable": true,
+     "depends_on": [
+      {
+       "question": "Yabancı pilot lisansınızın durumu nedir?",
+       "options": [
+        {
+         "label": "Tanınmış değil",
+         "fact": "Yabancı pilot lisansı Genel Müdürlükçe henüz tanınmadı"
+        },
+        {
+         "label": "Tanınmış",
+         "fact": "Yabancı pilot lisansı Genel Müdürlükçe tanındı"
+        }
+       ]
+      }
+     ],
+     "sections": [
+      {
+       "topic": "Yabancı Lisansların Tanınması",
+       "text": "Yabancı pilotların lisanslarının tanınması, uluslararası antlaşmalar çerçevesinde Genel Müdürlükçe Şikago Sözleşmesinin 33 üncü maddesi ile ilgili ulusal mevzuat hükümleri kıyasen uygulanarak değerlendirilir.",
+       "cases": [],
+       "citations": [
+        4
+       ]
+      },
+      {
+       "topic": "İntibak Eğitimi ve Yetkilendirme",
+       "text": "Lisansı tanınan yabancı İHA pilotlarının, hava aracı tip intibakına ilişkin esaslara kıyasen Talimat hükümleri, ulusal hava sahası yapısı ve İHATTYS kullanımına ilişkin fark eğitimini KDM-ORG üzerinden tamamlamaları hâlinde, lisansları karşılık geldiği seviyedeki P1 veya P2 lisansı ile yetkilendirilir.",
+       "cases": [],
+       "citations": [
+        4
+       ]
+      },
+      {
+       "topic": "Operasyonel Lisans",
+       "text": "Türkiye'de uçuş icrası yapılabilmesi için 15 inci maddenin dördüncü fıkrası uyarınca operasyonel lisans alınması zorunludur.",
+       "cases": [],
+       "citations": [
+        4
+       ]
+      }
+     ],
+     "not_in_sources": [
+      "Avrupa Birliği'nden alınan A2 sertifikasının doğrudan Türkiye'de geçerli olup olmadığına veya otomatik olarak tanınıp tanınmayacağına dair özel bir hüküm pasajlarda yer almamaktadır."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "Yabancı pilot lisansımın tanınması için nereye başvurmalıyım?",
+      "KDM-ORG üzerinden intibak eğitimi nasıl tamamlanır?",
+      "Operasyonel lisans almak için hangi adımları izlemeliyim?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 4,
+      "section_ref": "Madde 10",
+      "page": 7
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "Yabancı pilotların lisanslarının tanınması, uluslararası antlaşmalar çerçevesinde Genel Müdürlükçe Şikago Sözleşmesinin 33 üncü maddesi ile ilgili ulusal mevzuat hükümleri kıyasen uygulanarak değerlendirilir."
+     },
+     {
+      "id": "m2",
+      "status": "present",
+      "quote": "fark eğitimini KDM-ORG üzerinden tamamlamaları hâlinde, lisansları karşılık geldiği seviyedeki P1 veya P2 lisansı ile yetkilendirilir. [4]\n\nOperasyonel Lisans\nTürkiye'de uçuş icrası yapılabilmesi için 15 inci maddenin dördüncü fıkrası uyarınca operasyonel lisans alınması zorunludur."
+     },
+     {
+      "id": "s1",
+      "status": "absent",
+      "quote": ""
+     }
+    ],
+    "depends_on": [
+     {
+      "number": 1,
+      "already_given": false,
+      "question_quote": ""
+     }
+    ],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "k-03",
+   "lang": "en",
+   "question": "Does Turkey accept a medical certificate issued in an EU country for a P2 licence?",
+   "detection": {
+    "detected_mode": "compare",
+    "mode": "compare",
+    "mode_source": "detected",
+    "accepted": [
+     "TR",
+     "both"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "Turkey",
+     "EU",
+     "P2"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Article 41 (2019/945)",
+     "Article 21 (2019/947)",
+     "AMC1 Article 13(2)",
+     "UAS.OPEN.070",
+     "AMC1 Article 11 Annex E",
+     "AMC2 UAS.OPEN.030(2)(c)",
+     "Madde 15",
+     "Madde 15",
+     "Madde 6",
+     "Madde 12",
+     "Madde 10",
+     "Madde 11"
+    ],
+    "count": 12,
+    "ranks": {
+     "Madde 15": 7
+    },
+    "list_question": false,
+    "top_k": 12
+   },
+   "citations": {
+    "places": {
+     "Madde 15": [
+      "section 'P2 Medical Certificate'"
+     ]
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "yes: a valid, at least class 3 medical certificate issued by SHGM or by an EASA member country",
+     "status": "present",
+     "quote": "applicants are required to hold a valid minimum Class 3 medical certificate issued by either the Directorate General of Civil Aviation or an EASA member state.",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "compare",
+    "retrieval_ms": 42,
+    "generation_ms": 5125,
+    "prompt_tokens": 6486,
+    "output_tokens": 147
+   },
+   "answer": {
+    "refused": false,
+    "text": "P2 Medical Certificate\nFor the issuance of a P2 licence, applicants are required to hold a valid minimum Class 3 medical certificate issued by either the Directorate General of Civil Aviation or an EASA member state. [8]",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [
+      {
+       "topic": "P2 Medical Certificate",
+       "text": "For the issuance of a P2 licence, applicants are required to hold a valid minimum Class 3 medical certificate issued by either the Directorate General of Civil Aviation or an EASA member state.",
+       "cases": [],
+       "citations": [
+        8
+       ]
+      }
+     ],
+     "not_in_sources": [],
+     "compare": null,
+     "follow_ups": [
+      "What are the requirements for foreign pilots in Turkey?",
+      "What are the privileges of a P2 licence?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 8,
+      "section_ref": "Madde 15",
+      "page": 11
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "applicants are required to hold a valid minimum Class 3 medical certificate issued by either the Directorate General of Civil Aviation or an EASA member state."
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "k-04",
+   "lang": "tr",
+   "question": "Türkiye'deki P1 lisansı ile AB'deki A2 sertifikası arasındaki fark ne?",
+   "detection": {
+    "detected_mode": "compare",
+    "mode": "compare",
+    "mode_source": "detected",
+    "accepted": [
+     "both"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "Türkiye",
+     "P1",
+     "AB",
+     "A2"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 15",
+     "Madde 15",
+     "Madde 29",
+     "Madde 6",
+     "Madde 10",
+     "Madde 17",
+     "UAS.OPEN.030",
+     "AMC2 UAS.OPEN.030(2)(c)",
+     "AMC1 UAS.OPEN.030(2)",
+     "AMC1 UAS.OPEN.030(2)(c)",
+     "GM1 UAS.OPEN.030(1) and UAS.OPEN.040(1)",
+     "GM1 UAS.OPEN.030(2)(c)"
+    ],
+    "count": 12,
+    "ranks": {
+     "Madde 15": 1,
+     "UAS.OPEN.030": 7
+    },
+    "list_question": false,
+    "top_k": 12
+   },
+   "citations": {
+    "places": {
+     "Madde 15": [
+      "compare 'Kapsam ve Amaç' TR",
+      "compare 'Uçuş Koşulları ve Sınırlar' TR"
+     ],
+     "UAS.OPEN.030": [
+      "compare 'Uçuş Koşulları ve Sınırlar' EU"
+     ]
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "P1: Türkiye'de ticari uçuş lisansı; VLOS, 120 m / 3.000 m, uygun donanımla gece; aracın sınıfından bağımsız",
+     "status": "present",
+     "quote": "Türkiye'de P1 lisansı görsel görüş hattında (VLOS), azami 120 metre yükseklik ve 3.000 metre görüş/yatay mesafe sınırlarında uygulanır ve uygun donanımla gece yapılabilir",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "A2: AB'de C2 sınıfı dron ile ilgisiz kişilerden en az 30 m (düşük hız modunda 5 m); çevrim içi eğitim + sınav, kendi kendine pratik eğitim ve en az 30 soruluk ek sınav (%75)",
+     "status": "unverified",
+     "quote": "AB'deki A2 sertifikası uninvolved (ilgili olmayan) kişilere yakın uçuşları ve C2 sınıfı dron operasyonlarını kapsar... AB A2 operasyonlarında ise güvenli yatay mesafe kuralları (normalde en az 30 metre, düşük hız modunda 5 metreye kadar) geçerlidir.",
+     "note": "judge said present; quote not found"
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "Türkiye'de yetki lisans seviyesi ve bölgeye, AB'de alt kategori ve dron sınıfına göre belirlenir",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "compare",
+    "retrieval_ms": 20,
+    "generation_ms": 7422,
+    "prompt_tokens": 6202,
+    "output_tokens": 778
+   },
+   "answer": {
+    "refused": false,
+    "text": "Temel farklar:\n- Türkiye'deki P1 lisansı ticari operasyonlar ve uçuşlar için düzenlenirken, AB'deki A2 sertifikası uninvolved (ilgili olmayan) kişilere yakın uçuşları ve C2 sınıfı dron operasyonlarını kapsar.\n- Türkiye'de P1 lisansı için asgari yaş sınırı on sekiz iken, AB A2 sertifikası eğitim ve sınav süreçleri farklı yaş kurallarına tabi olabilir.\n- Türkiye'de P1 lisansı görsel görüş hattında (VLOS), azami 120 metre yükseklik ve 3.000 metre görüş/yatay mesafe sınırlarında uygulanır ve uygun donanımla gece yapılabilir; AB A2 operasyonlarında ise güvenli yatay mesafe kuralları (normalde en az 30 metre, düşük hız modunda 5 metreye kadar) geçerlidir.\n\nKapsam ve Amaç\n- Türkiye: P1 İHA Pilot Lisansı (Ticari); ticari operasyon ve uçuşlar için düzenlenir. [2]\n- AB: A2 alt kategorisi, uçuşun önemli bir kısmında insanlara yakın uçuşun amaçlandığı operasyonları ele alır. [11]\n\nUçuş Koşulları ve Sınırlar\n- Türkiye: Görsel görüş hattında (VLOS); azami 120 metre yükseklik ile 3.000 metre görüş mesafesi veya yatay uzaklık sınırları dâhilinde operasyon yapılır. Uygun donanımla gece operasyonu yapılabilir. [2]\n- AB: İlgili olmayan kişilerin üzerinden uçulmayacak ve en az 30 metre (aktif düşük hız modu ile 5 metreye kadar düşürülebilir) güvenli yatay mesafe bırakılacak şekilde gerçekleştirilir. [7][11]\n\nPilot Yaş Sınırı\n- Türkiye: P1 lisansı gerektiren operasyonlar için İHA pilotu asgari on sekiz yaşını doldurmuş olmalıdır. [6]\n\nKaynaklarda olmayanlar:\n- AB A2 alt kategorisinde yaş sınırı ve teorik sınav detayları dışındaki bazı operasyonel kısıtlamalar\n- Türkiye P1 lisansının sınav formatı ve müfredatının tam detayları",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [],
+     "not_in_sources": [
+      "AB A2 alt kategorisinde yaş sınırı ve teorik sınav detayları dışındaki bazı operasyonel kısıtlamalar",
+      "Türkiye P1 lisansının sınav formatı ve müfredatının tam detayları"
+     ],
+     "compare": {
+      "key_differences": [
+       "Türkiye'deki P1 lisansı ticari operasyonlar ve uçuşlar için düzenlenirken, AB'deki A2 sertifikası uninvolved (ilgili olmayan) kişilere yakın uçuşları ve C2 sınıfı dron operasyonlarını kapsar.",
+       "Türkiye'de P1 lisansı için asgari yaş sınırı on sekiz iken, AB A2 sertifikası eğitim ve sınav süreçleri farklı yaş kurallarına tabi olabilir.",
+       "Türkiye'de P1 lisansı görsel görüş hattında (VLOS), azami 120 metre yükseklik ve 3.000 metre görüş/yatay mesafe sınırlarında uygulanır ve uygun donanımla gece yapılabilir; AB A2 operasyonlarında ise güvenli yatay mesafe kuralları (normalde en az 30 metre, düşük hız modunda 5 metreye kadar) geçerlidir."
+      ],
+      "rows": [
+       {
+        "topic": "Kapsam ve Amaç",
+        "TR": {
+         "text": "P1 İHA Pilot Lisansı (Ticari); ticari operasyon ve uçuşlar için düzenlenir.",
+         "citations": [
+          2
+         ]
+        },
+        "EU": {
+         "text": "A2 alt kategorisi, uçuşun önemli bir kısmında insanlara yakın uçuşun amaçlandığı operasyonları ele alır.",
+         "citations": [
+          11
+         ]
+        }
+       },
+       {
+        "topic": "Uçuş Koşulları ve Sınırlar",
+        "TR": {
+         "text": "Görsel görüş hattında (VLOS); azami 120 metre yükseklik ile 3.000 metre görüş mesafesi veya yatay uzaklık sınırları dâhilinde operasyon yapılır. Uygun donanımla gece operasyonu yapılabilir.",
+         "citations": [
+          2
+         ]
+        },
+        "EU": {
+         "text": "İlgili olmayan kişilerin üzerinden uçulmayacak ve en az 30 metre (aktif düşük hız modu ile 5 metreye kadar düşürülebilir) güvenli yatay mesafe bırakılacak şekilde gerçekleştirilir.",
+         "citations": [
+          7,
+          11
+         ]
+        }
+       },
+       {
+        "topic": "Pilot Yaş Sınırı",
+        "TR": {
+         "text": "P1 lisansı gerektiren operasyonlar için İHA pilotu asgari on sekiz yaşını doldurmuş olmalıdır.",
+         "citations": [
+          6
+         ]
+        },
+        "EU": null
+       }
+      ]
+     },
+     "follow_ups": [
+      "Türkiye'deki P0 lisansı ile P1 lisansı arasındaki farklar nelerdir?",
+      "AB A2 sertifikası almak için hangi aşamaları tamamlamak gerekir?",
+      "Türkiye'de yabancı pilotların lisansları nasıl tanınır?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 2,
+      "section_ref": "Madde 15",
+      "page": 10
+     },
+     {
+      "n": 6,
+      "section_ref": "Madde 17",
+      "page": 12
+     },
+     {
+      "n": 7,
+      "section_ref": "UAS.OPEN.030",
+      "page": 430
+     },
+     {
+      "n": 11,
+      "section_ref": "GM1 UAS.OPEN.030(1) and UAS.OPEN.040(1)",
+      "page": 439
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "Türkiye'de P1 lisansı görsel görüş hattında (VLOS), azami 120 metre yükseklik ve 3.000 metre görüş/yatay mesafe sınırlarında uygulanır ve uygun donanımla gece yapılabilir"
+     },
+     {
+      "id": "m2",
+      "status": "present",
+      "quote": "AB'deki A2 sertifikası uninvolved (ilgili olmayan) kişilere yakın uçuşları ve C2 sınıfı dron operasyonlarını kapsar... AB A2 operasyonlarında ise güvenli yatay mesafe kuralları (normalde en az 30 metre, düşük hız modunda 5 metreye kadar) geçerlidir."
+     },
+     {
+      "id": "s1",
+      "status": "absent",
+      "quote": ""
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": null
+   }
+  },
+  {
+   "id": "k-05",
+   "lang": "tr",
+   "question": "Türkiye'deki M0 sınıfı ile AB'deki C0 sınıfı aynı şey mi?",
+   "detection": {
+    "detected_mode": "compare",
+    "mode": "compare",
+    "mode_source": "detected",
+    "accepted": [
+     "both"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "Türkiye",
+     "M0",
+     "AB",
+     "C0"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 8",
+     "Madde 24",
+     "Madde 23",
+     "Madde 27",
+     "Madde 19",
+     "Madde 28",
+     "Part 1 (2019/945 Annex)",
+     "GM1 UAS.OPEN.040(4)",
+     "AMC1 UAS.OPEN.020(1) and (2)",
+     "UAS.OPEN.020",
+     "AMC1 UAS.OPEN.020(5)(c) and (d), UAS.OPEN.030(3) and UAS.OPEN.040(4)(c),(d) and (e)",
+     "GM2 Article 16"
+    ],
+    "count": 12,
+    "ranks": {
+     "Madde 8": 1,
+     "Part 1 (2019/945 Annex)": 7
+    },
+    "list_question": false,
+    "top_k": 12
+   },
+   "citations": {
+    "places": {
+     "Madde 8": [
+      "compare 'Kütle Sınırları' TR",
+      "compare 'Teknik ve Operasyonel Şartlar' TR"
+     ],
+     "Part 1 (2019/945 Annex)": [
+      "compare 'Kütle Sınırları' EU",
+      "compare 'Teknik ve Operasyonel Şartlar' EU"
+     ]
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "hayır",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "M0: azami kalkış kütlesi 500 g (dâhil) – 4 kg; 500 g altı olup Basit İHA olmayanlar da M0 hükümlerine tabi",
+     "status": "present",
+     "quote": "Türkiye: Azami kalkış kütlesi 500 gr (dâhil) ile 4 kg aralığında olan İHA'lar M0 sınıfındadır; ayrıca 500 gramın altında olup Basit İHA tanımını karşılamayanlar da M0 sınıfına tabidir.",
+     "note": ""
+    },
+    {
+     "id": "m3",
+     "kind": "must",
+     "text": "C0: 250 g altı ve teknik şartlar (19 m/s, 120 m sınırı, yalnız elektrik)",
+     "status": "present",
+     "quote": "AB: C0 sınıfı bir UAS en fazla 19 m/s yatay uçuş hızına sahip olmalı, azami 120 m yüksekliğe ulaşabilmeli ve münhasıran elektrikle çalışmalıdır. [7]",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "M0 kütle sınıfı, C0 ürün sınıfı (CE işaretli ürün gereklilikleri)",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "compare",
+    "retrieval_ms": 20,
+    "generation_ms": 6741,
+    "prompt_tokens": 6636,
+    "output_tokens": 582
+   },
+   "answer": {
+    "refused": false,
+    "text": "Temel farklar:\n- Türkiye'deki M0 sınıfı 500 gram ile 4 kg arasındaki İHA'ları kapsarken, AB'deki C0 sınıfı 250 gramın altında kalkış kütlesine sahip cihazları kapsar.\n- Türkiye'de M0 sınıfı araçlar için Basit İHA istisnası ve özel uyum yazılım modülü/geofence gereklilikleri bulunurken, AB'de C0 sınıfı için elektrikle güçlendirilme ve 19 m/s hız sınırı gibi belirli tasarım kuralları vardır.\n\nKütle Sınırları\n- Türkiye: Azami kalkış kütlesi 500 gr (dâhil) ile 4 kg aralığında olan İHA'lar M0 sınıfındadır; ayrıca 500 gramın altında olup Basit İHA tanımını karşılamayanlar da M0 sınıfına tabidir. [1]\n- AB: C0 sınıfı bir UAS, yük dâhil 250 g'dan daha az bir azami kalkış kütlesine (MTOM) sahiptir. [7]\n\nTeknik ve Operasyonel Şartlar\n- Türkiye: Kayıt yükümlülüğüne tabi M0 araçlarda mobil uygulama bağlantısı, zarf içinde kalma (geofence) testi ve gömülü uyum yazılım modülü bulunması esastır. [1][3]\n- AB: C0 sınıfı bir UAS en fazla 19 m/s yatay uçuş hızına sahip olmalı, azami 120 m yüksekliğe ulaşabilmeli ve münhasıran elektrikle çalışmalıdır. [7]",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [],
+     "not_in_sources": [],
+     "compare": {
+      "key_differences": [
+       "Türkiye'deki M0 sınıfı 500 gram ile 4 kg arasındaki İHA'ları kapsarken, AB'deki C0 sınıfı 250 gramın altında kalkış kütlesine sahip cihazları kapsar.",
+       "Türkiye'de M0 sınıfı araçlar için Basit İHA istisnası ve özel uyum yazılım modülü/geofence gereklilikleri bulunurken, AB'de C0 sınıfı için elektrikle güçlendirilme ve 19 m/s hız sınırı gibi belirli tasarım kuralları vardır."
+      ],
+      "rows": [
+       {
+        "topic": "Kütle Sınırları",
+        "TR": {
+         "text": "Azami kalkış kütlesi 500 gr (dâhil) ile 4 kg aralığında olan İHA'lar M0 sınıfındadır; ayrıca 500 gramın altında olup Basit İHA tanımını karşılamayanlar da M0 sınıfına tabidir.",
+         "citations": [
+          1
+         ]
+        },
+        "EU": {
+         "text": "C0 sınıfı bir UAS, yük dâhil 250 g'dan daha az bir azami kalkış kütlesine (MTOM) sahiptir.",
+         "citations": [
+          7
+         ]
+        }
+       },
+       {
+        "topic": "Teknik ve Operasyonel Şartlar",
+        "TR": {
+         "text": "Kayıt yükümlülüğüne tabi M0 araçlarda mobil uygulama bağlantısı, zarf içinde kalma (geofence) testi ve gömülü uyum yazılım modülü bulunması esastır.",
+         "citations": [
+          1,
+          3
+         ]
+        },
+        "EU": {
+         "text": "C0 sınıfı bir UAS en fazla 19 m/s yatay uçuş hızına sahip olmalı, azami 120 m yüksekliğe ulaşabilmeli ve münhasıran elektrikle çalışmalıdır.",
+         "citations": [
+          7
+         ]
+        }
+       }
+      ]
+     },
+     "follow_ups": [
+      "Türkiye'deki M0 sınıfı İHA'lar için pilot lisansı şartları nelerdir?",
+      "AB'deki C0 sınıfı dronlar kalabalıklar üzerinde uçabilir mi?",
+      "Mevcut dronların yeni sınıf düzenine uyarlanması nasıl yapılır?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "Madde 8",
+      "page": 6
+     },
+     {
+      "n": 3,
+      "section_ref": "Madde 23",
+      "page": 14
+     },
+     {
+      "n": 7,
+      "section_ref": "Part 1 (2019/945 Annex)",
+      "page": 590
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "m2",
+      "status": "present",
+      "quote": "Türkiye: Azami kalkış kütlesi 500 gr (dâhil) ile 4 kg aralığında olan İHA'lar M0 sınıfındadır; ayrıca 500 gramın altında olup Basit İHA tanımını karşılamayanlar da M0 sınıfına tabidir."
+     },
+     {
+      "id": "m3",
+      "status": "present",
+      "quote": "AB: C0 sınıfı bir UAS en fazla 19 m/s yatay uçuş hızına sahip olmalı, azami 120 m yüksekliğe ulaşabilmeli ve münhasıran elektrikle çalışmalıdır. [7]"
+     },
+     {
+      "id": "s1",
+      "status": "absent",
+      "quote": ""
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": null
+   }
+  }
+ ],
+ "calls_total": {
+  "embedding": 0,
+  "embedding_cached": 36,
+  "generation": 36,
+  "judge": 36,
+  "retries": 0
+ }
+}

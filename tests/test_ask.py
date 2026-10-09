@@ -1,6 +1,7 @@
 """POST /api/ask end to end: fake embedder and LLM, the real test database. No network."""
 
 import json
+import re
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from datetime import UTC, datetime
@@ -218,6 +219,22 @@ async def test_list_questions_get_more_passages(db, loaded, clean_log, question,
 
     log = await last_log(db)
     assert (log["top_k"], log["retrieved_chunks"]) == (expected, expected)
+
+
+@pytest.mark.parametrize(
+    ("core", "expected"), [("off", ["Madde 12"]), ("list", ["Madde 12", "Madde 15"])]
+)
+async def test_list_questions_can_get_the_core_sections(db, loaded, clean_log, core, expected):
+    llm = FakeLLM()
+    settings = make_settings(search_top_k_list=1, search_core_sections=core)
+
+    async with ask_client(llm, settings=settings) as client:
+        await ask(client, "Kırmızı bölge için hangi belgeler gerekli?", mode="TR")
+        await ask(client, "Kırmızı bölgede uçabilir miyim?", mode="TR")  # not a list question
+
+    refs = lambda prompt: re.findall(r"\| (Madde \d+) \(", prompt)  # noqa: E731
+    assert refs(llm.calls[0][1]) == expected
+    assert refs(llm.calls[1][1]) == ["Madde 12", "Madde 15"]  # top_k 8, both sample sections
 
 
 async def test_compare_mode_gets_at_least_per_side_passages_from_each_source(db, loaded, clean_log):

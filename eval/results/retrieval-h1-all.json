@@ -1,0 +1,886 @@
+{
+ "settings": [
+  "search_core_sections=all"
+ ],
+ "rows": [
+  {
+   "id": "tr-01",
+   "mode": "TR",
+   "top_k": 8,
+   "passages": [
+    "Madde 15",
+    "Madde 6",
+    "Madde 4",
+    "Madde 15",
+    "Madde 17",
+    "Madde 29",
+    "Madde 19",
+    "Madde 4",
+    "Madde 11",
+    "Madde 8",
+    "Madde 12",
+    "Madde 23"
+   ],
+   "count": 12,
+   "ranks": {
+    "Madde 15": 1,
+    "Madde 11": 9
+   }
+  },
+  {
+   "id": "tr-02",
+   "mode": "TR",
+   "top_k": 14,
+   "passages": [
+    "Madde 4",
+    "Madde 8",
+    "Madde 4",
+    "Madde 5",
+    "Madde 19",
+    "Madde 4",
+    "Madde 29",
+    "Madde 24",
+    "Madde 27",
+    "Madde 25",
+    "Madde 4",
+    "Madde 2",
+    "Geçici Madde 3",
+    "Madde 28",
+    "Madde 11",
+    "Madde 15",
+    "Madde 12",
+    "Madde 23"
+   ],
+   "count": 18,
+   "ranks": {
+    "Madde 8": 2
+   }
+  },
+  {
+   "id": "tr-03",
+   "mode": "TR",
+   "top_k": 8,
+   "passages": [
+    "Madde 11",
+    "Madde 25",
+    "Madde 4",
+    "Madde 15",
+    "Madde 8",
+    "Madde 6",
+    "Madde 15",
+    "Madde 2",
+    "Madde 12",
+    "Madde 23"
+   ],
+   "count": 10,
+   "ranks": {
+    "Madde 8": 5,
+    "Madde 4": 3,
+    "Madde 11": 1,
+    "Madde 15": 4,
+    "Madde 12": 9
+   }
+  },
+  {
+   "id": "tr-04",
+   "mode": "TR",
+   "top_k": 8,
+   "passages": [
+    "Madde 29",
+    "Geçici Madde 3",
+    "Madde 25",
+    "Madde 15",
+    "Madde 27",
+    "Madde 8",
+    "Madde 19",
+    "Madde 24",
+    "Madde 11",
+    "Madde 12",
+    "Madde 23"
+   ],
+   "count": 11,
+   "ranks": {
+    "Madde 29": 1
+   }
+  },
+  {
+   "id": "tr-05",
+   "mode": "TR",
+   "top_k": 8,
+   "passages": [
+    "Geçici Madde 1",
+    "Madde 29",
+    "Geçici Madde 2",
+    "Madde 28",
+    "Geçici Madde 3",
+    "Madde 25",
+    "Madde 27",
+    "Madde 7",
+    "Madde 11",
+    "Madde 8",
+    "Madde 15",
+    "Madde 12",
+    "Madde 23"
+   ],
+   "count": 13,
+   "ranks": {
+    "Geçici Madde 1": 1
+   }
+  },
+  {
+   "id": "tr-06",
+   "mode": "TR",
+   "top_k": 14,
+   "passages": [
+    "Madde 27",
+    "Geçici Madde 1",
+    "Madde 28",
+    "Madde 25",
+    "Geçici Madde 3",
+    "Geçici Madde 2",
+    "Madde 29",
+    "Madde 7",
+    "Madde 23",
+    "Madde 22",
+    "Madde 19",
+    "Madde 23",
+    "Madde 15",
+    "Madde 30",
+    "Madde 11",
+    "Madde 8",
+    "Madde 12"
+   ],
+   "count": 17,
+   "ranks": {
+    "Madde 27": 1,
+    "Geçici Madde 2": 6,
+    "Madde 25": 4
+   }
+  },
+  {
+   "id": "tr-07",
+   "mode": "TR",
+   "top_k": 8,
+   "passages": [
+    "Madde 12",
+    "Madde 6",
+    "Madde 12",
+    "Madde 13",
+    "Madde 4",
+    "Madde 15",
+    "Madde 15",
+    "Madde 22",
+    "Madde 11",
+    "Madde 8",
+    "Madde 23"
+   ],
+   "count": 11,
+   "ranks": {
+    "Madde 12": 1
+   }
+  },
+  {
+   "id": "tr-08",
+   "mode": "TR",
+   "top_k": 8,
+   "passages": [
+    "Madde 15",
+    "Madde 12",
+    "Madde 6",
+    "Madde 15",
+    "Madde 17",
+    "Madde 4",
+    "Madde 29",
+    "Madde 8",
+    "Madde 11",
+    "Madde 23"
+   ],
+   "count": 10,
+   "ranks": {
+    "Madde 15": 1
+   }
+  },
+  {
+   "id": "tr-09",
+   "mode": "TR",
+   "top_k": 8,
+   "passages": [
+    "Madde 15",
+    "Madde 15",
+    "Madde 17",
+    "Madde 6",
+    "Madde 12",
+    "Madde 19",
+    "Madde 11",
+    "Madde 7",
+    "Madde 8",
+    "Madde 23"
+   ],
+   "count": 10,
+   "ranks": {
+    "Madde 15": 1
+   }
+  },
+  {
+   "id": "tr-10",
+   "mode": "TR",
+   "top_k": 8,
+   "passages": [
+    "Madde 24",
+    "Madde 2",
+    "Madde 12",
+    "Madde 12",
+    "Madde 23",
+    "Madde 7",
+    "Madde 1",
+    "Madde 4",
+    "Madde 11",
+    "Madde 8",
+    "Madde 15"
+   ],
+   "count": 11,
+   "ranks": {
+    "Madde 24": 1,
+    "Madde 11": 9,
+    "Madde 15": 11,
+    "Madde 12": 3
+   }
+  },
+  {
+   "id": "en-01",
+   "mode": "EU",
+   "top_k": 8,
+   "passages": [
+    "Article 4 (2019/947)",
+    "UAS.OPEN.010",
+    "GM2 Article 15(2)",
+    "GM1 Article 3",
+    "Article 20 (2019/947)",
+    "UAS.STS-01.010",
+    "UAS.STS-02.010",
+    "AMC4 Article 11",
+    "Article 9 (2019/947)",
+    "Article 14 (2019/947)",
+    "UAS.OPEN.020"
+   ],
+   "count": 11,
+   "ranks": {
+    "Article 4 (2019/947)": 1,
+    "UAS.OPEN.010": 2
+   }
+  },
+  {
+   "id": "en-02",
+   "mode": "EU",
+   "top_k": 8,
+   "passages": [
+    "Article 14 (2019/947)",
+    "GM1 UAS.SPEC.050(1)(a)(iv)",
+    "Recitals (2019/947)",
+    "AMC1 UAS.SPEC.050(1)(g)",
+    "AMC1 UAS.LUC.030(2)(g)(vi)",
+    "Article 14 (2019/947)",
+    "AMC1 UAS.LUC.030(2)(g)(v)",
+    "Article 4 (2019/947)",
+    "Article 9 (2019/947)",
+    "UAS.OPEN.020"
+   ],
+   "count": 10,
+   "ranks": {
+    "Article 14 (2019/947)": 1,
+    "Madde 11": null
+   }
+  },
+  {
+   "id": "en-03",
+   "mode": "EU",
+   "top_k": 8,
+   "passages": [
+    "AMC1 UAS.OPEN.030(1)",
+    "UAS.OPEN.030",
+    "GM1 UAS.OPEN.030(1)",
+    "AMC1 UAS.OPEN.030(2)(c)",
+    "GM1 UAS.OPEN.030(1) and UAS.OPEN.040(1)",
+    "AMC2 UAS.OPEN.030(2)(b)",
+    "AMC1 UAS.OPEN.020(1) and (2)",
+    "AMC1 UAS.OPEN.040(1)",
+    "Article 4 (2019/947)",
+    "Article 9 (2019/947)",
+    "Article 14 (2019/947)",
+    "UAS.OPEN.020"
+   ],
+   "count": 12,
+   "ranks": {
+    "UAS.OPEN.030": 2,
+    "AMC1 UAS.OPEN.030(1)": 1,
+    "Part 3 (2019/945 Annex)": null
+   }
+  },
+  {
+   "id": "en-04",
+   "mode": "EU",
+   "top_k": 8,
+   "passages": [
+    "GM1 UAS.OPEN.030(1) and UAS.OPEN.040(1)",
+    "UAS.OPEN.040",
+    "GM1 UAS.OPEN.040(4)",
+    "AMC1 UAS.OPEN.040(1)",
+    "UAS.OPEN.030",
+    "AMC1 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)",
+    "AMC1 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)",
+    "AMC1 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)",
+    "Article 4 (2019/947)",
+    "Article 9 (2019/947)",
+    "Article 14 (2019/947)",
+    "UAS.OPEN.020"
+   ],
+   "count": 12,
+   "ranks": {
+    "UAS.OPEN.040": 2
+   }
+  },
+  {
+   "id": "en-05",
+   "mode": "EU",
+   "top_k": 8,
+   "passages": [
+    "UAS.OPEN.020",
+    "STS-01 Attachment A",
+    "UAS.OPEN.030",
+    "UAS.OPEN.070",
+    "UAS.OPEN.040",
+    "AMC2 UAS.OPEN.030(2)(c)",
+    "AMC2 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)",
+    "UAS.STS-01.020",
+    "Article 4 (2019/947)",
+    "Article 9 (2019/947)",
+    "Article 14 (2019/947)"
+   ],
+   "count": 11,
+   "ranks": {
+    "UAS.OPEN.020": 1
+   }
+  },
+  {
+   "id": "en-06",
+   "mode": "EU",
+   "top_k": 8,
+   "passages": [
+    "UAS.OPEN.070",
+    "AMC2 UAS.OPEN.030(2)(c)",
+    "AMC1 UAS.OPEN.030(2)",
+    "UAS.OPEN.030",
+    "GM1 UAS.OPEN.030(2)(c)",
+    "Article 21 (2019/947)",
+    "UAS.OPEN.060",
+    "AMC1 Article 18(e)",
+    "Article 4 (2019/947)",
+    "Article 9 (2019/947)",
+    "Article 14 (2019/947)",
+    "UAS.OPEN.020"
+   ],
+   "count": 12,
+   "ranks": {
+    "UAS.OPEN.070": 1
+   }
+  },
+  {
+   "id": "en-07",
+   "mode": "EU",
+   "top_k": 14,
+   "passages": [
+    "Part 1 (2019/945 Annex)",
+    "Part 2 (2019/945 Annex)",
+    "Part 3 (2019/945 Annex)",
+    "Part 17 (2019/945 Annex)",
+    "Part 5 (2019/945 Annex)",
+    "Part 4 (2019/945 Annex)",
+    "Part 16 (2019/945 Annex)",
+    "Part 2 (2019/945 Annex)",
+    "Part 3 (2019/945 Annex)",
+    "Part 2 (2019/945 Annex)",
+    "Part 3 (2019/945 Annex)",
+    "Part 4 (2019/945 Annex)",
+    "Part 4 (2019/945 Annex)",
+    "Part 2 (2019/945 Annex)",
+    "Article 4 (2019/947)",
+    "Article 9 (2019/947)",
+    "Article 14 (2019/947)",
+    "UAS.OPEN.020"
+   ],
+   "count": 18,
+   "ranks": {
+    "Part 1 (2019/945 Annex)": 1
+   }
+  },
+  {
+   "id": "en-08",
+   "mode": "EU",
+   "top_k": 8,
+   "passages": [
+    "Article 4 (2019/947)",
+    "Article 20 (2019/947)",
+    "Article 3 (2019/947)",
+    "GM1 Article 3",
+    "UAS.LUC.010",
+    "UAS.OPEN.060",
+    "Article 40 (2019/945)",
+    "UAS.OPEN.010",
+    "Article 9 (2019/947)",
+    "Article 14 (2019/947)",
+    "UAS.OPEN.020"
+   ],
+   "count": 11,
+   "ranks": {
+    "UAS.OPEN.060": 6
+   }
+  },
+  {
+   "id": "en-09",
+   "mode": "EU",
+   "top_k": 8,
+   "passages": [
+    "Article 12 (2019/947)",
+    "Article 3 (2019/947)",
+    "Article 4 (2019/947)",
+    "GM2 UAS.SPEC.030(2)",
+    "GM1 Article 3",
+    "Article 5 (2019/947)",
+    "UAS.SPEC.030",
+    "AMC1 Article 12(2)(a)",
+    "Article 9 (2019/947)",
+    "Article 14 (2019/947)",
+    "UAS.OPEN.020"
+   ],
+   "count": 11,
+   "ranks": {
+    "Article 5 (2019/947)": 6,
+    "Article 12 (2019/947)": 1,
+    "UAS.SPEC.020": null
+   }
+  },
+  {
+   "id": "en-10",
+   "mode": "EU",
+   "top_k": 8,
+   "passages": [
+    "UAS.SPEC.030",
+    "GM1 AMC1 Article 11",
+    "Article 11 (2019/947)",
+    "GM1 AMC1 Article 11",
+    "AMC1 Article 11 Annex A",
+    "AMC1bis Article 11",
+    "UAS.SPEC.010",
+    "AMC2 Article 11",
+    "Article 4 (2019/947)",
+    "Article 9 (2019/947)",
+    "Article 14 (2019/947)",
+    "UAS.OPEN.020"
+   ],
+   "count": 12,
+   "ranks": {
+    "Article 5 (2019/947)": null,
+    "Article 11 (2019/947)": 3,
+    "Madde 9": null
+   }
+  },
+  {
+   "id": "x-01",
+   "mode": "EU",
+   "top_k": 8,
+   "passages": [
+    "UAS.OPEN.020",
+    "AMC1 UAS.OPEN.020(1) and (2)",
+    "GM1 UAS.OPEN.030(1) and UAS.OPEN.040(1)",
+    "AMC1 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)",
+    "GM1 UAS.OPEN.040(4)",
+    "AMC1 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)",
+    "Article 20 (2019/947)",
+    "UAS.OPEN.010",
+    "Article 4 (2019/947)",
+    "Article 9 (2019/947)",
+    "Article 14 (2019/947)"
+   ],
+   "count": 11,
+   "ranks": {
+    "UAS.OPEN.020": 1
+   }
+  },
+  {
+   "id": "x-02",
+   "mode": "TR",
+   "top_k": 8,
+   "passages": [
+    "Madde 4",
+    "Madde 6",
+    "Madde 15",
+    "Madde 4",
+    "Madde 12",
+    "Madde 14",
+    "Madde 4",
+    "Madde 21",
+    "Madde 11",
+    "Madde 8",
+    "Madde 23"
+   ],
+   "count": 11,
+   "ranks": {
+    "Madde 6": 2,
+    "Madde 15": 3
+   }
+  },
+  {
+   "id": "x-03",
+   "mode": "compare",
+   "top_k": 12,
+   "passages": [
+    "Madde 17",
+    "Madde 15",
+    "Madde 15",
+    "Madde 6",
+    "Madde 29",
+    "Madde 23",
+    "Madde 11",
+    "Madde 8",
+    "Madde 12",
+    "Article 9 (2019/947)",
+    "GM1 UAS.SPEC.050(1)(a)(iv)",
+    "GM1 Article 2(11)",
+    "GM1 Article 9",
+    "Article 8 (2019/947)",
+    "AMC1 Article 11 Annex D",
+    "Article 4 (2019/947)",
+    "Article 14 (2019/947)",
+    "UAS.OPEN.020"
+   ],
+   "count": 18,
+   "ranks": {
+    "Madde 17": 1,
+    "Article 9 (2019/947)": 10
+   }
+  },
+  {
+   "id": "x-04",
+   "mode": "TR",
+   "top_k": 8,
+   "passages": [
+    "Madde 21",
+    "Madde 4",
+    "Madde 7",
+    "Madde 22",
+    "Madde 4",
+    "Madde 15",
+    "Madde 23",
+    "Madde 23",
+    "Madde 11",
+    "Madde 8",
+    "Madde 12"
+   ],
+   "count": 11,
+   "ranks": {
+    "Madde 23": 7
+   }
+  },
+  {
+   "id": "r-01",
+   "mode": "TR",
+   "top_k": 8,
+   "passages": [
+    "Madde 15",
+    "Madde 15",
+    "Madde 17",
+    "Madde 16",
+    "Madde 29",
+    "Madde 25",
+    "Madde 22",
+    "Madde 8",
+    "Madde 11",
+    "Madde 12",
+    "Madde 23"
+   ],
+   "count": 11,
+   "ranks": {}
+  },
+  {
+   "id": "r-02",
+   "mode": "EU",
+   "top_k": 8,
+   "passages": [
+    "AMC1bis Article 11",
+    "Article 15 (2019/947)",
+    "AMC2 Article 11",
+    "UAS.OPEN.060",
+    "AMC1 Article 11",
+    "GM1 UAS.OPEN.060(1)(b)",
+    "AMC1bis Article 11",
+    "GM1 UAS.OPEN.010",
+    "Article 4 (2019/947)",
+    "Article 9 (2019/947)",
+    "Article 14 (2019/947)",
+    "UAS.OPEN.020"
+   ],
+   "count": 12,
+   "ranks": {}
+  },
+  {
+   "id": "r-03",
+   "mode": "TR",
+   "top_k": 14,
+   "passages": [
+    "Madde 27",
+    "Madde 24",
+    "Madde 23",
+    "Madde 4",
+    "Madde 6",
+    "Madde 2",
+    "Madde 15",
+    "Madde 4",
+    "Madde 8",
+    "Madde 11",
+    "Geçici Madde 1",
+    "Madde 1",
+    "Madde 17",
+    "Madde 16",
+    "Madde 12"
+   ],
+   "count": 15,
+   "ranks": {}
+  },
+  {
+   "id": "r-04",
+   "mode": "EU",
+   "top_k": 8,
+   "passages": [
+    "GM1 UAS.SPEC.050(1)(a)(iv)",
+    "Recitals (2019/947)",
+    "Article 14 (2019/947)",
+    "GM1 Article 14(1)",
+    "AMC1 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)",
+    "GM3 Article 15(1)",
+    "UAS.OPEN.020",
+    "Article 14 (2019/947)",
+    "Article 4 (2019/947)",
+    "Article 9 (2019/947)"
+   ],
+   "count": 10,
+   "ranks": {}
+  },
+  {
+   "id": "j-01",
+   "mode": "TR",
+   "top_k": 8,
+   "passages": [
+    "Madde 11",
+    "Madde 15",
+    "Madde 23",
+    "Madde 8",
+    "Madde 4",
+    "Madde 12",
+    "Madde 12",
+    "Madde 13"
+   ],
+   "count": 8,
+   "ranks": {
+    "Madde 15": 2,
+    "Article 4 (2019/947)": null
+   }
+  },
+  {
+   "id": "j-02",
+   "mode": "EU",
+   "top_k": 8,
+   "passages": [
+    "AMC1 UAS.OPEN.020(1) and (2)",
+    "UAS.OPEN.020",
+    "Recitals (2019/947)",
+    "Part 1 (2019/945 Annex)",
+    "Article 20 (2019/947)",
+    "Article 14 (2019/947)",
+    "AMC1 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)",
+    "GM1 UAS.SPEC.050(1)(a)(iv)",
+    "Article 4 (2019/947)",
+    "Article 9 (2019/947)"
+   ],
+   "count": 10,
+   "ranks": {
+    "UAS.OPEN.020": 2,
+    "Part 1 (2019/945 Annex)": 4
+   }
+  },
+  {
+   "id": "j-03",
+   "mode": "TR",
+   "top_k": 8,
+   "passages": [
+    "Madde 15",
+    "Madde 17",
+    "Madde 15",
+    "Madde 6",
+    "Madde 8",
+    "Madde 23",
+    "Madde 25",
+    "Madde 10",
+    "Madde 11",
+    "Madde 12"
+   ],
+   "count": 10,
+   "ranks": {
+    "Madde 17": 2
+   }
+  },
+  {
+   "id": "k-01",
+   "mode": "compare",
+   "top_k": 12,
+   "passages": [
+    "Madde 15",
+    "Madde 15",
+    "Madde 10",
+    "Madde 29",
+    "Madde 6",
+    "Madde 4",
+    "Madde 11",
+    "Madde 8",
+    "Madde 12",
+    "Madde 23",
+    "AMC1 Article 11 Annex D",
+    "UAS.OPEN.020",
+    "AMC1bis Article 11",
+    "UAS.OPEN.060",
+    "AMC1bis Article 11 Annex D",
+    "AMC2 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)",
+    "Article 4 (2019/947)",
+    "Article 9 (2019/947)",
+    "Article 14 (2019/947)"
+   ],
+   "count": 19,
+   "ranks": {
+    "Article 41 (2019/945)": null
+   }
+  },
+  {
+   "id": "k-02",
+   "mode": "compare",
+   "top_k": 12,
+   "passages": [
+    "Madde 29",
+    "Madde 24",
+    "Madde 4",
+    "Madde 10",
+    "Madde 3",
+    "Geçici Madde 2",
+    "Madde 11",
+    "Madde 8",
+    "Madde 15",
+    "Madde 12",
+    "Madde 23",
+    "UAS.OPEN.030",
+    "AMC1 UAS.OPEN.030(2)",
+    "AMC2 UAS.OPEN.030(2)(c)",
+    "AMC1 UAS.OPEN.030(2)(c)",
+    "AMC2 UAS.OPEN.030(2)(b)",
+    "AMC1 UAS.OPEN.030(2)(b)",
+    "Article 4 (2019/947)",
+    "Article 9 (2019/947)",
+    "Article 14 (2019/947)",
+    "UAS.OPEN.020"
+   ],
+   "count": 21,
+   "ranks": {
+    "Madde 10": 4,
+    "Madde 15": 9
+   }
+  },
+  {
+   "id": "k-03",
+   "mode": "compare",
+   "top_k": 12,
+   "passages": [
+    "Article 41 (2019/945)",
+    "Article 21 (2019/947)",
+    "AMC1 Article 13(2)",
+    "UAS.OPEN.070",
+    "AMC1 Article 11 Annex E",
+    "AMC2 UAS.OPEN.030(2)(c)",
+    "Article 4 (2019/947)",
+    "Article 9 (2019/947)",
+    "Article 14 (2019/947)",
+    "UAS.OPEN.020",
+    "Madde 15",
+    "Madde 15",
+    "Madde 6",
+    "Madde 12",
+    "Madde 10",
+    "Madde 11",
+    "Madde 8",
+    "Madde 23"
+   ],
+   "count": 18,
+   "ranks": {
+    "Madde 15": 11
+   }
+  },
+  {
+   "id": "k-04",
+   "mode": "compare",
+   "top_k": 12,
+   "passages": [
+    "Madde 15",
+    "Madde 15",
+    "Madde 29",
+    "Madde 6",
+    "Madde 10",
+    "Madde 17",
+    "Madde 11",
+    "Madde 8",
+    "Madde 12",
+    "Madde 23",
+    "UAS.OPEN.030",
+    "AMC2 UAS.OPEN.030(2)(c)",
+    "AMC1 UAS.OPEN.030(2)",
+    "AMC1 UAS.OPEN.030(2)(c)",
+    "GM1 UAS.OPEN.030(1) and UAS.OPEN.040(1)",
+    "GM1 UAS.OPEN.030(2)(c)",
+    "Article 4 (2019/947)",
+    "Article 9 (2019/947)",
+    "Article 14 (2019/947)",
+    "UAS.OPEN.020"
+   ],
+   "count": 20,
+   "ranks": {
+    "Madde 15": 1,
+    "UAS.OPEN.030": 11
+   }
+  },
+  {
+   "id": "k-05",
+   "mode": "compare",
+   "top_k": 12,
+   "passages": [
+    "Madde 8",
+    "Madde 24",
+    "Madde 23",
+    "Madde 27",
+    "Madde 19",
+    "Madde 28",
+    "Madde 11",
+    "Madde 15",
+    "Madde 12",
+    "Part 1 (2019/945 Annex)",
+    "GM1 UAS.OPEN.040(4)",
+    "AMC1 UAS.OPEN.020(1) and (2)",
+    "UAS.OPEN.020",
+    "AMC1 UAS.OPEN.020(5)(c) and (d), UAS.OPEN.030(3) and UAS.OPEN.040(4)(c),(d) and (e)",
+    "GM2 Article 16",
+    "Article 4 (2019/947)",
+    "Article 9 (2019/947)",
+    "Article 14 (2019/947)"
+   ],
+   "count": 18,
+   "ranks": {
+    "Madde 8": 1,
+    "Part 1 (2019/945 Annex)": 10
+   }
+  }
+ ]
+}
