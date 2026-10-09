@@ -1,0 +1,1043 @@
+{
+ "config": {
+  "name": "H",
+  "generation_model": "gemini-3.5-flash-lite",
+  "thinking_level": "default (minimal)",
+  "judge_model": "gemini-3.5-flash-lite",
+  "top_k": 8,
+  "list_top_k": 14,
+  "compare_per_side": 6,
+  "core_sections": "off",
+  "candidates": 30,
+  "rrf_k": 60,
+  "timeout_s": 60.0,
+  "prompt_sha": "b5f911baaf76",
+  "judge_prompt_sha": "4f05e274f182",
+  "questions": "notes/holdout.yaml",
+  "questions_sha": "918046e2fd7a",
+  "git": "1b8fc53",
+  "note": "held-out questions, final configuration (F3), single run"
+ },
+ "started": "2026-10-09T09:31:33+00:00",
+ "status": "complete",
+ "calls": {
+  "embedding": 5,
+  "embedding_cached": 0,
+  "generation": 5,
+  "judge": 5,
+  "retries": 0
+ },
+ "results": [
+  {
+   "id": "h-01",
+   "lang": "tr",
+   "question": "Dji mavic pro 3 dronum var. hangi ehliyeti almam lazım ?",
+   "detection": {
+    "detected_mode": null,
+    "mode": "TR",
+    "mode_source": "default",
+    "accepted": [
+     "TR",
+     "none"
+    ],
+    "ok": true,
+    "matched_terms": []
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 15",
+     "Geçici Madde 3",
+     "Madde 6",
+     "Madde 8",
+     "Madde 15",
+     "Madde 28",
+     "Madde 19",
+     "Madde 17",
+     "Madde 2",
+     "Madde 12",
+     "Madde 3",
+     "Madde 14",
+     "Madde 29",
+     "Madde 10"
+    ],
+    "count": 14,
+    "ranks": {
+     "Madde 15": 1,
+     "Madde 8": 4
+    },
+    "list_question": true,
+    "top_k": 14
+   },
+   "citations": {
+    "places": {
+     "Madde 15": [
+      "case 'Pilot Lisans Seviyeleri / Amatör (Ticari olmayan) operasyonlar'",
+      "case 'Pilot Lisans Seviyeleri / Ticari operasyonlar'",
+      "case 'Pilot Lisans Seviyeleri / Yüksek riskli veya görüş hattı dışı (BVLOS) operasyonlar'"
+     ],
+     "Madde 8": []
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "lisans dronun modeline, sınıfına ya da ağırlığına göre değil operasyonun türüne göre belirlenir (M.15(2); M.8(4))",
+     "status": "present",
+     "quote": "Cevap şunlara bağlı:\n- Operasyonun amacı nedir? (Amatör (Ticari değil) / Ticari amaçlı / Yüksek riskli / BVLOS)",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "ticari olmayan uçuş için P0, ticari uçuş için P1 (M.15(2)(a)-(b))",
+     "status": "present",
+     "quote": "- Amatör (Ticari olmayan) operasyonlar — P0 Lisansı: Ticari amaç taşımayan amatör operasyonlar için asgari P0 İHA pilot lisansı alınması gerekir. [3][5]\n- Ticari operasyonlar — P1 Lisansı: Ticari operasyonlar ve uçuşlar için asgari P1 İHA pilot lisansı alınması gerekir. [3][5]",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "görüş hattı dışı ve yüksek riskli operasyonlar için P2 (M.15(2)(c))",
+     "status": "present",
+     "quote": "- Yüksek riskli veya görüş hattı dışı (BVLOS) operasyonlar — P2 Lisansı: Görüş hattı dışı (BVLOS) operasyonlar ile kalabalık üstü uçuş gibi yüksek riskli operasyonlar P2 lisansı kapsamında icra edilir. [3][5]",
+     "note": ""
+    },
+    {
+     "id": "s2",
+     "kind": "should",
+     "text": "eğitim ve sınavdan sonra diploma lisansı KDM-ORG'dan; uçmak için ayrıca KDM-ERP'den operasyonel lisans gerekir (M.15(4))",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [
+     "Operasyonun amacı nedir?"
+    ],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "TR",
+    "retrieval_ms": 522,
+    "generation_ms": 3417,
+    "prompt_tokens": 7446,
+    "output_tokens": 833
+   },
+   "answer": {
+    "refused": false,
+    "text": "Cevap şunlara bağlı:\n- Operasyonun amacı nedir? (Amatör (Ticari değil) / Ticari amaçlı / Yüksek riskli / BVLOS)\n\nPilot Lisans Seviyeleri\n- Amatör (Ticari olmayan) operasyonlar — P0 Lisansı: Ticari amaç taşımayan amatör operasyonlar için asgari P0 İHA pilot lisansı alınması gerekir. [3][5]\n- Ticari operasyonlar — P1 Lisansı: Ticari operasyonlar ve uçuşlar için asgari P1 İHA pilot lisansı alınması gerekir. [3][5]\n- Yüksek riskli veya görüş hattı dışı (BVLOS) operasyonlar — P2 Lisansı: Görüş hattı dışı (BVLOS) operasyonlar ile kalabalık üstü uçuş gibi yüksek riskli operasyonlar P2 lisansı kapsamında icra edilir. [3][5]\n\nAsgari Yaş Sınırı\n- P0 lisansı gerektiren operasyonlar — Asgari 10 yaş: P0 lisansı gerektiren operasyonlar için İHA pilotu asgari on yaşını doldurmuş olmalıdır. [8]\n- P1 veya P2 lisansı gerektiren operasyonlar — Asgari 18 yaş: P1 veya P2 lisansı gerektiren operasyonlar için İHA pilotu asgari on sekiz yaşını doldurmuş olmalıdır. [8]\n\nKaynaklarda olmayanlar:\n- Kaynaklarda DJI Mavic Pro 3 modeline ait kütle, sınıf etiketi ve teknik özellikler yer almamaktadır.\n- Sigorta zorunluluğu ve tutarları kaynaklarda belirtilmemektedir.",
+    "structured": {
+     "answerable": true,
+     "depends_on": [
+      {
+       "question": "Operasyonun amacı nedir?",
+       "options": [
+        {
+         "label": "Amatör (Ticari değil)",
+         "fact": "Operasyon ticari amaç taşımamaktadır."
+        },
+        {
+         "label": "Ticari amaçlı",
+         "fact": "Operasyon ticari amaç taşımaktadır."
+        },
+        {
+         "label": "Yüksek riskli / BVLOS",
+         "fact": "Operasyon görüş hattı dışı (BVLOS), kalabalık üstü veya yüksek riskli kapsamdadır."
+        }
+       ]
+      }
+     ],
+     "sections": [
+      {
+       "topic": "Pilot Lisans Seviyeleri",
+       "text": null,
+       "cases": [
+        {
+         "condition": "Amatör (Ticari olmayan) operasyonlar",
+         "verdict": "P0 Lisansı",
+         "text": "Ticari amaç taşımayan amatör operasyonlar için asgari P0 İHA pilot lisansı alınması gerekir.",
+         "citations": [
+          3,
+          5
+         ]
+        },
+        {
+         "condition": "Ticari operasyonlar",
+         "verdict": "P1 Lisansı",
+         "text": "Ticari operasyonlar ve uçuşlar için asgari P1 İHA pilot lisansı alınması gerekir.",
+         "citations": [
+          3,
+          5
+         ]
+        },
+        {
+         "condition": "Yüksek riskli veya görüş hattı dışı (BVLOS) operasyonlar",
+         "verdict": "P2 Lisansı",
+         "text": "Görüş hattı dışı (BVLOS) operasyonlar ile kalabalık üstü uçuş gibi yüksek riskli operasyonlar P2 lisansı kapsamında icra edilir.",
+         "citations": [
+          3,
+          5
+         ]
+        }
+       ],
+       "citations": [
+        3,
+        5
+       ]
+      },
+      {
+       "topic": "Asgari Yaş Sınırı",
+       "text": null,
+       "cases": [
+        {
+         "condition": "P0 lisansı gerektiren operasyonlar",
+         "verdict": "Asgari 10 yaş",
+         "text": "P0 lisansı gerektiren operasyonlar için İHA pilotu asgari on yaşını doldurmuş olmalıdır.",
+         "citations": [
+          8
+         ]
+        },
+        {
+         "condition": "P1 veya P2 lisansı gerektiren operasyonlar",
+         "verdict": "Asgari 18 yaş",
+         "text": "P1 veya P2 lisansı gerektiren operasyonlar için İHA pilotu asgari on sekiz yaşını doldurmuş olmalıdır.",
+         "citations": [
+          8
+         ]
+        }
+       ],
+       "citations": [
+        8
+       ]
+      }
+     ],
+     "not_in_sources": [
+      "Kaynaklarda DJI Mavic Pro 3 modeline ait kütle, sınıf etiketi ve teknik özellikler yer almamaktadır.",
+      "Sigorta zorunluluğu ve tutarları kaynaklarda belirtilmemektedir."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "P0 ve P1 lisansı almak için hangi eğitimler gereklidir?",
+      "P0 ve P1 lisansı başvurularında sağlık raporu isteniyor mu?",
+      "Yeşil, turuncu ve kırmızı bölgelerde uçuş izinleri nasıl alınır?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 3,
+      "section_ref": "Madde 6",
+      "page": 5
+     },
+     {
+      "n": 5,
+      "section_ref": "Madde 15",
+      "page": 10
+     },
+     {
+      "n": 8,
+      "section_ref": "Madde 17",
+      "page": 12
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "Cevap şunlara bağlı:\n- Operasyonun amacı nedir? (Amatör (Ticari değil) / Ticari amaçlı / Yüksek riskli / BVLOS)"
+     },
+     {
+      "id": "m2",
+      "status": "present",
+      "quote": "- Amatör (Ticari olmayan) operasyonlar — P0 Lisansı: Ticari amaç taşımayan amatör operasyonlar için asgari P0 İHA pilot lisansı alınması gerekir. [3][5]\n- Ticari operasyonlar — P1 Lisansı: Ticari operasyonlar ve uçuşlar için asgari P1 İHA pilot lisansı alınması gerekir. [3][5]"
+     },
+     {
+      "id": "s1",
+      "status": "present",
+      "quote": "- Yüksek riskli veya görüş hattı dışı (BVLOS) operasyonlar — P2 Lisansı: Görüş hattı dışı (BVLOS) operasyonlar ile kalabalık üstü uçuş gibi yüksek riskli operasyonlar P2 lisansı kapsamında icra edilir. [3][5]"
+     },
+     {
+      "id": "s2",
+      "status": "absent",
+      "quote": ""
+     }
+    ],
+    "depends_on": [
+     {
+      "number": 1,
+      "already_given": false,
+      "question_quote": ""
+     }
+    ],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "h-02",
+   "lang": "tr",
+   "question": "Yeşil alanlarda uçmak için de izine ihtiyacım var mı ?",
+   "detection": {
+    "detected_mode": null,
+    "mode": "TR",
+    "mode_source": "default",
+    "accepted": [
+     "TR",
+     "none"
+    ],
+    "ok": true,
+    "matched_terms": []
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 12",
+     "Madde 12",
+     "Madde 4",
+     "Madde 6",
+     "Madde 4",
+     "Madde 23",
+     "Madde 21",
+     "Madde 13"
+    ],
+    "count": 8,
+    "ranks": {
+     "Madde 12": 1
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "Madde 12": [
+      "section 'Yeşil Bölge Uçuşları'"
+     ]
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "yeşil bölgede belirlenen irtifa ve şartlar altında operasyonel izin gerekmez (M.12(2)(a))",
+     "status": "present",
+     "quote": "Yeşil bölgelerde, belirlenen irtifa ve şartlar altında operasyonel izne gerek duyulmadan uçuş yapılabilir.",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "P0 ve P1 yeşil bölgede sistem üzerinden ayrıca izin almadan uçar (M.12(7)(b))",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "P2'de yükseklik ya da uzun mesafe gerektirirse koordinasyon, Genel Müdürlük izni ve NOTAM aranır (M.12(7)(c))",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "s2",
+     "kind": "should",
+     "text": "lisansın uçuş zarfı bölgenin tavan irtifasını aşamaz (M.12(6))",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "s3",
+     "kind": "should",
+     "text": "yeşil bölgeler İHATTYS haritasında yayımlanır (M.12(1))",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [
+     "İHA pilot lisansı seviyeniz nedir?"
+    ],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "TR",
+    "retrieval_ms": 477,
+    "generation_ms": 5205,
+    "prompt_tokens": 5675,
+    "output_tokens": 297
+   },
+   "answer": {
+    "refused": false,
+    "text": "Cevap şunlara bağlı:\n- İHA pilot lisansı seviyeniz nedir? (P0 veya P1 / P2 / Basit İHA)\n\nYeşil Bölge Uçuşları\nYeşil bölgelerde, belirlenen irtifa ve şartlar altında operasyonel izne gerek duyulmadan uçuş yapılabilir. [1][2]",
+    "structured": {
+     "answerable": true,
+     "depends_on": [
+      {
+       "question": "İHA pilot lisansı seviyeniz nedir?",
+       "options": [
+        {
+         "label": "P0 veya P1",
+         "fact": "Pilot lisansı seviyesi P0 veya P1'dir."
+        },
+        {
+         "label": "P2",
+         "fact": "Pilot lisansı seviyesi P2'dir."
+        },
+        {
+         "label": "Basit İHA",
+         "fact": "Kullanılan araç Basit İHA'dır."
+        }
+       ]
+      }
+     ],
+     "sections": [
+      {
+       "topic": "Yeşil Bölge Uçuşları",
+       "text": "Yeşil bölgelerde, belirlenen irtifa ve şartlar altında operasyonel izne gerek duyulmadan uçuş yapılabilir.",
+       "cases": [],
+       "citations": [
+        1,
+        2
+       ]
+      }
+     ],
+     "not_in_sources": [],
+     "compare": null,
+     "follow_ups": [
+      "Yeşil bölgelerin sınırları ve irtifa limitleri nereden öğrenilir?",
+      "P2 lisansı için yeşil bölgelerde hangi durumlarda koordinasyon aranır?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "Madde 12",
+      "page": 8
+     },
+     {
+      "n": 2,
+      "section_ref": "Madde 12",
+      "page": 8
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "Yeşil bölgelerde, belirlenen irtifa ve şartlar altında operasyonel izne gerek duyulmadan uçuş yapılabilir."
+     },
+     {
+      "id": "m2",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "s1",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "s2",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "s3",
+      "status": "absent",
+      "quote": ""
+     }
+    ],
+    "depends_on": [
+     {
+      "number": 1,
+      "already_given": false,
+      "question_quote": ""
+     }
+    ],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "h-03",
+   "lang": "en",
+   "question": "What are the top 3 issue for p1 lecience holder ?",
+   "detection": {
+    "detected_mode": null,
+    "mode": "EU",
+    "mode_source": "default",
+    "accepted": [
+     "TR"
+    ],
+    "ok": false,
+    "matched_terms": []
+   },
+   "retrieval": {
+    "passages": [
+     "AMC1 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)",
+     "AMC1 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)",
+     "AMC1 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)",
+     "AMC2 UAS.OPEN.020(4)(b) and UAS.OPEN.040(3)",
+     "AMC1 UAS.LUC.020(3)",
+     "UAS.OPEN.060",
+     "GM1 UAS.LUC.020(3)",
+     "AMC1 UAS.STS-01.030(1)&(3) and UAS.STS-02.030(1)&(3)"
+    ],
+    "count": 8,
+    "ranks": {
+     "Madde 15": null,
+     "Madde 12": null
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "Madde 15": [],
+     "Madde 12": []
+    },
+    "any_expected_cited": false
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": true,
+    "empty_and_explained": null,
+    "false_refusal": true
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "treats P1 as the Turkish commercial UAS pilot licence and answers under SHT-İHA (M.15(2)(b))",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "VLOS only, maximum 120 m height and 3,000 m visual or horizontal distance (M.15(2)(b))",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "night operations allowed with suitable equipment; an observer may be required (M.15(2)(b))",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "s2",
+     "kind": "should",
+     "text": "flying needs the operational licence (KDM-ERP) after the diploma licence (M.15(4))",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "s3",
+     "kind": "should",
+     "text": "green zone without a permit; outside it with a permit (M.12(7)(b))",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "EU",
+    "retrieval_ms": 487,
+    "generation_ms": 5161,
+    "prompt_tokens": 4472,
+    "output_tokens": 102
+   },
+   "answer": {
+    "refused": true,
+    "text": "Not in the sources:\n- The sources do not mention a p1 licence or its specific top issues.",
+    "structured": {
+     "answerable": false,
+     "depends_on": [],
+     "sections": [],
+     "not_in_sources": [
+      "The sources do not mention a p1 licence or its specific top issues."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "What training and examinations are required for remote pilots in the open category?",
+      "What are the responsibilities of the remote pilot before and during a flight?",
+      "What theoretical knowledge subjects must a remote pilot cover?"
+     ]
+    },
+    "citations": []
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "m2",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "s1",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "s2",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "s3",
+      "status": "absent",
+      "quote": ""
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "h-04",
+   "lang": "en",
+   "question": "If ı modify my drone and the weight is changed, should i reapply for register ?",
+   "detection": {
+    "detected_mode": null,
+    "mode": "EU",
+    "mode_source": "default",
+    "accepted": [
+     "EU",
+     "none"
+    ],
+    "ok": true,
+    "matched_terms": []
+   },
+   "retrieval": {
+    "passages": [
+     "GM1 Article 14(1)",
+     "AMC1 UAS.OPEN.020(5)(c) and (d), UAS.OPEN.030(3) and UAS.OPEN.040(4)(c),(d) and (e)",
+     "Article 28 (2019/945)",
+     "UAS.LUC.070",
+     "GM1 UAS.OPEN.020(5)(c) and (d), UAS.OPEN.030(3) and UAS.OPEN.040(4)(c), (d) and (e)",
+     "Article 14 (2019/947)",
+     "AMC1 UAS.LUC.070(2)",
+     "AMC2 UAS.SPEC.030(2)"
+    ],
+    "count": 8,
+    "ranks": {
+     "Article 14 (2019/947)": 6,
+     "AMC1 UAS.OPEN.020(5)(c) and (d), UAS.OPEN.030(3) and UAS.OPEN.040(4)(c),(d) and (e)": 2
+    },
+    "list_question": false,
+    "top_k": 8
+   },
+   "citations": {
+    "places": {
+     "Article 14 (2019/947)": [
+      "section 'Registration Accuracy'"
+     ],
+     "AMC1 UAS.OPEN.020(5)(c) and (d), UAS.OPEN.030(3) and UAS.OPEN.040(4)(c),(d) and (e)": [
+      "section 'Modification Impact'"
+     ]
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "in the open category the operator registers, not each drone (only UA whose design is subject to certification are registered individually) (Art. 14(5), 14(7))",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "an operator not yet registered must register if the modified UA now has an MTOM of 250 g or more, or a sensor able to capture personal data (Art. 14(5)(a))",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "m3",
+     "kind": "must",
+     "text": "a modification that changes the weight outside the manufacturer's specifications invalidates the class (C0-C4) conformity; the class label must be removed and the UA may then only be flown in the specific category (AMC1/GM1 UAS.OPEN.020(5)…, p. 429)",
+     "status": "present",
+     "quote": "Modifications to a UAS with a class identification label that affect weight or performance outside the manufacturer's specifications or instructions are considered modifications that breach compliance. For classes C0 through C3, such modifications invalidate class conformity, require the class label to be removed, and restrict operation to the 'specific' category.",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "registration information must be kept accurate (Art. 14(6))",
+     "status": "present",
+     "quote": "must update registration data when it changes",
+     "note": ""
+    },
+    {
+     "id": "s2",
+     "kind": "should",
+     "text": "payload or original replacement parts allowed by the manufacturer are not a modification (AMC1, p. 429)",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [
+     "What is the class of your drone?"
+    ],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "EU",
+    "retrieval_ms": 489,
+    "generation_ms": 5615,
+    "prompt_tokens": 3154,
+    "output_tokens": 505
+   },
+   "answer": {
+    "refused": false,
+    "text": "The answer depends on:\n- What is the class of your drone? (Class C0, C1, C2, or C3 / Class C4 / Unlabelled / Other)\n\nModification Impact\nModifications to a UAS with a class identification label that affect weight or performance outside the manufacturer's specifications or instructions are considered modifications that breach compliance. For classes C0 through C3, such modifications invalidate class conformity, require the class label to be removed, and restrict operation to the 'specific' category. Changes to class C4 UAS are allowed, and such aircraft can be considered 'privately built' and continue to be operated in subcategory A3 of the 'open' category. [2][5]\n\nRegistration Accuracy\nUAS operators are required to provide accurate information when registering themselves or their certified UAS, and must update registration data when it changes. The sources do not explicitly state that a change in drone weight due to modification requires a completely new operator registration, but operator details and information must be kept accurate. [1][6]\n\nNot in the sources:\n- An explicit procedure or requirement to re-register or reapply for registration specifically due to a change in drone weight caused by a modification.",
+    "structured": {
+     "answerable": true,
+     "depends_on": [
+      {
+       "question": "What is the class of your drone?",
+       "options": [
+        {
+         "label": "Class C0, C1, C2, or C3",
+         "fact": "The drone is in class C0, C1, C2, or C3"
+        },
+        {
+         "label": "Class C4",
+         "fact": "The drone is in class C4"
+        },
+        {
+         "label": "Unlabelled / Other",
+         "fact": "The drone does not have a class identification label"
+        }
+       ]
+      }
+     ],
+     "sections": [
+      {
+       "topic": "Modification Impact",
+       "text": "Modifications to a UAS with a class identification label that affect weight or performance outside the manufacturer's specifications or instructions are considered modifications that breach compliance. For classes C0 through C3, such modifications invalidate class conformity, require the class label to be removed, and restrict operation to the 'specific' category. Changes to class C4 UAS are allowed, and such aircraft can be considered 'privately built' and continue to be operated in subcategory A3 of the 'open' category.",
+       "cases": [],
+       "citations": [
+        2,
+        5
+       ]
+      },
+      {
+       "topic": "Registration Accuracy",
+       "text": "UAS operators are required to provide accurate information when registering themselves or their certified UAS, and must update registration data when it changes. The sources do not explicitly state that a change in drone weight due to modification requires a completely new operator registration, but operator details and information must be kept accurate.",
+       "cases": [],
+       "citations": [
+        1,
+        6
+       ]
+      }
+     ],
+     "not_in_sources": [
+      "An explicit procedure or requirement to re-register or reapply for registration specifically due to a change in drone weight caused by a modification."
+     ],
+     "compare": null,
+     "follow_ups": [
+      "What category can I fly in if my class label is removed?",
+      "What changes are considered maintenance instead of modification?",
+      "How do I update my operator registration details?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 1,
+      "section_ref": "GM1 Article 14(1)",
+      "page": 401
+     },
+     {
+      "n": 2,
+      "section_ref": "AMC1 UAS.OPEN.020(5)(c) and (d), UAS.OPEN.030(3) and UAS.OPEN.040(4)(c),(d) and (e)",
+      "page": 429
+     },
+     {
+      "n": 5,
+      "section_ref": "GM1 UAS.OPEN.020(5)(c) and (d), UAS.OPEN.030(3) and UAS.OPEN.040(4)(c), (d) and (e)",
+      "page": 429
+     },
+     {
+      "n": 6,
+      "section_ref": "Article 14 (2019/947)",
+      "page": 399
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "m2",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "m3",
+      "status": "present",
+      "quote": "Modifications to a UAS with a class identification label that affect weight or performance outside the manufacturer's specifications or instructions are considered modifications that breach compliance. For classes C0 through C3, such modifications invalidate class conformity, require the class label to be removed, and restrict operation to the 'specific' category."
+     },
+     {
+      "id": "s1",
+      "status": "present",
+      "quote": "must update registration data when it changes"
+     },
+     {
+      "id": "s2",
+      "status": "absent",
+      "quote": ""
+     }
+    ],
+    "depends_on": [
+     {
+      "number": 1,
+      "already_given": false,
+      "question_quote": ""
+     }
+    ],
+    "refusal_explained": false
+   }
+  },
+  {
+   "id": "h-05",
+   "lang": "tr",
+   "question": "Türkiye'de ve Avrupa'da drone için sigorta yaptırmak zorunlu mu?",
+   "detection": {
+    "detected_mode": "compare",
+    "mode": "compare",
+    "mode_source": "detected",
+    "accepted": [
+     "both"
+    ],
+    "ok": true,
+    "matched_terms": [
+     "Türkiye",
+     "Avrupa"
+    ]
+   },
+   "retrieval": {
+    "passages": [
+     "Madde 5",
+     "Madde 11",
+     "Madde 24",
+     "Madde 23",
+     "Madde 10",
+     "Madde 23",
+     "GM1 UAS.SPEC.050(1)(a)(iv)",
+     "Article 14 (2019/947)",
+     "GM1 UAS.SPEC.050(1)(a)(iv)",
+     "GM1 Article 2(11)",
+     "Article 14 (2019/947)",
+     "AMC1 Article 11 Annex D"
+    ],
+    "count": 12,
+    "ranks": {
+     "Article 14 (2019/947)": 8,
+     "UAS.SPEC.020": null,
+     "UAS.SPEC.030": null
+    },
+    "list_question": false,
+    "top_k": 12
+   },
+   "citations": {
+    "places": {
+     "Article 14 (2019/947)": [
+      "compare 'Sigorta' EU"
+     ],
+     "UAS.SPEC.020": [],
+     "UAS.SPEC.030": []
+    },
+    "any_expected_cited": true
+   },
+   "refusal": {
+    "should_refuse": false,
+    "refused_flag": false,
+    "empty_and_explained": null,
+    "false_refusal": false
+   },
+   "facts": [
+    {
+     "id": "m1",
+     "kind": "must",
+     "text": "Türkiye: SHT-İHA'da sigorta zorunluluğuna ilişkin hüküm yok; cevap bunu kaynakta yok olarak söyler, uydurmaz",
+     "status": "present",
+     "quote": "Türkiye'deki kaynaklarda sigorta zorunluluğu konusunda herhangi bir düzenleme bulunmamaktadır.",
+     "note": ""
+    },
+    {
+     "id": "m2",
+     "kind": "must",
+     "text": "AB: 2019/947 genel bir sigorta zorunluluğu koymaz; sigorta Birlik ya da ulusal hukuk gerektiriyorsa aranır (kayıtta poliçe numarası yalnız bu durumda: Art. 14(2)(d))",
+     "status": "present",
+     "quote": "AB: Kayıt sistemleri, birlik veya ulusal hukuk gerektiriyorsa sigorta poliçesi numarası için veri alanları sağlar. [11]",
+     "note": ""
+    },
+    {
+     "id": "s1",
+     "kind": "should",
+     "text": "specific kategoride beyan ve izinde uygun sigortanın olacağı teyit edilir, yine 'gerekiyorsa' (UAS.SPEC.020(2)(d), UAS.SPEC.030(3)(f))",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "s2",
+     "kind": "should",
+     "text": "üye devletlerin ulusal sigorta kuralları farklı olabilir (AMC1 UAS.OPEN.020(4)(b), p. 427)",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    },
+    {
+     "id": "s3",
+     "kind": "should",
+     "text": "üye devlet kayıtta poliçenin bitiş tarihini isteyebilir (GM1 Article 14(1), p. 401)",
+     "status": "absent",
+     "quote": "",
+     "note": ""
+    }
+   ],
+   "depends_on": {
+    "questions": [],
+    "already_given": []
+   },
+   "latency": {
+    "mode": "compare",
+    "retrieval_ms": 473,
+    "generation_ms": 5511,
+    "prompt_tokens": 6618,
+    "output_tokens": 336
+   },
+   "answer": {
+    "refused": false,
+    "text": "Temel farklar:\n- Türkiye'deki kaynaklarda sigorta zorunluluğu konusunda herhangi bir düzenleme bulunmamaktadır.\n- Avrupa Birliği kaynaklarında ise ulusal veya birlik hukukunun gerektirmesi halinde sigorta poliçesi numarasının kayıt sistemine girilmesi gerektiği belirtilmekte ancak sigortanın doğrudan zorunlu olup olmadığı net olarak açıklanmamaktadır.\n\nSigorta\n- AB: Kayıt sistemleri, birlik veya ulusal hukuk gerektiriyorsa sigorta poliçesi numarası için veri alanları sağlar. [11]\n\nKaynaklarda olmayanlar:\n- Türkiye mevzuatında sigorta zorunluluğuna dair herhangi bir hüküm yer almamaktadır.\n- Avrupa Birliği mevzuatında sigorta yaptırmanın zorunlu olup olmadığına ve sigorta poliçesi tutarlarına dair detaylar yer almamaktadır.",
+    "structured": {
+     "answerable": true,
+     "depends_on": [],
+     "sections": [],
+     "not_in_sources": [
+      "Türkiye mevzuatında sigorta zorunluluğuna dair herhangi bir hüküm yer almamaktadır.",
+      "Avrupa Birliği mevzuatında sigorta yaptırmanın zorunlu olup olmadığına ve sigorta poliçesi tutarlarına dair detaylar yer almamaktadır."
+     ],
+     "compare": {
+      "key_differences": [
+       "Türkiye'deki kaynaklarda sigorta zorunluluğu konusunda herhangi bir düzenleme bulunmamaktadır.",
+       "Avrupa Birliği kaynaklarında ise ulusal veya birlik hukukunun gerektirmesi halinde sigorta poliçesi numarasının kayıt sistemine girilmesi gerektiği belirtilmekte ancak sigortanın doğrudan zorunlu olup olmadığı net olarak açıklanmamaktadır."
+      ],
+      "rows": [
+       {
+        "topic": "Sigorta",
+        "TR": null,
+        "EU": {
+         "text": "Kayıt sistemleri, birlik veya ulusal hukuk gerektiriyorsa sigorta poliçesi numarası için veri alanları sağlar.",
+         "citations": [
+          11
+         ]
+        }
+       }
+      ]
+     },
+     "follow_ups": [
+      "Türkiye'de drone kayıt işlemleri nasıl yapılır?",
+      "Avrupa'da drone operatör kaydı hangi durumlarda zorunludur?"
+     ]
+    },
+    "citations": [
+     {
+      "n": 11,
+      "section_ref": "Article 14 (2019/947)",
+      "page": 399
+     }
+    ]
+   },
+   "judge": {
+    "facts": [
+     {
+      "id": "m1",
+      "status": "present",
+      "quote": "Türkiye'deki kaynaklarda sigorta zorunluluğu konusunda herhangi bir düzenleme bulunmamaktadır."
+     },
+     {
+      "id": "m2",
+      "status": "present",
+      "quote": "AB: Kayıt sistemleri, birlik veya ulusal hukuk gerektiriyorsa sigorta poliçesi numarası için veri alanları sağlar. [11]"
+     },
+     {
+      "id": "s1",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "s2",
+      "status": "absent",
+      "quote": ""
+     },
+     {
+      "id": "s3",
+      "status": "absent",
+      "quote": ""
+     }
+    ],
+    "depends_on": [],
+    "refusal_explained": null
+   }
+  }
+ ],
+ "calls_total": {
+  "embedding": 5,
+  "embedding_cached": 0,
+  "generation": 5,
+  "judge": 5,
+  "retries": 0
+ }
+}

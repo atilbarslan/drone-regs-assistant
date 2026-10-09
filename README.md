@@ -40,9 +40,19 @@ flatters the system; the held-out row below uses questions that were not seen wh
 model is not deterministic: two runs of the same configuration differed by 4 required facts, so
 small differences are noise.
 
-| Held-out (5 questions, not seen while tuning) | — |
+| Held-out: 5 questions written after tuning, one run | Result |
 |---|---|
-| Required facts in the answer | to come |
+| Jurisdiction detected correctly | 4/5 |
+| Required facts in the answer | 6/11 |
+| Facts contradicted | 0 |
+| Out-of-scope questions refused | none in this set |
+| Answerable questions refused | 1/5 |
+
+Five questions are a small sample (one fact is 9 %), but the drop from 48/59 to 6/11 is the
+honest measure: the "current" numbers above were tuned on the questions they are measured with.
+On the held-out set, a misspelled English question about the Turkish P1 licence was not
+recognised as Turkish, was searched in the EU text and refused; the other misses were facts
+left out of answers built on the right articles. Results: `eval/HOLDOUT.md`.
 
 A limit of the free tier: the stronger model on the same account (gemini-3.8-flash, 20 requests
 a day) could not be compared. On two days, 35 of its 36 requests to answer the questions the
