@@ -115,6 +115,7 @@ def summary_table(runs: list[dict]) -> list[str]:
         "| Ölçü | " + " | ".join(names) + " |",
         "|---|" + "---|" * len(names),
         line("Soru (hata)", [f"{s['questions']} ({s['errors']})" for s in rows]),
+        line("Anahtarı değişip yeniden puanlanan", [", ".join(r["id"] for r in run["results"] if r.get("key_changed")) or "—" for run in runs]),
         line("Tespit doğru", [f"{s['detection_ok']}/{s['questions'] - s['errors']}" for s in rows]),
         line("Getirme: beklenen maddeden en az biri", [f"{s['retrieved_any']}/{s['with_sources']}" for s in rows]),
         line("Getirme: beklenen maddelerin hepsi", [f"{s['retrieved_all']}/{s['with_sources']}" for s in rows]),
@@ -190,7 +191,7 @@ def detail_table(run: dict) -> list[str]:
         dep = r["depends_on"]
         gen = r["latency"]["generation_ms"]
         out.append(
-            f"| {r['id']} | {'✓' if d['ok'] else '✗'} {d['detected_mode'] or 'null'}→{d['mode']} "
+            f"| {r['id']}{' †' if r.get('key_changed') else ''} | {'✓' if d['ok'] else '✗'} {d['detected_mode'] or 'null'}→{d['mode']} "
             f"| {'liste' if ret['list_question'] else ''} {ret['count']} | {rank_text(ret['ranks'])} "
             f"| {'' if cited is None else ('✓' if cited else '✗')} | {facts_text(r['facts'], 'must')} "
             f"| {facts_text(r['facts'], 'should')} | {refusal} "
@@ -265,6 +266,7 @@ def write(runs: list[dict], detail: dict) -> str:
         "",
         f"## Soru bazında — {detail['config']['name']}",
         "",
+        "† anahtar değişti; kayıtlı cevap yeni anahtarla yeniden puanlandı (`eval/rescore.py`). "
         "must/should: ✓ var · ✗ yok · ‼ çelişki · ? doğrulanamadı. Sıra: beklenen maddenin "
         "modele verilen parçalar arasındaki yeri (1 = ilk).",
         "",

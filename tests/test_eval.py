@@ -254,3 +254,26 @@ def test_report_renders_a_run():
     text = report.write([run], run)
     assert "| Tespit doğru | 1/1 |" in text
     assert "tr-02 | hata: generation: timeout" in text
+
+
+def test_rescore_recomputes_from_the_stored_answer():
+    from eval.rescore import rescored
+
+    structured_answer = structured(sections=[section("Yükseklik", "Azami 120 m.", [2])])
+    record = {
+        "id": "j-01",
+        "answer": {"text": "Yükseklik\nAzami 120 m. [2]", "structured": structured_answer},
+        "retrieval": {"passages": ["Madde 12", "Madde 15"], "ranks": {}, "count": 2},
+        "depends_on": {"questions": [], "already_given": []},
+    }
+    q = {
+        "expected_sources": [{"source_id": "shgm-sht-iha", "section_ref": "Madde 15"}],
+        "facts": [{"id": "m1", "kind": "must", "text": "120 m"}],
+    }
+    verdict = {"facts": [{"id": "m1", "status": "present", "quote": "Azami 120 m."}]}
+
+    new = rescored(record, q, verdict)
+
+    assert new["retrieval"]["ranks"] == {"Madde 15": 2}
+    assert new["citations"]["places"] == {"Madde 15": ["section 'Yükseklik'"]}
+    assert new["facts"][0]["status"] == "present"
