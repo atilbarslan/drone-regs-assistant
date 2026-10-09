@@ -327,6 +327,44 @@ def clean_answer(
     return cleaned, used
 
 
+# The prompt calls the sources "passages"; the model sometimes copies the word into the answer
+# ("passages metinlerinde"). Readers know them as sources. Plural Turkish forms keep their
+# suffix ("pasajlarda" → "kaynaklarda"); singular ones follow the consonant change of "kaynak".
+_TR_SINGULAR = {
+    "pasaj": "kaynak", "pasajda": "kaynakta", "pasajdan": "kaynaktan", "pasaja": "kaynağa",
+    "pasajı": "kaynağı", "pasajın": "kaynağın", "pasajında": "kaynağında",
+    "pasajındaki": "kaynağındaki", "pasajdaki": "kaynaktaki",
+}  # fmt: skip
+_INTERNAL = re.compile(r"\b(passages?|pasajlar\w*|pasaj\w*)\b", re.IGNORECASE)
+
+
+def _replace_internal(match: re.Match, lang: str) -> str:
+    word = match.group(0)
+    low = word.casefold()
+    if low.startswith("passage"):
+        new = "kaynak" if lang == "tr" else ("sources" if low.endswith("s") else "source")
+    elif low.startswith("pasajlar"):
+        new = "kaynaklar" + low[len("pasajlar") :]
+    else:
+        new = _TR_SINGULAR.get(low, "kaynak")
+    return new[0].upper() + new[1:] if word[0].isupper() else new
+
+
+def scrub_internal_terms(answer: StructuredAnswer, lang: str) -> StructuredAnswer:
+    """Replace the prompt's word for the sources wherever the answer uses it."""
+
+    def walk(value):
+        if isinstance(value, str):
+            return _INTERNAL.sub(lambda m: _replace_internal(m, lang), value)
+        if isinstance(value, list):
+            return [walk(v) for v in value]
+        if isinstance(value, dict):
+            return {k: walk(v) for k, v in value.items()}
+        return value
+
+    return StructuredAnswer.model_validate(walk(answer.model_dump()))
+
+
 # --- presentation ----------------------------------------------------------------------------
 
 LABELS = {
@@ -551,6 +589,7 @@ async def answer_question(
             f"reply does not match the schema ({exc.error_count()} errors)"
         ) from exc
     answer, used = clean_answer(raw, hits, used_mode, facts)
+    answer = scrub_internal_terms(answer, lang)
     if not answer.answerable:
         if raw.answerable:
             # The model answered, but no part of it was tied to a passage: do not show it.
