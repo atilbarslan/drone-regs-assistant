@@ -7,6 +7,7 @@ import time, and lets tests pass fake providers.
 The app assumes a single worker: the request limits are counted in memory (app/limits.py).
 """
 
+import logging
 import mimetypes
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
@@ -107,6 +108,14 @@ def create_app(
 
     @app.middleware("http")
     async def security_headers(request: Request, call_next):
+        if settings.log_forwarded_count:  # TEMPORARY: see Settings.log_forwarded_count
+            values = [
+                v
+                for header in request.headers.getlist("x-forwarded-for")
+                for v in header.split(",")
+                if v.strip()
+            ]
+            logging.getLogger("uvicorn.error").info("x-forwarded-for values: %d", len(values))
         response = await call_next(request)
         response.headers.update(SECURITY_HEADERS)
         if settings.hsts:

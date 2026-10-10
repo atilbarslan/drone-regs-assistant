@@ -57,6 +57,9 @@ class Settings(BaseSettings):
     # Proxies in front of the app that append to X-Forwarded-For (app/ask.py: client_ip).
     # 0: no proxy, use the direct peer. Measured on the host before setting it.
     forwarded_trusted_hops: int = Field(default=0, ge=0)
+    # TEMPORARY, for measuring forwarded_trusted_hops on the host: log how many values
+    # X-Forwarded-For has (never the values). Removed once the number is known.
+    log_forwarded_count: bool = False
 
     # Deployment switches. api_docs: serve /docs, /redoc and /openapi.json (off in production).
     # hsts: send Strict-Transport-Security (only where the site is served over HTTPS).
