@@ -9,7 +9,7 @@ Gemini çağrıları her koşunun satırında (son satır). Hakem: her soru içi
 | Ölçü | A | A2 | B | H1all | F1 | F2 | H5 | F3 | C |
 |---|---|---|---|---|---|---|---|---|---|
 | Soru (hata) | 36 (0) | 36 (0) | 36 (0) | 36 (0) | 36 (0) | 36 (0) | 36 (0) | 36 (0) | 14 (13) |
-| Anahtarı değişip yeniden puanlanan | j-01 | — | — | — | — | j-01 | — | — | — |
+| Anahtarı değişip yeniden puanlanan | j-01 | - | - | - | - | j-01 | - | - | - |
 | Tespit doğru | 36/36 | 36/36 | 36/36 | 36/36 | 36/36 | 36/36 | 36/36 | 36/36 | 1/1 |
 | Getirme: beklenen maddeden en az biri | 31/32 | 31/32 | 31/32 | 31/32 | 31/32 | 31/32 | 31/32 | 31/32 | 0/1 |
 | Getirme: beklenen maddelerin hepsi | 23/32 | 22/32 | 22/32 | 26/32 | 22/32 | 23/32 | 22/32 | 23/32 | 0/1 |
@@ -23,8 +23,8 @@ Gemini çağrıları her koşunun satırında (son satır). Hakem: her soru içi
 | Reddetme: boş + kaynakta yok dedi | 4/4 | 3/4 | 3/4 | 3/4 | 3/4 | 4/4 | 4/4 | 4/4 | 0/0 |
 | Yanlış ret | 2/32 | 2/32 | 2/32 | 1/32 | 1/32 | 0/32 | 1/32 | 1/32 | 0/1 |
 | depends_on: soru / madde / soruda zaten var | 8 / 8 / 0 | 7 / 9 / 0 | 8 / 9 / 0 | 11 / 12 / 0 | 11 / 14 / 1 | 7 / 8 / 0 | 9 / 11 / 0 | 8 / 10 / 0 | 0 / 0 / 0 |
-| Üretim süresi EU: medyan / en çok (soru) | 5.7 / 6.8 sn (14) | 6.3 / 11.8 sn (14) | 5.8 / 8.0 sn (14) | 5.9 / 7.2 sn (14) | 6.2 / 7.9 sn (14) | 6.0 / 6.7 sn (14) | 6.2 / 7.3 sn (14) | 5.9 / 8.6 sn (14) | — |
-| Üretim süresi TR: medyan / en çok (soru) | 5.3 / 6.3 sn (16) | 6.1 / 11.4 sn (16) | 6.0 / 7.7 sn (16) | 5.9 / 8.0 sn (16) | 6.1 / 7.6 sn (16) | 5.9 / 7.2 sn (16) | 5.9 / 10.9 sn (16) | 6.1 / 7.8 sn (16) | — |
+| Üretim süresi EU: medyan / en çok (soru) | 5.7 / 6.8 sn (14) | 6.3 / 11.8 sn (14) | 5.8 / 8.0 sn (14) | 5.9 / 7.2 sn (14) | 6.2 / 7.9 sn (14) | 6.0 / 6.7 sn (14) | 6.2 / 7.3 sn (14) | 5.9 / 8.6 sn (14) | - |
+| Üretim süresi TR: medyan / en çok (soru) | 5.3 / 6.3 sn (16) | 6.1 / 11.4 sn (16) | 6.0 / 7.7 sn (16) | 5.9 / 8.0 sn (16) | 6.1 / 7.6 sn (16) | 5.9 / 7.2 sn (16) | 5.9 / 10.9 sn (16) | 6.1 / 7.8 sn (16) | - |
 | Üretim süresi compare: medyan / en çok (soru) | 5.8 / 7.1 sn (6) | 6.4 / 10.4 sn (6) | 6.6 / 7.9 sn (6) | 6.7 / 7.1 sn (6) | 6.3 / 7.7 sn (6) | 6.9 / 7.6 sn (6) | 6.8 / 7.7 sn (6) | 6.6 / 8.1 sn (6) | 45.4 / 45.4 sn (1) |
 | Ortalama token: prompt / çıktı | 5235 / 322 | 5235 / 306 | 5235 / 296 | 6983 / 338 | 5396 / 376 | 5442 / 338 | 5422 / 352 | 5569 / 342 | 7558 / 719 |
 | Gemini çağrısı: embedding (önbellek) / üretim / hakem / yeniden deneme | 36 (0) / 36 / 36 / 0 | 0 (36) / 36 / 36 / 0 | 0 (36) / 36 / 36 / 0 | 0 (36) / 36 / 36 / 0 | 0 (36) / 36 / 36 / 0 | 0 (36) / 36 / 36 / 0 | 0 (36) / 36 / 36 / 0 | 0 (36) / 36 / 36 / 0 | 0 (14) / 14 / 1 / 0 |
@@ -53,7 +53,7 @@ Her satır tüm sete (36 soru) karşı ölçüldü; "çevrimdışı" yazanlar ya
 
 | # | Değişiklik / hipotez | Ölçüm | Sonuç | Karar |
 |---|---|---|---|---|
-| A | Temel çizgi (PR 7 sonrası ayarlar) | tam koşu | must 45/61, çelişki 0, ret 4/4, yanlış ret 2 | — |
+| A | Temel çizgi (PR 7 sonrası ayarlar) | tam koşu | must 45/61, çelişki 0, ret 4/4, yanlış ret 2 | - |
 | H2 | Liste sorusu kalıpları ("kurallar neler", "what rules apply" …) | çevrimdışı | setteki 36 sorunun hiçbirinin liste durumu değişmiyor | eklenmedi (etki ölçülemez) |
 | H1-liste | Liste sorularına temel maddeler | çevrimdışı | getirme 45/57 → 45/57 (yalnız 4 liste sorusu; beklenen maddeleri zaten vardı) | eklenmedi |
 | H1-hepsi | Her soruya temel maddeler | çevrimdışı + tam koşu | getirme 45/57 → 50/57 (hepsi gelen 22 → 26/32); must 44/61, çelişki 1, should 10 → 7, prompt +1.750 token (+%33) | eklenmedi: must artmadı, maliyet yüksek |
@@ -64,11 +64,11 @@ Her satır tüm sete (36 soru) karşı ölçüldü; "çevrimdışı" yazanlar ya
 | F2 | F1 + mevzuatın çözmediği sorular (satın alma önerisi, fiyat, ücret, maliyet) reddedilsin, yakın bir soru cevaplanmasın (kural 7) | tam koşu | reddetme 3/4 → **4/4**, yanlış ret 1 → **0/32**; must 48/61 (F1: 50, gürültü içinde), çelişki 1 (x-01 C1; aynı hata A2'de de var, F2'ye bağlı değil) | **tutuldu** |
 | H5 | F2'den "geçiş hükümleri yalnız soru geçişle ilgiliyse" cümlesi çıkarıldı (ablasyon) | tam koşu | must 49/61, çelişki 0, ret 4/4, yanlış ret 1; F2'den farkı gürültü içinde. Setin hiçbir sorusu bu hatayı tetiklemiyor (PR 6 duman testi Q2 setin dışında) | kural **korundu** (ölçülebilir etkisi yok, zararı da yok; karar Atıl'ın) |
 | H6 | Gecikme, mod bazında | bütün koşular | üretim medyanı EU 5,7–6,3 · TR 5,3–6,1 · compare 5,8–6,9 sn; en çok 11,8 sn; zaman aşımı yok | compare_per_side 6 kaldı (ayar gerekmiyor) |
-| j-01 | **Anahtar değişti** (Atıl'ın onayı, 8 Ekim): PR 6 tasarımı kalıyor; sinyalsiz soru sayfa dilindeki tarafta cevaplanır. Beklenen kaynak yalnız Madde 15; must 3 → 1 ("Türkiye: P0/P1 azami 120 m; P2'de …"), AB 120 m ve engel istisnası should | A ve F2 yeniden puanlandı (`eval/rescore.py`, 2 hakem çağrısı) | A: must 45/59, F2: 48/59 (toplam must 61 → 59). A2, F1, B, H1all, H5 eski anahtarla kaldı (61) | — |
+| j-01 | **Anahtar değişti** (Atıl'ın onayı, 8 Ekim): PR 6 tasarımı kalıyor; sinyalsiz soru sayfa dilindeki tarafta cevaplanır. Beklenen kaynak yalnız Madde 15; must 3 → 1 ("Türkiye: P0/P1 azami 120 m; P2'de …"), AB 120 m ve engel istisnası should | A ve F2 yeniden puanlandı (`eval/rescore.py`, 2 hakem çağrısı) | A: must 45/59, F2: 48/59 (toplam must 61 → 59). A2, F1, B, H1all, H5 eski anahtarla kaldı (61) | - |
 | F3 | F2 + (a) bir case'in izni/muafiyeti/sınırı başka case'e taşınmaz (kural 4); (b) not_in_sources yalnız sorulan ya da cevap için gereken eksikler (kural 7); (c) cevapta prompt'un iç kelimeleri yok, "kaynaklar" denir (kural 11) + sunucuda `scrub_internal_terms`; (d) Türkçede terim önce Türkçe, İngilizcesi gerekirse parantezde (kural 9) | tam koşu | must 48/59 (F2: 48), çelişki 1 → **0**, ret 4/4, yanlış ret 0 → 1 (k-01; 7 koşunun 5'inde aynı, getirme). Hedefler: x-01 C1 kolu çelişki → var; sorulmamış ücret/fiyat başlığı 3 → 1 soru; iç kelime 6 → **0** cevap (ham çıktıda da 0: prompt kuralı yetti, sunucu kontrolü güvenlik ağı); parantezsiz İngilizce terim (Türkçe cevaplar) 5 → 2 | **tutuldu** |
 | C (2. deneme) | gemini-3.8-flash, A prompt'u, `--retries 0`, 14 soru (j-01 yeni anahtarla) | 14 üretim + 1 hakem | 13 soruda yine `503 UNAVAILABLE`; iki günde 36 istekten 35'i 503. Cevaplanan tek soru k-01: reddetmedi (flash-lite 7 koşunun 5'inde reddetti) ama Article 41 getirilmediği için m1, m2 yine yok; üretim 45 sn | karşılaştırma yapılamadı; README'de "ücretsiz katmanın sınırı" olarak |
 
-## Hata sınıfları — F3
+## Hata sınıfları: F3
 
 Sınıflar otomatik çıkarılır: tespit (mod kabul listesinde değil), getirme (eksik must var ve beklenen maddelerden biri getirilmemiş), üretim (eksik must var ve beklenen maddelerden en az biri getirilmiş; çelişki ayrı), atıf (beklenen madde getirildi ama hiçbiri [n] ile gösterilmedi), reddetme, depends_on (soruda zaten olan bilgiyi soruyor). Bir soru birden çok sınıfta olabilir.
 
@@ -78,50 +78,50 @@ Sınıflar otomatik çıkarılır: tespit (mod kabul listesinde değil), getirme
 | getirme | 4 | tr-03, en-09, en-10, k-01 |
 | reddetme | 1 | k-01 |
 
-## Soru bazında — F3
+## Soru bazında: F3
 
 † anahtar değişti; kayıtlı cevap yeni anahtarla yeniden puanlandı (`eval/rescore.py`). must/should: ✓ var · ✗ yok · ‼ çelişki · ? doğrulanamadı. Sıra: beklenen maddenin modele verilen parçalar arasındaki yeri (1 = ilk).
 
 | id | tespit (mod) | liste / parça | beklenen maddelerin sırası | atıf | must | should | ret | depends_on | üretim sn | hata sınıfı |
 |---|---|---|---|---|---|---|---|---|---|---|
-| tr-01 | ✓ TR→TR |  8 | Madde 15: 1, Madde 11: yok | ✓ | m1✓ m2✓ m3✓ | s1✗ |  | 0 | 1.8 | — |
-| tr-02 | ✓ TR→TR | liste 14 | Madde 8: 2 | ✓ | m1✓ | — |  | 0 | 5.7 | — |
+| tr-01 | ✓ TR→TR |  8 | Madde 15: 1, Madde 11: yok | ✓ | m1✓ m2✓ m3✓ | s1✗ |  | 0 | 1.8 | - |
+| tr-02 | ✓ TR→TR | liste 14 | Madde 8: 2 | ✓ | m1✓ | - |  | 0 | 5.7 | - |
 | tr-03 | ✓ null→TR |  8 | Madde 8: 5, Madde 4: 3, Madde 11: 1, Madde 15: 4, Madde 12: yok | ✓ | m1✗ m2✓ m3✗ | s1✗ |  | 0 | 5.8 | getirme, üretim |
-| tr-04 | ✓ TR→TR |  8 | Madde 29: 1 | ✓ | m1✓ m2✓ | s1✓ |  | 0 | 6.1 | — |
-| tr-05 | ✓ TR→TR |  8 | Geçici Madde 1: 1 | ✓ | m1✓ m2✓ | s1✗ |  | 0 | 7.0 | — |
-| tr-06 | ✓ null→TR | liste 14 | Madde 27: 1, Geçici Madde 2: 6, Madde 25: 4 | ✓ | m1✓ m2✓ m3✓ | s1✓ |  | 1 | 6.6 | — |
-| tr-07 | ✓ TR→TR |  8 | Madde 12: 1 | ✓ | m1✓ m2✓ m3✗ | — |  | 0 | 5.7 | üretim |
-| tr-08 | ✓ TR→TR |  8 | Madde 15: 1 | ✓ | m1✓ | s1✓ |  | 0 | 6.1 | — |
-| tr-09 | ✓ TR→TR |  8 | Madde 15: 1 | ✓ | m1✓ | s1✗ |  | 0 | 5.8 | — |
-| tr-10 | ✓ TR→TR |  8 | Madde 24: 1, Madde 11: yok, Madde 15: yok, Madde 12: 3 | ✓ | m1✓ m2✓ | s1✓ |  | 2 | 7.8 | — |
-| en-01 | ✓ EU→EU |  8 | Article 4 (2019/947): 1, UAS.OPEN.010: 2 | ✓ | m1✓ m2✓ | s1✓ s2✓ |  | 0 | 5.6 | — |
-| en-02 | ✓ null→EU |  8 | Article 14 (2019/947): 1, Madde 11: yok | ✓ | m1✓ | s1✗ s2✗ |  | 1 | 6.1 | — |
-| en-03 | ✓ EU→EU |  8 | UAS.OPEN.030: 2, AMC1 UAS.OPEN.030(1): 1, Part 3 (2019/945 Annex): yok | ✓ | m1✓ m2✓ | s1✗ s2✗ |  | 0 | 5.8 | — |
-| en-04 | ✓ EU→EU |  8 | UAS.OPEN.040: 2 | ✓ | m1✓ | — |  | 0 | 5.5 | — |
-| en-05 | ✓ EU→EU |  8 | UAS.OPEN.020: 1 | ✓ | m1✓ m2✓ | — |  | 0 | 4.9 | — |
-| en-06 | ✓ EU→EU |  8 | UAS.OPEN.070: 1 | ✓ | m1✓ | — |  | 0 | 5.6 | — |
-| en-07 | ✓ EU→EU | liste 14 | Part 1 (2019/945 Annex): 1 | ✓ | m1✓ m2✓ m3✓ | s1✓ s2✓ |  | 0 | 7.9 | — |
-| en-08 | ✓ EU→EU |  8 | UAS.OPEN.060: 6 | ✓ | m1✓ | — |  | 0 | 1.7 | — |
+| tr-04 | ✓ TR→TR |  8 | Madde 29: 1 | ✓ | m1✓ m2✓ | s1✓ |  | 0 | 6.1 | - |
+| tr-05 | ✓ TR→TR |  8 | Geçici Madde 1: 1 | ✓ | m1✓ m2✓ | s1✗ |  | 0 | 7.0 | - |
+| tr-06 | ✓ null→TR | liste 14 | Madde 27: 1, Geçici Madde 2: 6, Madde 25: 4 | ✓ | m1✓ m2✓ m3✓ | s1✓ |  | 1 | 6.6 | - |
+| tr-07 | ✓ TR→TR |  8 | Madde 12: 1 | ✓ | m1✓ m2✓ m3✗ | - |  | 0 | 5.7 | üretim |
+| tr-08 | ✓ TR→TR |  8 | Madde 15: 1 | ✓ | m1✓ | s1✓ |  | 0 | 6.1 | - |
+| tr-09 | ✓ TR→TR |  8 | Madde 15: 1 | ✓ | m1✓ | s1✗ |  | 0 | 5.8 | - |
+| tr-10 | ✓ TR→TR |  8 | Madde 24: 1, Madde 11: yok, Madde 15: yok, Madde 12: 3 | ✓ | m1✓ m2✓ | s1✓ |  | 2 | 7.8 | - |
+| en-01 | ✓ EU→EU |  8 | Article 4 (2019/947): 1, UAS.OPEN.010: 2 | ✓ | m1✓ m2✓ | s1✓ s2✓ |  | 0 | 5.6 | - |
+| en-02 | ✓ null→EU |  8 | Article 14 (2019/947): 1, Madde 11: yok | ✓ | m1✓ | s1✗ s2✗ |  | 1 | 6.1 | - |
+| en-03 | ✓ EU→EU |  8 | UAS.OPEN.030: 2, AMC1 UAS.OPEN.030(1): 1, Part 3 (2019/945 Annex): yok | ✓ | m1✓ m2✓ | s1✗ s2✗ |  | 0 | 5.8 | - |
+| en-04 | ✓ EU→EU |  8 | UAS.OPEN.040: 2 | ✓ | m1✓ | - |  | 0 | 5.5 | - |
+| en-05 | ✓ EU→EU |  8 | UAS.OPEN.020: 1 | ✓ | m1✓ m2✓ | - |  | 0 | 4.9 | - |
+| en-06 | ✓ EU→EU |  8 | UAS.OPEN.070: 1 | ✓ | m1✓ | - |  | 0 | 5.6 | - |
+| en-07 | ✓ EU→EU | liste 14 | Part 1 (2019/945 Annex): 1 | ✓ | m1✓ m2✓ m3✓ | s1✓ s2✓ |  | 0 | 7.9 | - |
+| en-08 | ✓ EU→EU |  8 | UAS.OPEN.060: 6 | ✓ | m1✓ | - |  | 0 | 1.7 | - |
 | en-09 | ✓ EU→EU |  8 | Article 5 (2019/947): 6, Article 12 (2019/947): 1, UAS.SPEC.020: yok | ✓ | m1✓ m2✗ | s1✗ s2✗ |  | 0 | 6.2 | getirme, üretim |
 | en-10 | ✓ null→EU |  8 | Article 5 (2019/947): yok, Article 11 (2019/947): 3, Madde 9: yok | ✓ | m1? | s1✗ s2✗ |  | 0 | 6.7 | getirme, üretim |
-| x-01 | ✓ EU→EU |  8 | UAS.OPEN.020: 1 | ✓ | m1✓ m2✓ | — |  | 1 | 8.6 | — |
-| x-02 | ✓ TR→TR |  8 | Madde 6: 2, Madde 15: 3 | ✓ | m1✓ | — |  | 0 | 6.1 | — |
+| x-01 | ✓ EU→EU |  8 | UAS.OPEN.020: 1 | ✓ | m1✓ m2✓ | - |  | 1 | 8.6 | - |
+| x-02 | ✓ TR→TR |  8 | Madde 6: 2, Madde 15: 3 | ✓ | m1✓ | - |  | 0 | 6.1 | - |
 | x-03 | ✓ compare→compare |  12 | Madde 17: 1, Article 9 (2019/947): 7 | ✓ | m1✓ m2✓ m3? | s1? |  | 1 | 8.1 | üretim |
-| x-04 | ✓ TR→TR |  8 | Madde 23: 7 | ✓ | m1✓ | — |  | 2 | 6.3 | — |
-| r-01 | ✓ null→TR |  8 | — |  | — | — | ✓ | 0 | 5.3 | — |
-| r-02 | ✓ null→EU |  8 | — |  | — | — | ✓ | 0 | 6.0 | — |
-| r-03 | ✓ null→TR | liste 14 | — |  | — | — | ✓ | 0 | 5.9 | — |
-| r-04 | ✓ EU→EU |  8 | — |  | — | — | ✓ | 0 | 5.8 | — |
-| j-01 | ✓ null→TR |  8 | Madde 15: 2 | ✓ | m1✓ | s1✗ s2✗ |  | 1 | 7.2 | — |
-| j-02 | ✓ EU→EU |  8 | UAS.OPEN.020: 2, Part 1 (2019/945 Annex): 4 | ✓ | m1✓ m2✓ | — |  | 1 | 6.7 | — |
-| j-03 | ✓ TR→TR |  8 | Madde 17: 2 | ✓ | m1✓ | — |  | 0 | 7.1 | — |
+| x-04 | ✓ TR→TR |  8 | Madde 23: 7 | ✓ | m1✓ | - |  | 2 | 6.3 | - |
+| r-01 | ✓ null→TR |  8 | - |  | - | - | ✓ | 0 | 5.3 | - |
+| r-02 | ✓ null→EU |  8 | - |  | - | - | ✓ | 0 | 6.0 | - |
+| r-03 | ✓ null→TR | liste 14 | - |  | - | - | ✓ | 0 | 5.9 | - |
+| r-04 | ✓ EU→EU |  8 | - |  | - | - | ✓ | 0 | 5.8 | - |
+| j-01 | ✓ null→TR |  8 | Madde 15: 2 | ✓ | m1✓ | s1✗ s2✗ |  | 1 | 7.2 | - |
+| j-02 | ✓ EU→EU |  8 | UAS.OPEN.020: 2, Part 1 (2019/945 Annex): 4 | ✓ | m1✓ m2✓ | - |  | 1 | 6.7 | - |
+| j-03 | ✓ TR→TR |  8 | Madde 17: 2 | ✓ | m1✓ | - |  | 0 | 7.1 | - |
 | k-01 | ✓ compare→compare |  12 | Article 41 (2019/945): yok | ✗ | m1✗ m2✗ m3✓ | s1✗ | yanlış ret | 0 | 5.8 | reddetme, getirme |
-| k-02 | ✓ compare→compare |  12 | Madde 10: 4, Madde 15: yok | ✓ | m1✓ m2✓ | s1✗ |  | 0 | 6.3 | — |
-| k-03 | ✓ compare→compare |  12 | Madde 15: 7 | ✓ | m1✓ | — |  | 0 | 5.5 | — |
+| k-02 | ✓ compare→compare |  12 | Madde 10: 4, Madde 15: yok | ✓ | m1✓ m2✓ | s1✗ |  | 0 | 6.3 | - |
+| k-03 | ✓ compare→compare |  12 | Madde 15: 7 | ✓ | m1✓ | - |  | 0 | 5.5 | - |
 | k-04 | ✓ compare→compare |  12 | Madde 15: 1, UAS.OPEN.030: 7 | ✓ | m1✗ m2✗ | s1✗ |  | 0 | 7.3 | üretim |
 | k-05 | ✓ compare→compare |  12 | Madde 8: 1, Part 1 (2019/945 Annex): 7 | ✓ | m1✗ m2✓ m3✓ | s1✗ |  | 0 | 6.9 | üretim |
 
-## Hakem kararlarını elle kontrol — F3
+## Hakem kararlarını elle kontrol: F3
 
 Bütün çelişki ve doğrulanamayan kararlar, ayrıca 5 örnek var/yok kararı.
 

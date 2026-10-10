@@ -115,7 +115,7 @@ def summary_table(runs: list[dict]) -> list[str]:
         "| Ölçü | " + " | ".join(names) + " |",
         "|---|" + "---|" * len(names),
         line("Soru (hata)", [f"{s['questions']} ({s['errors']})" for s in rows]),
-        line("Anahtarı değişip yeniden puanlanan", [", ".join(r["id"] for r in run["results"] if r.get("key_changed")) or "—" for run in runs]),
+        line("Anahtarı değişip yeniden puanlanan", [", ".join(r["id"] for r in run["results"] if r.get("key_changed")) or "-" for run in runs]),
         line("Tespit doğru", [f"{s['detection_ok']}/{s['questions'] - s['errors']}" for s in rows]),
         line("Getirme: beklenen maddeden en az biri", [f"{s['retrieved_any']}/{s['with_sources']}" for s in rows]),
         line("Getirme: beklenen maddelerin hepsi", [f"{s['retrieved_all']}/{s['with_sources']}" for s in rows]),
@@ -134,7 +134,7 @@ def summary_table(runs: list[dict]) -> list[str]:
         values = []
         for s in rows:
             m = s["latency"].get(mode)
-            values.append(f"{m[0] / 1000:.1f} / {m[1] / 1000:.1f} sn ({m[2]})" if m else "—")
+            values.append(f"{m[0] / 1000:.1f} / {m[1] / 1000:.1f} sn ({m[2]})" if m else "-")
         out.append(line(f"Üretim süresi {mode}: medyan / en çok (soru)", values))
     out.append(
         line(
@@ -163,13 +163,13 @@ def config_table(runs: list[dict]) -> list[str]:
 
 
 def rank_text(ranks: dict) -> str:
-    return ", ".join(f"{ref}: {rank or 'yok'}" for ref, rank in ranks.items()) or "—"
+    return ", ".join(f"{ref}: {rank or 'yok'}" for ref, rank in ranks.items()) or "-"
 
 
 def facts_text(facts: list[dict], kind: str) -> str:
     marks = {"present": "✓", "absent": "✗", "contradicted": "‼", "unverified": "?"}
     chosen = [f for f in facts if f["kind"] == kind]
-    return " ".join(f"{f['id']}{marks.get(f['status'], '·')}" for f in chosen) or "—"
+    return " ".join(f"{f['id']}{marks.get(f['status'], '·')}" for f in chosen) or "-"
 
 
 def detail_table(run: dict) -> list[str]:
@@ -196,7 +196,7 @@ def detail_table(run: dict) -> list[str]:
             f"| {'' if cited is None else ('✓' if cited else '✗')} | {facts_text(r['facts'], 'must')} "
             f"| {facts_text(r['facts'], 'should')} | {refusal} "
             f"| {len(dep['questions'])}{' (' + str(len(dep['already_given'])) + ' zaten var)' if dep['already_given'] else ''} "
-            f"| {gen / 1000:.1f} | {', '.join(classes(r)) or '—'} |"
+            f"| {gen / 1000:.1f} | {', '.join(classes(r)) or '-'} |"
         )  # fmt: skip
     return out
 
@@ -225,7 +225,10 @@ def judge_checks(run: dict, examples: int = 5) -> list[str]:
     step = max(1, len(sample) // examples)
     picked += sample[::step][:examples]
     for r, f in picked:
-        quote = (f["quote"] or "").replace("|", "\\|").replace("\n", " ")[:220]
+        # Quotes are the model's words; its long dashes are shown as plain hyphens.
+        quote = (
+            (f["quote"] or "").replace("|", "\\|").replace("\n", " ").replace("\u2014", "-")[:220]
+        )
         text = f["text"].replace("|", "\\|")
         out.append(f"| {r['id']} | {f['id']}: {text} | {f['status']} | {quote} | {f['note']} |")
     return out
@@ -254,7 +257,7 @@ def write(runs: list[dict], detail: dict) -> str:
     if CHANGES.exists():
         parts += [CHANGES.read_text(encoding="utf-8").strip(), ""]
     parts += [
-        f"## Hata sınıfları — {detail['config']['name']}",
+        f"## Hata sınıfları: {detail['config']['name']}",
         "",
         "Sınıflar otomatik çıkarılır: tespit (mod kabul listesinde değil), getirme (eksik must var "
         "ve beklenen maddelerden biri getirilmemiş), üretim (eksik must var ve beklenen maddelerden "
@@ -264,7 +267,7 @@ def write(runs: list[dict], detail: dict) -> str:
         "",
         *class_counts(detail),
         "",
-        f"## Soru bazında — {detail['config']['name']}",
+        f"## Soru bazında: {detail['config']['name']}",
         "",
         "† anahtar değişti; kayıtlı cevap yeni anahtarla yeniden puanlandı (`eval/rescore.py`). "
         "must/should: ✓ var · ✗ yok · ‼ çelişki · ? doğrulanamadı. Sıra: beklenen maddenin "
@@ -272,7 +275,7 @@ def write(runs: list[dict], detail: dict) -> str:
         "",
         *detail_table(detail),
         "",
-        f"## Hakem kararlarını elle kontrol — {detail['config']['name']}",
+        f"## Hakem kararlarını elle kontrol: {detail['config']['name']}",
         "",
         "Bütün çelişki ve doğrulanamayan kararlar, ayrıca 5 örnek var/yok kararı.",
         "",
