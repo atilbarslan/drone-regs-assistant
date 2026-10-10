@@ -70,7 +70,7 @@ def test_page_basics():
     assert '<html lang="en">' in html
     assert 'name="viewport"' in html
     # The two fixed notices are part of the page, not of the model's answer.
-    assert "Not legal advice — the official text prevails." in html
+    assert "Not legal advice: the official text prevails." in html
     assert "do not enter personal data." in html
     assert "<script>" not in html and "style=" not in html  # nothing inline (CSP)
 

@@ -16,15 +16,15 @@ export const STRINGS = {
     jurisdiction: "JURISDICTION",
     jurisdictionLabel: "Jurisdiction",
     modeNames: { EU: "EU", TR: "TÜRKİYE", compare: "COMPARE" },
-    kicker: "REGULATION (EU) 2019/947 · 2019/945  —  SHT-İHA 30.07.2026",
+    kicker: "REGULATION (EU) 2019/947 · 2019/945 AND SHT-İHA 30.07.2026",
     headline: "Drone rules, answered with the article that says so.",
     lede:
       "Ask in English or Turkish. Every statement links to the exact article and page of the " +
-      "official EASA or SHGM text — and when your question leaves out something the rules " +
+      "official EASA or SHGM text, and when your question leaves out something the rules " +
       "depend on, the answer says so.",
     askLabel: "Ask a question",
     switchHint:
-      "Mention a country or city — “in Germany”, “İstanbul’da” — and the switch follows your " +
+      "Mention a country or city (“in Germany”, “İstanbul’da”) and the switch follows your " +
       "question. You can always change it.",
     questionLabel: "YOUR QUESTION",
     placeholders: {
@@ -36,8 +36,8 @@ export const STRINGS = {
     submitting: "Asking…",
     waitSeconds: (s) => `Wait ${s} s`,
     tryOne: "Try one",
-    noticeLegal: "Not legal advice — the official text prevails.",
-    noticeData: "Questions are sent to the Google Gemini API free tier — do not enter personal data.",
+    noticeLegal: "Not legal advice: the official text prevails.",
+    noticeData: "Questions are sent to the Google Gemini API free tier, so do not enter personal data.",
     factsLabel: "What is behind the answers",
     factSections: "sections indexed from the EASA Easy Access Rules for UAS (June 2026) and SHGM SHT-İHA (30.07.2026)",
     factCiteValue: "ART. + PAGE",
@@ -109,14 +109,14 @@ export const STRINGS = {
     jurisdiction: "YETKİ ALANI",
     jurisdictionLabel: "Yetki alanı",
     modeNames: { EU: "AB", TR: "TÜRKİYE", compare: "KARŞILAŞTIR" },
-    kicker: "(AB) 2019/947 · 2019/945 TÜZÜKLERİ  —  SHT-İHA 30.07.2026",
+    kicker: "(AB) 2019/947 · 2019/945 TÜZÜKLERİ VE SHT-İHA 30.07.2026",
     headline: "Drone kurallarına, dayanağı olan maddeyle cevap.",
     lede:
       "Türkçe ya da İngilizce sorun. Her ifade, EASA ya da SHGM resmi metnindeki maddeye ve " +
       "sayfaya bağlanır; sorunuz kuralların bağlı olduğu bir bilgiyi belirtmiyorsa cevap bunu söyler.",
     askLabel: "Soru sorun",
     switchHint:
-      "Bir ülke ya da şehir yazın — “in Germany”, “İstanbul’da” — anahtar sorunuza göre değişir. " +
+      "Bir ülke ya da şehir yazın (“in Germany”, “İstanbul’da”), anahtar sorunuza göre değişir. " +
       "İstediğiniz zaman değiştirebilirsiniz.",
     questionLabel: "SORUNUZ",
     placeholders: {
@@ -128,8 +128,8 @@ export const STRINGS = {
     submitting: "Soruluyor…",
     waitSeconds: (s) => `${s} sn bekleyin`,
     tryOne: "Birini deneyin",
-    noticeLegal: "Hukuki danışmanlık değildir — resmi metin esastır.",
-    noticeData: "Sorular Google Gemini API’nin ücretsiz katmanına gönderilir — kişisel veri girmeyin.",
+    noticeLegal: "Hukuki danışmanlık değildir: resmi metin esastır.",
+    noticeData: "Sorular Google Gemini API’nin ücretsiz katmanına gönderilir; kişisel veri girmeyin.",
     factsLabel: "Cevapların arkasında ne var",
     factSections: "bölüm: EASA Easy Access Rules for UAS (Haziran 2026) ve SHGM SHT-İHA (30.07.2026) metinlerinden dizinlendi",
     factCiteValue: "MADDE + SAYFA",
