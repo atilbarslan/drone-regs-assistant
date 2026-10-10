@@ -11,7 +11,8 @@ services:
     # One worker: the request limits are counted in memory (app/limits.py).
     # --no-access-log: uvicorn's access log writes every client address to the console, which
     # Render keeps. --no-proxy-headers: the client address comes from X-Forwarded-For counted
-    # from the right (FORWARDED_TRUSTED_HOPS), never from uvicorn's leftmost-value handling.
+    # from the right (FORWARDED_TRUSTED_HOPS); uvicorn trusting every proxy ('*') would take the
+    # leftmost value, which a client can write.
     startCommand: uvicorn --factory app.main:create_app --host 0.0.0.0 --port $PORT --workers 1 --no-access-log --no-proxy-headers
     healthCheckPath: /health
     envVars:
