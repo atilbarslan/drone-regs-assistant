@@ -45,6 +45,7 @@ def test_settings_in_the_file_exist_and_parse():
     assert set(values) <= set(Settings.model_fields)
     settings = Settings(_env_file=None, database_url="postgresql://x@localhost/x", **values)
     assert settings.api_docs is False and settings.hsts is True
+    assert settings.forwarded_trusted_hops == 3  # measured on Render, see render.yaml
 
 
 def test_python_version_matches_ci():
