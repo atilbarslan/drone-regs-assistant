@@ -100,7 +100,7 @@ def eu_answer(lang: str, eu: list[int], facts: list[str]) -> dict:
                     "With a camera",
                     "REGISTER",
                     "The 250 g threshold does not apply to drones that can capture personal "
-                    "data — unless it is a toy.",
+                    "data, unless it is a toy.",
                     pick(eu, 0),
                 ),
                 case(
@@ -120,14 +120,14 @@ def eu_answer(lang: str, eu: list[int], facts: list[str]) -> dict:
         "sections": [
             section(
                 "Category",
-                "Open category, subcategory A1 — if the drone carries a C0 label or is privately "
+                "Open category, subcategory A1, if the drone carries a C0 label or is privately "
                 "built (under 250 g and under 19 m/s).",
                 pick(eu, 1),
             ),
             registration,
             section(
                 "Training",
-                "No online course or exam for a C0 or privately built drone under 250 g — you "
+                "No online course or exam for a C0 or privately built drone under 250 g: you "
                 "must know the manufacturer’s instructions. The online course and 40-question "
                 "exam start at class C1.",
                 pick(eu, 1),
@@ -227,13 +227,13 @@ COMPARE_ROWS = [
     (
         "Pilot licence",
         "P0 (hobby) or P1 (commercial), whatever the drone’s class. A diploma licence alone "
-        "does not allow flying — an operational licence is required.",
+        "does not allow flying; an operational licence is required.",
         "No online exam for C0 / under 250 g; know the manufacturer’s instructions.",
     ),
     (
         "Registration",
         "Every user except a Basit İHA registers through İHATTYS.",
-        "Required — the camera can capture personal data, unless the drone is a toy.",
+        "Required: the camera can capture personal data, unless the drone is a toy.",
     ),
     (
         "Minimum age",

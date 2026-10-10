@@ -129,3 +129,8 @@ test("reset times are shown in local time, invalid ones ignored", () => {
   assert.equal(formatLocalTime("not a date", "en"), null);
   assert.match(formatLocalTime("2026-10-08T07:00:00Z", "en"), /2026/);
 });
+
+test("the test-questions box says how the 41 questions were used", () => {
+  assert.match(STRINGS.en.factTests, /^test questions \(36 used for tuning, 5 held out\)/);
+  assert.match(STRINGS.tr.factTests, /^test sorusu \(36'sı ayar için, 5'i bekletilen\)/);
+});

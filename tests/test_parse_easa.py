@@ -36,8 +36,8 @@ GM = "GM to IR (Guidance material to implementing rule);"
         # Article numbers repeat between the two regulations, so the reference names it.
         ("Article 4 - Sample", IR, {}, ("Article 4 (2019/947)", "Sample")),
         ("Article 4 - Sample", DR, {}, ("Article 4 (2019/945)", "Sample")),
-        ("PART 3 — Sample", DR, {}, ("Part 3 (2019/945 Annex)", "Sample")),
-        ("Appendix 2 — Sample", IR, {}, ("Appendix 2 (2019/947)", "Sample")),
+        ("PART 3 \u2014 Sample", DR, {}, ("Part 3 (2019/945 Annex)", "Sample")),  # em dash
+        ("Appendix 2 \u2014 Sample", IR, {}, ("Appendix 2 (2019/947)", "Sample")),
         ("ATTACHMENT A: Sample", IR, {"last_sts": "STS-01"}, ("STS-01 Attachment A", "Sample")),
         (
             "Annex B to AMC1 to Article 11",
@@ -91,7 +91,7 @@ def package(toc: str, body: str) -> ET.Element:
         '<w:numbering><w:abstractNum w:abstractNumId="0"><w:lvl w:ilvl="0"><w:start w:val="1"/>'
         '<w:numFmt w:val="lowerRoman"/><w:lvlText w:val="(%1)"/></w:lvl></w:abstractNum>'
         '<w:abstractNum w:abstractNumId="1"><w:lvl w:ilvl="0"><w:numFmt w:val="bullet"/>'
-        '<w:lvlText w:val="—"/></w:lvl></w:abstractNum>'
+        '<w:lvlText w:val="\u2014"/></w:lvl></w:abstractNum>'  # an em dash bullet
         '<w:num w:numId="5"><w:abstractNumId w:val="0"/></w:num>'
         '<w:num w:numId="6"><w:abstractNumId w:val="1"/></w:num></w:numbering>'
     )
@@ -153,7 +153,7 @@ def test_parse_package_reads_text_numbering_tables_and_pages():
         "(1) An opening sentence.",
         "(i) first item",
         "(ii) second item",
-        "— a dash item",
+        "\u2014 a dash item",
         "Term | Meaning",
         "A SUBHEADING",
     ]

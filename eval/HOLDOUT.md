@@ -7,7 +7,7 @@
 | Ölçü | H |
 |---|---|
 | Soru (hata) | 5 (0) |
-| Anahtarı değişip yeniden puanlanan | — |
+| Anahtarı değişip yeniden puanlanan | - |
 | Tespit doğru | 4/5 |
 | Getirme: beklenen maddeden en az biri | 4/5 |
 | Getirme: beklenen maddelerin hepsi | 3/5 |
@@ -33,19 +33,19 @@ must/should: ✓ var · ✗ yok · ‼ çelişki · ? doğrulanamadı.
 
 | id | tespit (mod) | liste / parça | beklenen maddelerin sırası | atıf | must | should | ret | depends_on | üretim sn | hata sınıfı |
 |---|---|---|---|---|---|---|---|---|---|---|
-| h-01 | ✓ null→TR | liste 14 | Madde 15: 1, Madde 8: 4 | ✓ | m1✓ m2✓ | s1✓ s2✗ |  | 1 | 3.4 | — |
+| h-01 | ✓ null→TR | liste 14 | Madde 15: 1, Madde 8: 4 | ✓ | m1✓ m2✓ | s1✓ s2✗ |  | 1 | 3.4 | - |
 | h-02 | ✓ null→TR |  8 | Madde 12: 1 | ✓ | m1✓ m2✗ | s1✗ s2✗ s3✗ |  | 1 | 5.2 | üretim |
 | h-03 | ✗ null→EU |  8 | Madde 15: yok, Madde 12: yok | ✗ | m1✗ m2✗ | s1✗ s2✗ s3✗ | yanlış ret | 0 | 5.2 | tespit, reddetme, getirme |
 | h-04 | ✓ null→EU |  8 | Article 14 (2019/947): 6, AMC1 UAS.OPEN.020(5)(c) and (d), UAS.OPEN.030(3) and UAS.OPEN.040(4)(c),(d) and (e): 2 | ✓ | m1✗ m2✗ m3✓ | s1✓ s2✗ |  | 1 | 5.6 | üretim |
-| h-05 | ✓ compare→compare |  12 | Article 14 (2019/947): 8, UAS.SPEC.020: yok, UAS.SPEC.030: yok | ✓ | m1✓ m2✓ | s1✗ s2✗ s3✗ |  | 0 | 5.5 | — |
+| h-05 | ✓ compare→compare |  12 | Article 14 (2019/947): 8, UAS.SPEC.020: yok, UAS.SPEC.030: yok | ✓ | m1✓ m2✓ | s1✗ s2✗ s3✗ |  | 0 | 5.5 | - |
 
 ## Hakem kararları (hepsi)
 
 | id | fact | karar | alıntı (cevaptan) | not |
 |---|---|---|---|---|
 | h-01 | m1: lisans dronun modeline, sınıfına ya da ağırlığına göre değil operasyonun türüne göre belirlenir (M.15(2); M.8(4)) | present | Cevap şunlara bağlı: - Operasyonun amacı nedir? (Amatör (Ticari değil) / Ticari amaçlı / Yüksek riskli / BVLOS) |  |
-| h-01 | m2: ticari olmayan uçuş için P0, ticari uçuş için P1 (M.15(2)(a)-(b)) | present | - Amatör (Ticari olmayan) operasyonlar — P0 Lisansı: Ticari amaç taşımayan amatör operasyonlar için asgari P0 İHA pilot lisansı alınması gerekir. [3][5] - Ticari operasyonlar — P1 Lisansı: Ticari operasyonlar ve uçuşlar  |  |
-| h-01 | s1: görüş hattı dışı ve yüksek riskli operasyonlar için P2 (M.15(2)(c)) | present | - Yüksek riskli veya görüş hattı dışı (BVLOS) operasyonlar — P2 Lisansı: Görüş hattı dışı (BVLOS) operasyonlar ile kalabalık üstü uçuş gibi yüksek riskli operasyonlar P2 lisansı kapsamında icra edilir. [3][5] |  |
+| h-01 | m2: ticari olmayan uçuş için P0, ticari uçuş için P1 (M.15(2)(a)-(b)) | present | - Amatör (Ticari olmayan) operasyonlar - P0 Lisansı: Ticari amaç taşımayan amatör operasyonlar için asgari P0 İHA pilot lisansı alınması gerekir. [3][5] - Ticari operasyonlar - P1 Lisansı: Ticari operasyonlar ve uçuşlar  |  |
+| h-01 | s1: görüş hattı dışı ve yüksek riskli operasyonlar için P2 (M.15(2)(c)) | present | - Yüksek riskli veya görüş hattı dışı (BVLOS) operasyonlar - P2 Lisansı: Görüş hattı dışı (BVLOS) operasyonlar ile kalabalık üstü uçuş gibi yüksek riskli operasyonlar P2 lisansı kapsamında icra edilir. [3][5] |  |
 | h-01 | s2: eğitim ve sınavdan sonra diploma lisansı KDM-ORG'dan; uçmak için ayrıca KDM-ERP'den operasyonel lisans gerekir (M.15(4)) | absent |  |  |
 | h-02 | m1: yeşil bölgede belirlenen irtifa ve şartlar altında operasyonel izin gerekmez (M.12(2)(a)) | present | Yeşil bölgelerde, belirlenen irtifa ve şartlar altında operasyonel izne gerek duyulmadan uçuş yapılabilir. |  |
 | h-02 | m2: P0 ve P1 yeşil bölgede sistem üzerinden ayrıca izin almadan uçar (M.12(7)(b)) | absent |  |  |
