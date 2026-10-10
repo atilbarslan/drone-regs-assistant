@@ -38,6 +38,8 @@ SECURITY_HEADERS = {
     "Referrer-Policy": "no-referrer",
     "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
 }
+# Browsers then use HTTPS only for a year (set only where the site is served over HTTPS).
+HSTS = "max-age=31536000"
 # FastAPI's interactive docs load scripts from a CDN, so they get no CSP.
 DOCS_PATHS = ("/docs", "/redoc", "/openapi.json")
 
@@ -83,7 +85,14 @@ def create_app(
                 await client.aclose()
             await pool.close()
 
-    app = FastAPI(title="drone-regs-assistant", lifespan=lifespan)
+    docs = settings.api_docs
+    app = FastAPI(
+        title="drone-regs-assistant",
+        lifespan=lifespan,
+        docs_url="/docs" if docs else None,
+        redoc_url="/redoc" if docs else None,
+        openapi_url="/openapi.json" if docs else None,
+    )
     app.state.settings = settings
     app.state.limiter = limiter or RateLimiter(
         Limits(
@@ -100,6 +109,8 @@ def create_app(
     async def security_headers(request: Request, call_next):
         response = await call_next(request)
         response.headers.update(SECURITY_HEADERS)
+        if settings.hsts:
+            response.headers["Strict-Transport-Security"] = HSTS
         if not request.url.path.startswith(DOCS_PATHS):
             response.headers["Content-Security-Policy"] = CONTENT_SECURITY_POLICY
         return response

@@ -58,6 +58,11 @@ class Settings(BaseSettings):
     # 0: no proxy, use the direct peer. Measured on the host before setting it.
     forwarded_trusted_hops: int = Field(default=0, ge=0)
 
+    # Deployment switches. api_docs: serve /docs, /redoc and /openapi.json (off in production).
+    # hsts: send Strict-Transport-Security (only where the site is served over HTTPS).
+    api_docs: bool = True
+    hsts: bool = False
+
     # Embedding the sources (python -m ingest.embed). The free tier limits for
     # gemini-embedding-2 were 100 requests and 30,000 tokens per minute and 1,000 requests per
     # day (Google AI Studio, 2026-10-06). Each text in a batch counts as one request, per minute
