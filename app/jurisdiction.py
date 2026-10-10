@@ -8,7 +8,9 @@ Pitfalls handled here, each with a test:
   name ("Almanyada"); acronyms take only the apostrophe form, so "ABD" (USA) is not "AB".
 - Dotted and dotless i: "İ" has no one-letter lower case, so i/ı/I/İ are matched as one class.
 - Codes such as A1, C2, P1 or M0 count only when the question also has a drone word that fits
-  the code ("A1 alt kategorisi", "C1 sınıfı", "P2 lisansı"), so "A1 vitamini" is ignored.
+  the code ("A1 alt kategorisi", "C1 sınıfı", "P2 lisansı"), so "A1 vitamini" is ignored. The
+  Turkish licence levels P0, P1 and P2 never appear in the EU texts, so alone ("p1 holder", a
+  misspelled "licence") they are also a weak Turkish signal: used only when nothing else matched.
 - "Avrupa yakası" (Istanbul's European side) is not Europe, "Türkçe"/"in Turkish" is a
   language, and "Kıbrıs"/"Cyprus" alone is ambiguous; none of these counts.
 - Place names (81 Turkish provinces, EU capitals and largest cities, see app/places.py) take
@@ -237,6 +239,8 @@ RULES: list[Rule] = [
         ),
     ),
     Rule("TR", _code("P[0-2]"), _LICENCE_CONTEXT),
+    # P0-P2 are Turkish licence levels only (none in the EU texts): weak without the context.
+    Rule("TR", _code("P[0-2]"), weak=True),
     Rule("TR", _code("M[0-3]"), _CLASS_CONTEXT),
     # Licence names of the previous Turkish instruction: İHA0 ... İHA3, also "İHA-1".
     Rule("TR", re.compile(rf"(?<![\w])({_letters('İHA')}-?[0-3])(?![\w])", re.IGNORECASE)),

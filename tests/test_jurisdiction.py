@@ -191,7 +191,7 @@ def test_ambiguous_names_need_place_context():
     [
         # "talimat" and "yeni/eski mevzuat" point to SHT-İHA ...
         ("Yeni talimata göre kayıt nasıl yapılır?", "TR", ["Yeni talimat"]),
-        ("Talimata göre P0 kimdir?", "TR", ["Talimat"]),
+        ("Talimata göre P0 kimdir?", "TR", ["Talimat", "P0"]),
         (
             "Yeni mevzuat ile eski mevzuat arasındaki farklar",
             "TR",
@@ -216,6 +216,17 @@ def test_ambiguous_names_need_place_context():
         ("Remote pilot with A1 training", "EU", ["A1"]),
         ("A2 sınavı nasıl yapılır?", "EU", ["A2"]),
         ("A1 vitamini", "none", []),  # still not a drone code
+        # P0-P2 alone: a weak Turkish signal (they never appear in the EU texts) ...
+        ("What can a p1 holder do?", "TR", ["p1"]),
+        ("Is night flying allowed with P0?", "TR", ["P0"]),
+        ("P2 ile neler yapılır?", "TR", ["P2"]),
+        # ... with a licence word it is a strong one, as before ...
+        ("Can a P1 pilot fly in Germany?", "both", ["P1", "Germany"]),
+        # ... and alone it gives way to a strong signal.
+        ("What does P1 mean in Germany?", "EU", ["Germany"]),
+        ("AB'de P2 ne demek?", "EU", ["AB"]),
+        ("P3 nedir?", "none", []),  # not a Turkish licence level
+        ("C1 vitamini", "none", []),  # EU codes keep needing a drone word
     ],
 )
 def test_detect_instruction_words_old_licences_and_certificates(question, expected, terms):
