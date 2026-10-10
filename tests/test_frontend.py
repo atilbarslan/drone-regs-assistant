@@ -109,3 +109,13 @@ async def test_hsts_only_when_turned_on(client, client_for, test_database):
         for path in ("/", "/health"):
             response = await client_hsts.get(path)
             assert response.headers["strict-transport-security"] == "max-age=31536000"
+
+
+def test_test_questions_box_counts_all_41_and_links_to_the_evaluation():
+    html = (FRONTEND_DIR / "index.html").read_text(encoding="utf-8")
+    box = re.search(
+        r'<a class="fact fact-link" href="([^"]+)"[^>]*>\s*<span class="fact-value">(\d+)</span>',
+        html,
+    )
+    assert box and box.group(2) == "41"
+    assert box.group(1).endswith("/drone-regs-assistant#evaluation")

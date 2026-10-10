@@ -42,7 +42,8 @@ export const STRINGS = {
     factSections: "sections indexed from the EASA Easy Access Rules for UAS (June 2026) and SHGM SHT-İHA (30.07.2026)",
     factCiteValue: "ART. + PAGE",
     factCite: "on every statement, linked to the official PDF; citations are checked on the server",
-    factTests: "test questions; answer keys checked against the official texts by a UAS pilot",
+    factTests:
+      "test questions (36 used for tuning, 5 held out); answer keys checked against the official texts by a UAS pilot",
     howTitle: "HOW IT WORKS",
     howSteps: [
       "The two official texts are split by article and indexed both by meaning and by exact terms, such as “UAS.OPEN.020” or “Madde 12”.",
@@ -133,7 +134,8 @@ export const STRINGS = {
     factSections: "bölüm: EASA Easy Access Rules for UAS (Haziran 2026) ve SHGM SHT-İHA (30.07.2026) metinlerinden dizinlendi",
     factCiteValue: "MADDE + SAYFA",
     factCite: "her ifadede, resmi PDF’e bağlantılı; atıflar sunucuda denetlenir",
-    factTests: "test sorusu; cevap anahtarları bir İHA pilotu tarafından resmi metinlerden kontrol edildi",
+    factTests:
+      "test sorusu (36'sı ayar için, 5'i bekletilen); cevap anahtarları bir İHA pilotu tarafından resmi metinlerden kontrol edildi",
     howTitle: "NASIL ÇALIŞIR",
     howSteps: [
       "İki resmi metin maddelere bölünür; hem anlama hem de “UAS.OPEN.020”, “Madde 12” gibi tam ifadelere göre dizinlenir.",
