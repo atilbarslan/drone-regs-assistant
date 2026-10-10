@@ -110,9 +110,26 @@ def _error(status: int, body: ErrorResponse) -> JSONResponse:
     return JSONResponse(body.model_dump(mode="json"), status_code=status, headers=headers)
 
 
-def client_ip(request: Request) -> str:
-    # Behind a proxy, uvicorn's --proxy-headers puts the original client address here.
-    return request.client.host if request.client else "unknown"
+def client_ip(request: Request, trusted_hops: int) -> str:
+    """The client address the per-IP limits count.
+
+    With trusted_hops = 0 it is the direct peer (running locally). Behind N trusted proxies, it
+    is the N-th value from the right of X-Forwarded-For: each proxy appends the address it got
+    the request from, so values a client writes itself stay on the left and cannot be chosen.
+    (uvicorn's --proxy-headers takes the leftmost value instead, which a client can forge when
+    the proxy does not strip the incoming header.) Without the header, or with fewer values than
+    N, the direct peer is used.
+    """
+    peer = request.client.host if request.client else "unknown"
+    if trusted_hops <= 0:
+        return peer
+    values = [
+        value.strip()
+        for header in request.headers.getlist("x-forwarded-for")
+        for value in header.split(",")
+    ]
+    values = [value for value in values if value]
+    return values[-trusted_hops] if len(values) >= trusted_hops else peer
 
 
 LOG_FIELDS = (
@@ -146,7 +163,7 @@ async def ask(body: AskRequest, request: Request):
     started = time.perf_counter()
     metrics = Metrics(lang=body.lang)
     try:
-        refusal = state.limiter.check(client_ip(request))
+        refusal = state.limiter.check(client_ip(request, state.settings.forwarded_trusted_hops))
         if refusal is not None:
             metrics.error_type = f"rate_limited:{refusal.scope}"
             return _error(

@@ -3,7 +3,7 @@
 from pathlib import Path
 from typing import Literal
 
-from pydantic import SecretStr
+from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -54,6 +54,9 @@ class Settings(BaseSettings):
     ask_global_per_day: int = 300
     ask_ip_per_minute: int = 3
     ask_ip_per_day: int = 20
+    # Proxies in front of the app that append to X-Forwarded-For (app/ask.py: client_ip).
+    # 0: no proxy, use the direct peer. Measured on the host before setting it.
+    forwarded_trusted_hops: int = Field(default=0, ge=0)
 
     # Embedding the sources (python -m ingest.embed). The free tier limits for
     # gemini-embedding-2 were 100 requests and 30,000 tokens per minute and 1,000 requests per
