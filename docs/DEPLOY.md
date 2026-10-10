@@ -13,7 +13,8 @@ the linked pages.
 2. Under **Connect**, turn **Connection pooling off** and copy the **direct** connection string
    ([connection pooling](https://neon.com/docs/connect/connection-pooling)). Why direct: see
    "Direct or pooled" below.
-3. Save it on your computer as `.env.neon`, one line: `DATABASE_URL=<the string>`. The file is
+3. Save it on your computer as `.env.neon`, one line: `DATABASE_URL='<the string>'`, in single
+   quotes (the string contains `&`, which the shell would otherwise read). The file is
    ignored by git (`.env.*` in `.gitignore`); check with `git check-ignore .env.neon`.
 
 ## 2. Schema and data (from a developer machine)
@@ -68,7 +69,7 @@ What `render.yaml` sets, and why:
 | `--no-proxy-headers` | The client address is read from `X-Forwarded-For` counted from the right (`FORWARDED_TRUSTED_HOPS`). uvicorn's own handling needs the proxies' addresses; with `--forwarded-allow-ips='*'` it takes the leftmost value, which a client can write, because Render appends to the header without removing what the client sent. |
 | `API_DOCS=false` | No `/docs`, `/redoc` or `/openapi.json` in production. |
 | `HSTS=true` | Browsers keep to HTTPS (Render terminates TLS). |
-| `FORWARDED_TRUSTED_HOPS` | The number of proxies that append to `X-Forwarded-For`, measured on Render. Until it is set, every visitor counts as the proxy's address, so the per-address limit acts as a shared one. |
+| `FORWARDED_TRUSTED_HOPS=3` | The number of proxies that append to `X-Forwarded-For`, measured on Render on 10 October 2026: a request without the header arrived with 3 values, one with a forged value with 4 (only the number of values was logged, during the measurement only, never the addresses). With 3, a forged header could not get round the per-address limit, and a second network got its own limit. If Render changes its proxies, measure again; with 0 every visitor counts as one address. |
 
 ## First request after a quiet period
 
@@ -81,6 +82,13 @@ Both services sleep when unused:
   plan) and resumes **within a few hundred milliseconds**
   ([scale to zero](https://neon.com/docs/introduction/scale-to-zero)). The app's connection pool
   checks each connection before use, so connections closed during the pause are replaced.
+
+Measured on 10 October 2026: after 20 minutes and after about 90 minutes without visitors, the
+first `/health` took **32.3 and 32.4 seconds** (32.4 for the first visit of the day too), the
+next one 0.1 seconds. Render's own health checks query the database every few seconds while the
+service is up, so the Neon compute stays active as long as the Render service does: about 15
+minutes after the last visit plus Neon's 5, about 0.08 CU-hours at 0.25 CU. Once Render has
+spun down, Neon showed **Idle**; the health checks do not keep either service awake.
 
 ## Free-tier limits that matter here (October 2026)
 
@@ -95,7 +103,7 @@ minute and 300 a day in total (`app/config.py`).
 
 ## Why the service is not kept awake
 
-A pinger that calls the site every few minutes would avoid the one-minute start, but:
+A pinger that calls the site every few minutes would avoid the half-minute start, but:
 
 - `/health` queries the database, so it would keep the Neon compute awake too. At the smallest
   size, 0.25 CU ([computes](https://neon.com/docs/manage/computes)), a compute active all month
@@ -104,8 +112,11 @@ A pinger that calls the site every few minutes would avoid the one-minute start,
 - It would need another always-on service to send the pings, and it works against what the free
   tiers are for.
 
-For a portfolio demo with occasional visitors, a slow first answer is the honest trade-off; the
-page shows a loading state while it waits.
+For a portfolio demo with occasional visitors, a slow first visit is the honest trade-off. Note
+what the visitor sees: the page itself comes from the sleeping service, so the first visitor sees
+only the browser's own loading indicator for about half a minute, not the page's "searching the
+sources" state. That state appears only when the page was already open and the service fell
+asleep afterwards (15 minutes without a question).
 
 ## Direct or pooled database connection
 

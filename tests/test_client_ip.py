@@ -64,16 +64,3 @@ async def test_forged_header_does_not_get_round_the_per_ip_limit(db, loaded):
     assert first.status_code == 200
     assert forged.status_code == 429
     assert other.status_code == 200
-
-
-@pytest.mark.anyio
-@pytest.mark.parametrize("on", [False, True])
-async def test_temporary_count_of_forwarded_values_never_logs_them(
-    client_for, test_database, caplog, on
-):
-    caplog.set_level("INFO", logger="uvicorn.error")
-    async with client_for(make_settings(log_forwarded_count=on)) as client:
-        await client.get("/health", headers={"X-Forwarded-For": "203.0.113.7, 198.51.100.4"})
-    lines = [r.getMessage() for r in caplog.records if r.name == "uvicorn.error"]
-    assert lines == (["x-forwarded-for values: 2"] if on else [])
-    assert "203.0.113.7" not in caplog.text and "198.51.100.4" not in caplog.text

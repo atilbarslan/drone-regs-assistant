@@ -35,7 +35,8 @@ services:
         value: "false"
       - key: HSTS
         value: "true"
-      # Proxies that append to X-Forwarded-For in front of the service. 0 until measured on
-      # Render (docs/DEPLOY.md); until then every visitor counts as the proxy's address.
+      # Proxies that append to X-Forwarded-For in front of the service, measured on Render on
+      # 10 October 2026: a request without the header arrives with 3 values, one with a forged
+      # value with 4, so the client is the 3rd value from the right (docs/DEPLOY.md).
       - key: FORWARDED_TRUSTED_HOPS
-        value: "0"
+        value: "3"
