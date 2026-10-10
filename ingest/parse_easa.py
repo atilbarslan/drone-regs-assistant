@@ -47,9 +47,10 @@ _ITEM = rf"(?:Artic\w*\s*\d+|UAS\.[A-Z]+(?:-\d+)?\.\d{{3}}|Appendix\s*\d+){_SUFF
 _MORE = rf"(?:\s*(?:,|\band\b|&)\s*(?:{_ITEM}|\([0-9a-z]+\){_SUFFIX}))*"
 _AMC_GM = re.compile(rf"^((?:AMC|GM)\d+(?:bis)?(?:\s+(?:to\s+)?AMC\d+)?\s+{_ITEM}{_MORE})\s*(.*)$")
 _RULE = re.compile(r"^(UAS\.(?:OPEN|SPEC|LUC|STS-\d{2})\.\d{3})\s+(.*)$")
-_ARTICLE = re.compile(r"^Article\s+(\d+[a-z]?)\s*[-–—]\s*(.*)$")
-_PART = re.compile(r"^PART\s+(\d+)\s*[-–—]\s*(.*)$")
-_APPENDIX = re.compile(r"^Appendix\s+(\d+)\s*[-–—]?\s*(.*)$")
+# Headings separate the number from the title with a hyphen, an en dash or an em dash.
+_ARTICLE = re.compile(r"^Article\s+(\d+[a-z]?)\s*[-\u2013\u2014]\s*(.*)$")
+_PART = re.compile(r"^PART\s+(\d+)\s*[-\u2013\u2014]\s*(.*)$")
+_APPENDIX = re.compile(r"^Appendix\s+(\d+)\s*[-\u2013\u2014]?\s*(.*)$")
 _ATTACHMENT = re.compile(r"^ATTACHMENT\s+([A-Z])\s*:\s*(.*)$")
 _AMC_ANNEX = re.compile(r"^Annex\s+([A-Z])\s+to\s+")
 _STS = re.compile(r"UAS\.(STS-\d{2})\.")

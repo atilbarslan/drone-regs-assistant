@@ -288,7 +288,7 @@ def test_render_text():
     assert text == (
         "Cevap şunlara bağlı:\n- Kamera? (Var / Yok)\n\n"
         "Kategori\nA1. [2]\n\n"
-        "Kayıt\n- Kameralı — KAYIT: Gerekir. [1]\n\n"
+        "Kayıt\n- Kameralı (KAYIT): Gerekir. [1]\n\n"
         "Kaynaklarda olmayanlar:\n- Ulusal sigorta kuralları."
     )
 

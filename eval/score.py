@@ -98,7 +98,8 @@ def refusal(result: AnswerResult, should_refuse: bool, explained: bool | None) -
 
 # --- judge quotes ---------------------------------------------------------------------------
 
-_QUOTES = str.maketrans({"’": "'", "‘": "'", "“": '"', "”": '"', "–": "-", "—": "-"})
+# Typographic quotes and the en and em dashes (written as escapes) count as their plain forms.
+_QUOTES = str.maketrans({"’": "'", "‘": "'", "“": '"', "”": '"', "\u2013": "-", "\u2014": "-"})
 
 
 def normalise(text: str) -> str:
@@ -143,9 +144,9 @@ def checked_facts(facts: list[dict], verdicts: list[dict], text: str, answer) ->
 
 
 def _without_case_lines(text: str, answer: StructuredAnswer) -> str:
-    # render_text writes a case as "- {condition} — {verdict}: {text} [n]".
+    # render_text writes a case as "- {condition} ({verdict}): {text} [n]".
     starts = tuple(
-        f"- {case.condition} — {case.verdict}:"
+        f"- {case.condition} ({case.verdict}):"
         for section in answer.sections
         for case in section.cases
     )

@@ -422,7 +422,7 @@ def render_text(answer: StructuredAnswer, lang: str) -> str:
             lines.append(f"{section.text} {_marks(section.citations)}")
         for case in section.cases:
             lines.append(
-                f"- {case.condition} — {case.verdict}: {case.text} {_marks(case.citations)}"
+                f"- {case.condition} ({case.verdict}): {case.text} {_marks(case.citations)}"
             )
         parts.append("\n".join(lines))
     if answer.not_in_sources:

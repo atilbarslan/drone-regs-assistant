@@ -128,7 +128,7 @@ async def test_refusal_criteria(db, loaded):
 
 
 def test_quotes_must_be_verbatim():
-    text = "Azami yükseklik 120 m’dir [1].\n- Kameralı — KAYIT: Kayıt gerekir [2]."
+    text = "Azami yükseklik 120 m’dir [1].\n- Kameralı (KAYIT): Kayıt gerekir [2]."
     assert score.quote_in("Azami yükseklik 120 m'dir", text)  # quote marks normalised
     assert score.quote_in("Azami   yükseklik 120 m’dir…", text)  # spaces, trailing ellipsis
     assert not score.quote_in("Azami yükseklik 150 m'dir", text)
