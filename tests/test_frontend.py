@@ -5,6 +5,7 @@ import re
 import pytest
 
 from app.main import FRONTEND_DIR
+from tests.conftest import make_settings
 
 pytestmark = pytest.mark.anyio
 
@@ -93,3 +94,18 @@ def test_fonts_are_self_hosted_with_their_licences():
     for family in ("barlow-condensed", "ibm-plex-sans", "ibm-plex-mono"):
         licence = (FRONTEND_DIR / "fonts" / f"LICENSE-{family}.txt").read_text(encoding="utf-8")
         assert "SIL Open Font License" in licence, family
+
+
+@pytest.mark.parametrize("path", ["/docs", "/redoc", "/openapi.json"])
+async def test_api_docs_can_be_turned_off(client_for, test_database, path):
+    async with client_for(make_settings(api_docs=False)) as client:
+        assert (await client.get(path)).status_code == 404
+        assert (await client.get("/health")).status_code == 200
+
+
+async def test_hsts_only_when_turned_on(client, client_for, test_database):
+    assert "strict-transport-security" not in (await client.get("/")).headers
+    async with client_for(make_settings(hsts=True)) as client_hsts:
+        for path in ("/", "/health"):
+            response = await client_hsts.get(path)
+            assert response.headers["strict-transport-security"] == "max-age=31536000"

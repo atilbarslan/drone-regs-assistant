@@ -7,8 +7,8 @@ Turkish and English. It is a portfolio project, not a product, and its answers a
 advice: the official texts always prevail.
 
 **Status: work in progress.** Downloading, parsing, chunking, embedding, hybrid search, the
-answer endpoint (`POST /api/ask`) and the web page (served at `/`) work; the evaluation and the
-deployment are still being built.
+answer endpoint (`POST /api/ask`), the web page (served at `/`) and the evaluation work. It is
+set up for free tiers of Render and Neon; see [docs/DEPLOY.md](docs/DEPLOY.md).
 
 Fonts (Barlow Condensed, IBM Plex Sans, IBM Plex Mono; SIL Open Font License 1.1) are served
 from this site, not from Google Fonts, so visitors' IP addresses are not sent to a third party

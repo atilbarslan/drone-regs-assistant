@@ -1,0 +1,41 @@
+# Render Blueprint: one free web service in Frankfurt. The database is on Neon (docs/DEPLOY.md).
+# Spec: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: drone-regs-assistant
+    runtime: python
+    plan: free
+    region: frankfurt
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    # One worker: the request limits are counted in memory (app/limits.py).
+    # --no-access-log: uvicorn's access log writes every client address to the console, which
+    # Render keeps. --no-proxy-headers: the client address comes from X-Forwarded-For counted
+    # from the right (FORWARDED_TRUSTED_HOPS); uvicorn trusting every proxy ('*') would take the
+    # leftmost value, which a client can write.
+    startCommand: uvicorn --factory app.main:create_app --host 0.0.0.0 --port $PORT --workers 1 --no-access-log --no-proxy-headers
+    healthCheckPath: /health
+    envVars:
+      # Same Python as CI and local development; Render's default for new services is newer.
+      # https://render.com/docs/python-version
+      - key: PYTHON_VERSION
+        value: 3.12.13
+      # Secrets: entered in the Render dashboard when the Blueprint is created.
+      - key: DATABASE_URL
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_GENERATION_MODEL
+        value: gemini-3.5-flash-lite
+      - key: GEMINI_EMBEDDING_MODEL
+        value: gemini-embedding-2
+      - key: GEMINI_EMBEDDING_DIMENSIONS
+        value: "768"
+      - key: API_DOCS
+        value: "false"
+      - key: HSTS
+        value: "true"
+      # Proxies that append to X-Forwarded-For in front of the service. 0 until measured on
+      # Render (docs/DEPLOY.md); until then every visitor counts as the proxy's address.
+      - key: FORWARDED_TRUSTED_HOPS
+        value: "0"

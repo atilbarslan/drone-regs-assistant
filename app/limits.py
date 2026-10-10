@@ -3,6 +3,8 @@
 The counters live in the process, which is enough for the single uvicorn worker this demo
 runs with; more workers would each keep their own counts. IP addresses are kept only as salted
 hashes (the salt is random per process) and are never written to the database or the logs.
+Behind a proxy the address comes from X-Forwarded-For, counted from the right by the number of
+trusted proxies (app/ask.py: client_ip), so a client cannot pick it by sending the header.
 
 "Day" means the Gemini quota day: it starts at midnight Pacific time, when the API's daily
 quotas reset, so the app's daily limits and the provider's reset together.
