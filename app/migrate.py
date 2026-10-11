@@ -2,8 +2,9 @@
 
 Usage: python -m app.migrate   (uses DATABASE_URL)
 
-Files run in name order, each in its own transaction, and are recorded in schema_migrations.
-An advisory lock keeps two processes from migrating at the same time.
+The pending files run in name order in one transaction, together with their records in
+schema_migrations: if one fails, none of them is applied or recorded. An advisory lock, held
+for that transaction, keeps two processes from migrating at the same time.
 """
 
 import asyncio
