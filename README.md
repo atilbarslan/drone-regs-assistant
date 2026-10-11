@@ -131,7 +131,7 @@ Then open http://127.0.0.1:8000. With the passages already in the local database
 
 ## How this was built
 
-I flew UAVs professionally before this, so drone rules were a domain I could check myself. Claude Code wrote the code in small pull requests, and a separate Claude session wrote the instructions for each step and reviewed every pull request. I made the decisions (the sources, free-tier hosting, detecting the jurisdiction from the question, the answer structure, the limits), tried it live, asked for changes and merged every pull request. I checked every evaluation answer key against the official PDFs and corrected the references the AI had got wrong. Ask me about the design decisions and the trade-offs behind them.
+I ran this project as its lead, with AI agents as the team. I flew UAVs professionally, so drone rules were a domain I could check myself. I decided the scope and the order of the work, and it was built in twelve small pull requests, each with a written brief and checks. Claude Code wrote the code; a separate Claude session turned each step into detailed instructions and gave every pull request a first review. I reviewed every pull request myself before merging it, sent work back for changes and made every decision (the sources, free-tier hosting, detecting the jurisdiction from the question, the answer structure, the limits). I tried it live and checked every evaluation answer key against the official PDFs, correcting the references the AI had got wrong. Ask me how the work was planned, reviewed and decided, or about any of the trade-offs.
 
 ## License
 
