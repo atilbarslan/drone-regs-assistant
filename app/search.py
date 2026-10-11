@@ -216,6 +216,8 @@ async def retrieve(
 
     "EU"/"TR": only that side's sources. "both"/"none": each side separately, balanced, with
     the side named by first (the one matching the interface language) listed first.
+    POST /api/ask sends "EU", "TR" or, for compare mode, "both" (app/answer.py resolves every
+    question to a mode first), so "none" comes only from python -m app.search and the tests.
     """
     if jurisdiction in ("EU", "TR"):
         return await rank_chunks(
